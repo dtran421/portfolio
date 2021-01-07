@@ -5,5 +5,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
 body {
-   @apply bg-black;
+   @apply bg-gray-900;
+}
+
+#down_arrows {
+   transform: translateY(-25%);
+}
+
+#learn_more:hover #down_arrows {
+   @apply animate-bounce;
+}
+
+::-webkit-scrollbar {
+   width: 8px;
+}
+
+::-webkit-scrollbar-track {
+   background: #2b2b2b;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgb(113, 1, 165);
+   border-radius: 6px;
 }

@@ -9,10 +9,18 @@
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",
+    "framer-motion": "^3.1.4",
     "next": "10.0.4",
     "postcss": "^8.2.2",
     "react": "17.0.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "17.0.1",
+    "react-parallax": "^3.1.2",
+    "react-scroll": "^1.8.1",
+    "react-scroll-parallax": "^2.3.5",
+    "react-step-progress-bar": "^1.0.3",
+    "react-switch": "^5.0.1",
+    "react-toggle": "^4.1.1",
     "tailwindcss": "^2.0.2",
     "tiled-hexagons": "^1.0.2"
   },

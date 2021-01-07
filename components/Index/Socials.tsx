@@ -1,14 +1,14 @@
 import { TiledHexagons } from "tiled-hexagons";
 
-export interface Props {}
+export interface SocialsProps {}
 
-const Socials: React.FunctionComponent<Props> = () => {
+const Socials: React.FunctionComponent<SocialsProps> = () => {
    return (
       <div className="flex justify-center py-5">
          <TiledHexagons
             maxHorizontal={5}
             tileSideLengths={50}
-            tileElevations={12}
+            tileElevations={10}
             tileGap={20}
             tileBorderRadii={12}
             tiles={[
