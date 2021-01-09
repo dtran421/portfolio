@@ -8,7 +8,7 @@ import StickyBar from "../components/Global/StickyBar";
 import LangProfile from "../components/Index/LangProfile";
 import languages from "../public/languages.json";
 import SocialProfile from "../components/Index/SocialProfile";
-//import Socials from "../components/Index/Socials";
+import socials from "../public/socials.json";
 
 export interface IndexProps {}
 
@@ -22,8 +22,6 @@ function isInViewport(el) {
       rect.bottom > 0
    );
 }
-
-const socials = ["Github", "LinkedIn", "Facebook", "Twitter"];
 
 const Index: React.FunctionComponent<IndexProps> = () => {
    const [showLearnMore, toggleLearnMore] = useState(true);
@@ -45,13 +43,13 @@ const Index: React.FunctionComponent<IndexProps> = () => {
       <div>
          <div ref={page1} className="h-screen flex flex-col ">
             <Navbar />
-            <div className="flex flex-col items-center mt-20">
-               <div className="flex flex-col w-full pt-36 pb-14 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500">
-                  <div className="flex justify-center">
+            <div className="flex flex-col items-center">
+               <div className="flex flex-col items-center w-full pt-36 pb-14 bg-banner-img bg-center">
+                  <div className="flex justify-center bg-gray-700 bg-opacity-60 rounded-3xl px-4">
                      <p className="text-white text-5xl text-center py-5 pr-4">Hi! My name is </p>
                      <motion.div
                         className="flex items-center"
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.05 }}
                         transition={{ ease: "easeOut", duration: 0.5 }}>
                         <p className="bg-gray-100 text-purple-600 text-5xl px-3 py-1 rounded-md font-bold">
                            Duke Tran!
@@ -59,8 +57,8 @@ const Index: React.FunctionComponent<IndexProps> = () => {
                      </motion.div>
                   </div>
                </div>
-               <div className="flex flex-col items-center px-16 pt-5 -m-12 max-w-screen-lg bg-gray-700 rounded-xl">
-                  <p className="text-white text-2xl text-center pb-20">
+               <div className="flex flex-col items-center px-16 pt-10 -m-12 max-w-screen-lg bg-gradient-to-tr from-blue-800 to-blue-700 rounded-xl">
+                  <p className="text-white text-2xl text-center pb-28">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                      aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -69,16 +67,14 @@ const Index: React.FunctionComponent<IndexProps> = () => {
                   <AnimateSharedLayout>
                      <motion.div
                         layout
-                        className="flex flex-row items-center justify-between w-5/6 h-16 px-16 py-2 mb-5 bg-gray-300 rounded-xl ">
-                        {socials.map((name) => {
-                           return <SocialProfile key={name} name={name} />;
+                        className="flex flex-row items-center justify-between w-5/6 h-16 px-16 py-2 mb-10 rounded-xl ">
+                        {socials.list.map((social) => {
+                           return <SocialProfile key={social.type} {...social} />;
                         })}
                      </motion.div>
                   </AnimateSharedLayout>
                </div>
             </div>
-
-            {/* <div className="pt-5 pb-10"><Socials /></div> */}
             <AnimatePresence>
                {showLearnMore && (
                   <motion.div
@@ -104,7 +100,6 @@ const Index: React.FunctionComponent<IndexProps> = () => {
             {showSticky && (
                <motion.div
                   key="sticky_nav"
-                  className="fixed top-0 w-full"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -113,43 +108,59 @@ const Index: React.FunctionComponent<IndexProps> = () => {
                </motion.div>
             )}
          </AnimatePresence>
-         <div id="page2" className="h-screen pt-10">
-            <div className="grid grid-cols-2 py-20 mx-auto">
-               <div className="flex justify-center grid-span-1">
-                  <img src="/profile.jpg" className="rounded-2xl" />
+         <div id="page2" className="pt-10 px-10">
+            <div className="grid grid-cols-2 mx-auto">
+               <div className="flex justify-center col-span-1">
+                  <div className="flex items-start pt-10">
+                     <Image src="/profile.jpg" width={400} height={650} className="rounded-2xl z-0" />
+                  </div>
                </div>
-               <div className="flex justify-end grid-span-1">
-                  <div className="flex flex-col w-7/8 h-full bg-gradient-to-br from-indigo-400 to-purple-600 rounded-l-xl p-8 px-12">
-                     <p className="text-5xl pt-14 pb-16">
+               <div className="flex justify-end col-span-1">
+                  <div className="flex flex-col h-3/5 rounded-xl p-12 mt-10 bg-gradient-to-tr from-blue-800 to-blue-700">
+                     <p className="text-5xl pt-4 pb-16">
                         <span className="bg-gray-100 text-blue-600 px-3 py-1 rounded-md font-semibold">About me</span>
                      </p>
-                     <br />
-                     <br />
                      <p className="text-2xl text-white">
                         Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
                         magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet
                         massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla at.
-                        Varius vel pharetra vel turpis nunc eget. Nulla facilisi etiam dignissim diam quis. Euismod
-                        lacinia at quis risus sed vulputate odio ut enim.
+                        Varius vel pharetra vel turpis nunc eget.
                      </p>
                   </div>
                </div>
             </div>
+            <div className="grid grid-cols-2 mx-auto -mt-48">
+               <div className="flex items-center col-span-1 mt-24">
+                  <div className="p-12 rounded-xl bg-gradient-to-tr from-blue-800 to-blue-700">
+                     <p className="text-2xl text-white">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                     </p>
+                  </div>
+               </div>
+               <div className="flex justify-center col-span-1 py-10">
+                  <div>
+                     <Image src="/outside.jpg" width={400} height={625} className="rounded-2xl z-0" />
+                  </div>
+               </div>
+            </div>
          </div>
-         <div className="h-screen pt-20">
-            <div className="flex flex-col justify-center bg-gradient-to-tr from-blue-700 via-blue-600 to-blue-500 max-w-screen-xl px-10 mx-auto rounded-xl">
-               <p className="text-5xl text-center pt-14 pb-8">
-                  <span className="bg-gray-100  text-purple-600 px-3 py-1 rounded-md font-semibold">Technologies</span>
-               </p>
-               <p className="text-2xl text-white p-5 pb-10">
-                  Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et magnis
-                  dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet massa tincidunt
-                  nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla at. Varius vel pharetra vel
-                  turpis nunc eget. Nulla facilisi etiam dignissim diam quis. Euismod lacinia at quis risus sed
-                  vulputate odio ut enim. Vitae auctor eu augue ut lectus arcu bibendum at.
-               </p>
-               <div className="flex flex-col">
-                  <div className="grid grid-cols-2 py-10 border-t-4 border-gray-300">
+         <div className="pt-32">
+            <div className="flex flex-col justify-center max-w-screen-xl px-10 mx-auto rounded-xl">
+               <div className="flex flex-col bg-gradient-to-tr from-blue-800 to-blue-700 rounded-xl">
+                  <p className="text-5xl text-center pt-14 pb-8">
+                     <span className="bg-gray-100  text-blue-600 px-3 py-1 rounded-md font-semibold">Technologies</span>
+                  </p>
+                  <p className="text-2xl text-white px-10 pb-10">
+                     Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
+                     magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet massa
+                     tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla at. Varius vel
+                     pharetra vel turpis nunc eget. Nulla facilisi etiam dignissim diam quis. Euismod lacinia at quis
+                     risus sed vulputate odio ut enim. Vitae auctor eu augue ut lectus arcu bibendum at.
+                  </p>
+                  <div className="grid grid-cols-2 p-10">
                      <div className="grid grid-cols-3 col-span-1 gap-x-10 w-full border-r-4 border-gray-300 pr-10">
                         <div className="col-span-3">
                            <p className="text-3xl text-center pb-12">
@@ -175,7 +186,30 @@ const Index: React.FunctionComponent<IndexProps> = () => {
                         })}
                      </div>
                   </div>
-                  <div className="col-span-1"></div>
+               </div>
+            </div>
+         </div>
+         <div className="pt-32">
+            <div className="flex flex-col items-center">
+               <p className=" text-center pb-12">
+                  <span className="text-5xl bg-gray-100  text-blue-600 px-3 py-1 rounded-md font-semibold">
+                     Projects
+                  </span>
+               </p>
+               <p className="text-2xl text-white px-10 pb-10 max-w-screen-xl">
+                  Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et magnis
+                  dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet massa tincidunt
+                  nunc pulvinar sapien.
+               </p>
+               <div className="grid grid-cols-3 max-w-screen-lg">
+                  <div className="flex flex-col col-span-1 rounded-xl bg-gradient-to-tr from-blue-800 to-blue-700">
+                     <div className="flex justify-center">
+                        <p className="text-white text-2xl m-2 pb-1 border-b-4 border-white">Kickflip</p>
+                     </div>
+                     <div className="flex w-full justify-center p-5">
+                        <Image src="/typescript.png" width={100} height={100} />
+                     </div>
+                  </div>
                </div>
             </div>
          </div>

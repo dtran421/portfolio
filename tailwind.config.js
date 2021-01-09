@@ -6,6 +6,9 @@ module.exports = {
          animation: {
             bounce: "bounce 1.25s linear infinite"
          },
+         backgroundImage: (theme) => ({
+            "banner-img": "url('/city_night.jpg')"
+         }),
          colors: {
             "java-orange": "#e76f00",
             "python-yellow": "#ffcf3e",

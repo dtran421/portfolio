@@ -3,35 +3,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export interface SocialProfileProps {
+   type: string;
    name: string;
+   link: string;
 }
 
 const logoMotion = {
-   inactive: { translateX: 0 },
+   inactive: { x: 0 },
    hover: {
-      translateX: -20
+      x: -15
    }
 };
 
 const textMotion = {
-   inactive: { opacity: 0, x: -50, ease: "easeOut", duration: 0.3, type: "tween" },
+   inactive: { opacity: 0, x: -40, ease: "easeOut", duration: 0.25, type: "tween" },
    hover: {
       opacity: 1,
-      x: 0,
+      x: -10,
       ease: "easeIn",
       duration: 0.5,
       type: "tween"
    }
 };
 
-const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ name }) => {
+const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ type, name, link }) => {
    const [textVisible, showText] = useState(false);
 
    return (
       <AnimatePresence>
          <motion.div
             layout
-            className="flex flex-row h-full items-center mx-10 cursor-pointer"
+            className="flex flex-row h-full items-center cursor-pointer"
             initial="inactive"
             whileHover="hover"
             onHoverStart={(e) => {
@@ -41,12 +43,12 @@ const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ name }) =>
                showText(false);
             }}
             animate="initial">
-            <motion.div layout variants={logoMotion} className="flex items-center mr-4">
-               <Image src={`/${name.toLowerCase()}.svg`} width={50} height={50} layout="fixed" />
+            <motion.div layout variants={logoMotion} className="flex items-center">
+               <Image src={`/${type.toLowerCase()}.svg`} width={50} height={50} layout="fixed" />
             </motion.div>
             <AnimatePresence>
                {textVisible && (
-                  <motion.p layout variants={textMotion} className=" text-purple-500 text-2xl font-bold">
+                  <motion.p layout variants={textMotion} className=" text-gray-200 text-2xl">
                      {name}
                   </motion.p>
                )}
