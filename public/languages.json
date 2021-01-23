@@ -19,7 +19,7 @@
          "img": "react",
          "width": 150,
          "height": 150,
-         "pillStyle": "bg-react-blue"
+         "pillStyle": "bg-react-blue text-gray-800"
       },
       {
          "text": "Node.js",

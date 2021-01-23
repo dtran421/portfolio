@@ -16,7 +16,7 @@ const LangProfile: React.FunctionComponent<LangProfileProps> = ({ text, img, wid
                <Image src={`/${img}.png`} width={width} height={height} />
             </div>
          </div>
-         <p className={`rounded-full ${pillStyle} font-semibold text-xl text-center m-4 px-2 py-1`}>{text}</p>
+         <p className={`rounded-full ${pillStyle} font-semibold text-xl text-center m-4 px-2 py-1 shadow-lg`}>{text}</p>
       </div>
    );
 };

@@ -27,33 +27,23 @@ const textMotion = {
 };
 
 const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ type, name, link }) => {
-   const [textVisible, showText] = useState(false);
-
    return (
       <AnimatePresence>
-         <motion.div
-            layout
-            className="flex flex-row h-full items-center cursor-pointer"
+         <motion.a
+            className="h-full items-center cursor-pointer"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
             initial="inactive"
             whileHover="hover"
-            onHoverStart={(e) => {
-               showText(true);
-            }}
-            onHoverEnd={(e) => {
-               showText(false);
-            }}
             animate="initial">
-            <motion.div layout variants={logoMotion} className="flex items-center">
+            <motion.div variants={logoMotion} className="flex relative items-center">
+               <motion.p variants={textMotion} className="absolute left-20 text-gray-200 text-2xl">
+                  {name}
+               </motion.p>
                <Image src={`/${type.toLowerCase()}.svg`} width={50} height={50} layout="fixed" />
             </motion.div>
-            <AnimatePresence>
-               {textVisible && (
-                  <motion.p layout variants={textMotion} className=" text-gray-200 text-2xl">
-                     {name}
-                  </motion.p>
-               )}
-            </AnimatePresence>
-         </motion.div>
+         </motion.a>
       </AnimatePresence>
    );
 };

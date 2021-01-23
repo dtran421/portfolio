@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
-
 import Dropdown from "./Dropdown";
 
 export interface NavlinkProps {
-   text: string;
+   active: boolean;
+   link: string;
    contents: Array<string>;
    toggleDropdown: (status: boolean, tab: string) => void;
    dropdownVisibility: boolean;
@@ -11,19 +10,21 @@ export interface NavlinkProps {
 }
 
 const Navlink: React.FunctionComponent<NavlinkProps> = ({
-   text,
+   active,
+   link,
    contents,
    toggleDropdown,
    dropdownVisibility,
    dropdownTab
 }) => {
    return (
-      <div className="mx-10 py-5" onMouseEnter={(event) => toggleDropdown(true, text)}>
-         <a href="" className="text-3xl text-blue-500 hover:text-purple-200">
-            {text}
+      <div className={`${active && "border-b-4"} mx-5 py-5`} onMouseEnter={() => toggleDropdown(true, link)}>
+         <a
+            href={`/${link.toLowerCase()}`}
+            className={`text-4xl ${active ? "text-white" : "text-blue-500"} hover:text-purple-200 mx-5`}>
+            {link}
          </a>
-
-         {dropdownVisibility && dropdownTab == text && <Dropdown contents={contents} />}
+         {dropdownVisibility && dropdownTab === link && <Dropdown page={link.toLowerCase()} contents={contents} />}
       </div>
    );
 };

@@ -1,0 +1,5 @@
+{
+   "Resume": ["Profile", "Experience", "Education", "Skills", "Certifications", "Accomplishments", "Languages"],
+   "Projects": ["Kickflip", "Whispearrings", "AI"],
+   "Contact": ["Address", "Phone", "Email", "Social Media"]
+}
