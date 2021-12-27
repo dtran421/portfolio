@@ -63,6 +63,8 @@ const Index: React.FunctionComponent<IndexProps> = () => {
    const learnMoreAnimations = useAnimation();
    const stickyAnimations = useAnimation();
 
+   const [showSticky, toggleSticky] = useState(false);
+
    const page1 = useRef(null);
    const scrollListener = () => {
       const page1Visible = isInViewport(page1.current);
@@ -73,6 +75,8 @@ const Index: React.FunctionComponent<IndexProps> = () => {
          learnMoreAnimations.start("hidden");
          stickyAnimations.start("visible");
       }
+      toggleSticky(!page1Visible);
+      console.log(showSticky);
    };
    useEffect(() => {
       document.addEventListener("scroll", scrollListener);
@@ -128,9 +132,11 @@ const Index: React.FunctionComponent<IndexProps> = () => {
             </AnimatePresence>
          </div>
          <AnimatePresence>
-            <motion.div key="sticky_nav" initial="hidden" animate={stickyAnimations} variants={stickyVariants}>
-               <StickyBar title="Portfolio" />
-            </motion.div>
+            {showSticky && (
+               <motion.div key="sticky_nav" initial="hidden" animate={stickyAnimations} variants={stickyVariants}>
+                  <StickyBar title="Portfolio" />
+               </motion.div>
+            )}
          </AnimatePresence>
          <div id="page2" className="pt-10 px-10">
             <div className="grid grid-cols-2 mx-auto">

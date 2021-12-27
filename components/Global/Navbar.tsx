@@ -22,10 +22,10 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({ page }) => {
          <div className="flex justify-between">
             <div className="flex">
                <div className="flex">
-                  <div className={`${page === "Main" && "border-b-4"} mx-5 py-5`}>
+                  <div className={`${page === "Main" && "border-b-4"} mx-5 py-3`}>
                      <a
                         href="/"
-                        className={`text-4xl ${
+                        className={`text-xl ${
                            page === "Main" ? "text-white" : "text-blue-500"
                         } mx-5 hover:text-purple-200`}>
                         Duke Tran
@@ -46,21 +46,6 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({ page }) => {
                         />
                      );
                   })}
-               </div>
-            </div>
-            <div className="flex items-center mx-10">
-               <div>
-                  <Switch
-                     aria-label="night mode toggle"
-                     checked={true}
-                     onChange={() => console.log("test")}
-                     checkedIcon={<img src="/moon.svg" />}
-                     uncheckedIcon={<img src="/sun.svg" />}
-                     onColor={"#6942C4"}
-                     offColor={"#3C76DA"}
-                     onHandleColor={"#C3CBCF"}
-                     handleDiameter={32}
-                  />
                </div>
             </div>
          </div>
