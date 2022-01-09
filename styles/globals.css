@@ -2,20 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
-
-body {
-   @apply bg-gray-900;
-   @apply text-white;
-}
-
-#down_arrows {
-   transform: translateY(-25%);
-}
-
-#learn_more:hover #down_arrows {
-   @apply animate-bounce;
-}
 
 ::-webkit-scrollbar {
    width: 8px;
@@ -28,4 +16,44 @@ body {
 ::-webkit-scrollbar-thumb {
    background: rgb(113, 1, 165);
    border-radius: 6px;
+}
+
+.bg-java {
+   background-color: #e76f00;
+}
+
+.bg-python {
+   background-color: #ffcf3e;
+}
+
+.bg-react {
+   background-color: #61dbfb;
+}
+
+.bg-node {
+   background-color: #8cc84b;
+}
+
+.bg-typescript {
+   background-color: #007acc;
+}
+
+.bg-swift {
+   background-color: #eb4548;
+}
+
+.bg-cpp {
+   background-color: #00589d;
+}
+
+.bg-mongo {
+   background-color: #4caf50;
+}
+
+.bg-tailwind {
+   background-color: #17b9b9;
+}
+
+.bg-gcloud {
+   background-color: #34a853;
 }

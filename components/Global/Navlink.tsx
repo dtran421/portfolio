@@ -18,15 +18,19 @@ const Navlink: React.FunctionComponent<NavlinkProps> = ({
    dropdownTab
 }) => {
    return (
-      <div
-         className={`items-center ${active && "border-b-4"} mx-5 py-3 cursor-pointer`}
-         onMouseEnter={() => toggleDropdown(true, link)}>
-         <a
-            href={`/${link.toLowerCase()}`}
-            className={`text-xl ${active ? "text-white" : "text-blue-500"} hover:text-purple-200 mx-5`}>
-            {link}
-         </a>
-         {dropdownVisibility && dropdownTab === link && <Dropdown page={link.toLowerCase()} contents={contents} />}
+      <div>
+         <div
+            className={`border-b-4 border-b-transparent ${
+               active
+                  ? "border-opacity-100"
+                  : "transition duration-200 ease-linear hover:border-blue-500/100 hover:cursor-pointer"
+            } mx-5 py-3`}
+            onMouseEnter={() => toggleDropdown(true, link)}>
+            <a href={`/${link.toLowerCase()}`} className={`text-xl ${active ? "text-white" : "text-blue-500"} mx-5`}>
+               {link}
+            </a>
+         </div>
+         {/*dropdownVisibility && dropdownTab === link && <Dropdown page={link.toLowerCase()} contents={contents} />*/}
       </div>
    );
 };

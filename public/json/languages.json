@@ -3,37 +3,37 @@
       {
          "text": "Java",
          "img": "java",
-         "width": 50,
+         "width": 40,
          "height": 50,
-         "pillStyle": "bg-java-orange text-white"
+         "darkText": true
       },
       {
          "text": "Python",
          "img": "python",
          "width": 80,
          "height": 80,
-         "pillStyle": "bg-python-yellow text-gray-800"
+         "darkText": true
       },
       {
          "text": "React",
          "img": "react",
          "width": 150,
          "height": 150,
-         "pillStyle": "bg-react-blue text-gray-800"
+         "darkText": true
       },
       {
          "text": "Node.js",
          "img": "node",
-         "width": 70,
+         "width": 60,
          "height": 70,
-         "pillStyle": "bg-node-green text-gray-800"
+         "darkText": true
       },
       {
          "text": "Typescript",
          "img": "typescript",
          "width": 80,
          "height": 80,
-         "pillStyle": "bg-typescript-blue text-white"
+         "darkText": false
       }
    ],
    "learning": [
@@ -42,35 +42,35 @@
          "img": "swift",
          "width": 80,
          "height": 80,
-         "pillStyle": "bg-swift-red text-white"
+         "darkText": false
       },
       {
          "text": "C++",
-         "img": "c++",
-         "width": 70,
+         "img": "cpp",
+         "width": 60,
          "height": 70,
-         "pillStyle": "bg-cpp-blue text-white"
+         "darkText": false
       },
       {
          "text": "MongoDB",
-         "img": "mongodb",
+         "img": "mongo",
          "width": 70,
          "height": 70,
-         "pillStyle": "bg-mongo-green text-white"
+         "darkText": false
       },
       {
          "text": "Tailwind",
          "img": "tailwind",
          "width": 100,
          "height": 100,
-         "pillStyle": "bg-tailwind-blue text-gray-800"
+         "darkText": true
       },
       {
          "text": "GCloud",
          "img": "gcloud",
          "width": 80,
          "height": 80,
-         "pillStyle": "bg-google-green text-white"
+         "darkText": true
       }
    ]
 }

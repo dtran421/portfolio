@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
-export interface SocialProfileProps {
+import Icon from "./Icon";
+
+interface SocialProfileProps {
    type: string;
    name: string;
    link: string;
+   icon: string;
 }
 
 const logoMotion = {
@@ -16,21 +18,21 @@ const logoMotion = {
 };
 
 const textMotion = {
-   inactive: { opacity: 0, x: -40, ease: "easeOut", duration: 0.25, type: "tween" },
+   inactive: { opacity: 0, x: -60, ease: "easeOut", duration: 0.25, type: "tween" },
    hover: {
       opacity: 1,
-      x: -10,
+      x: -35,
       ease: "easeIn",
       duration: 0.5,
       type: "tween"
    }
 };
 
-const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ type, name, link }) => {
+const SocialProfile: FC<SocialProfileProps> = ({ name, link, icon }) => {
    return (
       <AnimatePresence>
          <motion.a
-            className="h-full items-center cursor-pointer"
+            className="h-full flex items-center cursor-pointer px-12"
             href={link}
             target="_blank"
             rel="noopener noreferrer"
@@ -38,10 +40,10 @@ const SocialProfile: React.FunctionComponent<SocialProfileProps> = ({ type, name
             whileHover="hover"
             animate="initial">
             <motion.div variants={logoMotion} className="flex relative items-center">
-               <motion.p variants={textMotion} className="absolute left-20 text-gray-200 text-2xl">
+               <Icon path={icon} />
+               <motion.p variants={textMotion} className="absolute left-20 text-gray-200 text-xl">
                   {name}
                </motion.p>
-               <Image src={`/${type.toLowerCase()}.svg`} width={50} height={50} layout="fixed" />
             </motion.div>
          </motion.a>
       </AnimatePresence>

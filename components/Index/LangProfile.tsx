@@ -5,18 +5,23 @@ export interface LangProfileProps {
    img: string;
    width: number;
    height: number;
-   pillStyle: string;
+   darkText: boolean;
 }
 
-const LangProfile: React.FunctionComponent<LangProfileProps> = ({ text, img, width, height, pillStyle }) => {
+const LangProfile: React.FunctionComponent<LangProfileProps> = ({ text, img, width, height, darkText }) => {
    return (
-      <div className="flex flex-col col-span-1 justify-between rounded-lg">
+      <div>
          <div className="flex flex-row justify-center">
-            <div className="flex justify-center mt-4 mb-2 bg-gray-700 rounded-full p-6 w-32 h-32 shadow-lg">
-               <Image src={`/${img}.png`} width={width} height={height} />
+            <div className="flex justify-center mt-4 mb-2 bg-gray-700/30 backdrop-blur-md rounded-full p-6 w-24 h-24 shadow-lg">
+               <Image src={`/icons/${img}.png`} alt="test" width={width} height={height} />
             </div>
          </div>
-         <p className={`rounded-full ${pillStyle} font-semibold text-xl text-center m-4 px-2 py-1 shadow-lg`}>{text}</p>
+         <p
+            className={`rounded-full bg-${img} ${
+               darkText ? "text-gray-800" : "text-white"
+            } font-semibold text-center mx-6 my-2 px-2 py-1 shadow-lg`}>
+            {text}
+         </p>
       </div>
    );
 };

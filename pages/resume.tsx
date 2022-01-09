@@ -5,7 +5,7 @@ import Navbar from "../components/Global/Navbar";
 import StickyBar from "../components/Global/StickyBar";
 import Section from "../components/Resume/Section";
 import Subsection from "../components/Resume/Subsection";
-import resumeContents from "../public/resume.json";
+import resumeContents from "../public/json/resume.json";
 import { isInViewport } from "./index";
 
 export interface ResumeProps {}
@@ -41,7 +41,7 @@ const Resume: React.FunctionComponent<ResumeProps> = () => {
 
    return (
       <div>
-         <Navbar page="Resume" />
+         <Navbar page="Resume" sticky={false} />
          <div className="flex justify-center bg-gradient-to-tr from-blue-800 to-blue-700">
             <p className="text-6xl my-20">Duke Tran</p>
          </div>
@@ -55,11 +55,11 @@ const Resume: React.FunctionComponent<ResumeProps> = () => {
                </p>
             </Section>
          </div>
-         <AnimatePresence>
+         {/*<AnimatePresence>
             <motion.div key="sticky_nav" initial="hidden" animate={stickyAnimations} variants={stickyVariants}>
                <StickyBar title="Resume" />
             </motion.div>
-         </AnimatePresence>
+         </AnimatePresence>*/}
          <div className="max-w-screen-xl mx-auto pb-20">
             <Section heading="Experience">
                {resumeContents["Experience"].map((content, idx, arr) => {
