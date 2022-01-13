@@ -1,61 +1,80 @@
 {
-   "Experience": [
+   "Tabs": [
       {
-         "title": "Marketing Staff Member",
-         "organization": "Agency 1693",
-         "date": "Feb 2020 - Present",
-         "description": "Worked on a marketing team for various clients looking to grow and expand their businesses. Designed videos, logos, and other adverts to promote branding of companies."
+         "heading": "Experience",
+         "body": [
+            {
+               "title": "Marketing Staff Member",
+               "organization": "Agency 1693",
+               "date": "Feb 2020 - Present",
+               "description": "Worked on a marketing team for various clients looking to grow and expand their businesses. Designed videos, logos, and other adverts to promote branding of companies."
+            },
+            {
+               "title": "Development Intern",
+               "organization": "Whispearrings",
+               "date": "Jul 2020 - Aug 2020",
+               "description": "Learned to work with Swift and XCode for iOS development. Developed a fully-fledged iOS app with sound and playback capabilities."
+            },
+            {
+               "title": "Private Online Tutor",
+               "organization": "Acakid",
+               "date": "Jun 2019 - Present",
+               "description": "Worked as a private tutor educating students in grades K-12 in various subjects including math, science, and physics."
+            },
+            {
+               "title": "Laboratory Intern",
+               "organization": "Georgetown University School of Medicine",
+               "date": "Jul 2018 - Feb 2019",
+               "description": "Worked at Georgetown University as an intern under the supervision of Dr. Niaz Sahibzada. Studied the function of GABAergic interneurons in the regulation of the brain-gut axis. Learned more about electrophysiology and neurobiology."
+            }
+         ]
       },
       {
-         "title": "Development Intern",
-         "organization": "Whispearrings",
-         "date": "Jul 2020 - Aug 2020",
-         "description": "Learned to work with Swift and XCode for iOS development. Developed a fully-fledged iOS app with sound and playback capabilities."
-      },
-      {
-         "title": "Private Online Tutor",
-         "organization": "Acakid",
-         "date": "Jun 2019 - Present",
-         "description": "Worked as a private tutor educating students in grades K-12 in various subjects including math, science, and physics."
-      },
-      {
-         "title": "Laboratory Intern",
-         "organization": "Georgetown University School of Medicine",
-         "date": "Jul 2018 - Feb 2019",
-         "description": "Worked at Georgetown University as an intern under the supervision of Dr. Niaz Sahibzada. Studied the function of GABAergic interneurons in the regulation of the brain-gut axis. Learned more about electrophysiology and neurobiology."
+         "heading": "Education",
+         "body": [
+            {
+               "title": "Bachelor of Science, Major in Computer Science, Minor in Finance",
+               "organization": "College of William & Mary",
+               "date": "2019 - 2023",
+               "description": "Activities and Clubs: Intramural Basketball, Soccer, and Frisbee, Association for Computing Machinery, Chinese Student Organization"
+            },
+            {
+               "title": "Advanced Studies Diploma",
+               "organization": "Thomas Jefferson High School for Science and Technology",
+               "date": "2015 - 2019",
+               "description": "Activities and Clubs: Bioengineering Projects for the Future, Innovations in Concepts of Engineering, Spanish Honor Society, Curricular Band, Varsity Football. Studied AP Chemistry, AP Computer Science, Artificial Intelligence, Web App Development, AP Calculus BC, Multivariable Calculus, AP Spanish Language, Research Statistics 1, Physics, and DNA Science."
+            }
+         ]
       }
    ],
-   "Education": [
+   "Bubbles": [
       {
-         "title": "Bachelor of Science, Major in Computer Science, Minor in Finance",
-         "organization": "College of William & Mary",
-         "date": "2019 - 2023",
-         "description": "Activities and Clubs: Intramural Basketball, Soccer, and Frisbee, Association for Computing Machinery, Chinese Student Organization"
+         "heading": "Skills",
+         "body": [
+            "Python",
+            "Java",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "MySQL",
+            "React",
+            "Typescript",
+            "Microsoft Word",
+            "Microsoft Powerpoint",
+            "Microsoft Excel"
+         ]
       },
       {
-         "title": "Advanced Studies Diploma",
-         "organization": "Thomas Jefferson High School for Science and Technology",
-         "date": "2015 - 2019",
-         "description": "Activities and Clubs: Bioengineering Projects for the Future, Innovations in Concepts of Engineering, Spanish Honor Society, Curricular Band, Varsity Football. Studied AP Chemistry, AP Computer Science, Artificial Intelligence, Web App Development, AP Calculus BC, Multivariable Calculus, AP Spanish Language, Research Statistics 1, Physics, and DNA Science."
-      }
-   ],
-   "Skills": [
-      "Python",
-      "Java",
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "MySQL",
-      "React",
-      "Typescript",
-      "Microsoft Word",
-      "Microsoft Powerpoint",
-      "Microsoft Excel"
-   ],
-   "Certifications": ["Google Ads Display", "Google Ads Search"],
-   "Accomplishments": [
-      "Invitation to Alpha Lambda Delta and Phi Eta Sigma Honor Societies",
-      "Most Entrepreneurial App from HackTJ Hackathon"
-   ],
-   "Languages": ["English", "Spanish", "Vietnamese"]
+         "heading": "Interests",
+         "body": [
+            "Software Development/Engineering",
+            "Finance and Financial Analysis",
+            "Quantitative Analysis",
+            "AI and Machine Learning",
+            "Investment Banking"
+         ]
+      },
+      { "heading": "Certifications", "body": ["Google Ads Display", "Google Ads Search"] },
+      { "heading": "Languages", "body": ["English", "Spanish", "Vietnamese"] }
+   ]
 }

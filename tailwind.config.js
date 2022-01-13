@@ -1,6 +1,8 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
    content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
-   // darkMode: "class", // or 'media' or 'class'
+   darkMode: "class", // or 'media' or 'class'
    theme: {
       extend: {
          animation: {
@@ -8,7 +10,11 @@ module.exports = {
          },
          backgroundImage: (theme) => ({
             "banner-img": "url('/city_night.jpg')"
-         })
+         }),
+         colors: {
+            primary: colors.red["500"],
+            secondary: colors.purple["500"]
+         }
       },
       fontFamily: {
          display: ["Quicksand"],

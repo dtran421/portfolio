@@ -34,16 +34,16 @@
          "width": 80,
          "height": 80,
          "darkText": false
+      },
+      {
+         "text": "Tailwind",
+         "img": "tailwind",
+         "width": 100,
+         "height": 100,
+         "darkText": true
       }
    ],
    "learning": [
-      {
-         "text": "Swift",
-         "img": "swift",
-         "width": 80,
-         "height": 80,
-         "darkText": false
-      },
       {
          "text": "C++",
          "img": "cpp",
@@ -59,11 +59,41 @@
          "darkText": false
       },
       {
-         "text": "Tailwind",
-         "img": "tailwind",
-         "width": 100,
-         "height": 100,
+         "text": "Swift",
+         "img": "swift",
+         "width": 80,
+         "height": 80,
+         "darkText": false
+      },
+      {
+         "text": "GCloud",
+         "img": "gcloud",
+         "width": 80,
+         "height": 80,
          "darkText": true
+      }
+   ],
+   "future": [
+      {
+         "text": "C++",
+         "img": "cpp",
+         "width": 60,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "MongoDB",
+         "img": "mongo",
+         "width": 70,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "Swift",
+         "img": "swift",
+         "width": 80,
+         "height": 80,
+         "darkText": false
       },
       {
          "text": "GCloud",

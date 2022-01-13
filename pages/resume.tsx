@@ -1,125 +1,103 @@
-import { useEffect, useRef } from "react";
-import { useAnimation, AnimatePresence, motion } from "framer-motion";
+import { FC } from "react";
+import { useMediaQuery } from "react-responsive";
+import Image from "next/image";
+import Link from "next/link";
+import { Parallax } from "react-parallax";
+import { FiMail, FiPhone, FiHome } from "react-icons/fi";
 
-import Navbar from "../components/Global/Navbar";
-import StickyBar from "../components/Global/StickyBar";
+import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
+
+import MainLayout from "../components/Global/layouts/MainLayout";
 import Section from "../components/Resume/Section";
-import Subsection from "../components/Resume/Subsection";
 import resumeContents from "../public/json/resume.json";
-import { isInViewport } from "./index";
 
-export interface ResumeProps {}
+const Resume: FC<null> = () => {
+   const lgScreen = useMediaQuery(lgScreenQuery);
 
-const stickyVariants = {
-   hidden: {
-      opacity: 0,
-      transition: {
-         duration: 0.2,
-         ease: "easeOut"
-      }
-   },
-   visible: {
-      opacity: 1,
-      transition: {
-         duration: 0.25,
-         ease: "easeOut"
-      }
-   }
-};
-
-const Resume: React.FunctionComponent<ResumeProps> = () => {
-   const stickyAnimations = useAnimation();
-   const profile = useRef(null);
-
-   const scrollListener = () => {
-      const profileVisible = isInViewport(profile.current);
-      profileVisible ? stickyAnimations.start("hidden") : stickyAnimations.start("visible");
+   const iconProps = {
+      size: lgScreen ? 18 : 12,
+      className: "dark:text-white"
    };
-   useEffect(() => {
-      document.addEventListener("scroll", scrollListener);
-   });
 
    return (
-      <div>
-         <Navbar page="Resume" sticky={false} />
-         <div className="flex justify-center bg-gradient-to-tr from-blue-800 to-blue-700">
-            <p className="text-6xl my-20">Duke Tran</p>
-         </div>
-         <div ref={profile} className="max-w-screen-xl mx-auto">
-            <Section heading="Profile">
-               <p className="text-2xl px-20">
-                  Studying computer science and finance at William & Mary. Accumulated profound research and programming
-                  skills through classroom experiences. Working as an online tutor gaining invaluable technology and
-                  teaching experience. Employed at Agency 1693 as marketing staff member, collaborating on marketing
-                  projects.
-               </p>
-            </Section>
-         </div>
-         {/*<AnimatePresence>
-            <motion.div key="sticky_nav" initial="hidden" animate={stickyAnimations} variants={stickyVariants}>
-               <StickyBar title="Resume" />
-            </motion.div>
-         </AnimatePresence>*/}
-         <div className="max-w-screen-xl mx-auto pb-20">
-            <Section heading="Experience">
-               {resumeContents["Experience"].map((content, idx, arr) => {
-                  return <Subsection key={idx} content={content} idx={idx} max={arr.length} />;
+      <MainLayout page="Resume">
+         <div className="mt-16">
+            <div className="relative w-full h-64 overflow-hidden">
+               {lgScreen ? (
+                  <Parallax
+                     bgImage={"/img/city_night.jpg"}
+                     strength={-200}
+                     className="h-full"
+                     bgClassName="translate-y-3/4"
+                  />
+               ) : (
+                  <div
+                     className="w-full h-full bg-no-repeat bg-center"
+                     style={{ backgroundImage: "url(/img/city_night.jpg)" }}
+                  />
+               )}
+            </div>
+            <div className="md:max-w-3xl absolute top-48 lg:top-40 inset-x-1/2 md:left-0 flex justify-center mx-auto">
+               <div className="w-min md:w-max">
+                  <div className="relative overflow-hidden w-48 h-48 lg:w-56 lg:h-56 border-8 border-slate-100 dark:border-gray-900 rounded-full">
+                     <Image alt="headshot" src="/img/profile.jpg" width={300} height={475} />
+                  </div>
+               </div>
+            </div>
+            <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col items-start space-y-2 mx-auto mt-16 lg:mt-20">
+               <h1 className="text-2xl lg:text-3xl dark:text-white font-bold">Duke Tran</h1>
+               <div className="flex flex-col md:flex-row justify-between text-lg text-gray-800 dark:text-gray-200 dark-transition">
+                  <div className="flex flex-col justify-between space-y-4 lg:space-y-6 mb-10 lg:mb-0">
+                     <h2 className="md:w-5/6 lg:w-2/3 font-medium text-sm lg:text-lg">
+                        Incoming EY FSO Technology Consulting Intern | Chief Financial Officer of Agency 1693 | CS +
+                        Finance @ William & Mary
+                     </h2>
+                     <Link href="/contact" passHref={true}>
+                        <button className="w-full md:w-min bg-primary text-lg lg:text-xl text-white dark:text-gray-200 dark-transition font-semibold rounded-full px-8 py-1 lg:py-2">
+                           Contact
+                        </button>
+                     </Link>
+                  </div>
+                  <div className="lg:w-5/12 space-y-2">
+                     <ContactLabel label="duketran2001@gmail.com" center={true}>
+                        <FiMail {...iconProps} />
+                     </ContactLabel>
+                     <ContactLabel label="(703)-409-3681" center={true}>
+                        <FiPhone {...iconProps} />
+                     </ContactLabel>
+                     <ContactLabel
+                        label="Please contact me personally if you need my address"
+                        center={false}
+                        special={true}>
+                        <FiHome {...iconProps} />
+                     </ContactLabel>
+                  </div>
+               </div>
+            </div>
+            <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
+               {resumeContents["Tabs"].map(({ heading, body }, sectionIdx) => {
+                  return <Section key={sectionIdx} type="Tabs" {...{ heading, body }} />;
                })}
-            </Section>
-            <Section heading="Education">
-               {resumeContents["Education"].map((content, idx, arr) => {
-                  return <Subsection key={idx} content={content} idx={idx} max={arr.length} />;
+               {resumeContents["Bubbles"].map(({ heading, body }, sectionIdx) => {
+                  return <Section key={sectionIdx} type="Bubbles" {...{ heading, body }} />;
                })}
-            </Section>
-            <div className="grid grid-cols-2 gap-14">
-               <Section heading="Professional Skills">
-                  <div className="flex flex-wrap justify-center max-w-screen-lg mx-auto">
-                     {resumeContents["Skills"].map((content, idx) => {
-                        return (
-                           <div key={idx} className="m-4">
-                              <p className="rounded-full bg-blue-700 text-white text-2xl inline py-1 px-4">{content}</p>
-                           </div>
-                        );
-                     })}
-                  </div>
-               </Section>
-               <Section heading="Certifications">
-                  <div className="flex flex-wrap justify-center max-w-screen-lg mx-auto">
-                     {resumeContents["Certifications"].map((content, idx) => {
-                        return (
-                           <div key={idx} className="m-4">
-                              <p className="rounded-full bg-blue-700 text-white text-2xl inline py-1 px-4">{content}</p>
-                           </div>
-                        );
-                     })}
-                  </div>
-               </Section>
-               <Section heading="Accomplishments">
-                  <div className="flex flex-wrap justify-center max-w-screen-lg mx-auto">
-                     {resumeContents["Accomplishments"].map((content, idx) => {
-                        return (
-                           <div key={idx} className="m-4 px-8">
-                              <p className="rounded-full bg-blue-700 text-white text-2xl inline-block text-center py-1 px-4">
-                                 {content}
-                              </p>
-                           </div>
-                        );
-                     })}
-                  </div>
-               </Section>
-               <Section heading="Languages">
-                  <div className="flex flex-wrap justify-center max-w-screen-lg mx-auto">
-                     {resumeContents["Languages"].map((content, idx) => {
-                        return (
-                           <div key={idx} className="m-4">
-                              <p className="rounded-full bg-blue-700 text-white text-2xl inline py-1 px-4">{content}</p>
-                           </div>
-                        );
-                     })}
-                  </div>
-               </Section>
             </div>
          </div>
+      </MainLayout>
+   );
+};
+
+interface ContactLabelProps {
+   label: string;
+   center: boolean;
+   special?: boolean;
+}
+
+const ContactLabel: FC<ContactLabelProps> = ({ label, center, special, children }) => {
+   return (
+      <div className={`flex ${center ? "items-center" : "items-start"} space-x-2`}>
+         <span className="bg-gray-200/75 dark:bg-gray-700/75 rounded-full p-2">{children}</span>
+         <p className={`text-sm lg:text-lg ${special ? "italic" : ""}`}>{label}</p>
       </div>
    );
 };

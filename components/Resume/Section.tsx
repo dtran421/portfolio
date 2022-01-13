@@ -1,65 +1,44 @@
-import { useEffect, useRef } from "react";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { FC, useEffect } from "react";
 
-export interface SectionProps {
+import { SubsectionType } from "./Subsection";
+import Subsection from "./Subsection";
+
+interface SectionProps {
+   type: string;
    heading: string;
+   body: (SubsectionType | string)[];
 }
 
-function isInViewport(el) {
-   const rect = el.getBoundingClientRect();
+const Section: FC<SectionProps> = ({ type, heading, body }) => {
    return (
-      // rect.top >= 0 ||
-      // rect.left >= 0 ||
-      // rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) ||
-      // rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      rect.bottom - (rect.bottom - rect.top) / 4 >= 0
-   );
-}
-
-const variants = {
-   hidden: {
-      opacity: 0,
-      transition: {
-         duration: 0.25,
-         ease: "easeOut"
-      }
-   },
-   visible: {
-      opacity: 1,
-      transition: {
-         duration: 0.4,
-         ease: "easeIn"
-      }
-   }
-};
-
-const Section: React.FunctionComponent<SectionProps> = ({ children, heading }) => {
-   const animations = useAnimation();
-   const section = useRef(null);
-
-   const scrollListener = () => {
-      const sectionVisible = isInViewport(section.current);
-      sectionVisible ? animations.start("visible") : animations.start("hidden");
-   };
-   useEffect(() => {
-      document.addEventListener("scroll", scrollListener);
-   });
-
-   return (
-      <div id={heading.toLowerCase()} ref={section} className="mt-10 pt-10 h-full">
-         <AnimatePresence>
-            <motion.div
-               className="flex flex-col h-full justify-start bg-gray-700 bg-opacity-50 rounded-xl py-16"
-               initial="visible"
-               animate={animations}
-               variants={variants}>
-               <p className="text-5xl text-center mb-10">
-                  <span className="bg-gray-100 text-blue-600 px-3 py-1 rounded-md font-semibold">{heading}</span>
-               </p>
-               {children}
-            </motion.div>
-            )
-         </AnimatePresence>
+      <div className="flex flex-col bg-gray-300/25 dark:bg-gray-700/50 dark-transition rounded-xl px-6 lg:px-10 py-6">
+         <p
+            className={`text-2xl lg:text-3xl text-center dark-transition font-semibold px-3 py-1 ${
+               type === "Tabs" ? "mb-6" : "mb-4"
+            }`}>
+            {heading}
+         </p>
+         {type === "Tabs" ? (
+            body.map((content: SubsectionType, idx, arr) => {
+               let style;
+               if (idx === 0) style = "border-b-4 border-gray-300 dark:border-gray-600 dark-transition pb-6";
+               else if (idx + 1 === arr.length) style = "pt-6";
+               else style = "border-b-4 border-gray-300 dark:border-gray-600 dark-transition py-6";
+               return <Subsection key={idx} {...{ content, style }} />;
+            })
+         ) : (
+            <div className="flex flex-wrap justify-center">
+               {body.map((content, idx) => {
+                  return (
+                     <p
+                        key={idx}
+                        className="bg-secondary text-white text-center rounded-full lg:text-lg px-6 lg:px-3 py-1 mx-2 my-1">
+                        {content}
+                     </p>
+                  );
+               })}
+            </div>
+         )}
       </div>
    );
 };

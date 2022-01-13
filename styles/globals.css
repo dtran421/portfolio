@@ -18,6 +18,13 @@
    border-radius: 6px;
 }
 
+/* transition duration-200 ease-in */
+.dark-transition {
+   transition-property: color, background-color, border-color, fill, stroke, box-shadow;
+   transition-duration: 200ms;
+   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
 .bg-java {
    background-color: #e76f00;
 }

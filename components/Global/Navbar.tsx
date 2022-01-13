@@ -1,68 +1,107 @@
-import { useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
+import { FC, Dispatch, SetStateAction, useState, useContext } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
+import { ThemeContext } from "../../pages/_app";
+import { lgScreenQuery } from "./configs/Breakpoints";
 import Navlink from "./Navlink";
-import dropdownContents from "../../public/json/dropdown.json";
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
-export interface NavbarProps {
+const navlinkVariants = {
+   expanded: {
+      transition: {
+         staggerChildren: 1,
+         delayChildren: 2
+      }
+   },
+   collapsed: {
+      transition: {
+         staggerChildren: 0.07,
+         delayChildren: 0.2
+      }
+   }
+};
+
+interface NavbarProps {
    page: string;
    sticky: boolean;
 }
 
-const Navbar: React.FunctionComponent<NavbarProps> = ({ page, sticky }) => {
-   const [dropdownTab, setTab] = useState("");
-   const [dropdownVisibility, setDropdownVisibility] = useState(false);
-   const toggleDropdown = (status, tab) => {
-      setDropdownVisibility(status);
-      setTab(tab);
-   };
+const Navbar: FC<NavbarProps> = ({ page, sticky }) => {
+   const lgScreen = useMediaQuery(lgScreenQuery);
+   const tabs = ["Portfolio", "Resume", "Projects", "Contact"];
 
-   const pageTitle = `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
+   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
-   return (
-      <>
-         <Head>
-            <title>{pageTitle}</title>
-            <meta property="og:title" content={pageTitle} key="title" />
-         </Head>
-         <div
-            className={`fixed z-20 w-full bg-gray-900 transition-all duration-300 ease-in ${
-               sticky ? "bg-opacity-90 backdrop-blur-md" : "bg-gray-900 pt-4"
-            }`}
-            onMouseLeave={() => toggleDropdown(false, "")}>
-            <div className="flex items-center">
-               <p className="font-Oxygen text-4xl text-white font-bold ml-6 mr-3">DT</p>
-               <div
-                  className={`${page === "Main" && "border-b-4"} py-3 mx-5`}
-                  onMouseEnter={() => toggleDropdown(false, "")}>
-                  <Link href="/">
-                     <a
-                        className={`text-xl ${
-                           page === "Main" ? "text-white" : "text-blue-500 hover:text-purple-200"
-                        } mx-5`}>
-                        Portfolio
-                     </a>
-                  </Link>
-               </div>
-               <div className="flex justify-between pr-10">
-                  {Object.keys(dropdownContents).map((link, idx) => {
-                     return (
-                        <Navlink
-                           key={idx}
-                           active={page === link}
-                           link={link}
-                           contents={dropdownContents[link]}
-                           toggleDropdown={toggleDropdown}
-                           dropdownVisibility={dropdownVisibility}
-                           dropdownTab={dropdownTab}
-                        />
-                     );
-                  })}
-               </div>
+   const [isExpanded, toggleExpanded] = useState(false);
+
+   return lgScreen ? (
+      <div
+         className={`w-full fixed z-20 bg-slate-100 dark:bg-gray-900 dark-transition ${
+            sticky ? "bg-opacity-80 backdrop-blur-lg" : "translate-y-1/2"
+         } transition-transform duration-200 ease-linear`}>
+         <div className="relative flex justify-between items-center mx-6">
+            <p className="absolute font-Oxygen text-4xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-secondary font-bold">
+               DT
+            </p>
+            <div className="w-full flex justify-center space-x-6">
+               {tabs.map((link, idx) => {
+                  return <Navlink key={idx} active={page === link} link={link} mobile={false} />;
+               })}
             </div>
+            <DarkModeToggle {...{ darkMode, toggleDarkMode }} mobile={false} />
          </div>
-      </>
+      </div>
+   ) : (
+      <div className="w-full fixed z-20 flex flex-col bg-slate-300 dark:bg-gray-700 dark-transition rounded-b-2xl">
+         <div className="flex justify-between items-center mt-2 mx-3">
+            <button
+               className="flex justify-center items-center dark-transition rounded-full p-4"
+               onClick={() => toggleExpanded(!isExpanded)}>
+               {isExpanded ? <FiX size={28} /> : <FiMenu size={28} />}
+            </button>
+            <DarkModeToggle {...{ darkMode, toggleDarkMode }} mobile={true} />
+         </div>
+         {isExpanded && (
+            <motion.div
+               initial={"collapsed"}
+               animate={"expanded"}
+               exit={"collapsed"}
+               variants={navlinkVariants}
+               className="flex flex-col items-center space-y-2 mb-2">
+               {tabs.map((link, idx) => {
+                  return <Navlink key={idx} active={page === link} link={link} mobile={true} />;
+               })}
+            </motion.div>
+         )}
+      </div>
+   );
+};
+
+interface DarkModeToggleProps {
+   darkMode: boolean;
+   toggleDarkMode: Dispatch<SetStateAction<boolean>>;
+   mobile: boolean;
+}
+
+const DarkModeToggle: FC<DarkModeToggleProps> = ({ darkMode, toggleDarkMode, mobile }) => {
+   return (
+      <div
+         className={`w-16 ${
+            !mobile && "absolute right-0"
+         } flex justify-start dark:justify-end bg-gray-800/75 dark:bg-gray-200/75 dark-transition rounded-full p-1 cursor-pointer`}
+         onClick={() => toggleDarkMode(!darkMode)}>
+         <motion.div
+            className="w-6 h-6 flex justify-center items-center text-black bg-white rounded-full"
+            layout
+            transition={{
+               type: "spring",
+               stiffness: 500,
+               damping: 30
+            }}>
+            {darkMode ? <FiMoon size={16} /> : <FiSun size={16} />}
+         </motion.div>
+      </div>
    );
 };
 

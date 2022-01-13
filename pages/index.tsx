@@ -1,18 +1,22 @@
 import { useState, useEffect, useRef, FC } from "react";
+import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Link } from "react-scroll";
 import Typewriter from "typewriter-effect";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FiChevronsDown } from "react-icons/fi";
 
-import languages from "../public/json/languages.json";
-import socials from "../public/json/socials.json";
+import { lgScreenQuery, xlScreenQuery } from "../components/Global/configs/Breakpoints";
 import carousel from "../public/json/carousel.json";
 
-import Navbar from "../components/Global/Navbar";
 import Emoji from "../components/Global/Emoji";
 import SocialProfile from "../components/Index/SocialProfile";
 import Timeline from "../components/Index/Timeline";
-import LangProfile from "../components/Index/LangProfile";
+import LangGroup from "../components/Index/LangGroup";
+import MainLayout from "../components/Global/layouts/MainLayout";
 
 export function isInViewport(el) {
    const rect = el.getBoundingClientRect();
@@ -45,56 +49,104 @@ const learnMoreVariants = {
 };
 
 const Index: FC<null> = () => {
+   const lgScreen = useMediaQuery(lgScreenQuery);
+   const xlScreen = useMediaQuery(xlScreenQuery);
    const learnMoreAnimations = useAnimation();
 
    const page1 = useRef(null);
    const scrollListener = () => {
-      const page1Visible = isInViewport(page1.current);
-      if (page1Visible) {
-         learnMoreAnimations.start("visible");
-      } else {
-         learnMoreAnimations.start("hidden");
+      if (page1.current) {
+         const page1Visible = isInViewport(page1.current);
+         if (page1Visible) {
+            learnMoreAnimations.start("visible");
+         } else {
+            learnMoreAnimations.start("hidden");
+         }
       }
    };
 
-   const [stickyNavbar, toggleStickyNavbar] = useState(false);
-   const stickyScrollListener = () => {
-      toggleStickyNavbar(window.scrollY > 0);
+   const pics = 2;
+   const imgs = carousel.imgs;
+
+   const [[pic, picData, init], cyclePics] = useState([1, imgs[0], true]);
+   const typewriter = useRef(null);
+   const typewriterListener = () => {
+      const cyclePicture = () => {
+         const loop = pic + 1 > pics;
+         const newPic = loop ? 1 : pic + 1;
+         cyclePics([newPic, imgs[newPic - 1], loop]);
+      };
+
+      let typewriterText = typewriter.current.children[0].innerText;
+
+      if (typewriterText.length == 1) {
+         if (init) {
+            cyclePics([pic, picData, false]);
+         } else {
+            cyclePicture();
+         }
+      }
    };
 
    useEffect(() => {
       document.addEventListener("scroll", scrollListener);
 
-      document.addEventListener("scroll", stickyScrollListener);
+      let typewriterNode;
+      if (typewriter.current) {
+         typewriterNode = typewriter.current;
+         typewriter.current.addEventListener("DOMSubtreeModified", typewriterListener);
+      }
+
+      return () => {
+         document.removeEventListener("scroll", scrollListener);
+
+         typewriterNode.removeEventListener("DOMSubtreeModified", typewriterListener);
+      };
    });
 
-   const pics = 2;
-   const imgs = carousel.imgs;
-
-   const [[pic, picData], cyclePics] = useState([1, imgs[0]]);
-   const cyclePicture = () => {
-      const newPic = pic + 1 > pics ? 1 : pic + 1;
-      cyclePics([newPic, imgs[newPic - 1]]);
+   const socialIconClass = "z-10 flex justify-center items-center text-white bg-primary rounded-full p-2";
+   const socialIconProps = {
+      size: lgScreen ? 24 : 20
    };
 
    return (
-      <div className="bg-gray-900">
-         <div ref={page1} className="h-screen flex flex-col justify-between">
-            <Navbar page="Main" sticky={stickyNavbar} />
-            <div className="grid grid-cols-2">
-               <div className="flex flex-col items-start ml-14 mr-8 mt-28">
-                  <div className="flex justify-start py-5">
-                     <p className="text-white text-3xl text-center">
-                        Hi there! My name is{" "}
-                        <span className="font-medium bg-purple-500 rounded-lg px-3 py-1 ml-1">Duke Tran</span>{" "}
-                     </p>
-                     <Emoji
-                        label="wave"
-                        symbol={"👋🏼"}
-                        className="text-3xl transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 pl-4 cursor-default"
-                     />
+      <MainLayout page="Portfolio">
+         <div ref={page1} className="w-5/6 xl:h-screen flex flex-col justify-between items-center mx-auto">
+            <div className="flex flex-col lg:flex-row justify-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-24 xl:mt-40">
+               <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
+                  <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
+                     <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0">
+                        <p className="inline dark:text-white dark-transition">Hi there! My name is </p>
+                        <p className="inline">
+                           <span className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3">
+                              Duke Tran
+                           </span>
+                           <Emoji
+                              label="wave"
+                              symbol={"👋🏼"}
+                              className="text-3xl transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 ml-3 cursor-default"
+                           />
+                        </p>
+                     </div>
+                     {/* <AnimatePresence>
+                        <motion.div
+                           animate={{ rotate: [10, 100, 10, 100, 10, 100, 10, 0] }}
+                           transition={{
+                              repeat: Infinity,
+                              repeatType: "loop",
+                              duration: 2,
+                              times: [0.4, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
+                              repeatDelay: 1
+                           }}>
+                           <Emoji
+                              label="wave"
+                              symbol={"👋🏼"}
+                              className="text-3xl transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 ml-4 cursor-default"
+                           />
+                        </motion.div>
+                     </AnimatePresence> */}
                   </div>
-                  <div className="w-full flex flex-col text-gray-200 text-lg space-y-4">
+                  <div className="w-full flex flex-col text-gray-800 dark:text-gray-200 lg:text-lg space-y-4">
                      <p>
                         I&#39;m currently a junior studying CS and finance at William & Mary. I&#39;m super interested
                         in exploring the intersection of technology and financial markets, hopefully through internships
@@ -104,186 +156,225 @@ const Index: FC<null> = () => {
                      <p className="mt-2">
                         Below are some of my socials. Feel free to check them out and connect with me there!
                      </p>
-                     <div className="flex justify-center px-4 py-2">
-                        {socials.list.map((social) => {
-                           return <SocialProfile key={social.type} {...social} />;
-                        })}
+                     <div className="w-full flex justify-center md:px-4 lg:px-0">
+                        <div className="w-full lg:w-2/3 xl:w-full grid grid-cols-2 xl:flex xl:justify-center gap-x-8 lg:gap-x-4 xl:gap-x-2 gap-y-4">
+                           <SocialProfile type="Github" name="dtran421" link="https://github.com/dtran421">
+                              <div className={socialIconClass}>
+                                 <FaGithub {...socialIconProps} />
+                              </div>
+                           </SocialProfile>
+                           <SocialProfile type="LinkedIn" name="duketran" link="https://www.linkedin.com/in/duketran/">
+                              <div className={socialIconClass}>
+                                 <FaLinkedinIn {...socialIconProps} />
+                              </div>
+                           </SocialProfile>
+                           <SocialProfile type="Facebook" name="dtran421" link="https://www.facebook.com/dtran421">
+                              <div className={socialIconClass}>
+                                 <FaFacebookF {...socialIconProps} />
+                              </div>
+                           </SocialProfile>
+                           <SocialProfile type="Twitter" name="dtran421" link="https://www.twitter.com/dtran421">
+                              <div className={socialIconClass}>
+                                 <FaTwitter {...socialIconProps} />
+                              </div>
+                           </SocialProfile>
+                        </div>
                      </div>
                   </div>
                </div>
-               <div className="grow-0 overflow-hidden flex flex-col items-center mx-10 mt-24">
-                  <AnimatePresence initial={false}>
-                     <motion.div
-                        key={pic}
-                        initial={{ x: 100, opacity: 0, z: 10 }}
-                        animate={{ x: 0, opacity: 1, z: 10 }}
-                        exit={{ x: -100, opacity: 0, z: 0 }}
-                        transition={{
-                           x: { type: "spring", stiffness: 300, damping: 300 },
-                           opacity: { duration: 0.7 }
-                        }}
-                        className="grow-0 overflow-hidden">
-                        <div>
-                           <Image
-                              src={picData.pic}
+               <div className="md:w-full lg:w-1/2 relative overflow-hidden flex flex-col justify-start items-center space-y-4 mx-8">
+                  {lgScreen && (
+                     <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
+                        <AnimatePresence initial={false}>
+                           <motion.img
+                              key={pic}
                               alt={picData.alt}
-                              className="absolute rounded-xl"
+                              src={picData.pic}
+                              initial={{ x: 200, opacity: 0 }}
+                              animate={{ x: 0, opacity: 1, zIndex: 1 }}
+                              exit={{ x: -200, opacity: 0, zIndex: 0 }}
+                              transition={{
+                                 zIndex: { duration: 0.1 },
+                                 x: {
+                                    duration: 1.5,
+                                    ease: "easeInOut"
+                                 },
+                                 opacity: {
+                                    duration: 2,
+                                    ease: "easeOut"
+                                 }
+                              }}
                               width={picData.width}
                               height={picData.height}
-                              loading="lazy"
+                              className="absolute rounded-xl"
                            />
-                        </div>
-                     </motion.div>
-                  </AnimatePresence>
-                  <button className="bg-purple-500 text-white rounded-lg p-3" onClick={() => cyclePicture()}>
-                     Switch
-                  </button>
-                  {/* <div className="flex text-3xl my-4">
-                     <p className="text-white">I am a/an </p>
-                     <Typewriter
-                        options={{
-                           strings: [
-                              "Programmer",
-                              "Developer",
-                              "Investor",
-                              "Aspiring Analyst",
-                              "Problem Solver",
-                              "Critical Thinker"
-                           ],
-                           autoStart: true,
-                           loop: true,
-                           pauseFor: 5000,
-                           wrapperClassName: "font-medium border-b-2 border-blue-500 ml-2 mr-1",
-                           cursorClassName: "text-purple-400 shadow-md shadow-purple-200/40 animate-pulse"
-                        }}
-                     />
-                  </div> */}
-               </div>
-            </div>
-            <AnimatePresence>
-               <motion.div
-                  key="learn_more"
-                  className="mt-auto flex justify-center"
-                  animate={learnMoreAnimations}
-                  variants={learnMoreVariants}>
-                  <Link to="page2" smooth={"easeOutCubic"} offset={25} duration={1000} className="flex justify-center">
-                     <div className="flex flex-col justify-end items-center mt-4 transition duration-500 transform group hover:scale-110 cursor-pointer">
-                        <p className=" text-white text-xl text-center opacity-100 mb-2">Learn more</p>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                           src="/svg/down_arrows.svg"
-                           alt="down arrows"
-                           width="28"
-                           height="28"
-                           className="py-4 -translate-y-1/4 group-hover:animate-bounce"
+                        </AnimatePresence>
+                     </div>
+                  )}
+                  <div className="w-full flex justify-center text-3xl dark:text-white dark-transition">
+                     <p className="inline-block">I am </p>
+                     <div ref={typewriter}>
+                        <Typewriter
+                           options={{
+                              strings: [
+                                 "a Programmer",
+                                 "a Developer",
+                                 "an Investor",
+                                 "an Analyst",
+                                 "a Problem Solver",
+                                 "a Critical Thinker"
+                              ],
+                              autoStart: true,
+                              loop: true,
+                              pauseFor: 5000,
+                              wrapperClassName: "font-medium border-b-2 border-secondary ml-2 mr-1",
+                              cursorClassName: "text-primary shadow-md shadow-red-200/40 animate-pulse"
+                           }}
                         />
                      </div>
-                  </Link>
-               </motion.div>
-            </AnimatePresence>
-         </div>
-         <div id="page2" className="grid grid-cols-2 pt-20 px-10">
-            <div className="flex flex-col items-center">
-               <div className="flex justify-center items-center">
-                  <div className="flex items-start pt-10">
-                     <Image src="/img/coding.jpg" alt="img1" width={450} height={350} className="rounded-xl" />
                   </div>
                </div>
-               <div className="flex items-center mt-20">
-                  <div className="px-12 rounded-xl">
-                     <p className="text-lg text-white leading-snug">
+            </div>
+            {lgScreen && (
+               <AnimatePresence>
+                  <motion.div
+                     key="learn_more"
+                     className="mt-auto flex justify-center"
+                     animate={learnMoreAnimations}
+                     variants={learnMoreVariants}>
+                     <Link
+                        to="page2"
+                        smooth={"easeOutCubic"}
+                        offset={25}
+                        duration={1000}
+                        className="flex justify-center">
+                        <div className="flex flex-col justify-end items-center text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 mt-4 transition duration-500 group hover:scale-110 cursor-pointer">
+                           <p className="text-xl text-center opacity-100 mb-1">Learn more</p>
+                           <div className="-translate-y-1/4 transition duration-200 opacity-60 group-hover:opacity-100 group-hover:animate-bounce py-4">
+                              <FiChevronsDown size={24} />
+                           </div>
+                        </div>
+                     </Link>
+                  </motion.div>
+               </AnimatePresence>
+            )}
+         </div>
+         <div id="page2" className="flex flex-col items-center px-10 py-20 mb-10">
+            {lgScreen ? (
+               <ParallaxProvider>
+                  <div className="flex justify-center space-x-10 py-10">
+                     <Parallax y={xlScreen ? ["-20%", "20%"] : ["-10%", "10%"]}>
+                        <Image src="/img/coding.jpg" alt="img1" width={450} height={350} className="rounded-xl" />
+                     </Parallax>
+                     <div className="w-1/2 flex flex-col rounded-xl">
+                        <Parallax y={xlScreen ? ["150%", "-30%"] : ["75%", "-20%"]}>
+                           <h1 className="text-3xl dark:text-white dark-transition rounded-md font-semibold mb-8">
+                              About Me
+                           </h1>
+                           <p className="text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
+                              Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit.
+                              Et magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis
+                              imperdiet massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis
+                              lectus nulla at. Varius vel pharetra vel turpis nunc eget.
+                           </p>
+                        </Parallax>
+                     </div>
+                  </div>
+                  <div className="flex justify-center space-x-10 py-10">
+                     <div className="w-1/2 rounded-xl">
+                        <Parallax y={["75%", "175%"]}>
+                           <p className="text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                              ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                           </p>
+                        </Parallax>
+                     </div>
+                     <Parallax y={["25%", "-10%"]}>
+                        <Image
+                           src="/img/outside.jpg"
+                           alt="img2"
+                           width={300}
+                           height={469}
+                           layout="fixed"
+                           className="rounded-xl"
+                        />
+                     </Parallax>
+                  </div>
+               </ParallaxProvider>
+            ) : (
+               <div className="max-w-xl mx-auto">
+                  <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-x-10 py-10">
+                     <Image src="/img/coding.jpg" alt="img1" width={450} height={350} className="rounded-xl" />
+                     <div className="flex flex-col lg:flex-row rounded-xl">
+                        <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition rounded-md font-semibold mb-4 lg:mb-8">
+                           About Me
+                        </h1>
+                        <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
+                           Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
+                           magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet
+                           massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla
+                           at. Varius vel pharetra vel turpis nunc eget.
+                        </p>
+                     </div>
+                  </div>
+                  <div className="flex flex-col-reverse lg:flex-row justify-center lg:space-x-10 py-10">
+                     <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug mt-10 lg:mt-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat.
                      </p>
-                  </div>
-               </div>
-            </div>
-            <div className="flex flex-col items-center">
-               <div className="flex justify-end">
-                  <div className="flex flex-col h-2/3 rounded-xl p-12 mt-16">
-                     <p className="text-3xl pb-8">
-                        <span className="text-gray-100 rounded-md font-semibold">About me</span>
-                     </p>
-                     <p className="text-lg text-white leading-snug">
-                        Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
-                        magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet
-                        massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla at.
-                        Varius vel pharetra vel turpis nunc eget.
-                     </p>
-                  </div>
-               </div>
-               <div className="flex justify-center">
-                  <div>
                      <Image src="/img/outside.jpg" alt="img2" width={300} height={469} className="rounded-xl" />
                   </div>
                </div>
+            )}
+         </div>
+         <div className="max-w-4xl px-4 lg:px-0 mx-auto">
+            <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition text-center font-semibold mb-8">
+               My Journey
+            </h1>
+            <div className="mb-20">
+               <Timeline />
             </div>
          </div>
-         <Timeline />
-         <div className="mt-28">
-            <div className="flex flex-col justify-center max-w-5xl px-10 mx-auto rounded-xl">
-               <div className="flex flex-col rounded-xl">
-                  <p className="text-2xl text-center pt-14 pb-8">
-                     <span className="bg-gray-100 text-blue-600 px-3 py-1 rounded-md font-semibold">Technologies</span>
-                  </p>
-                  <p className="text-lg text-white px-10">
-                     Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
-                     magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet massa
-                     tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla at. Varius vel
-                     pharetra vel turpis nunc eget. Nulla facilisi etiam dignissim diam quis. Euismod lacinia at quis
-                     risus sed vulputate odio ut enim. Vitae auctor eu augue ut lectus arcu bibendum at.
-                  </p>
-                  <div className="space-y-4 p-10">
-                     <p className="text-2xl text-white py-1 rounded-md font-semibold">Experienced</p>
-                     <div className="grid grid-cols-5 gap-x-4 xl:gap-x-10 w-full pb-4">
-                        {languages.experienced.map((lang) => {
-                           return <LangProfile key={lang.text} {...lang} />;
-                        })}
-                     </div>
-                     <p className="text-2xl text-white pt-5 pb-1 rounded-md font-semibold">Learning</p>
-                     <div className="grid grid-cols-5 gap-x-4 xl:gap-x-10 w-full">
-                        {languages.learning.map((lang) => {
-                           return <LangProfile key={lang.text} {...lang} />;
-                        })}
-                     </div>
-                  </div>
-               </div>
+         <div className="max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex flex-col justify-center px-6 mx-auto mt-32 rounded-xl">
+            <h1 className="text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold mb-4">
+               Technologies
+            </h1>
+            <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition pb-6">
+               As the digital world evolves, technologies and frameworks are constantly being developed and pushed to
+               the forefront of our ever-advancing society. As a developer, it is my lifelong mission and ambition to
+               stay on top of these incredible innovations and strive for mastery of these powerful tools that will
+               enable me to explore my passions and perform my career functions to the best of my ability.
+            </p>
+            <div className="space-y-4">
+               <LangGroup
+                  name={"Experienced"}
+                  desc={
+                     "Numerous years of experience, intermediate to advanced mastery of associated concepts, thousands of lines coded"
+                  }
+                  emoji={"⚡️"}
+                  emojiLabel="lightning"
+               />
+               <LangGroup
+                  name={"Learning"}
+                  desc={
+                     "Limited years of experience, novice understanding of associated concepts, less than a thousand lines coded"
+                  }
+                  emoji={"📚"}
+                  emojiLabel="books"
+               />
+               <LangGroup
+                  name={"Future"}
+                  desc={
+                     "No experience, desire to learn relevant concepts and attain mastery, limited lines coded (or none)"
+                  }
+                  emoji={"📌"}
+                  emojiLabel="pin"
+               />
             </div>
          </div>
-         <div className="pt-32">
-            <div className="flex flex-col items-center">
-               <p className=" text-center pb-12">
-                  <span className="text-2xl bg-gray-100  text-blue-600 px-3 py-1 rounded-md font-semibold">
-                     Projects
-                  </span>
-               </p>
-               <p className="text-lg text-white px-10 pb-10 max-w-screen-xl">
-                  Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et magnis
-                  dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet massa tincidunt
-                  nunc pulvinar sapien.
-               </p>
-               <div className="grid grid-cols-3 gap-14 max-w-screen-lg pb-20">
-                  <div className="flex flex-col col-span-1 px-4 rounded-xl bg-gradient-to-tr from-blue-800 to-blue-700">
-                     <div className="flex justify-center">
-                        <p className="text-white text-2xl m-2 pb-1 border-b-2 border-white">Kickflip</p>
-                     </div>
-                     <div className="flex w-full justify-center p-5">
-                        <Image src="/typescript.png" alt="img3" width={100} height={100} />
-                     </div>
-                  </div>
-                  <div className="flex flex-col col-span-1 px-4 rounded-xl bg-gradient-to-tr from-blue-800 to-blue-700">
-                     <div className="flex justify-center">
-                        <p className="text-white text-2xl m-2 pb-1 border-b-2 border-white">Whispearrings</p>
-                     </div>
-                     <div className="flex w-full justify-center p-5">
-                        <Image src="/typescript.png" alt="img4" width={100} height={100} />
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      </MainLayout>
    );
 };
 
