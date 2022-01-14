@@ -2,42 +2,49 @@
    "experienced": [
       {
          "text": "Java",
-         "img": "java",
+         "img": "java.png",
          "width": 40,
          "height": 50,
          "darkText": true
       },
       {
          "text": "Python",
-         "img": "python",
+         "img": "python.png",
          "width": 80,
          "height": 80,
          "darkText": true
       },
       {
          "text": "React",
-         "img": "react",
+         "img": "react.png",
          "width": 150,
          "height": 150,
          "darkText": true
       },
       {
+         "text": "Next.js",
+         "img": "nextjs.svg",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
          "text": "Node.js",
-         "img": "node",
+         "img": "node.png",
          "width": 60,
          "height": 70,
          "darkText": true
       },
       {
          "text": "Typescript",
-         "img": "typescript",
+         "img": "typescript.png",
          "width": 80,
          "height": 80,
          "darkText": false
       },
       {
          "text": "Tailwind",
-         "img": "tailwind",
+         "img": "tailwind.png",
          "width": 100,
          "height": 100,
          "darkText": true
@@ -46,28 +53,28 @@
    "learning": [
       {
          "text": "C++",
-         "img": "cpp",
+         "img": "cpp.png",
          "width": 60,
          "height": 70,
          "darkText": false
       },
       {
          "text": "MongoDB",
-         "img": "mongo",
+         "img": "mongo.png",
          "width": 70,
          "height": 70,
          "darkText": false
       },
       {
          "text": "Swift",
-         "img": "swift",
+         "img": "swift.png",
          "width": 80,
          "height": 80,
          "darkText": false
       },
       {
          "text": "GCloud",
-         "img": "gcloud",
+         "img": "gcloud.png",
          "width": 80,
          "height": 80,
          "darkText": true
@@ -76,28 +83,28 @@
    "future": [
       {
          "text": "C++",
-         "img": "cpp",
+         "img": "cpp.png",
          "width": 60,
          "height": 70,
          "darkText": false
       },
       {
          "text": "MongoDB",
-         "img": "mongo",
+         "img": "mongo.png",
          "width": 70,
          "height": 70,
          "darkText": false
       },
       {
          "text": "Swift",
-         "img": "swift",
+         "img": "swift.png",
          "width": 80,
          "height": 80,
          "darkText": false
       },
       {
          "text": "GCloud",
-         "img": "gcloud",
+         "img": "gcloud.png",
          "width": 80,
          "height": 80,
          "darkText": true

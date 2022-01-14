@@ -48,7 +48,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ name, thumbnail, width, height }) =
       <Link href={`/projects/${name.toLowerCase()}`} passHref={true}>
          <button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="h-96 relative">
             <div className="w-full h-full relative z-10 flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
-               <Image alt={name.toLowerCase()} src={thumbnail} {...{ width, height }} layout="fixed" />
+               <Image alt={name.toLowerCase()} src={thumbnail} {...{ width, height }} layout="fixed" priority />
             </div>
             {lgScreen ? (
                <AnimatePresence initial={false}>

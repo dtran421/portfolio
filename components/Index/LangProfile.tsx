@@ -12,10 +12,12 @@ const LangProfile: React.FunctionComponent<LangProfileProps> = ({ text, img, wid
    return (
       <div className="flex flex-col items-center">
          <div className="flex justify-center mt-4 mb-2 bg-gray-300/30 dark:bg-gray-700/30 dark-transition backdrop-blur-md rounded-full p-5 lg:p-6 w-20 h-20 lg:w-24 lg:h-24 shadow-md">
-            <Image src={`/icons/${img}.png`} alt="test" {...{ width, height }} />
+            <div className="flex justify-center items-center">
+               <Image src={`/icons/${img}`} alt="test" {...{ width, height }} />
+            </div>
          </div>
          <p
-            className={`w-5/6 rounded-full bg-${img} ${
+            className={`w-5/6 rounded-full bg-${img.substring(0, img.indexOf("."))} ${
                darkText ? "text-gray-800" : "text-white"
             } font-semibold text-sm lg:text-md text-center py-1 my-2`}>
             {text}

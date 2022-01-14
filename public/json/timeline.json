@@ -1,0 +1,28 @@
+{
+   "events": [
+      {
+         "heading": "Interned at Georgetown University School of Medicine",
+         "type": "Internship",
+         "date": "Sept 2018 - Jan 2019",
+         "body": "During my senior year of high school, I received the unique opportunity to intern at Georgetown University as a part of a mentorship program. I got to study neurons that regulated the gastrointestinal system of mice. I learned so much about electrophysiology and neurobiology, and my amazing mentor taught me life lessons that I will cherish forever."
+      },
+      {
+         "heading": "Graduated from TJHSST",
+         "type": "Education",
+         "date": "Sept 2015 - May 2019",
+         "body": "These were a quite stressful 4 years of my life, but I was able to push through and earn an Advanced Diploma. Some cool classes I took include Artificial Intelligence, Web App Development, Multivariable Calculus, and DNA Science. I was also a member of some really interesting clubs, such as Bioengineering Projects for the Future, Innovations in Concepts of Engineering, and Spanish Honor Society. I was also on the Varsity Football team for 3 years."
+      },
+      {
+         "heading": "First Job at Mathnasium",
+         "type": "Work",
+         "date": "Jan 2019 - May 2019",
+         "body": "This was my first real job, and I enjoyed it much more than I thought going in. I tutored kids in K-12 about math concepts and helped them sharpen their logical reasoning skills. This job opened my eyes to how much I enjoy teaching others (and unexpectedly, working with kids)."
+      },
+      {
+         "heading": "Summer Tutor for Acakid",
+         "type": "Work",
+         "date": "Jun 2019 - Jun 2021",
+         "body": "Continuing from my previous job at Mathnasium, I decided to continue tutoring kids since I enjoyed it so much. I worked throughout the summer to keep busy and earn some money for college."
+      }
+   ]
+}

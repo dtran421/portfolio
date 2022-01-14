@@ -9,16 +9,16 @@ import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
 const navlinkVariants = {
    expanded: {
-      transition: {
-         staggerChildren: 1,
-         delayChildren: 2
-      }
+      height: "auto",
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3, staggerChildren: 1, delayChildren: 0.5 }
    },
    collapsed: {
-      transition: {
-         staggerChildren: 0.07,
-         delayChildren: 0.2
-      }
+      height: 0,
+      opacity: 0,
+      y: -150,
+      transition: { when: "afterChildren", duration: 0.3, staggerChildren: 1, staggerDirection: -1 }
    }
 };
 
@@ -37,7 +37,7 @@ const Navbar: FC<NavbarProps> = ({ page, sticky }) => {
 
    return lgScreen ? (
       <div
-         className={`w-full fixed z-20 bg-slate-100 dark:bg-gray-900 dark-transition ${
+         className={`w-full fixed z-20 bg-transparent lg:bg-slate-100 lg:dark:bg-gray-900 dark-transition ${
             sticky ? "bg-opacity-80 backdrop-blur-lg" : "translate-y-1/2"
          } transition-transform duration-200 ease-linear`}>
          <div className="relative flex justify-between items-center mx-6">
@@ -46,35 +46,47 @@ const Navbar: FC<NavbarProps> = ({ page, sticky }) => {
             </p>
             <div className="w-full flex justify-center space-x-6">
                {tabs.map((link, idx) => {
-                  return <Navlink key={idx} active={page === link} link={link} mobile={false} />;
+                  return <Navlink key={idx} active={page === link} {...{ link, idx }} mobile={false} />;
                })}
             </div>
             <DarkModeToggle {...{ darkMode, toggleDarkMode }} mobile={false} />
          </div>
       </div>
    ) : (
-      <div className="w-full fixed z-20 flex flex-col bg-slate-300 dark:bg-gray-700 dark-transition rounded-b-2xl">
-         <div className="flex justify-between items-center mt-2 mx-3">
+      <motion.div
+         animate={isExpanded ? "expanded" : "collapsed"}
+         className={`w-full fixed z-20 flex flex-col bg-slate-300 dark:bg-slate-700 dark-transition ${
+            sticky && "bg-opacity-80 backdrop-blur-lg"
+         } rounded-b-2xl`}>
+         <div className={`flex justify-between items-center ${isExpanded && "shadow-lg"} px-6 py-2 mt-2`}>
             <button
-               className="flex justify-center items-center dark-transition rounded-full p-4"
-               onClick={() => toggleExpanded(!isExpanded)}>
+               className="flex justify-center items-center dark-transition rounded-full"
+               onClick={() => {
+                  console.log("test");
+                  toggleExpanded(!isExpanded);
+               }}>
                {isExpanded ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
             <DarkModeToggle {...{ darkMode, toggleDarkMode }} mobile={true} />
          </div>
-         {isExpanded && (
-            <motion.div
-               initial={"collapsed"}
-               animate={"expanded"}
-               exit={"collapsed"}
-               variants={navlinkVariants}
-               className="flex flex-col items-center space-y-2 mb-2">
-               {tabs.map((link, idx) => {
-                  return <Navlink key={idx} active={page === link} link={link} mobile={true} />;
-               })}
-            </motion.div>
-         )}
-      </div>
+         <div className="overflow-hidden bg-transparent">
+            <AnimatePresence>
+               {isExpanded && (
+                  <motion.ul
+                     initial="collapsed"
+                     animate="expanded"
+                     exit="collapsed"
+                     variants={navlinkVariants}
+                     layout
+                     className="flex flex-col items-center space-y-2 mt-4 mb-2">
+                     {tabs.map((link, idx) => {
+                        return <Navlink key={idx} active={page === link} {...{ link, idx }} mobile={true} />;
+                     })}
+                  </motion.ul>
+               )}
+            </AnimatePresence>
+         </div>
+      </motion.div>
    );
 };
 
@@ -89,7 +101,7 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({ darkMode, toggleDarkMode, mob
       <div
          className={`w-16 ${
             !mobile && "absolute right-0"
-         } flex justify-start dark:justify-end bg-gray-800/75 dark:bg-gray-200/75 dark-transition rounded-full p-1 cursor-pointer`}
+         } flex justify-start dark:justify-end bg-slate-800/75 dark:bg-slate-200/75 dark-transition rounded-full p-1 cursor-pointer`}
          onClick={() => toggleDarkMode(!darkMode)}>
          <motion.div
             className="w-6 h-6 flex justify-center items-center text-black bg-white rounded-full"

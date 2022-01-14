@@ -1,16 +1,14 @@
 import { useState, useEffect, useRef, FC } from "react";
 import { useMediaQuery } from "react-responsive";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Link } from "react-scroll";
 import Typewriter from "typewriter-effect";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { ParallaxProvider, Parallax } from "react-scroll-parallax";
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 
-import { lgScreenQuery, xlScreenQuery } from "../components/Global/configs/Breakpoints";
-import carousel from "../public/json/carousel.json";
+import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
+import carouselData from "../public/json/carousel.json";
 
 import Emoji from "../components/Global/Emoji";
 import SocialProfile from "../components/Index/SocialProfile";
@@ -50,7 +48,6 @@ const learnMoreVariants = {
 
 const Index: FC<null> = () => {
    const lgScreen = useMediaQuery(lgScreenQuery);
-   const xlScreen = useMediaQuery(xlScreenQuery);
    const learnMoreAnimations = useAnimation();
 
    const page1 = useRef(null);
@@ -65,22 +62,27 @@ const Index: FC<null> = () => {
       }
    };
 
-   const pics = 2;
-   const imgs = carousel.imgs;
+   const carousel = carouselData.imgs;
+   const pics = carousel.length;
+   const strings = carousel.map((entry) => entry.label);
 
-   const [[pic, picData, init], cyclePics] = useState([1, imgs[0], true]);
+   const [imgClass, setImgClass] = useState("rounded-xl opacity-0 transition duration-200 ease-linear");
+   const [[pic, picData, init], cyclePics] = useState([1, carousel[0], true]);
    const typewriter = useRef(null);
    const typewriterListener = () => {
       const cyclePicture = () => {
          const loop = pic + 1 > pics;
          const newPic = loop ? 1 : pic + 1;
-         cyclePics([newPic, imgs[newPic - 1], loop]);
+         setImgClass(imgClass.replace("opacity-100", "opacity-0"));
+         setTimeout(() => cyclePics([newPic, carousel[newPic - 1], loop]), 500);
+         setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 500);
       };
 
       let typewriterText = typewriter.current.children[0].innerText;
 
       if (typewriterText.length == 1) {
          if (init) {
+            setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 500);
             cyclePics([pic, picData, false]);
          } else {
             cyclePicture();
@@ -104,47 +106,52 @@ const Index: FC<null> = () => {
       };
    });
 
-   const socialIconClass = "z-10 flex justify-center items-center text-white bg-primary rounded-full p-2";
    const socialIconProps = {
       size: lgScreen ? 24 : 20
+   };
+
+   const aboutMe1 = {
+      pic_props: {
+         src: "/img/about_me_1.jpg",
+         width: 309,
+         height: 413,
+         className: "rounded-xl"
+      },
+      paragraph: `I began my fateful journey to becoming a skilled programmer as a fledgeling sophomore in high school. 
+         Ever since I took my first CS class, I have been in love with coding and all the bugs that come with it.
+         For me, the most exciting part of programming is the process of solving problems through creative ideas and 
+         innovative approaches.`
+   };
+
+   const aboutMe2 = {
+      pic_props: {
+         src: "/img/about_me_2.jpg",
+         width: 309,
+         height: 413,
+         className: "rounded-xl"
+      },
+      paragraph: `I'm also a very data-oriented person, hence my enjoyment for algorithmic optimization. Coming from a STEM-focused 
+         high school and given my CS major, I have come to love and embrace the scientific process and using numbers and rigorous testing
+         to make code more efficient.`
    };
 
    return (
       <MainLayout page="Portfolio">
          <div ref={page1} className="w-5/6 xl:h-screen flex flex-col justify-between items-center mx-auto">
-            <div className="flex flex-col lg:flex-row justify-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-24 xl:mt-40">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-24 xl:mt-40">
                <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
                   <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
                      <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0">
                         <p className="inline dark:text-white dark-transition">Hi there! My name is </p>
-                        <p className="inline">
-                           <span className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3">
+                        <div className="flex items-center space-x-3">
+                           <p className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3">
                               Duke Tran
-                           </span>
-                           <Emoji
-                              label="wave"
-                              symbol={"👋🏼"}
-                              className="text-3xl transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 ml-3 cursor-default"
-                           />
-                        </p>
+                           </p>
+                           <div className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default">
+                              <Emoji label="wave" symbol={"👋🏼"} />
+                           </div>
+                        </div>
                      </div>
-                     {/* <AnimatePresence>
-                        <motion.div
-                           animate={{ rotate: [10, 100, 10, 100, 10, 100, 10, 0] }}
-                           transition={{
-                              repeat: Infinity,
-                              repeatType: "loop",
-                              duration: 2,
-                              times: [0.4, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.4],
-                              repeatDelay: 1
-                           }}>
-                           <Emoji
-                              label="wave"
-                              symbol={"👋🏼"}
-                              className="text-3xl transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 ml-4 cursor-default"
-                           />
-                        </motion.div>
-                     </AnimatePresence> */}
                   </div>
                   <div className="w-full flex flex-col text-gray-800 dark:text-gray-200 lg:text-lg space-y-4">
                      <p>
@@ -159,71 +166,39 @@ const Index: FC<null> = () => {
                      <div className="w-full flex justify-center md:px-4 lg:px-0">
                         <div className="w-full lg:w-2/3 xl:w-full grid grid-cols-2 xl:flex xl:justify-center gap-x-8 lg:gap-x-4 xl:gap-x-2 gap-y-4">
                            <SocialProfile type="Github" name="dtran421" link="https://github.com/dtran421">
-                              <div className={socialIconClass}>
-                                 <FaGithub {...socialIconProps} />
-                              </div>
+                              <FaGithub {...socialIconProps} />
                            </SocialProfile>
                            <SocialProfile type="LinkedIn" name="duketran" link="https://www.linkedin.com/in/duketran/">
-                              <div className={socialIconClass}>
-                                 <FaLinkedinIn {...socialIconProps} />
-                              </div>
+                              <FaLinkedinIn {...socialIconProps} />
                            </SocialProfile>
                            <SocialProfile type="Facebook" name="dtran421" link="https://www.facebook.com/dtran421">
-                              <div className={socialIconClass}>
-                                 <FaFacebookF {...socialIconProps} />
-                              </div>
+                              <FaFacebookF {...socialIconProps} />
                            </SocialProfile>
                            <SocialProfile type="Twitter" name="dtran421" link="https://www.twitter.com/dtran421">
-                              <div className={socialIconClass}>
-                                 <FaTwitter {...socialIconProps} />
-                              </div>
+                              <FaTwitter {...socialIconProps} />
                            </SocialProfile>
                         </div>
                      </div>
                   </div>
                </div>
-               <div className="md:w-full lg:w-1/2 relative overflow-hidden flex flex-col justify-start items-center space-y-4 mx-8">
-                  {lgScreen && (
-                     <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
-                        <AnimatePresence initial={false}>
-                           <motion.img
-                              key={pic}
-                              alt={picData.alt}
-                              src={picData.pic}
-                              initial={{ x: 200, opacity: 0 }}
-                              animate={{ x: 0, opacity: 1, zIndex: 1 }}
-                              exit={{ x: -200, opacity: 0, zIndex: 0 }}
-                              transition={{
-                                 zIndex: { duration: 0.1 },
-                                 x: {
-                                    duration: 1.5,
-                                    ease: "easeInOut"
-                                 },
-                                 opacity: {
-                                    duration: 2,
-                                    ease: "easeOut"
-                                 }
-                              }}
-                              width={picData.width}
-                              height={picData.height}
-                              className="absolute rounded-xl"
-                           />
-                        </AnimatePresence>
-                     </div>
-                  )}
-                  <div className="w-full flex justify-center text-3xl dark:text-white dark-transition">
-                     <p className="inline-block">I am </p>
-                     <div ref={typewriter}>
+               <div className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
+                  <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
+                     <Image
+                        key={pic}
+                        alt={picData.alt}
+                        src={picData.pic}
+                        width={picData.width}
+                        height={picData.height}
+                        className={imgClass}
+                        priority
+                     />
+                  </div>
+                  <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
+                     <p className="inline-block text-center">I am</p>
+                     <div ref={typewriter} className="flex justify-center">
                         <Typewriter
                            options={{
-                              strings: [
-                                 "a Programmer",
-                                 "a Developer",
-                                 "an Investor",
-                                 "an Analyst",
-                                 "a Problem Solver",
-                                 "a Critical Thinker"
-                              ],
+                              strings,
                               autoStart: true,
                               loop: true,
                               pauseFor: 5000,
@@ -259,75 +234,45 @@ const Index: FC<null> = () => {
                </AnimatePresence>
             )}
          </div>
-         <div id="page2" className="flex flex-col items-center px-10 py-20 mb-10">
-            {lgScreen ? (
-               <ParallaxProvider>
-                  <div className="flex justify-center space-x-10 py-10">
-                     <Parallax y={xlScreen ? ["-20%", "20%"] : ["-10%", "10%"]}>
-                        <Image src="/img/coding.jpg" alt="img1" width={450} height={350} className="rounded-xl" />
-                     </Parallax>
-                     <div className="w-1/2 flex flex-col rounded-xl">
-                        <Parallax y={xlScreen ? ["150%", "-30%"] : ["75%", "-20%"]}>
-                           <h1 className="text-3xl dark:text-white dark-transition rounded-md font-semibold mb-8">
-                              About Me
-                           </h1>
-                           <p className="text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
-                              Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit.
-                              Et magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis
-                              imperdiet massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis
-                              lectus nulla at. Varius vel pharetra vel turpis nunc eget.
-                           </p>
-                        </Parallax>
-                     </div>
+         <div id="page2" className="flex flex-col items-center pt-28 mb-28">
+            <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
+               <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
+                  <div className="w-full lg:w-1/2 flex justify-center">
+                     <Image alt="about me pic 1" {...aboutMe1.pic_props} />
                   </div>
-                  <div className="flex justify-center space-x-10 py-10">
-                     <div className="w-1/2 rounded-xl">
-                        <Parallax y={["75%", "175%"]}>
-                           <p className="text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                              ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                           </p>
-                        </Parallax>
-                     </div>
-                     <Parallax y={["25%", "-10%"]}>
-                        <Image
-                           src="/img/outside.jpg"
-                           alt="img2"
-                           width={300}
-                           height={469}
-                           layout="fixed"
-                           className="rounded-xl"
-                        />
-                     </Parallax>
-                  </div>
-               </ParallaxProvider>
-            ) : (
-               <div className="max-w-xl mx-auto">
-                  <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-x-10 py-10">
-                     <Image src="/img/coding.jpg" alt="img1" width={450} height={350} className="rounded-xl" />
-                     <div className="flex flex-col lg:flex-row rounded-xl">
-                        <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition rounded-md font-semibold mb-4 lg:mb-8">
-                           About Me
+                  <div className="w-full lg:w-1/2 flex flex-col justify-between rounded-xl space-y-8">
+                     <div>
+                        <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition rounded-md font-semibold space-x-2 mb-4">
+                           <span>About Me</span>
+                           <Emoji label="waving guy" symbol={"🙋🏻‍♂️"} />
                         </h1>
                         <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
-                           Enim diam vulputate ut pharetra sit. Iaculis at erat pellentesque adipiscing commodo elit. Et
-                           magnis dis parturient montes nascetur. Tincidunt eget nullam non nisi. Commodo quis imperdiet
-                           massa tincidunt nunc pulvinar sapien. Volutpat ac tincidunt vitae semper quis lectus nulla
-                           at. Varius vel pharetra vel turpis nunc eget.
+                           {aboutMe1.paragraph}
                         </p>
                      </div>
-                  </div>
-                  <div className="flex flex-col-reverse lg:flex-row justify-center lg:space-x-10 py-10">
-                     <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug mt-10 lg:mt-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
-                     </p>
-                     <Image src="/img/outside.jpg" alt="img2" width={300} height={469} className="rounded-xl" />
+                     <div className="flex flex-col items-between bg-gray-300/50 dark:bg-gray-700/50 dark-transition rounded-xl shadow-lg space-y-2 px-5 py-3">
+                        <p className="text-lg lg:text-xl text-center italic">
+                           {'"We can not solve our problems with the same level of thinking that created them."'}
+                        </p>
+                        <div className="flex justify-center items-center">
+                           <div className="w-full border-b-2 border-black/50 dark:border-white/50 dark-transition" />
+                           <p className="whitespace-nowrap lg:text-lg text-center mx-2">Albert Einstein</p>
+                           <div className="w-full border-b-2 border-black/50 dark:border-white/50 dark-transition" />
+                        </div>
+                     </div>
                   </div>
                </div>
-            )}
+               <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-10">
+                  <div className="w-full lg:w-1/2 flex items-center">
+                     <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug mt-10 lg:mt-0">
+                        {aboutMe2.paragraph}
+                     </p>
+                  </div>
+                  <div className="w-full lg:w-1/2 flex justify-center">
+                     <Image alt="about me pic 2" {...aboutMe2.pic_props} />
+                  </div>
+               </div>
+            </div>
          </div>
          <div className="max-w-4xl px-4 lg:px-0 mx-auto">
             <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition text-center font-semibold mb-8">
