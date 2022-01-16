@@ -55,15 +55,15 @@ const Index: FC<null> = () => {
          const loop = pic + 1 > pics;
          const newPic = loop ? 1 : pic + 1;
          setImgClass(imgClass.replace("opacity-100", "opacity-0"));
-         setTimeout(() => cyclePics([newPic, carousel[newPic - 1], loop]), 500);
-         setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 500);
+         setTimeout(() => cyclePics([newPic, carousel[newPic - 1], loop]), 250);
+         setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 250);
       };
 
       let typewriterText = typewriter.current.children[0].innerText;
 
       if (typewriterText.length == 1) {
          if (init) {
-            setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 500);
+            setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 250);
             cyclePics([pic, picData, false]);
          } else {
             cyclePicture();
@@ -166,7 +166,7 @@ const Index: FC<null> = () => {
                   <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
                      <Image
                         key={pic}
-                        alt={picData.alt}
+                        alt={`pic of me ${pic}`}
                         src={picData.pic}
                         width={picData.width}
                         height={picData.height}
