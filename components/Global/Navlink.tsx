@@ -45,8 +45,8 @@ const Navlink: FC<NavlinkProps> = ({ idx, active, link, mobile }) => {
                         ? "border-black dark:border-white border-opacity-100"
                         : `${
                              mobile ? "border-transparent focus:border-secondary" : "border-b-transparent"
-                          } hover:border-secondary hover:cursor-pointer`
-                  } dark-transition ${mobile ? "px-6 py-1" : "px-5 py-3"}`}>
+                          } hover:border-secondary`
+                  } dark-transition hover:cursor-pointer ${mobile ? "px-6 py-1" : "px-5 py-3"}`}>
                   <a className={`text-xl ${active ? "dark:text-white" : "text-secondary"} dark-transition`}>{link}</a>
                </div>
             </Link>

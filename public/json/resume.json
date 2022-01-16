@@ -4,22 +4,46 @@
          "heading": "Experience",
          "body": [
             {
+               "title": "Technology Program Coordinator",
+               "organization": "Alan B. Miller Entrepreneurship Center",
+               "date": "Aug 2021 - Present",
+               "description": "Worked on the Technology team to create applications and maintain software to propel the missions of the EC. Utilized technological tools to streamline backend development and enable smooth and seamless user experiences."
+            },
+            {
+               "title": "Research and Software Development Intern",
+               "organization": "National Science Foundation (NSF)",
+               "date": "Jun 2021 - Aug 2021",
+               "description": "Learned to work with A-Frame, Unity 3D, and C# for VR/AR development. Developed evasive algorithms paired with the SHARKS (Secure, Heterogeneous, Autonomous, and Rotational Knowledge for Swarms) Protocol to defend a UAV swarm against adversarial UAVs. Simulated UAV swarms in VR and Unity 3D to gather data on the effectiveness of evasive maneuvers."
+            },
+            {
+               "title": "Chief Financial Officer",
+               "organization": "Agency 1693",
+               "date": "Mar 2021 - Present",
+               "description": "Managed and oversaw the agency’s revenue, project investments, and wages. Documented and handled invoices and expenses."
+            },
+            {
                "title": "Marketing Staff Member",
                "organization": "Agency 1693",
-               "date": "Feb 2020 - Present",
+               "date": "Feb 2020 - Mar 2021",
                "description": "Worked on a marketing team for various clients looking to grow and expand their businesses. Designed videos, logos, and other adverts to promote branding of companies."
             },
             {
-               "title": "Development Intern",
+               "title": "Mobile App Development Intern",
                "organization": "Whispearrings",
                "date": "Jul 2020 - Aug 2020",
-               "description": "Learned to work with Swift and XCode for iOS development. Developed a fully-fledged iOS app with sound and playback capabilities."
+               "description": "Interned at a growing startup that plans on producing wireless earrings that play daily scheduled motivational sounds. Developed the app in Swift to manage the whisper (sound) library and the scheduling and playing of the whispers."
             },
             {
                "title": "Private Online Tutor",
                "organization": "Acakid",
-               "date": "Jun 2019 - Present",
+               "date": "Jun 2019 - Jun 2021",
                "description": "Worked as a private tutor educating students in grades K-12 in various subjects including math, science, and physics."
+            },
+            {
+               "title": "Math Tutor",
+               "organization": "Mathnasium",
+               "date": "Jan 2019 - Jun 2019",
+               "description": "Taught kids about mathematical concepts and helped them sharpen their logical reasoning and computational skills."
             },
             {
                "title": "Laboratory Intern",
@@ -36,13 +60,13 @@
                "title": "Bachelor of Science, Major in Computer Science, Minor in Finance",
                "organization": "College of William & Mary",
                "date": "2019 - 2023",
-               "description": "Activities and Clubs: Intramural Basketball, Soccer, and Frisbee, Association for Computing Machinery, Chinese Student Organization"
+               "description": "Pursuing a Bachelor of Science in Computer Science and a Minor in Finance.\n Honors: Dean’s List (Spring 2020, Fall 2020, Spring 2021)\n Coursework: Linear Algebra, Data Structures, Discrete Structures, Algorithms, Software Development, Computer Organization, Principles of Programming Languages, Finite Automata, Intro to Machine Learning, Statistics, Principles of Accounting, Financial Management, Investments, Corporate Valuation and Credit Analysis, Advanced Investments, Derivatives and Risk Management.\n Activities and Societies: Intramural Basketball and Soccer, Association for Computing Machinery, Developer Student Club, Mason Investment Club, Finance Academy, Alpha Kappa Psi (Omega chapter) Fraternity, Sigma Phi Epsilon (Virginia Delta chapter) Fraternity"
             },
             {
                "title": "Advanced Studies Diploma",
                "organization": "Thomas Jefferson High School for Science and Technology",
                "date": "2015 - 2019",
-               "description": "Activities and Clubs: Bioengineering Projects for the Future, Innovations in Concepts of Engineering, Spanish Honor Society, Curricular Band, Varsity Football. Studied AP Chemistry, AP Computer Science, Artificial Intelligence, Web App Development, AP Calculus BC, Multivariable Calculus, AP Spanish Language, Research Statistics 1, Physics, and DNA Science."
+               "description": "Coursework: AP Chemistry, AP Computer Science, Artificial Intelligence, Web App Development, AP Calculus BC, Multivariable Calculus, AP Spanish Language, Research Statistics 1, Physics, and DNA Science.\n Activities and Clubs: Bioengineering Projects for the Future, Innovations in Concepts of Engineering, Spanish Honor Society, Curricular Band, Varsity Football."
             }
          ]
       }
@@ -53,15 +77,40 @@
          "body": [
             "Python",
             "Java",
-            "JavaScript",
+            "Javascript",
             "HTML",
             "CSS",
             "MySQL",
             "React",
             "Typescript",
+            "Windows",
+            "Mac OS",
+            "C/C++",
+            "C#",
+            "Back-End Web Development",
+            "Web Development",
+            "After Effects",
             "Microsoft Word",
             "Microsoft Powerpoint",
-            "Microsoft Excel"
+            "Microsoft Excel",
+            "Research",
+            "Social Media",
+            "Finance",
+            "Financial Analysis",
+            "Investments",
+            "Analytical Skills",
+            "Programming",
+            "Data Structures",
+            "Algorithms",
+            "Object-Oriented Programming (OOP)",
+            "Software Development",
+            "Machine Learning",
+            "Artificial Intelligence (AI)",
+            "Leadership",
+            "Organization Skills",
+            "Public Speaking",
+            "Teamwork",
+            "Time Management"
          ]
       },
       {

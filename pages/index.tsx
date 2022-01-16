@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef, FC } from "react";
-import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Link } from "react-scroll";
+import { useMediaQuery } from "react-responsive";
 import Typewriter from "typewriter-effect";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
-import { FiChevronsDown } from "react-icons/fi";
+import { useAnimation } from "framer-motion";
+import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
 import carouselData from "../public/json/carousel.json";
 
 import Emoji from "../components/Global/Emoji";
-import SocialProfile from "../components/Index/SocialProfile";
+const SocialProfile = dynamic(import("../components/Index/SocialProfile"), { ssr: false });
+const LearnMore = dynamic(import("./LearnMore"), { ssr: false });
 import Timeline from "../components/Index/Timeline";
 import LangGroup from "../components/Index/LangGroup";
 import MainLayout from "../components/Global/layouts/MainLayout";
@@ -26,25 +26,6 @@ export function isInViewport(el) {
       rect.bottom >= 0
    );
 }
-
-const learnMoreVariants = {
-   hidden: {
-      scale: 0.25,
-      opacity: 0,
-      transition: {
-         duration: 0.2,
-         ease: "easeOut"
-      }
-   },
-   visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-         duration: 0.3,
-         ease: "linear"
-      }
-   }
-};
 
 const Index: FC<null> = () => {
    const lgScreen = useMediaQuery(lgScreenQuery);
@@ -153,12 +134,12 @@ const Index: FC<null> = () => {
                         </div>
                      </div>
                   </div>
-                  <div className="w-full flex flex-col text-gray-800 dark:text-gray-200 lg:text-lg space-y-4">
+                  <div className="w-full flex flex-col text-zinc-800 dark:text-zinc-200 lg:text-lg space-y-4">
                      <p>
-                        I&#39;m currently a junior studying CS and finance at William & Mary. I&#39;m super interested
+                        {`I'm currently a junior studying CS and finance at William & Mary. I'm super interested
                         in exploring the intersection of technology and financial markets, hopefully through internships
-                        and other learning opportunities. I&#39;m also passionate about coding and programming in
-                        general, so feel free to take a look around the website and learn more about me!
+                        and other learning opportunities. I'm also passionate about coding and programming in
+                        general, so feel free to take a look around the website and learn more about me!`}
                      </p>
                      <p className="mt-2">
                         Below are some of my socials. Feel free to check them out and connect with me there!
@@ -190,7 +171,6 @@ const Index: FC<null> = () => {
                         width={picData.width}
                         height={picData.height}
                         className={imgClass}
-                        priority
                      />
                   </div>
                   <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
@@ -210,29 +190,7 @@ const Index: FC<null> = () => {
                   </div>
                </div>
             </div>
-            {lgScreen && (
-               <AnimatePresence>
-                  <motion.div
-                     key="learn_more"
-                     className="mt-auto flex justify-center"
-                     animate={learnMoreAnimations}
-                     variants={learnMoreVariants}>
-                     <Link
-                        to="page2"
-                        smooth={"easeOutCubic"}
-                        offset={25}
-                        duration={1000}
-                        className="flex justify-center">
-                        <div className="flex flex-col justify-end items-center text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 mt-4 transition duration-500 group hover:scale-110 cursor-pointer">
-                           <p className="text-xl text-center opacity-100 mb-1">Learn more</p>
-                           <div className="-translate-y-1/4 transition duration-200 opacity-60 group-hover:opacity-100 group-hover:animate-bounce py-4">
-                              <FiChevronsDown size={24} />
-                           </div>
-                        </div>
-                     </Link>
-                  </motion.div>
-               </AnimatePresence>
-            )}
+            {lgScreen && <LearnMore {...{ learnMoreAnimations }} />}
          </div>
          <div id="page2" className="flex flex-col items-center pt-28 mb-28">
             <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
@@ -246,11 +204,11 @@ const Index: FC<null> = () => {
                            <span>About Me</span>
                            <Emoji label="waving guy" symbol={"🙋🏻‍♂️"} />
                         </h1>
-                        <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug">
+                        <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition leading-snug">
                            {aboutMe1.paragraph}
                         </p>
                      </div>
-                     <div className="flex flex-col items-between bg-gray-300/50 dark:bg-gray-700/50 dark-transition rounded-xl shadow-lg space-y-2 px-5 py-3">
+                     <div className="flex flex-col items-between bg-zinc-300/50 dark:bg-zinc-700/50 dark-transition rounded-xl shadow-lg space-y-2 px-5 py-3">
                         <p className="text-lg lg:text-xl text-center italic">
                            {'"We can not solve our problems with the same level of thinking that created them."'}
                         </p>
@@ -264,7 +222,7 @@ const Index: FC<null> = () => {
                </div>
                <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-10">
                   <div className="w-full lg:w-1/2 flex items-center">
-                     <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition leading-snug mt-10 lg:mt-0">
+                     <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition leading-snug mt-10 lg:mt-0">
                         {aboutMe2.paragraph}
                      </p>
                   </div>
@@ -286,7 +244,7 @@ const Index: FC<null> = () => {
             <h1 className="text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold mb-4">
                Technologies
             </h1>
-            <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition pb-6">
+            <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition pb-6">
                As the digital world evolves, technologies and frameworks are constantly being developed and pushed to
                the forefront of our ever-advancing society. As a developer, it is my lifelong mission and ambition to
                stay on top of these incredible innovations and strive for mastery of these powerful tools that will

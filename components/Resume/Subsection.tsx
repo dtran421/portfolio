@@ -18,7 +18,7 @@ interface SubsectionProps {
    style: string;
 }
 
-const Subsection: FC<SubsectionProps> = ({ content, style }) => {
+const Subsection: FC<SubsectionProps> = ({ content: { title, organization, date, description }, style }) => {
    const lgScreen = useMediaQuery(lgScreenQuery);
 
    const [isExpanded, setExpanded] = useState(false);
@@ -27,7 +27,7 @@ const Subsection: FC<SubsectionProps> = ({ content, style }) => {
       <div className={`flex space-x-2 lg:space-x-4 ${style}`}>
          <div className="flex flex-col items-center">
             <button
-               className="h-min hover:bg-gray-400/25 dark:hover:bg-gray-600/75 dark-transition rounded-full p-1"
+               className="h-min hover:bg-zinc-400/25 dark:hover:bg-zinc-600/75 dark-transition rounded-full p-1"
                onClick={() => setExpanded(!isExpanded)}>
                {isExpanded ? <FiChevronDown size={20} /> : <FiChevronRight size={20} />}
             </button>
@@ -38,7 +38,7 @@ const Subsection: FC<SubsectionProps> = ({ content, style }) => {
                      animate={{ height: "100%" }}
                      exit={{ height: "0%" }}
                      transition={{ duration: 0.3, ease: "linear" }}
-                     className="h-full border-r-2 border-gray-400/75 dark:border-gray-600 dark-transition my-2"
+                     className="h-full border-r-2 border-zinc-400/75 dark:border-zinc-600 dark-transition my-2"
                   />
                )}
             </AnimatePresence>
@@ -46,15 +46,11 @@ const Subsection: FC<SubsectionProps> = ({ content, style }) => {
          <div className="w-full overflow-hidden">
             <div className="w-full flex justify-between">
                <div className="flex flex-col">
-                  <p className="max-w-md text-lg lg:text-xl font-medium text-secondary">{content.title}</p>
-                  <p className="lg:text-lg text-gray-700 dark:text-gray-300 dark-transition">{content.organization}</p>
-                  {!lgScreen && (
-                     <p className="lg:text-lg text-gray-700 dark:text-gray-300 dark-transition">{content.date}</p>
-                  )}
+                  <p className="max-w-md text-lg lg:text-xl font-medium text-secondary">{title}</p>
+                  <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{organization}</p>
+                  {!lgScreen && <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{date}</p>}
                </div>
-               {lgScreen && (
-                  <p className="lg:text-lg text-gray-700 dark:text-gray-300 dark-transition">{content.date}</p>
-               )}
+               {lgScreen && <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{date}</p>}
             </div>
             <AnimatePresence initial={false}>
                {isExpanded && (
@@ -64,8 +60,10 @@ const Subsection: FC<SubsectionProps> = ({ content, style }) => {
                      exit="collapsed"
                      variants={expandVariants}
                      transition={{ duration: 0.25, ease: "linear" }}>
-                     <p className="lg:text-lg text-gray-800 dark:text-gray-200 dark-transition pt-4">
-                        {content.description}
+                     <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4">
+                        {description.split("\n").map((text, idx) => {
+                           return <p key={idx}>{text}</p>;
+                        })}
                      </p>
                   </motion.div>
                )}

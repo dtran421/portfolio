@@ -3,7 +3,6 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 
 import { ThemeContext } from "../../../pages/_app";
-
 const Navbar = dynamic(() => import("../Navbar"), { ssr: false });
 
 interface MainLayoutProps {
@@ -37,7 +36,7 @@ const MainLayout: FC<MainLayoutProps> = ({ page, children }) => {
 
          <div className={`${darkMode ? "dark" : ""}`}>
             <div
-               className={`absolute w-full bg-slate-100 dark:bg-gray-900 transition duration-200 ease-in dark:text-white ${
+               className={`absolute w-full bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white ${
                   page != "Contact" ? "pb-32" : "pb-16"
                }`}>
                <Navbar page={page} sticky={stickyNavbar} />

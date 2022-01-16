@@ -14,7 +14,13 @@
          "width": 256,
          "height": 256
       },
-      { "link": "godspeed", "name": "Godspeed", "thumbnail": "/img/godspeed.png", "width": 193, "height": 227 },
+      {
+         "link": "godspeed",
+         "name": "Godspeed",
+         "thumbnail": "/img/godspeed.png",
+         "width": 193,
+         "height": 227
+      },
       {
          "link": "uav",
          "name": "3D/VR UAV Swarms",

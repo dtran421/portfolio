@@ -22,7 +22,7 @@ const Timeline: FC<{}> = () => {
    return (
       <div className="container mx-auto w-full h-full">
          <div className="relative wrap overflow-hidden h-full">
-            <div className="absolute left-1/2 h-full border border-gray-600/75 dark:border-gray-400/75 dark-transition" />
+            <div className="absolute left-1/2 h-full border border-zinc-600/75 dark:border-zinc-400/75 dark-transition" />
             <div className="space-y-8">
                {events.map((event, idx) => {
                   return <Event key={idx} side={idx % 2 == 0 ? "L" : "R"} data={event} />;
@@ -49,7 +49,7 @@ const Event: FC<EventProps> = ({ side, data: { heading, type, date, body } }) =>
    const [isExpanded, setExpanded] = useState(false);
 
    const iconProps = {
-      className: "text-gray-200 dark:text-gray-800 dark-transition",
+      className: "text-zinc-200 dark:text-zinc-800 dark-transition",
       size: 20
    };
 
@@ -65,7 +65,7 @@ const Event: FC<EventProps> = ({ side, data: { heading, type, date, body } }) =>
    return (
       <div className={`flex ${side === "R" && "flex-row-reverse"} justify-between items-center w-full`}>
          <Card {...{ side, isExpanded, setExpanded, heading, body }} />
-         <div className="z-10 w-8 h-8 flex items-center order-1 bg-gray-700 dark:bg-gray-300 dark-transition backdrop-blur-lg rounded-full">
+         <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
             <h1 className="mx-auto font-semibold">{icon}</h1>
          </div>
          <div className={`order-1 w-5/12 flex ${side === "L" ? "justify-start" : "justify-end"}`}>
@@ -77,8 +77,8 @@ const Event: FC<EventProps> = ({ side, data: { heading, type, date, body } }) =>
                      animate="open"
                      exit="collapsed"
                      variants={tagVariants}
-                     transition={{ duration: 0.4, ease: "linear" }}
-                     className="bg-gray-700 dark:bg-gray-300 lg:text-lg text-white dark:text-black dark-transition rounded-lg px-4 py-1">
+                     transition={{ duration: 0.25, type: "spring", damping: 100, stiffness: 1000 }}
+                     className="bg-zinc-700 dark:bg-zinc-300 lg:text-lg text-white dark:text-black dark-transition rounded-lg px-4 py-1">
                      {date}
                   </motion.p>
                )}
@@ -103,9 +103,9 @@ const Card: FC<CardProps> = ({ side, isExpanded, setExpanded, heading, body }) =
       <div
          className={`overflow-hidden order-1 ${
             side === "L" ? "bg-primary" : "bg-secondary"
-         } rounded-lg shadow-xl w-5/12 px-4 py-2 lg:px-6 md:py-4`}>
+         } rounded-lg shadow-xl w-5/12 px-4 py-2 md:p-4`}>
          <div className="flex justify-between">
-            <h3 className="font-bold text-white text-lg lg:text-xl">{heading}</h3>
+            <h3 className="font-bold text-white text-lg">{heading}</h3>
             <motion.button
                initial={false}
                animate={isExpanded ? { rotate: -180 } : { rotate: 0 }}

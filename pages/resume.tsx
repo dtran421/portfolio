@@ -2,8 +2,7 @@ import { FC } from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import Link from "next/link";
-import { Parallax } from "react-parallax";
-import { FiMail, FiPhone, FiHome } from "react-icons/fi";
+import { FiCheck, FiMail, FiPhone, FiHome } from "react-icons/fi";
 
 import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
 
@@ -21,39 +20,39 @@ const Resume: FC<null> = () => {
 
    return (
       <MainLayout page="Resume">
-         <div className="mt-16">
-            <div className="relative w-full h-64 overflow-hidden">
-               {lgScreen ? (
-                  <Parallax
-                     bgImage={"/img/city_night.jpg"}
-                     strength={-200}
-                     className="h-full"
-                     bgClassName="translate-y-3/4"
-                  />
-               ) : (
-                  <div
-                     className="w-full h-full bg-no-repeat bg-center"
-                     style={{ backgroundImage: "url(/img/city_night.jpg)" }}
-                  />
-               )}
-            </div>
-            <div className="md:max-w-3xl absolute top-48 lg:top-40 inset-x-1/2 md:left-0 flex justify-center mx-auto">
-               <div className="w-min md:w-max">
-                  <div className="relative overflow-hidden w-48 h-48 lg:w-56 lg:h-56 border-8 border-slate-100 dark:border-gray-900 rounded-full">
-                     <Image alt="headshot" src="/img/profile.jpg" width={300} height={475} />
+         <div className="relative mt-16">
+            <div
+               className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl h-48 lg:h-64 overflow-hidden bg-no-repeat bg-auto lg:bg-cover bg-center mx-auto"
+               style={{ backgroundImage: "url(/img/city_night.jpg)" }}
+            />
+            <div className="absolute top-16 lg:top-28 inset-x-1/2 lg:left-0 flex justify-center">
+               <div className="w-min">
+                  <div className="overflow-hidden w-48 h-48 lg:w-56 lg:h-56 border-8 border-slate-100 dark:border-zinc-900 dark-transition rounded-full">
+                     <Image
+                        alt="headshot"
+                        src="/img/profile.jpeg"
+                        width={1080}
+                        height={1616}
+                        className="-translate-y-14 brightness-110"
+                     />
                   </div>
                </div>
             </div>
             <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col items-start space-y-2 mx-auto mt-16 lg:mt-20">
-               <h1 className="text-2xl lg:text-3xl dark:text-white font-bold">Duke Tran</h1>
-               <div className="flex flex-col md:flex-row justify-between text-lg text-gray-800 dark:text-gray-200 dark-transition">
+               <div className="flex items-center space-x-2 lg:space-x-4">
+                  <h1 className="text-2xl lg:text-3xl dark:text-white font-bold">Duke Tran</h1>
+                  <div className="bg-secondary rounded-full p-1">
+                     <FiCheck size={lgScreen ? 18 : 14} />
+                  </div>
+               </div>
+               <div className="flex flex-col md:flex-row justify-between text-lg text-zinc-800 dark:text-zinc-200 dark-transition">
                   <div className="flex flex-col justify-between space-y-4 lg:space-y-6 mb-10 lg:mb-0">
                      <h2 className="md:w-5/6 lg:w-2/3 font-medium text-sm lg:text-lg">
                         Incoming EY FSO Technology Consulting Intern | Chief Financial Officer of Agency 1693 | CS +
                         Finance @ William & Mary
                      </h2>
                      <Link href="/contact" passHref={true}>
-                        <button className="w-full md:w-min bg-primary text-lg lg:text-xl text-white dark:text-gray-200 dark-transition font-semibold rounded-full px-8 py-1 lg:py-2">
+                        <button className="w-full md:w-min bg-primary text-lg lg:text-xl text-white dark:text-zinc-200 dark-transition font-semibold rounded-full px-8 py-1 lg:py-2">
                            Contact
                         </button>
                      </Link>
@@ -96,7 +95,7 @@ interface ContactLabelProps {
 const ContactLabel: FC<ContactLabelProps> = ({ label, center, special, children }) => {
    return (
       <div className={`flex ${center ? "items-center" : "items-start"} space-x-2`}>
-         <span className="bg-gray-200/75 dark:bg-gray-700/75 rounded-full p-2">{children}</span>
+         <span className="bg-zinc-200/75 dark:bg-zinc-700/75 rounded-full p-2">{children}</span>
          <p className={`text-sm lg:text-lg ${special ? "italic" : ""}`}>{label}</p>
       </div>
    );

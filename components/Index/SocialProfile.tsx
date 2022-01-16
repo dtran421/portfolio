@@ -47,7 +47,7 @@ const SocialProfile: FC<SocialProfileProps> = ({ name, link, children }) => {
             <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full p-2">
                {children}
             </div>
-            <motion.p variants={textMotion} className="text-gray-800 dark:text-gray-200 dark-transition text-xl">
+            <motion.p variants={textMotion} className="text-zinc-800 dark:text-zinc-200 dark-transition text-xl">
                {name}
             </motion.p>
          </motion.div>
@@ -58,7 +58,7 @@ const SocialProfile: FC<SocialProfileProps> = ({ name, link, children }) => {
             <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full p-2">
                {children}
             </div>
-            <p className="text-gray-800 dark:text-gray-200 dark-transition text-lg lg:text-xl">{name}</p>
+            <p className="text-zinc-800 dark:text-zinc-200 dark-transition text-lg lg:text-xl">{name}</p>
          </div>
       </a>
    );
