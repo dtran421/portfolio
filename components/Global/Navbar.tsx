@@ -101,19 +101,21 @@ interface DarkModeToggleProps {
 const DarkModeToggle: FC<DarkModeToggleProps> = ({ darkMode, toggleDarkMode, mobile }) => {
    return (
       <div
-         className={`w-16 ${
-            !mobile && "absolute right-0"
+         className={`${
+            mobile ? "w-16" : "absolute right-0 w-10"
          } flex justify-start dark:justify-end bg-slate-800/75 dark:bg-slate-200/75 dark-transition rounded-full p-1 cursor-pointer`}
          onClick={() => toggleDarkMode(!darkMode)}>
          <motion.div
-            className="w-6 h-6 flex justify-center items-center text-black bg-white rounded-full"
+            className={`${
+               mobile ? "w-6 h-6" : "w-4 h-4"
+            } flex justify-center items-center text-black bg-white rounded-full`}
             layout
             transition={{
                type: "spring",
                stiffness: 500,
                damping: 30
             }}>
-            {darkMode ? <FiMoon size={16} /> : <FiSun size={16} />}
+            {darkMode ? <FiMoon size={mobile ? 16 : 12} /> : <FiSun size={mobile ? 16 : 12} />}
          </motion.div>
       </div>
    );

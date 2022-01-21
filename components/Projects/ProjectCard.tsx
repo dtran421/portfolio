@@ -34,7 +34,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ link, name, thumbnail, width, heigh
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className="w-full h-96 relative">
-            <div className="w-full h-full relative z-10 flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
+            <div className="z-10 absolute top-0 overflow-hidden w-full h-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
                <Image alt={name.toLowerCase()} src={thumbnail} {...{ width, height }} layout="fixed" priority />
             </div>
             {lgScreen ? (
@@ -48,8 +48,8 @@ const ProjectCard: FC<ProjectCardProps> = ({ link, name, thumbnail, width, heigh
                   </motion.div>
                </AnimatePresence>
             ) : (
-               <div className="w-full absolute -bottom-12 z-0 bg-primary rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2">
-                  <p className="text-xl lg:text-2xl text-white font-medium transition duration-200 ease-linear">
+               <div className="w-full absolute -bottom-10 md:-bottom-12 z-0 bg-primary rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2">
+                  <p className="flex justify-center items-center text-xl md:text-2xl text-white font-medium transition duration-200 ease-linear">
                      {name}
                   </p>
                </div>

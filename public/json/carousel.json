@@ -2,43 +2,43 @@
    "imgs": [
       {
          "label": "a Programmer",
-         "pic": "/img/programmer.jpg",
+         "pic": "programmer.jpg",
          "width": 201,
          "height": 389
       },
       {
          "label": "a Developer",
-         "pic": "/img/developer.jpg",
+         "pic": "developer.jpg",
          "width": 275,
          "height": 367
       },
       {
          "label": "an Investor",
-         "pic": "/img/investor.jpg",
+         "pic": "investor.jpg",
          "width": 275,
          "height": 367
       },
       {
          "label": "a Scientist",
-         "pic": "/img/scientist.jpeg",
+         "pic": "scientist.jpeg",
          "width": 432,
          "height": 288
       },
       {
          "label": "an Innovator",
-         "pic": "/img/innovator.jpg",
+         "pic": "innovator.jpg",
          "width": 244,
          "height": 390
       },
       {
          "label": "a Curious Learner",
-         "pic": "/img/curious_learner.jpg",
+         "pic": "curious_learner.jpg",
          "width": 275,
          "height": 367
       },
       {
          "label": "a Critical Thinker",
-         "pic": "/img/critical_thinker.jpg",
+         "pic": "critical_thinker.jpg",
          "width": 275,
          "height": 367
       }

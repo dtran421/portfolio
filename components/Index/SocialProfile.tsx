@@ -44,7 +44,7 @@ const SocialProfile: FC<SocialProfileProps> = ({ name, link, children }) => {
          initial="inactive"
          animate={isHovered ? "hover" : "inactive"}>
          <motion.div variants={logoMotion} className="relative flex items-center">
-            <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full p-2">
+            <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full shadow-lg p-2">
                {children}
             </div>
             <motion.p variants={textMotion} className="text-zinc-800 dark:text-zinc-200 dark-transition text-xl">
@@ -55,7 +55,7 @@ const SocialProfile: FC<SocialProfileProps> = ({ name, link, children }) => {
    ) : (
       <a className="h-full flex md:justify-center items-center" href={link} target="_blank" rel="noopener noreferrer">
          <div className="relative flex items-center space-x-4 md:space-x-3">
-            <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full p-2">
+            <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full shadow-lg p-2">
                {children}
             </div>
             <p className="text-zinc-800 dark:text-zinc-200 dark-transition text-lg lg:text-xl">{name}</p>

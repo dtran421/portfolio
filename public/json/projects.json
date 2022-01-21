@@ -1,11 +1,18 @@
 {
    "projectList": [
       {
+         "link": "godspeed",
+         "name": "Godspeed",
+         "thumbnail": "/img/godspeed.png",
+         "width": 193,
+         "height": 227
+      },
+      {
          "link": "whispearrings",
          "name": "Whispearrings",
-         "thumbnail": "/img/whispearrings.png",
-         "width": 281,
-         "height": 86
+         "thumbnail": "/img/whispearrings_logo.png",
+         "width": 256,
+         "height": 256
       },
       {
          "link": "maze",
@@ -15,16 +22,9 @@
          "height": 256
       },
       {
-         "link": "godspeed",
-         "name": "Godspeed",
-         "thumbnail": "/img/godspeed.png",
-         "width": 193,
-         "height": 227
-      },
-      {
          "link": "uav",
-         "name": "3D/VR UAV Swarms",
-         "thumbnail": "/img/drone_swarm.png",
+         "name": "UAV Swarms",
+         "thumbnail": "/img/uav_swarm.png",
          "width": 350,
          "height": 350
       },

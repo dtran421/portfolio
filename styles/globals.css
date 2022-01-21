@@ -18,6 +18,10 @@
    border-radius: 6px;
 }
 
+.flex-special {
+   flex: 0 0 auto;
+}
+
 /* transition duration-200 ease-in */
 .dark-transition {
    transition-property: color, background-color, border-color, fill, stroke, box-shadow;
@@ -25,13 +29,38 @@
    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
+/* absolute top-0 z-10 w-full h-full rounded-full border-2 border-primary */
+.active {
+   position: absolute;
+   top: 0px;
+   z-index: 10;
+   width: 100%;
+   height: 100%;
+   border-radius: 9999px;
+   border-width: 2px;
+   --tw-border-opacity: 1;
+   border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
 /* bg colors for projects */
 .bg-whispearrings {
    background-color: #faebeb;
 }
 
+.bg-maze {
+   background-color: #e94560;
+}
+
 .bg-godspeed {
    background-color: #9c00ff;
+}
+
+.bg-uav {
+   background-color: #0d0deb;
+}
+
+.bg-ai {
+   background-color: #a6cee3;
 }
 
 /* bg colors for languages */

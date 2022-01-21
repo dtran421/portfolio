@@ -18,7 +18,7 @@ const Contact: FC<null> = () => {
       <MainLayout page="Contact">
          <div className="lg:h-screen flex justify-center items-center mt-28">
             <div className="max-w-5xl flex flex-col lg:grid lg:grid-cols-2 space-y-10 lg:space-y-0 mx-auto">
-               <div className="max-w-xl flex flex-col items-center bg-zinc-200/75 dark:bg-zinc-800/75 dark-transition rounded-xl space-y-2 md:space-y-4 p-6 mx-6 md:mx-auto">
+               <div className="max-w-xl flex flex-col items-center bg-zinc-200/75 dark:bg-zinc-800/75 dark-transition rounded-xl shadow-xl space-y-2 md:space-y-4 p-6 mx-6 md:mx-auto">
                   <p className="w-full font-Oxygen text-4xl text-white bg-gradient-to-tr from-primary to-secondary font-bold px-2 py-1">
                      DT
                   </p>
@@ -34,7 +34,7 @@ const Contact: FC<null> = () => {
                   </div>
                </div>
                <div className="w-full h-full flex justify-center items-center">
-                  <div className="max-w-lg lg:w-full h-1/2 flex bg-zinc-200/75 dark:bg-zinc-800/75 dark-transition rounded-xl space-x-4 md:space-x-8 p-4 mx-4 md:mx-auto lg:mx-4">
+                  <div className="max-w-lg lg:w-full h-1/2 flex bg-zinc-200/75 dark:bg-zinc-800/75 dark-transition rounded-xl shadow-xl space-x-4 md:space-x-8 p-4 mx-4 md:mx-auto lg:mx-4">
                      <div className="flex justify-center items-center">
                         <div className="flex justify-center items-center w-24 h-24 md:w-32 md:h-32 bg-gradient-to-tr from-primary to-secondary rounded-full">
                            <div className="font-Oxygen text-white text-3xl md:text-5xl font-bold">DT</div>

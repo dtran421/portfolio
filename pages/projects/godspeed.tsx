@@ -6,11 +6,11 @@ const Godspeed: FC<{}> = () => {
    return (
       <ProjectLayout
          page="Godspeed"
-         accent="bg-purple-600"
+         accent="bg-godspeed"
          darkText={false}
          github="https://github.com/dtran421/project-godspeed">
          <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex mx-10 md:mx-auto">
-            <div className="w-full flex flex-col items-center mt-8">
+            <div className="w-full flex flex-col items-center">
                <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4">
                   <h2 className="text-2xl font-medium">View the project:</h2>
                   <a

@@ -11,7 +11,7 @@ import carouselData from "../public/json/carousel.json";
 
 import Emoji from "../components/Global/Emoji";
 const SocialProfile = dynamic(import("../components/Index/SocialProfile"), { ssr: false });
-const LearnMore = dynamic(import("./LearnMore"), { ssr: false });
+const LearnMore = dynamic(import("../components/Index/LearnMore"), { ssr: false });
 import Timeline from "../components/Index/Timeline";
 import LangGroup from "../components/Index/LangGroup";
 import MainLayout from "../components/Global/layouts/MainLayout";
@@ -167,7 +167,7 @@ const Index: FC<null> = () => {
                      <Image
                         key={pic}
                         alt={`pic of me ${pic}`}
-                        src={picData.pic}
+                        src={`/img/carousel/${picData.pic}`}
                         width={picData.width}
                         height={picData.height}
                         className={imgClass}

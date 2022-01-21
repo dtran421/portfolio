@@ -20,14 +20,14 @@ const Resume: FC<null> = () => {
 
    return (
       <MainLayout page="Resume">
-         <div className="relative mt-16">
-            <div
-               className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl h-48 lg:h-64 overflow-hidden bg-no-repeat bg-auto lg:bg-cover bg-center mx-auto"
-               style={{ backgroundImage: "url(/img/city_night.jpg)" }}
-            />
-            <div className="absolute top-16 lg:top-28 inset-x-1/2 lg:left-0 flex justify-center">
-               <div className="w-min">
-                  <div className="overflow-hidden w-48 h-48 lg:w-56 lg:h-56 border-8 border-slate-100 dark:border-zinc-900 dark-transition rounded-full">
+         <div className="mt-16">
+            <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl h-48 lg:h-64 mx-auto">
+               <div
+                  className="h-full overflow-hidden bg-no-repeat bg-auto lg:bg-cover bg-center "
+                  style={{ backgroundImage: "url(/img/city_night.jpg)" }}
+               />
+               <div className="relative w-full h-full flex justify-center lg:justify-start px-10">
+                  <div className="absolute bottom-32 lg:bottom-48 overflow-hidden w-48 h-48 lg:w-56 lg:h-56 border-8 border-slate-100 dark:border-zinc-900 dark-transition rounded-full">
                      <Image
                         alt="headshot"
                         src="/img/profile.jpeg"
@@ -38,7 +38,7 @@ const Resume: FC<null> = () => {
                   </div>
                </div>
             </div>
-            <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col items-start space-y-2 mx-auto mt-16 lg:mt-20">
+            <div className="w-3/4 md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex flex-col items-start space-y-2 mx-auto mt-16 lg:mt-20">
                <div className="flex items-center space-x-2 lg:space-x-4">
                   <h1 className="text-2xl lg:text-3xl dark:text-white font-bold">Duke Tran</h1>
                   <div className="bg-secondary rounded-full p-1">
