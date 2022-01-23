@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 
 import { lgScreenQuery } from "../Global/configs/Breakpoints";
-import { expandVariants } from "../Index/Timeline";
+import { expandVariants } from "../Index/Event";
 
 export interface SubsectionType {
    title: string;
