@@ -232,7 +232,7 @@ const Index: FC<null> = () => {
                </div>
             </div>
          </div>
-         <div className="max-w-4xl px-4 lg:px-0 mx-auto">
+         <div className="max-w-xl md:max-w-4xl px-8 lg:px-0 mx-auto">
             <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition text-center font-semibold mb-8">
                My Journey
             </h1>

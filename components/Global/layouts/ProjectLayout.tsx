@@ -61,7 +61,7 @@ const ProjectLayout: FC<ProjectLayoutProps> = ({ page, accent, darkText, github,
                      className={`w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end ${accent} space-y-6 px-5 xl:px-12 py-6`}>
                      <h1
                         className={`w-full ${
-                           github && "lg:w-1/2"
+                           github && "xl:w-1/2"
                         } text-center xl:text-left text-5xl md:text-6xl lg:text-8xl font-bold ${
                            darkText ? "text-black" : "text-white"
                         }`}>
