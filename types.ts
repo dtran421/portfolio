@@ -5,16 +5,42 @@ export type ThemeContextObject = {
     toggleDarkMode: Dispatch<SetStateAction<boolean>>;
 };
 
+/**
+ * Contentful Schemas
+ */
+export type Description = {
+    json: {
+        data: Record<string, unknown>;
+        content: {
+            data: Record<string, unknown>;
+            content: [
+                {
+                    data: Record<string, unknown>;
+                    marks: [];
+                    value: string;
+                    nodeType: string;
+                }
+            ];
+            nodeType: string;
+        }[];
+    };
+};
+
 export type SubsectionObject = {
     title: string;
     organization: string;
-    date: string;
-    description: string;
+    startDate: string;
+    endDate: string;
+    currentlyWorking: boolean;
+    description: Description;
 };
 
 export type EventObject = {
     heading: string;
     type: string;
     date: string;
-    body: string;
+    startDate: string;
+    endDate: string;
+    currentlyWorking: boolean;
+    description: Description;
 };

@@ -8,7 +8,7 @@ import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 import Section from "../components/Resume/Section";
-import resumeContents from "../public/json/resume.json";
+import { SubsectionObject } from "../types";
 
 type ContactLabelProps = {
     label: string;
@@ -35,7 +35,20 @@ const ContactLabel = ({
     </div>
 );
 
-const Resume = () => {
+type ResumeProps = {
+    resumeData: {
+        tabs: {
+            heading: string;
+            subsections: SubsectionObject[];
+        }[];
+        bubbles: {
+            heading: string;
+            items: string[];
+        }[];
+    };
+};
+
+const Resume = ({ resumeData }: ResumeProps) => {
     const lgScreen = useMediaQuery(lgScreenQuery);
 
     const iconProps = {
@@ -76,8 +89,7 @@ const Resume = () => {
                         <div className="flex flex-col justify-between space-y-4 lg:space-y-6 mb-10 lg:mb-0">
                             <h2 className="md:w-5/6 lg:w-2/3 font-medium text-sm lg:text-lg">
                                 Incoming EY FSO Technology Consulting Intern |
-                                Chief Financial Officer of Agency 1693 | CS +
-                                Finance @ William & Mary
+                                CS + Finance @ William & Mary
                             </h2>
                             <Link href="/contact" passHref>
                                 <button
@@ -106,18 +118,18 @@ const Resume = () => {
                     </div>
                 </div>
                 <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
-                    {resumeContents.Tabs.map(({ heading, body }) => (
+                    {resumeData.tabs.map(({ heading, subsections }) => (
                         <Section
                             key={heading}
                             type="Tabs"
-                            {...{ heading, body }}
+                            {...{ heading, body: subsections }}
                         />
                     ))}
-                    {resumeContents.Bubbles.map(({ heading, body }) => (
+                    {resumeData.bubbles.map(({ heading, items }) => (
                         <Section
                             key={heading}
                             type="Bubbles"
-                            {...{ heading, body }}
+                            {...{ heading, body: items }}
                         />
                     ))}
                 </div>
@@ -125,5 +137,86 @@ const Resume = () => {
         </MainLayout>
     );
 };
+
+const query = `#graphql
+    {
+        resumeTabSectionCollection {
+            items {
+                heading
+                    subsectionsCollection {
+                        items {
+                            ... on ResumeTabSubsection {
+                                title
+                                organization
+                                startDate
+                                endDate
+                                currentlyWorking
+                                description {
+                                    json
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+        resumeBubblesSectionCollection {
+            items {
+                heading
+                items
+            }
+        }
+    }
+`;
+
+export async function getStaticProps() {
+    const response = await fetch(
+        `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+            },
+            body: JSON.stringify({ query })
+        }
+    );
+    if (!response.ok) {
+        console.error(
+            `Something went wrong with fetching resume data: ${response.status}`
+        );
+        return {
+            props: {
+                resumeData: null
+            }
+        };
+    }
+
+    const {
+        data: {
+            resumeTabSectionCollection: { items: tabsData },
+            resumeBubblesSectionCollection: { items: bubblesData }
+        }
+    } = await response.json();
+
+    const resumeTabsData = tabsData.map(
+        ({ heading, subsectionsCollection: { items: subsections } }) => ({
+            heading,
+            subsections
+        })
+    );
+    const resumeBubblesData = bubblesData.map(({ heading, items }) => ({
+        heading,
+        items
+    }));
+
+    return {
+        props: {
+            resumeData: {
+                tabs: resumeTabsData,
+                bubbles: resumeBubblesData
+            }
+        }
+    };
+}
 
 export default Resume;

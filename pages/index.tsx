@@ -7,6 +7,7 @@ import { useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
+import { EventObject } from "../types";
 import carouselData from "../public/json/carousel.json";
 
 import Emoji from "../components/Global/Emoji";
@@ -32,7 +33,11 @@ export function isInViewport(el) {
     );
 }
 
-const Index = () => {
+type IndexProps = {
+    timelineData: EventObject[];
+};
+
+const Index = ({ timelineData }: IndexProps) => {
     const lgScreen = useMediaQuery(lgScreenQuery);
     const learnMoreAnimations = useAnimation();
 
@@ -295,7 +300,7 @@ const Index = () => {
                     My Journey
                 </h1>
                 <div className="mb-20">
-                    <Timeline />
+                    <Timeline {...{ timelineData }} />
                 </div>
             </div>
             <div className="max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex flex-col justify-center px-6 mx-auto mt-32 rounded-xl">
@@ -335,5 +340,58 @@ const Index = () => {
         </MainLayout>
     );
 };
+
+const query = `#graphql
+    {
+        timelineEventCollection {
+            items {
+                heading
+                type
+                startDate
+                endDate
+                currentlyWorking
+                description {
+                    json
+                }
+            }
+        }
+    }
+`;
+
+export async function getStaticProps() {
+    const response = await fetch(
+        `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+            },
+            body: JSON.stringify({ query })
+        }
+    );
+    if (!response.ok) {
+        console.error(
+            `Something went wrong with fetching resume data: ${response.status}`
+        );
+        return {
+            props: {
+                timelineData: null
+            }
+        };
+    }
+
+    const {
+        data: {
+            timelineEventCollection: { items: timelineData }
+        }
+    } = await response.json();
+
+    return {
+        props: {
+            timelineData
+        }
+    };
+}
 
 export default Index;

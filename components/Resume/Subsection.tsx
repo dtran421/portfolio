@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 
 import { lgScreenQuery } from "../Global/configs/Breakpoints";
-import { expandVariants } from "../Index/Event";
+import { expandVariants, convertDateToString } from "../Index/Event";
 import { SubsectionObject } from "../../types";
 
 type SubsectionProps = {
@@ -13,12 +13,23 @@ type SubsectionProps = {
 };
 
 const Subsection = ({
-    content: { title, organization, date, description },
+    content: {
+        title,
+        organization,
+        startDate,
+        endDate,
+        currentlyWorking,
+        description
+    },
     style
 }: SubsectionProps) => {
     const lgScreen = useMediaQuery(lgScreenQuery);
 
     const [isExpanded, setExpanded] = useState(false);
+
+    const startDateStr = convertDateToString(startDate);
+    const endDateStr = convertDateToString(endDate, currentlyWorking);
+    const dateStr = `${startDateStr} - ${endDateStr}`;
 
     return (
         <div className={`flex space-x-2 lg:space-x-4 ${style}`}>
@@ -55,13 +66,13 @@ const Subsection = ({
                         </p>
                         {!lgScreen && (
                             <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">
-                                {date}
+                                {dateStr}
                             </p>
                         )}
                     </div>
                     {lgScreen && (
                         <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">
-                            {date}
+                            {dateStr}
                         </p>
                     )}
                 </div>
@@ -75,10 +86,12 @@ const Subsection = ({
                             transition={{ duration: 0.25, ease: "linear" }}
                         >
                             <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4">
-                                {description.split("\n").map((text, idx) => (
-                                    // eslint-disable-next-line react/no-array-index-key
-                                    <p key={idx}>{text}</p>
-                                ))}
+                                {description.json.content.map(
+                                    ({ content }, idx) => (
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        <p key={idx}>{content[0].value}</p>
+                                    )
+                                )}
                             </p>
                         </motion.div>
                     )}
