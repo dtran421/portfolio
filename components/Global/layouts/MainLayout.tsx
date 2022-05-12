@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, ReactNode } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import { ThemeContext } from "../../../pages/_app";
+import Contexts from "../../../Contexts";
 
 const Navbar = dynamic(() => import("../Navbar"), { ssr: false });
 
@@ -12,6 +12,9 @@ type MainLayoutProps = {
 };
 
 const MainLayout = ({ page, children }: MainLayoutProps) => {
+    const { ThemeContext } = Contexts;
+    const { darkMode } = useContext(ThemeContext);
+
     const [stickyNavbar, toggleStickyNavbar] = useState(false);
     const stickyScrollListener = () => {
         toggleStickyNavbar(window.scrollY > 0);
@@ -26,8 +29,6 @@ const MainLayout = ({ page, children }: MainLayoutProps) => {
     });
 
     const pageTitle = `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
-
-    const { darkMode } = useContext(ThemeContext);
 
     return (
         <>

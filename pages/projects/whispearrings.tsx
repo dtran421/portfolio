@@ -144,7 +144,7 @@ const Whispearrings = () => {
         opacityAnimation
     ]);
 
-    const contextObject = useMemo(
+    const whispearringsContextObject = useMemo(
         () => ({
             activeP,
             setActiveP,
@@ -175,7 +175,9 @@ const Whispearrings = () => {
                   my supervisors had asked for.`}
                     </p>
                 </div>
-                <WhispearringsContext.Provider value={contextObject}>
+                <WhispearringsContext.Provider
+                    value={whispearringsContextObject}
+                >
                     {lgScreen && (
                         <MenuBar
                             {...{ activeP, pRefs, setAutoScroll, paragraphs }}

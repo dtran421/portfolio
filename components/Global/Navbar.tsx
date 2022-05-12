@@ -4,9 +4,9 @@
 import { Dispatch, SetStateAction, useState, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
-import { ThemeContext } from "../../pages/_app";
+
+import Contexts from "../../Contexts";
 import { lgScreenQuery } from "./configs/Breakpoints";
 import Navlink from "./Navlink";
 
@@ -73,10 +73,11 @@ type NavbarProps = {
 };
 
 const Navbar = ({ page, sticky }: NavbarProps) => {
+    const { ThemeContext } = Contexts;
+    const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
     const lgScreen = useMediaQuery(lgScreenQuery);
     const tabs = ["Portfolio", "Resume", "Projects", "Contact"];
-
-    const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
     const [isExpanded, toggleExpanded] = useState(false);
 

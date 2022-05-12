@@ -3,7 +3,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import { ThemeContext } from "../../../pages/_app";
+import Contexts from "../../../Contexts";
 
 const Navbar = dynamic(() => import("../Navbar"), { ssr: false });
 const ProjectButton = dynamic(() => import("../../Projects/ProjectButton"), {
@@ -25,6 +25,9 @@ const ProjectLayout = ({
     github,
     children
 }: ProjectLayoutProps) => {
+    const { ThemeContext } = Contexts;
+    const { darkMode } = useContext(ThemeContext);
+
     const [stickyNavbar, toggleStickyNavbar] = useState(false);
     const stickyScrollListener = () => {
         toggleStickyNavbar(window.scrollY > 0);
@@ -39,8 +42,6 @@ const ProjectLayout = ({
     });
 
     const pageTitle = `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
-
-    const { darkMode } = useContext(ThemeContext);
 
     const githubLink = useRef(null);
     const [isFocused, setFocused] = useState(false);

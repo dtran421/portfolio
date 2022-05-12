@@ -1,3 +1,10 @@
+import { Dispatch, SetStateAction } from "react";
+
+export type ThemeContextObject = {
+    darkMode: boolean;
+    toggleDarkMode: Dispatch<SetStateAction<boolean>>;
+};
+
 export type SubsectionObject = {
     title: string;
     organization: string;
