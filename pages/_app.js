@@ -4,14 +4,14 @@ import "../styles/globals.css";
 
 export const ThemeContext = createContext(null);
 
-function MyApp({ Component, pageProps }) {
-   const [darkMode, toggleDarkMode] = useState(true);
+const MyApp = ({ Component, pageProps }) => {
+    const [darkMode, toggleDarkMode] = useState(true);
 
-   return (
-      <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
-         <Component {...pageProps} />
-      </ThemeContext.Provider>
-   );
-}
+    return (
+        <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+            <Component {...pageProps} />
+        </ThemeContext.Provider>
+    );
+};
 
 export default MyApp;
