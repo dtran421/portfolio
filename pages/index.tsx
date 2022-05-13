@@ -341,7 +341,7 @@ const Index = ({ timelineData }: IndexProps) => {
     );
 };
 
-const query = `#graphql
+const query = /* GraphQL */ `
     {
         timelineEventCollection {
             items {

@@ -44,3 +44,19 @@ export type EventObject = {
     currentlyWorking: boolean;
     description: Description;
 };
+
+export type Language = {
+    name: string;
+    img: {
+        url: string;
+        width: number;
+        height: number;
+    };
+    accentColor: string;
+    darkText: boolean;
+};
+
+export type LanguageGroup = {
+    heading: string;
+    languages: Language[];
+};

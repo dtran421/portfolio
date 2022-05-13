@@ -138,25 +138,25 @@ const Resume = ({ resumeData }: ResumeProps) => {
     );
 };
 
-const query = `#graphql
+const query = /* GraphQL */ `
     {
         resumeTabSectionCollection {
             items {
                 heading
-                    subsectionsCollection {
-                        items {
-                            ... on ResumeTabSubsection {
-                                title
-                                organization
-                                startDate
-                                endDate
-                                currentlyWorking
-                                description {
-                                    json
-                                }
+                subsectionsCollection {
+                    items {
+                        ... on ResumeTabSubsection {
+                            title
+                            organization
+                            startDate
+                            endDate
+                            currentlyWorking
+                            description {
+                                json
                             }
                         }
                     }
+                }
             }
         }
         resumeBubblesSectionCollection {
