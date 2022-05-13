@@ -1,13 +1,14 @@
 {
     "name": "portfolio",
-    "version": "0.1.0",
+    "version": "1.1.0",
     "private": true,
     "scripts": {
+        "postinstall": "patch-package",
         "dev": "NODE_ENV=development next dev",
         "build": "next build",
-        "start": "next start",
-        "postinstall": "patch-package",
-        "lint": "next lint"
+        "start": "NODE_ENV=production next start",
+        "lint": "next lint",
+        "lintProd": "next lint --quiet --fix"
     },
     "dependencies": {
         "contentful": "^9.1.28",
