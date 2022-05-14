@@ -8,6 +8,19 @@ type Query {
         where: AssetFilter
         order: [AssetOrder]
     ): AssetCollection
+    resumeBubblesSection(
+        id: String!
+        preview: Boolean
+        locale: String
+    ): ResumeBubblesSection
+    resumeBubblesSectionCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: ResumeBubblesSectionFilter
+        order: [ResumeBubblesSectionOrder]
+    ): ResumeBubblesSectionCollection
     languageGroup(id: String!, preview: Boolean, locale: String): LanguageGroup
     languageGroupCollection(
         skip: Int = 0
@@ -48,19 +61,6 @@ type Query {
         where: ResumeTabSubsectionFilter
         order: [ResumeTabSubsectionOrder]
     ): ResumeTabSubsectionCollection
-    resumeBubblesSection(
-        id: String!
-        preview: Boolean
-        locale: String
-    ): ResumeBubblesSection
-    resumeBubblesSectionCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-        where: ResumeBubblesSectionFilter
-        order: [ResumeBubblesSectionOrder]
-    ): ResumeBubblesSectionCollection
     resumeTabSection(
         id: String!
         preview: Boolean
@@ -331,6 +331,10 @@ type LanguageGroup implements Entry {
     contentfulMetadata: ContentfulMetadata!
     linkedFrom(allowedLocales: [String]): LanguageGroupLinkingCollections
     heading(locale: String): String
+    description(locale: String): String
+    emoji(locale: String): String
+    emojiLabel(locale: String): String
+    order(locale: String): Int
     languagesCollection(
         skip: Int = 0
         limit: Int = 100
@@ -554,6 +558,74 @@ enum AssetOrder {
     sys_publishedVersion_DESC
 }
 
+# Section of events styled as bubbles [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeBubblesSection)
+type ResumeBubblesSection implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ResumeBubblesSectionLinkingCollections
+    heading(locale: String): String
+    order(locale: String): Int
+    items(locale: String): [String]
+}
+
+type ResumeBubblesSectionLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type ResumeBubblesSectionCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [ResumeBubblesSection]!
+}
+
+input ResumeBubblesSectionFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
+    items_exists: Boolean
+    items_contains_all: [String]
+    items_contains_some: [String]
+    items_contains_none: [String]
+    OR: [ResumeBubblesSectionFilter]
+    AND: [ResumeBubblesSectionFilter]
+}
+
+enum ResumeBubblesSectionOrder {
+    heading_ASC
+    heading_DESC
+    order_ASC
+    order_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 input LanguageGroupFilter {
     sys: SysFilter
     contentfulMetadata: ContentfulMetadataFilter
@@ -564,6 +636,36 @@ input LanguageGroupFilter {
     heading_not_in: [String]
     heading_contains: String
     heading_not_contains: String
+    description_exists: Boolean
+    description: String
+    description_not: String
+    description_in: [String]
+    description_not_in: [String]
+    description_contains: String
+    description_not_contains: String
+    emoji_exists: Boolean
+    emoji: String
+    emoji_not: String
+    emoji_in: [String]
+    emoji_not_in: [String]
+    emoji_contains: String
+    emoji_not_contains: String
+    emojiLabel_exists: Boolean
+    emojiLabel: String
+    emojiLabel_not: String
+    emojiLabel_in: [String]
+    emojiLabel_not_in: [String]
+    emojiLabel_contains: String
+    emojiLabel_not_contains: String
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
     languagesCollection_exists: Boolean
     OR: [LanguageGroupFilter]
     AND: [LanguageGroupFilter]
@@ -572,6 +674,12 @@ input LanguageGroupFilter {
 enum LanguageGroupOrder {
     heading_ASC
     heading_DESC
+    emoji_ASC
+    emoji_DESC
+    emojiLabel_ASC
+    emojiLabel_DESC
+    order_ASC
+    order_DESC
     sys_id_ASC
     sys_id_DESC
     sys_publishedAt_ASC
@@ -846,62 +954,6 @@ enum ResumeTabSubsectionOrder {
     endDate_DESC
     currentlyWorking_ASC
     currentlyWorking_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-# Section of events styled as bubbles [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeBubblesSection)
-type ResumeBubblesSection implements Entry {
-    sys: Sys!
-    contentfulMetadata: ContentfulMetadata!
-    linkedFrom(allowedLocales: [String]): ResumeBubblesSectionLinkingCollections
-    heading(locale: String): String
-    items(locale: String): [String]
-}
-
-type ResumeBubblesSectionLinkingCollections {
-    entryCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-    ): EntryCollection
-}
-
-type ResumeBubblesSectionCollection {
-    total: Int!
-    skip: Int!
-    limit: Int!
-    items: [ResumeBubblesSection]!
-}
-
-input ResumeBubblesSectionFilter {
-    sys: SysFilter
-    contentfulMetadata: ContentfulMetadataFilter
-    heading_exists: Boolean
-    heading: String
-    heading_not: String
-    heading_in: [String]
-    heading_not_in: [String]
-    heading_contains: String
-    heading_not_contains: String
-    items_exists: Boolean
-    items_contains_all: [String]
-    items_contains_some: [String]
-    items_contains_none: [String]
-    OR: [ResumeBubblesSectionFilter]
-    AND: [ResumeBubblesSectionFilter]
-}
-
-enum ResumeBubblesSectionOrder {
-    heading_ASC
-    heading_DESC
     sys_id_ASC
     sys_id_DESC
     sys_publishedAt_ASC

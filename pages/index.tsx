@@ -7,7 +7,7 @@ import { useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
-import { EventObject } from "../types";
+import { EventObject, LanguageGroup } from "../types";
 import carouselData from "../public/json/carousel.json";
 
 import Emoji from "../components/Global/Emoji";
@@ -35,9 +35,10 @@ export function isInViewport(el) {
 
 type IndexProps = {
     timelineData: EventObject[];
+    languageGroupsData: LanguageGroup[];
 };
 
-const Index = ({ timelineData }: IndexProps) => {
+const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
     const lgScreen = useMediaQuery(lgScreenQuery);
     const learnMoreAnimations = useAnimation();
 
@@ -317,24 +318,26 @@ const Index = ({ timelineData }: IndexProps) => {
                     and perform my career functions to the best of my ability.
                 </p>
                 <div className="space-y-4">
-                    <LangGroup
-                        name="Experienced"
-                        desc="Numerous years of experience, intermediate to advanced mastery of associated concepts, thousands of lines coded"
-                        emoji="⚡️"
-                        emojiLabel="lightning"
-                    />
-                    <LangGroup
-                        name="Learning"
-                        desc="Limited years of experience, novice understanding of associated concepts, less than a thousand lines coded"
-                        emoji="📚"
-                        emojiLabel="books"
-                    />
-                    <LangGroup
-                        name="Future"
-                        desc="No experience, desire to learn relevant concepts and attain mastery, limited lines coded (or none)"
-                        emoji="📌"
-                        emojiLabel="pin"
-                    />
+                    {languageGroupsData.map(
+                        ({
+                            heading,
+                            description,
+                            emoji,
+                            emojiLabel,
+                            languagesCollection: { items: languages }
+                        }) => (
+                            <LangGroup
+                                key={heading}
+                                {...{
+                                    heading,
+                                    description,
+                                    emoji,
+                                    emojiLabel,
+                                    languages
+                                }}
+                            />
+                        )
+                    )}
                 </div>
             </div>
         </MainLayout>
@@ -352,6 +355,24 @@ const query = /* GraphQL */ `
                 currentlyWorking
                 description {
                     json
+                }
+            }
+        }
+        languageGroupCollection(limit: 3, order: order_ASC) {
+            items {
+                heading
+                description
+                emoji
+                emojiLabel
+                languagesCollection {
+                    items {
+                        name
+                        img {
+                            url(transform: { width: 50, resizeStrategy: SCALE })
+                        }
+                        accentColor
+                        darkText
+                    }
                 }
             }
         }
@@ -376,20 +397,23 @@ export async function getStaticProps() {
         );
         return {
             props: {
-                timelineData: null
+                timelineData: null,
+                languageGroupsData: null
             }
         };
     }
 
     const {
         data: {
-            timelineEventCollection: { items: timelineData }
+            timelineEventCollection: { items: timelineData },
+            languageGroupCollection: { items: languageGroupsData }
         }
     } = await response.json();
 
     return {
         props: {
-            timelineData
+            timelineData,
+            languageGroupsData
         }
     };
 }

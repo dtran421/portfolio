@@ -159,7 +159,7 @@ const query = /* GraphQL */ `
                 }
             }
         }
-        resumeBubblesSectionCollection {
+        resumeBubblesSectionCollection(order: order_ASC) {
             items {
                 heading
                 items

@@ -8,7 +8,7 @@ export type ThemeContextObject = {
 /**
  * Contentful Schemas
  */
-export type Description = {
+export type RichDescription = {
     json: {
         data: Record<string, unknown>;
         content: {
@@ -32,7 +32,7 @@ export type SubsectionObject = {
     startDate: string;
     endDate: string;
     currentlyWorking: boolean;
-    description: Description;
+    description: RichDescription;
 };
 
 export type EventObject = {
@@ -42,15 +42,13 @@ export type EventObject = {
     startDate: string;
     endDate: string;
     currentlyWorking: boolean;
-    description: Description;
+    description: RichDescription;
 };
 
 export type Language = {
     name: string;
     img: {
         url: string;
-        width: number;
-        height: number;
     };
     accentColor: string;
     darkText: boolean;
@@ -58,5 +56,8 @@ export type Language = {
 
 export type LanguageGroup = {
     heading: string;
-    languages: Language[];
+    description: string;
+    emoji: string;
+    emojiLabel: string;
+    languagesCollection: { items: Language[] };
 };
