@@ -1,39 +1,39 @@
 {
-   "projectList": [
-      {
-         "link": "godspeed",
-         "name": "Godspeed",
-         "thumbnail": "/img/godspeed.png",
-         "width": 193,
-         "height": 227
-      },
-      {
-         "link": "whispearrings",
-         "name": "Whispearrings",
-         "thumbnail": "/img/whispearrings_logo.png",
-         "width": 256,
-         "height": 256
-      },
-      {
-         "link": "maze",
-         "name": "Maze Game",
-         "thumbnail": "/img/maze_minotaur.png",
-         "width": 256,
-         "height": 256
-      },
-      {
-         "link": "uav",
-         "name": "UAV Swarms",
-         "thumbnail": "/img/uav_swarm.png",
-         "width": 350,
-         "height": 350
-      },
-      {
-         "link": "ai",
-         "name": "Machine Learning",
-         "thumbnail": "/img/machine_learning.png",
-         "width": 350,
-         "height": 350
-      }
-   ]
+    "projectList": [
+        {
+            "link": "godspeed",
+            "name": "Godspeed",
+            "thumbnail": "/img/godspeed.png",
+            "width": 193,
+            "height": 227
+        },
+        {
+            "link": "whispearrings",
+            "name": "Whispearrings",
+            "thumbnail": "/img/whispearrings_logo.png",
+            "width": 256,
+            "height": 256
+        },
+        {
+            "link": "maze",
+            "name": "Maze Game",
+            "thumbnail": "/img/maze_minotaur.png",
+            "width": 256,
+            "height": 256
+        },
+        {
+            "link": "uav",
+            "name": "UAV Swarms",
+            "thumbnail": "/img/uav_swarm.png",
+            "width": 350,
+            "height": 350
+        },
+        {
+            "link": "ai",
+            "name": "Machine Learning",
+            "thumbnail": "/img/machine_learning.png",
+            "width": 350,
+            "height": 350
+        }
+    ]
 }

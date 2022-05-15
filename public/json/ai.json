@@ -1,35 +1,45 @@
 {
-   "folders": [
-      {
-         "name": "gradient-descent",
-         "contents": ["gd.py", "gradient-descent.ipynb", "multivariate-linear-regression.ipynb"]
-      },
-      {
-         "name": "classification",
-         "contents": [
-            "digit-classification.ipynb",
-            "digits-py.mat",
-            "logistic_regression.ipynb",
-            "logistic_regression.py",
-            "one_vs_all.py",
-            "sms_classify.ipynb",
-            "sms.txt"
-         ]
-      },
-      {
-         "name": "support-vector-machines",
-         "contents": [
-            "movie-recommendations.ipynb",
-            "movies.mat",
-            "svmKernels.py",
-            "test_svm_parameters.ipynb",
-            "test_svmGaussianKernel.py",
-            "test_svmPolyKernel.py"
-         ]
-      },
-      {
-         "name": "principal-components",
-         "contents": ["decision_tree.ipynb", "eigenface.ipynb", "panda.jpeg", "segment.ipynb", "wm.jpeg"]
-      }
-   ]
+    "folders": [
+        {
+            "name": "gradient-descent",
+            "contents": [
+                "gd.py",
+                "gradient-descent.ipynb",
+                "multivariate-linear-regression.ipynb"
+            ]
+        },
+        {
+            "name": "classification",
+            "contents": [
+                "digit-classification.ipynb",
+                "digits-py.mat",
+                "logistic_regression.ipynb",
+                "logistic_regression.py",
+                "one_vs_all.py",
+                "sms_classify.ipynb",
+                "sms.txt"
+            ]
+        },
+        {
+            "name": "support-vector-machines",
+            "contents": [
+                "movie-recommendations.ipynb",
+                "movies.mat",
+                "svmKernels.py",
+                "test_svm_parameters.ipynb",
+                "test_svmGaussianKernel.py",
+                "test_svmPolyKernel.py"
+            ]
+        },
+        {
+            "name": "principal-components",
+            "contents": [
+                "decision_tree.ipynb",
+                "eigenface.ipynb",
+                "panda.jpeg",
+                "segment.ipynb",
+                "wm.jpeg"
+            ]
+        }
+    ]
 }

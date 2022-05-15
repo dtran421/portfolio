@@ -5,7 +5,7 @@ import { FiArrowDownCircle } from "react-icons/fi";
 import { MdSchool, MdWork, MdDesktopMac } from "react-icons/md";
 
 import { mdScreenQuery } from "../Global/configs/Breakpoints";
-import { Description, EventObject } from "../../types";
+import { RichDescription, EventObject } from "../../types";
 
 export const expandVariants = {
     open: { opacity: 1, height: "auto" },
@@ -49,7 +49,7 @@ type CardProps = {
     isExpanded: boolean;
     setExpanded: Dispatch<SetStateAction<boolean>>;
     heading: string;
-    description: Description;
+    description: RichDescription;
 };
 
 const Card = ({
