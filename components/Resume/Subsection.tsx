@@ -85,14 +85,17 @@ const Subsection = ({
                             variants={expandVariants}
                             transition={{ duration: 0.25, ease: "linear" }}
                         >
-                            <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4">
-                                {description.json.content.map(
-                                    ({ content }, idx) => (
+                            {description.json.content.map(
+                                ({ content }, idx) => (
+                                    <p
                                         // eslint-disable-next-line react/no-array-index-key
-                                        <p key={idx}>{content[0].value}</p>
-                                    )
-                                )}
-                            </p>
+                                        key={idx}
+                                        className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4"
+                                    >
+                                        {content[0].value}
+                                    </p>
+                                )
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>

@@ -15,14 +15,7 @@ module.exports = {
             }),
             colors: {
                 primary: colors.red["500"],
-                secondary: colors.purple["500"],
-                /* project colors */
-                ml: "#a6cee3",
-                data: "#ff7f0e",
-                whispearrings: "#faebeb",
-                maze: "#e94560",
-                godspeed: "#9c00ff",
-                uav: "#0d0deb"
+                secondary: colors.purple["500"]
             }
         },
         fontFamily: {

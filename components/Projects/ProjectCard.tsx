@@ -12,7 +12,7 @@ const cardVariants = {
         y: 0
     },
     hover: {
-        y: "80%"
+        y: "70%"
     }
 };
 
@@ -23,7 +23,7 @@ type ProjectCardProps = Project & {
 const ProjectCard = ({
     name,
     link,
-    accentColors: { background },
+    accentColor,
     darkText,
     thumbnail,
     width,
@@ -37,18 +37,20 @@ const ProjectCard = ({
         <Link href={`/projects/${link}`} passHref>
             <button
                 type="button"
-                className="w-full h-96 relative"
+                className="w-full h-56 md:h-64 lg:h-72 xl:h-80 relative"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
             >
                 <div className="z-10 absolute top-0 overflow-hidden w-full h-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
-                    <Image
-                        alt={name.toLowerCase()}
-                        src={thumbnail}
-                        {...{ width, height }}
-                        layout="intrinsic"
-                        priority
-                    />
+                    <div>
+                        <Image
+                            alt={name.toLowerCase()}
+                            src={thumbnail}
+                            {...{ width, height }}
+                            layout="intrinsic"
+                            priority
+                        />
+                    </div>
                 </div>
                 {lgScreen ? (
                     <AnimatePresence initial={false}>
@@ -56,10 +58,11 @@ const ProjectCard = ({
                             animate={isHovered ? "hover" : "inactive"}
                             variants={cardVariants}
                             transition={{ duration: 0.2, ease: "linear" }}
-                            className={`w-full absolute bottom-0 z-0 ${background} rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2`}
+                            style={{ backgroundColor: accentColor }}
+                            className="w-full absolute bottom-0 z-0 rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
                         >
                             <p
-                                className={`text-2xl ${
+                                className={`text-xl xl:text-2xl ${
                                     darkText ? "text-black" : "text-white"
                                 } font-medium transition duration-200 ease-linear`}
                             >
@@ -69,10 +72,11 @@ const ProjectCard = ({
                     </AnimatePresence>
                 ) : (
                     <div
-                        className={`w-full absolute -bottom-10 md:-bottom-12 z-0 ${background} rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2`}
+                        style={{ backgroundColor: accentColor }}
+                        className="w-full absolute -bottom-10 z-0 rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
                     >
                         <p
-                            className={`flex justify-center items-center text-xl md:text-2xl ${
+                            className={`flex justify-center items-center text-lg md:text-xl ${
                                 darkText ? "text-black" : "text-white"
                             } font-medium transition duration-200 ease-linear`}
                         >

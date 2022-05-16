@@ -13,7 +13,7 @@ export type ThemeContextObject = {
  */
 export type Project = {
     link: string;
-    accentColors: { background: string; border: string | null };
+    accentColor: string;
     darkText: boolean;
     thumbnail: string;
     width: number;

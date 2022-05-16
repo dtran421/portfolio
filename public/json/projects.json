@@ -1,68 +1,78 @@
 {
-    "Godspeed": {
-        "link": "godspeed",
-        "accentColors": {
-            "background": "bg-godspeed",
-            "border": null
+    "coding": {
+        "Godspeed": {
+            "link": "godspeed",
+            "accentColor": "#9c00ff",
+            "darkText": false,
+            "thumbnail": "/img/projects/godspeed.png",
+            "width": 193,
+            "height": 227
         },
-        "darkText": false,
-        "thumbnail": "/img/projects/godspeed.png",
-        "width": 193,
-        "height": 227
+        "UAV Swarms": {
+            "link": "uav",
+            "accentColor": "#0d0deb",
+            "darkText": false,
+            "thumbnail": "/img/projects/uav_swarm.png",
+            "width": 641,
+            "height": 516
+        },
+        "Whispearrings": {
+            "link": "whispearrings",
+            "accentColor": "#faebeb",
+            "darkText": true,
+            "thumbnail": "/img/projects/whispearrings.png",
+            "width": 256,
+            "height": 256
+        },
+        "Maze Game": {
+            "link": "maze",
+            "accentColor": "#e94560",
+            "darkText": false,
+            "thumbnail": "/img/projects/maze_minotaur.png",
+            "width": 256,
+            "height": 256
+        },
+        "Machine Learning": {
+            "link": "machine-learning",
+            "accentColor": "#a6cee3",
+            "darkText": true,
+            "thumbnail": "/img/projects/machine_learning.png",
+            "width": 667,
+            "height": 517
+        },
+        "Data Mining": {
+            "link": "data-mining",
+            "accentColor": "#ff7f0e",
+            "darkText": true,
+            "thumbnail": "/img/projects/data_mining.png",
+            "width": 587,
+            "height": 393
+        }
     },
-    "Whispearrings": {
-        "link": "whispearrings",
-        "accentColors": {
-            "background": "bg-whispearrings",
-            "border": null
+    "finance": {
+        "HES Pitch": {
+            "link": "hess",
+            "accentColor": "#007049",
+            "darkText": false,
+            "thumbnail": "/img/projects/hess.png",
+            "width": 600,
+            "height": 358
         },
-        "darkText": true,
-        "thumbnail": "/img/projects/whispearrings_logo.png",
-        "width": 256,
-        "height": 256
-    },
-    "Maze Game": {
-        "link": "maze",
-        "accentColors": {
-            "background": "bg-maze",
-            "border": null
+        "MUSA Case Study": {
+            "link": "murphy-usa",
+            "accentColor": "#235ba8",
+            "darkText": false,
+            "thumbnail": "/img/projects/murphy_usa.png",
+            "width": 544,
+            "height": 254
         },
-        "darkText": false,
-        "thumbnail": "/img/projects/maze_minotaur.png",
-        "width": 256,
-        "height": 256
-    },
-    "UAV Swarms": {
-        "link": "uav",
-        "accentColors": {
-            "background": "bg-uav",
-            "border": null
-        },
-        "darkText": false,
-        "thumbnail": "/img/projects/uav_swarm.png",
-        "width": 641,
-        "height": 516
-    },
-    "Machine Learning": {
-        "link": "machine-learning",
-        "accentColors": {
-            "background": "bg-ml",
-            "border": "hover:border-ml"
-        },
-        "darkText": true,
-        "thumbnail": "/img/projects/machine_learning.png",
-        "width": 667,
-        "height": 517
-    },
-    "Data Mining": {
-        "link": "data-mining",
-        "accentColors": {
-            "background": "bg-data",
-            "border": "hover:border-data"
-        },
-        "darkText": true,
-        "thumbnail": "/img/projects/data_mining.png",
-        "width": 587,
-        "height": 393
+        "Advanced Investments": {
+            "link": "advanced-investments",
+            "accentColor": "#652b91",
+            "darkText": false,
+            "thumbnail": "/img/projects/advanced_investments.png",
+            "width": 556,
+            "height": 300
+        }
     }
 }

@@ -16,11 +16,17 @@ const ProjectsBackButton = dynamic(
 
 type ProjectLayoutProps = {
     page: string;
+    type: "coding" | "finance";
     github?: string;
     children: ReactNode;
 };
 
-const ProjectLayout = ({ page, github, children }: ProjectLayoutProps) => {
+const ProjectLayout = ({
+    page,
+    type,
+    github,
+    children
+}: ProjectLayoutProps) => {
     const { ThemeContext } = Contexts;
     const { darkMode } = useContext(ThemeContext);
 
@@ -51,10 +57,7 @@ const ProjectLayout = ({ page, github, children }: ProjectLayoutProps) => {
         }, 3000);
     };
 
-    const {
-        accentColors: { background: backgroundAccent },
-        darkText
-    } = projects[page];
+    const { accentColor, darkText } = projects[type][page];
 
     return (
         <>
@@ -71,7 +74,8 @@ const ProjectLayout = ({ page, github, children }: ProjectLayoutProps) => {
                     <Navbar page="Projects" sticky={stickyNavbar} />
                     <div className="pt-14 lg:pt-20">
                         <div
-                            className={`w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end ${backgroundAccent} space-y-6 px-5 xl:px-12 py-6`}
+                            style={{ backgroundColor: accentColor }}
+                            className="w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end space-y-6 px-5 xl:px-12 py-6"
                         >
                             <h1
                                 className={`w-full ${

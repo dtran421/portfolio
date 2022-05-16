@@ -3,8 +3,7 @@ import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
 const Godspeed = () => (
     <ProjectLayout
         page="Godspeed"
-        accentColor="bg-godspeed"
-        darkText={false}
+        type="coding"
         github="https://github.com/dtran421/project-godspeed"
     >
         <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex mx-10 md:mx-auto">

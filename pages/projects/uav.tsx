@@ -6,6 +6,7 @@ import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
 const UAV = () => (
     <ProjectLayout
         page="UAV Swarms"
+        type="coding"
         github="https://github.com/dtran421/3D-SHARKS"
     >
         <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-7xl flex flex-col xl:flex-row justify-between space-y-10 xl:space-y-0 xl:space-x-20 py-20 mx-10 md:mx-auto">
