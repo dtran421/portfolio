@@ -5,7 +5,7 @@ import AndroidSection from "../../components/Projects/Maze/AndroidSection";
 const Maze = () => (
     <ProjectLayout
         page="Maze Game"
-        accent="bg-maze"
+        accentColor="bg-maze"
         darkText={false}
         github="https://github.com/dtran421/MazeByDukeTran"
     >

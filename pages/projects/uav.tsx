@@ -6,7 +6,7 @@ import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
 const UAV = () => (
     <ProjectLayout
         page="UAV Swarms"
-        accent="bg-uav"
+        accentColor="bg-uav"
         darkText={false}
         github="https://github.com/dtran421/3D-SHARKS"
     >
@@ -39,7 +39,7 @@ const UAV = () => (
                 </a>
                 <Image
                     alt="uav paper page 1"
-                    src="/img/uav/cover_page.jpg"
+                    src="/img/projects/uav/cover_page.jpg"
                     width={574}
                     height={743}
                     layout="fixed"

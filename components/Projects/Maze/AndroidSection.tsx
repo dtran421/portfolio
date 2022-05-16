@@ -54,7 +54,7 @@ const AndroidSection = () => (
                     <div className="w-min rounded-xl overflow-hidden">
                         <Image
                             alt="maze video 1 android"
-                            src="/img/maze/amaze1.gif"
+                            src="/img/projects/maze/amaze1.gif"
                             width={208}
                             height={430}
                             layout="fixed"
@@ -88,7 +88,7 @@ const AndroidSection = () => (
                     <div className="w-min rounded-xl overflow-hidden">
                         <Image
                             alt="maze video 2 android"
-                            src="/img/maze/amaze2.gif"
+                            src="/img/projects/maze/amaze2.gif"
                             width={208}
                             height={430}
                             layout="fixed"
@@ -97,7 +97,7 @@ const AndroidSection = () => (
                     <div className="w-min rounded-xl overflow-hidden">
                         <Image
                             alt="maze video 3 android"
-                            src="/img/maze/amaze3.gif"
+                            src="/img/projects/maze/amaze3.gif"
                             width={208}
                             height={430}
                             layout="fixed"
@@ -130,7 +130,7 @@ const AndroidSection = () => (
                         <div className="w-min rounded-xl overflow-hidden">
                             <Image
                                 alt="maze video 4 android"
-                                src="/img/maze/amaze4.gif"
+                                src="/img/projects/maze/amaze4.gif"
                                 width={208}
                                 height={430}
                                 layout="fixed"

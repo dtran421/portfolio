@@ -4,7 +4,7 @@ import { FiArrowLeftCircle } from "react-icons/fi";
 
 import { lgScreenQuery } from "../Global/configs/Breakpoints";
 
-const ProjectButton = () => {
+const ProjectsBackButton = () => {
     const lgScreen = useMediaQuery(lgScreenQuery);
 
     return (
@@ -20,4 +20,4 @@ const ProjectButton = () => {
     );
 };
 
-export default ProjectButton;
+export default ProjectsBackButton;

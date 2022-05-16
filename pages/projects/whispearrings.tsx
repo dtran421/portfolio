@@ -1,4 +1,11 @@
-import { useRef, useState, useReducer, useEffect, useMemo } from "react";
+import {
+    useRef,
+    useState,
+    useEffect,
+    useMemo,
+    createRef,
+    RefObject
+} from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
@@ -15,16 +22,13 @@ const MenuBar = dynamic(
     { ssr: false }
 );
 
-const paragraphs = whispearringsData.data;
-
-const getActiveParagraph = (pRefs) => {
+const getActiveParagraph = (pRefs: RefObject<HTMLParagraphElement>[]) => {
     const midHeight =
         (window.innerHeight || document.documentElement.clientHeight) / 2;
 
     const dists = pRefs.map((pRef) => {
         const rect = pRef.current.getBoundingClientRect();
-        const height = rect.bottom - rect.top;
-        const middle = rect.top + height / 2;
+        const middle = rect.top + (rect.bottom - rect.top) / 2;
         return Math.abs(midHeight - middle);
     });
 
@@ -33,7 +37,7 @@ const getActiveParagraph = (pRefs) => {
 
 type ParagraphProps = {
     lgScreen: boolean;
-    setPRefs: (value: { pRefIdx: number; el: HTMLParagraphElement }) => void;
+    pRefs: RefObject<HTMLParagraphElement>[];
     idx: number;
     paragraph: {
         heading: string;
@@ -43,23 +47,22 @@ type ParagraphProps = {
 
 const Paragraph = ({
     lgScreen,
-    setPRefs,
+    pRefs,
     idx,
     paragraph: { heading, body }
 }: ParagraphProps) => (
     <div id={`paragraph${idx + 1}`} className="space-y-6">
         <h2 className="text-3xl font-semibold">{heading}</h2>
-        <p
-            ref={(el) => setPRefs({ pRefIdx: idx, el })}
-            className="text-xl leading-relaxed"
-        >
+        <p ref={pRefs[idx]} className="text-xl leading-relaxed">
             {body}
         </p>
         {!lgScreen && (
             <div className="flex justify-center pt-6">
                 <Image
                     alt={`whispearrings video ${idx + 1}`}
-                    src={`/img/whispearrings/whispearrings${idx + 1}.gif`}
+                    src={`/img/projects/whispearrings/whispearrings${
+                        idx + 1
+                    }.gif`}
                     className="z-10 relative rounded-xl"
                     width={240}
                     height={520}
@@ -74,24 +77,14 @@ const Whispearrings = () => {
 
     const { WhispearringsContext } = Contexts;
 
-    const assignPRef = (pRefs, { pRefIdx, el }) =>
-        pRefs.map((ref, idx: number) => {
-            const refCopy = ref;
-            if (idx === pRefIdx) {
-                refCopy.current = el;
-            }
-            return ref;
-        });
+    const { data: paragraphs } = whispearringsData;
 
-    const [pRefs, setPRefs] = useReducer(assignPRef, [
-        useRef(null),
-        useRef(null),
-        useRef(null),
-        useRef(null),
-        useRef(null)
-    ]);
-
+    const pRefsRef = useRef<RefObject<HTMLParagraphElement | null>[]>(
+        paragraphs.map(() => createRef<HTMLParagraphElement>())
+    );
+    const { current: pRefs } = pRefsRef;
     const [activeP, setActiveP] = useState(-1);
+
     const [[imageAnimation, opacityAnimation], setAnimations] = useState([
         null,
         null
@@ -100,6 +93,7 @@ const Whispearrings = () => {
         "z-10 relative rounded-xl opacity-0 transition duration-200 ease-linear"
     );
     const [autoScroll, setAutoScroll] = useState(false);
+
     useEffect(() => {
         const scrollListener = () => {
             if (!autoScroll && activeP !== -1 && pRefs[activeP].current) {
@@ -157,7 +151,7 @@ const Whispearrings = () => {
     return (
         <ProjectLayout
             page="Whispearrings"
-            accent="bg-whispearrings"
+            accentColor="bg-whispearrings"
             darkText
             github="https://github.com/dtran421/Whispearrings-swift"
         >
@@ -190,7 +184,7 @@ const Whispearrings = () => {
                             <Paragraph
                                 // eslint-disable-next-line react/no-array-index-key
                                 key={idx}
-                                {...{ lgScreen, setPRefs, idx, paragraph }}
+                                {...{ lgScreen, pRefs, idx, paragraph }}
                             />
                         ))}
                     </div>
@@ -205,7 +199,7 @@ const Whispearrings = () => {
                                         alt={`whispearrings video ${
                                             activeP + 1
                                         }`}
-                                        src={`/img/whispearrings/whispearrings${
+                                        src={`/img/projects/whispearrings/whispearrings${
                                             activeP + 1
                                         }.gif`}
                                         className={imgClass}

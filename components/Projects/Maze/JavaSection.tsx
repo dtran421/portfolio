@@ -127,7 +127,7 @@ const JavaSection = () => (
                     <div className="w-min rounded-xl overflow-hidden">
                         <Image
                             alt="maze video 1"
-                            src="/img/maze/maze1.gif"
+                            src="/img/projects/maze/maze1.gif"
                             width={299}
                             height={297}
                             layout="fixed"
@@ -175,7 +175,7 @@ const JavaSection = () => (
                         <div className="w-min rounded-xl overflow-hidden">
                             <Image
                                 alt="maze video 2"
-                                src="/img/maze/maze2.gif"
+                                src="/img/projects/maze/maze2.gif"
                                 width={299}
                                 height={297}
                                 layout="fixed"
@@ -197,7 +197,7 @@ const JavaSection = () => (
                         <div className="w-min rounded-xl overflow-hidden">
                             <Image
                                 alt="maze video 3"
-                                src="/img/maze/maze3.gif"
+                                src="/img/projects/maze/maze3.gif"
                                 width={299}
                                 height={297}
                                 layout="fixed"
@@ -219,7 +219,7 @@ const JavaSection = () => (
                         <div className="w-min rounded-xl overflow-hidden lg:mt-10 xl:mt-0">
                             <Image
                                 alt="maze video 4"
-                                src="/img/maze/maze4.gif"
+                                src="/img/projects/maze/maze4.gif"
                                 width={299}
                                 height={297}
                                 layout="fixed"
@@ -267,7 +267,7 @@ const JavaSection = () => (
                         <div className="w-min rounded-xl overflow-hidden">
                             <Image
                                 alt="maze video 5"
-                                src="/img/maze/maze5.gif"
+                                src="/img/projects/maze/maze5.gif"
                                 width={299}
                                 height={297}
                                 layout="fixed"
@@ -314,7 +314,7 @@ const JavaSection = () => (
                         <div className="w-min rounded-xl overflow-hidden">
                             <Image
                                 alt="maze video 6"
-                                src="/img/maze/maze6.gif"
+                                src="/img/projects/maze/maze6.gif"
                                 width={299}
                                 height={297}
                                 layout="fixed"

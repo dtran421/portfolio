@@ -129,7 +129,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
             height: 413,
             className: "rounded-xl"
         },
-        paragraph: `I began my fateful journey to becoming a skilled programmer as a fledgeling sophomore in high school. 
+        paragraph: `I began my fateful journey to becoming a skilled programmer as a fledgling sophomore in high school. 
          Ever since I took my first CS class, I have been in love with coding and all the bugs that come with it.
          For me, the most exciting part of programming is the process of solving problems through creative ideas and 
          innovative approaches.`

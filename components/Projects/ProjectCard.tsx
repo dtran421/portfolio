@@ -47,7 +47,7 @@ const ProjectCard = ({
                         alt={name.toLowerCase()}
                         src={thumbnail}
                         {...{ width, height }}
-                        layout="fixed"
+                        layout="intrinsic"
                         priority
                     />
                 </div>

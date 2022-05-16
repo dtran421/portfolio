@@ -39,10 +39,7 @@ const Godspeed = () => (
                         pair of sneakers) find and keep track of the latest drops. Hence, the birth of Godspeed. A comprehensive web
                         platform designed to help sneaker enthusiasts identify drop dates for shoes they're looking to cop. It also
                         provides useful market data (similar to those for stocks) to enable shoe resellers to spot their next favorable 
-                        sneaker resell.`}{" "}
-                            <span className="italic">
-                                All for the wonderful price of $0.
-                            </span>
+                        sneaker resell.`}
                         </p>
                     </div>
                 </div>

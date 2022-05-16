@@ -3,37 +3,45 @@
         {
             "link": "godspeed",
             "name": "Godspeed",
-            "thumbnail": "/img/godspeed.png",
+            "thumbnail": "/img/projects/godspeed.png",
             "width": 193,
             "height": 227
         },
         {
             "link": "whispearrings",
             "name": "Whispearrings",
-            "thumbnail": "/img/whispearrings_logo.png",
+            "thumbnail": "/img/projects/whispearrings_logo.png",
             "width": 256,
             "height": 256
         },
         {
             "link": "maze",
             "name": "Maze Game",
-            "thumbnail": "/img/maze_minotaur.png",
+            "thumbnail": "/img/projects/maze_minotaur.png",
             "width": 256,
             "height": 256
         },
         {
             "link": "uav",
             "name": "UAV Swarms",
-            "thumbnail": "/img/uav_swarm.png",
-            "width": 350,
-            "height": 350
+            "thumbnail": "/img/projects/uav_swarm.png",
+            "width": 641,
+            "height": 516
         },
         {
-            "link": "ai",
+            "link": "machine-learning",
             "name": "Machine Learning",
-            "thumbnail": "/img/machine_learning.png",
-            "width": 350,
-            "height": 350
+            "thumbnail": "/img/projects/machine_learning.png",
+            "width": 667,
+            "height": 517
+        },
+
+        {
+            "link": "data-mining",
+            "name": "Data Mining",
+            "thumbnail": "/img/projects/data_mining.png",
+            "width": 587,
+            "height": 393
         }
     ]
 }
