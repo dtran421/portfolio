@@ -18,7 +18,11 @@ module.exports = {
                 secondary: colors.purple["500"],
                 /* project colors */
                 ml: "#a6cee3",
-                data: "#ff7f0e"
+                data: "#ff7f0e",
+                whispearrings: "#faebeb",
+                maze: "#e94560",
+                godspeed: "#9c00ff",
+                uav: "#0d0deb"
             }
         },
         fontFamily: {

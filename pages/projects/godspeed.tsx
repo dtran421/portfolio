@@ -3,7 +3,7 @@ import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
 const Godspeed = () => (
     <ProjectLayout
         page="Godspeed"
-        accent="bg-godspeed"
+        accentColor="bg-godspeed"
         darkText={false}
         github="https://github.com/dtran421/project-godspeed"
     >
@@ -15,7 +15,7 @@ const Godspeed = () => (
                         href="https://godspeed.vercel.app/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-2xl border-2 border-primary hover:bg-primary transition duration-200 ease-out rounded-lg p-3"
+                        className="flex items-center text-xl font-medium border-2 border-primary hover:bg-primary transition duration-200 ease-out rounded-lg px-5 py-3"
                     >
                         godspeed.vercel.app
                     </a>

@@ -1,8 +1,23 @@
 import { Dispatch, SetStateAction } from "react";
 
+/**
+ * context types
+ */
 export type ThemeContextObject = {
     darkMode: boolean;
     toggleDarkMode: Dispatch<SetStateAction<boolean>>;
+};
+
+/**
+ * JSON schemas
+ */
+export type Project = {
+    link: string;
+    accentColors: { background: string; border: string | null };
+    darkText: boolean;
+    thumbnail: string;
+    width: number;
+    height: number;
 };
 
 /**

@@ -5,10 +5,10 @@ type RepoCardProps = {
     name: string;
     url: string;
     tags: string[];
-    accentColor: string;
+    borderAccent: string;
 };
 
-const RepoCard = ({ name, url, tags, accentColor }: RepoCardProps) => {
+const RepoCard = ({ name, url, tags, borderAccent }: RepoCardProps) => {
     const githubLink = useRef(null);
     const [isFocused, setFocused] = useState(false);
     const [isCopyActive, setCopyActive] = useState(false);
@@ -24,7 +24,7 @@ const RepoCard = ({ name, url, tags, accentColor }: RepoCardProps) => {
     return (
         <div className="w-full flex justify-center xl:px-10 xl:py-4">
             <div
-                className={`w-full flex flex-col justify-between bg-slate-300/50 dark:bg-slate-700/50 border-2 border-slate-600/60 ${accentColor} dark-transition backdrop-blur-lg rounded-xl gap-y-3 lg:gap-y-4 p-4`}
+                className={`w-full flex flex-col justify-between bg-slate-300/50 dark:bg-slate-700/50 border-2 border-slate-600/60 ${borderAccent} dark-transition backdrop-blur-lg rounded-xl gap-y-3 lg:gap-y-4 p-4`}
             >
                 <h1 className="text-lg md:text-xl font-medium text-left">
                     {name}

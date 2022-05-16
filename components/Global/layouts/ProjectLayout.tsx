@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
 import Contexts from "../../../Contexts";
+import projects from "../../../public/json/projects.json";
 
 const Navbar = dynamic(() => import("../Navbar"), { ssr: false });
 const ProjectsBackButton = dynamic(
@@ -15,19 +16,11 @@ const ProjectsBackButton = dynamic(
 
 type ProjectLayoutProps = {
     page: string;
-    accentColor: string;
-    darkText: boolean;
     github?: string;
     children: ReactNode;
 };
 
-const ProjectLayout = ({
-    page,
-    accentColor,
-    darkText,
-    github,
-    children
-}: ProjectLayoutProps) => {
+const ProjectLayout = ({ page, github, children }: ProjectLayoutProps) => {
     const { ThemeContext } = Contexts;
     const { darkMode } = useContext(ThemeContext);
 
@@ -58,6 +51,11 @@ const ProjectLayout = ({
         }, 3000);
     };
 
+    const {
+        accentColors: { background: backgroundAccent },
+        darkText
+    } = projects[page];
+
     return (
         <>
             <Head>
@@ -73,7 +71,7 @@ const ProjectLayout = ({
                     <Navbar page="Projects" sticky={stickyNavbar} />
                     <div className="pt-14 lg:pt-20">
                         <div
-                            className={`w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end ${accentColor} space-y-6 px-5 xl:px-12 py-6`}
+                            className={`w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end ${backgroundAccent} space-y-6 px-5 xl:px-12 py-6`}
                         >
                             <h1
                                 className={`w-full ${

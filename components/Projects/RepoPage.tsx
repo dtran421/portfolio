@@ -11,7 +11,7 @@ type RepoPageProps = {
         url: string;
         tags: string[];
     }[];
-    accentColors: { background: string; border: string };
+    borderAccent: string;
 };
 
 const RepoPage = ({
@@ -20,9 +20,9 @@ const RepoPage = ({
     dateString,
     description,
     data,
-    accentColors: { background, border }
+    borderAccent
 }: RepoPageProps) => (
-    <ProjectLayout page={bannerHeading} accentColor={background} darkText>
+    <ProjectLayout page={bannerHeading}>
         <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col mx-8 md:mx-auto">
             <div className="flex flex-col space-y-2 mt-10">
                 <h1 className="font-semibold text-2xl lg:text-3xl">
@@ -41,7 +41,7 @@ const RepoPage = ({
                             name,
                             url,
                             tags,
-                            accentColor: border
+                            borderAccent
                         }}
                     />
                 ))}

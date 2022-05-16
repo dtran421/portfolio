@@ -1,47 +1,68 @@
 {
-    "projectList": [
-        {
-            "link": "godspeed",
-            "name": "Godspeed",
-            "thumbnail": "/img/projects/godspeed.png",
-            "width": 193,
-            "height": 227
+    "Godspeed": {
+        "link": "godspeed",
+        "accentColors": {
+            "background": "bg-godspeed",
+            "border": null
         },
-        {
-            "link": "whispearrings",
-            "name": "Whispearrings",
-            "thumbnail": "/img/projects/whispearrings_logo.png",
-            "width": 256,
-            "height": 256
+        "darkText": false,
+        "thumbnail": "/img/projects/godspeed.png",
+        "width": 193,
+        "height": 227
+    },
+    "Whispearrings": {
+        "link": "whispearrings",
+        "accentColors": {
+            "background": "bg-whispearrings",
+            "border": null
         },
-        {
-            "link": "maze",
-            "name": "Maze Game",
-            "thumbnail": "/img/projects/maze_minotaur.png",
-            "width": 256,
-            "height": 256
+        "darkText": true,
+        "thumbnail": "/img/projects/whispearrings_logo.png",
+        "width": 256,
+        "height": 256
+    },
+    "Maze Game": {
+        "link": "maze",
+        "accentColors": {
+            "background": "bg-maze",
+            "border": null
         },
-        {
-            "link": "uav",
-            "name": "UAV Swarms",
-            "thumbnail": "/img/projects/uav_swarm.png",
-            "width": 641,
-            "height": 516
+        "darkText": false,
+        "thumbnail": "/img/projects/maze_minotaur.png",
+        "width": 256,
+        "height": 256
+    },
+    "UAV Swarms": {
+        "link": "uav",
+        "accentColors": {
+            "background": "bg-uav",
+            "border": null
         },
-        {
-            "link": "machine-learning",
-            "name": "Machine Learning",
-            "thumbnail": "/img/projects/machine_learning.png",
-            "width": 667,
-            "height": 517
+        "darkText": false,
+        "thumbnail": "/img/projects/uav_swarm.png",
+        "width": 641,
+        "height": 516
+    },
+    "Machine Learning": {
+        "link": "machine-learning",
+        "accentColors": {
+            "background": "bg-ml",
+            "border": "hover:border-ml"
         },
-
-        {
-            "link": "data-mining",
-            "name": "Data Mining",
-            "thumbnail": "/img/projects/data_mining.png",
-            "width": 587,
-            "height": 393
-        }
-    ]
+        "darkText": true,
+        "thumbnail": "/img/projects/machine_learning.png",
+        "width": 667,
+        "height": 517
+    },
+    "Data Mining": {
+        "link": "data-mining",
+        "accentColors": {
+            "background": "bg-data",
+            "border": "hover:border-data"
+        },
+        "darkText": true,
+        "thumbnail": "/img/projects/data_mining.png",
+        "width": 587,
+        "height": 393
+    }
 }

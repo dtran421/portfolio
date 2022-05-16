@@ -151,8 +151,6 @@ const Whispearrings = () => {
     return (
         <ProjectLayout
             page="Whispearrings"
-            accentColor="bg-whispearrings"
-            darkText
             github="https://github.com/dtran421/Whispearrings-swift"
         >
             <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl relative flex flex-col items-center gap-y-20 mx-10 md:mx-auto mt-10 mb-20">
