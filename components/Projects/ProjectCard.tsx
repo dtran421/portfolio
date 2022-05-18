@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { lgScreenQuery } from "../Global/configs/Breakpoints";
+import { lgScreenQuery } from "../../configs/Breakpoints";
 import { Project } from "../../types";
 
 const cardVariants = {
@@ -42,7 +42,7 @@ const ProjectCard = ({
                 onMouseLeave={() => setHovered(false)}
             >
                 <div className="z-10 absolute top-0 overflow-hidden w-full h-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
-                    <div>
+                    <div className="w-3/4 md:w-full flex justify-center items-center p-4 md:p-0">
                         <Image
                             alt={name.toLowerCase()}
                             src={thumbnail}

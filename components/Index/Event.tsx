@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdSchool, MdWork, MdDesktopMac } from "react-icons/md";
 
-import { mdScreenQuery } from "../Global/configs/Breakpoints";
+import { mdScreenQuery } from "../../configs/Breakpoints";
 import { RichDescription, EventObject } from "../../types";
 
 export const expandVariants = {

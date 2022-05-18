@@ -15,7 +15,7 @@ module.exports = {
             }),
             colors: {
                 primary: colors.red["500"],
-                secondary: colors.purple["500"]
+                secondary: colors.purple["600"]
             }
         },
         fontFamily: {

@@ -47,9 +47,9 @@ const Navlink = ({ idx, active, link, mobile }: NavlinkProps) => (
                             ? "border-black dark:border-white border-opacity-100"
                             : `${
                                   mobile
-                                      ? "border-transparent focus:border-secondary"
+                                      ? "border-transparent focus:border-primary"
                                       : "border-b-transparent"
-                              } hover:border-secondary`
+                              } hover:border-primary`
                     } dark-transition hover:cursor-pointer ${
                         mobile ? "px-6 py-1" : "px-5 py-3"
                     }`}
@@ -58,7 +58,7 @@ const Navlink = ({ idx, active, link, mobile }: NavlinkProps) => (
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a
                         className={`text-xl ${
-                            active ? "dark:text-white" : "text-secondary"
+                            active ? "dark:text-white" : "text-primary"
                         }`}
                     >
                         {link}

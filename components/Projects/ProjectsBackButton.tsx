@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import { FiArrowLeftCircle } from "react-icons/fi";
 
-import { lgScreenQuery } from "../Global/configs/Breakpoints";
+import { lgScreenQuery } from "../../configs/Breakpoints";
 
 const ProjectsBackButton = () => {
     const lgScreen = useMediaQuery(lgScreenQuery);

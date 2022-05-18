@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
 import Contexts from "../../Contexts";
-import { lgScreenQuery } from "./configs/Breakpoints";
+import { lgScreenQuery } from "../../configs/Breakpoints";
 import Navlink from "./Navlink";
 
 const navlinkVariants = {

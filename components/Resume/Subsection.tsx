@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 
-import { lgScreenQuery } from "../Global/configs/Breakpoints";
+import { lgScreenQuery } from "../../configs/Breakpoints";
 import { expandVariants, convertDateToString } from "../Index/Event";
 import { SubsectionObject } from "../../types";
 

@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import { FiMail, FiPhone, FiBriefcase } from "react-icons/fi";
 
-import { mdScreenQuery } from "../components/Global/configs/Breakpoints";
+import { mdScreenQuery } from "../configs/Breakpoints";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 

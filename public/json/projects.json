@@ -8,14 +8,6 @@
             "width": 193,
             "height": 227
         },
-        "UAV Swarms": {
-            "link": "uav",
-            "accentColor": "#0d0deb",
-            "darkText": false,
-            "thumbnail": "/img/projects/uav_swarm.png",
-            "width": 641,
-            "height": 516
-        },
         "Whispearrings": {
             "link": "whispearrings",
             "accentColor": "#faebeb",
@@ -31,6 +23,14 @@
             "thumbnail": "/img/projects/maze_minotaur.png",
             "width": 256,
             "height": 256
+        },
+        "UAV Swarms": {
+            "link": "uav",
+            "accentColor": "#0d0deb",
+            "darkText": false,
+            "thumbnail": "/img/projects/uav_swarm.png",
+            "width": 641,
+            "height": 516
         },
         "Machine Learning": {
             "link": "machine-learning",

@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 import { FaApple } from "react-icons/fa";
 
-import { lgScreenQuery } from "../../components/Global/configs/Breakpoints";
+import { lgScreenQuery } from "../../configs/Breakpoints";
 import Contexts from "../../Contexts";
 import whispearringsData from "../../public/json/whispearrings.json";
 
@@ -154,7 +154,7 @@ const Whispearrings = () => {
             type="coding"
             github="https://github.com/dtran421/Whispearrings-swift"
         >
-            <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl relative flex flex-col items-center gap-y-20 mx-10 md:mx-auto mt-10 mb-20">
+            <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl relative flex flex-col items-center gap-y-20 mx-10 md:mx-auto mt-10 mb-20">
                 <div className="w-full lg:w-3/4 flex flex-col items-center space-y-6">
                     <h1 className="text-4xl text-center font-bold">
                         Background & Motivation

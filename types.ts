@@ -20,6 +20,26 @@ export type Project = {
     height: number;
 };
 
+export type Quote = {
+    symbol: string;
+    price: number;
+    change: number;
+    changePct: number;
+    latestBusinessDay: string;
+};
+
+export type Company = {
+    name: string;
+    exchange: string;
+    sector: string;
+    industry: string;
+    marketCap: number;
+    dividendYield: number;
+    eps: number;
+    high52Weeks: number;
+    low52Weeks: number;
+};
+
 /**
  * Contentful Schemas
  */

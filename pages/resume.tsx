@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiCheck, FiMail, FiPhone, FiHome } from "react-icons/fi";
 
-import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
+import { lgScreenQuery } from "../configs/Breakpoints";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 import Section from "../components/Resume/Section";

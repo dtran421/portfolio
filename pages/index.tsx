@@ -6,7 +6,7 @@ import Typewriter from "typewriter-effect";
 import { useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
-import { lgScreenQuery } from "../components/Global/configs/Breakpoints";
+import { lgScreenQuery } from "../configs/Breakpoints";
 import { EventObject, LanguageGroup } from "../types";
 import carouselData from "../public/json/carousel.json";
 
