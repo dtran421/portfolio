@@ -46,7 +46,7 @@ const RepoCard = ({ name, url, tags, accentColor }: RepoCardProps) => {
                         <button
                             type="button"
                             className={`w-full text-sm md:text-base rounded-l-lg ${
-                                isFocused && "ring-2 ring-zinc-100/75"
+                                isFocused ? "ring-2 ring-zinc-100/75" : ""
                             } px-3 py-1 cursor-default`}
                             onClick={() => githubLink.current.select()}
                         >

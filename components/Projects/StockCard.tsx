@@ -50,9 +50,32 @@ const titleCase = (str: string): string =>
         )
         .join(" ");
 
+type ReturnTextProps = {
+    change: number;
+    changePct: number;
+};
+
+const ReturnText = ({ change, changePct }: ReturnTextProps) => {
+    const hasGained = change >= 0;
+    const sign = hasGained ? "+" : "-";
+
+    return (
+        <p
+            className={`inline-block text-xl md:text-2xl ${
+                hasGained ? "text-green-500" : "text-red-500"
+            }`}
+        >
+            {sign}${Math.abs(change).toFixed(2)} ({sign}
+            {Math.abs(changePct).toFixed(2)}%)
+        </p>
+    );
+};
+
 type StockCardProps = {
     quoteData: Quote;
     companyData: Company;
+    showReturn?: boolean;
+    purchasePrice?: number;
 };
 
 const StockCard = ({
@@ -67,11 +90,10 @@ const StockCard = ({
         eps,
         high52Weeks,
         low52Weeks
-    }
+    },
+    showReturn = true,
+    purchasePrice = 0
 }: StockCardProps) => {
-    const hasGained = change >= 0;
-    const sign = hasGained ? "+" : "-";
-
     const latestBusinessDayStr = formatDateStr(latestBusinessDay);
 
     const table = {
@@ -88,6 +110,13 @@ const StockCard = ({
     };
     const rows = Object.keys(table.column1).length;
 
+    let dollarReturn = 0;
+    let pctReturn = 0;
+    if (showReturn) {
+        dollarReturn = price - purchasePrice;
+        pctReturn = (dollarReturn / purchasePrice) * 100;
+    }
+
     return (
         <div className="w-full lg:w-4/5 xl:w-2/3 bg-slate-300/50 dark:bg-slate-700/50 border-2 border-slate-600/60 dark-transition backdrop-blur-lg rounded-xl space-y-4 p-4 md:pb-1">
             <div className="space-y-4 md:space-y-2">
@@ -103,16 +132,24 @@ const StockCard = ({
                         Last Market Close: {latestBusinessDayStr}
                     </p>
                 </div>
-                <div className="flex flex-col md:flex-row flex-wrap md:items-end md:space-x-6">
-                    <h1 className="text-3xl md:text-4xl font-bold">{price}</h1>
-                    <p
-                        className={`inline-block text-xl md:text-2xl ${
-                            hasGained ? "text-green-500" : "text-red-500"
-                        }`}
-                    >
-                        {sign}${change.toFixed(2)} ({sign}
-                        {changePct.toFixed(2)}%)
-                    </p>
+                <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end space-y-2">
+                    <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end md:space-x-4">
+                        <h1 className="text-3xl md:text-4xl font-bold">
+                            ${price}
+                        </h1>
+                        <ReturnText {...{ change, changePct }} />
+                    </div>
+                    {showReturn && (
+                        <div className="flex text-xl md:text-2xl space-x-2">
+                            <p className="font-medium">ROI: </p>
+                            <ReturnText
+                                {...{
+                                    change: dollarReturn,
+                                    changePct: pctReturn
+                                }}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="grid grid-rows-6 md:grid-rows-3 grid-cols-1 md:grid-cols-2 grid-flow-col md:gap-x-8">

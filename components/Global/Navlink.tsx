@@ -33,7 +33,7 @@ const Navlink = ({ idx, active, link, mobile }: NavlinkProps) => (
             animate="expanded"
             exit="collapsed"
             variants={linkVariants}
-            className={`${mobile && "w-full"} flex justify-center`}
+            className={`${mobile ? "w-full" : ""} flex justify-center`}
         >
             <Link
                 href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`}

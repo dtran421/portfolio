@@ -10,7 +10,7 @@ type FilePreviewProps = {
     previewImgPath: string;
     width: number;
     height: number;
-    imgPosition: string;
+    special?: boolean;
 };
 
 const FilePreview = ({
@@ -19,7 +19,7 @@ const FilePreview = ({
     previewImgPath,
     width,
     height,
-    imgPosition
+    special = false
 }: FilePreviewProps) => {
     const mdScreen = useMediaQuery(mdScreenQuery);
     const lgScreen = useMediaQuery(lgScreenQuery);
@@ -30,7 +30,6 @@ const FilePreview = ({
     } else if (mdScreen) {
         resizeIconSize = 64;
     }
-
     const iconProps = {
         className:
             "absolute z-20 group-hover:bg-gray-100 rounded-xl text-transparent group-hover:text-secondary transition duration-150 ease-linear p-2",
@@ -43,12 +42,18 @@ const FilePreview = ({
             : "download";
 
     return (
-        <div className={`w-full h-full flex justify-center ${imgPosition}`}>
+        <div
+            className={`w-full flex justify-center ${
+                special ? "bg-white rounded-xl" : ""
+            }`}
+        >
             <a
                 href={`/files${filePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative overflow-hidden w-full flex justify-center items-center bg-white rounded-xl group"
+                className={`relative overflow-hidden w-full ${
+                    special ? "h-full" : ""
+                } flex justify-center items-center group`}
             >
                 {action === "view" ? (
                     <FiMaximize2 {...iconProps} />

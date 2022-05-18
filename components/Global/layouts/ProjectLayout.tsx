@@ -79,7 +79,7 @@ const ProjectLayout = ({
                         >
                             <h1
                                 className={`w-full ${
-                                    github && "xl:w-1/2"
+                                    github ? "xl:w-1/2" : ""
                                 } text-center xl:text-left text-5xl md:text-6xl lg:text-8xl font-bold ${
                                     darkText ? "text-black" : "text-white"
                                 }`}

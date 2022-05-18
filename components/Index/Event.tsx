@@ -136,7 +136,7 @@ const Event = ({
     return mdScreen ? (
         <div
             className={`w-full flex ${
-                side === "R" && "flex-row-reverse"
+                side === "R" ? "flex-row-reverse" : ""
             } justify-between items-center`}
         >
             <Card

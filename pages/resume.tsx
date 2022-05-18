@@ -118,18 +118,18 @@ const Resume = ({ resumeData }: ResumeProps) => {
                     </div>
                 </div>
                 <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
-                    {resumeData.tabs.map(({ heading, subsections }) => (
+                    {resumeData.tabs.map(({ heading, subsections: body }) => (
                         <Section
                             key={heading}
                             type="Tabs"
-                            {...{ heading, body: subsections }}
+                            {...{ heading, body }}
                         />
                     ))}
-                    {resumeData.bubbles.map(({ heading, items }) => (
+                    {resumeData.bubbles.map(({ heading, items: body }) => (
                         <Section
                             key={heading}
                             type="Bubbles"
-                            {...{ heading, body: items }}
+                            {...{ heading, body }}
                         />
                     ))}
                 </div>

@@ -50,7 +50,7 @@ const ContactLabel = ({
         <span className="bg-zinc-300/75 dark:bg-zinc-700/75 dark-transition md:text-lg rounded-full p-2">
             {children}
         </span>
-        <p className={`${special && "italic"}`}>{label}</p>
+        <p className={`${special ? "italic" : ""}`}>{label}</p>
     </div>
 );
 

@@ -111,12 +111,12 @@ const Navbar = ({ page, sticky }: NavbarProps) => {
         <motion.div
             animate={isExpanded ? "expanded" : "collapsed"}
             className={`w-full fixed z-20 flex flex-col bg-slate-200 dark:bg-slate-800 dark-transition ${
-                sticky && "bg-opacity-80 backdrop-blur-lg"
+                sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
             } rounded-b-2xl pt-2`}
         >
             <div
                 className={`relative z-10 flex justify-between items-center ${
-                    isExpanded && "shadow-lg"
+                    isExpanded ? "shadow-lg" : ""
                 } px-6 py-2`}
             >
                 <button
