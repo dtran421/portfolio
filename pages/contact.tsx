@@ -87,7 +87,7 @@ const Contact = () => {
                             <IdLabel
                                 {...{ mdScreen }}
                                 heading="Residency"
-                                body="Williamsburg, VA"
+                                body="Fairfax, VA"
                             />
                             <IdLabel
                                 {...{ mdScreen }}
@@ -116,14 +116,14 @@ const Contact = () => {
                                         Duke Tran
                                     </h1>
                                     <h2 className="md:text-xl text-zinc-700 dark:text-zinc-300 dark-transition font-medium">
-                                        Chief Financial Officer of Agency 1693
+                                        EY FSO Technology Consulting Intern
                                     </h2>
                                 </div>
                                 <div className="space-y-1 md:space-y-2">
                                     <ContactLabel label="duketran2001@gmail.com">
                                         <FiMail {...iconProps} />
                                     </ContactLabel>
-                                    <ContactLabel label="dtran@email.wm.edu">
+                                    <ContactLabel label="dtran@wm.edu">
                                         <FiBriefcase {...iconProps} />
                                     </ContactLabel>
                                     <ContactLabel label="(703)-409-3681">

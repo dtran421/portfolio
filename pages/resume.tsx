@@ -1,14 +1,19 @@
 import { ReactNode } from "react";
 import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { FiCheck, FiMail, FiPhone, FiHome } from "react-icons/fi";
+import { FiMail, FiPhone, FiHome } from "react-icons/fi";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 import Section from "../components/Resume/Section";
 import { SubsectionObject } from "../types";
+
+const CheckMark = dynamic(import("../components/Resume/CheckMark"), {
+    ssr: false
+});
 
 type ContactLabelProps = {
     label: string;
@@ -81,9 +86,7 @@ const Resume = ({ resumeData }: ResumeProps) => {
                         <h1 className="text-2xl lg:text-3xl dark:text-white font-bold">
                             Duke Tran
                         </h1>
-                        <div className="bg-secondary rounded-full p-1">
-                            <FiCheck size={lgScreen ? 18 : 14} />
-                        </div>
+                        <CheckMark />
                     </div>
                     <div className="flex flex-col md:flex-row justify-between text-lg text-zinc-800 dark:text-zinc-200 dark-transition">
                         <div className="flex flex-col justify-between space-y-4 lg:space-y-6 mb-10 lg:mb-0">
@@ -140,7 +143,7 @@ const Resume = ({ resumeData }: ResumeProps) => {
 
 const query = /* GraphQL */ `
     {
-        resumeTabSectionCollection {
+        resumeTabSectionCollection(order: order_ASC) {
             items {
                 heading
                 subsectionsCollection {

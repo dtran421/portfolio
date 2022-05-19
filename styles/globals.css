@@ -20,6 +20,7 @@
 
 .flex-special {
     flex: 0 0 auto;
+    flex-wrap: wrap;
 }
 
 /* transition duration-200 ease-in */

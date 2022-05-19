@@ -13,7 +13,7 @@ const Projects = () => {
     const { coding, finance } = projects;
 
     const preloadColors = ["border-[#a6cee3]", "border-[#ff7f0e]"];
-    const preloadClass = `hidden ${preloadColors}`;
+    const preloadClass = `hidden ${preloadColors.join(" ")}`;
 
     return (
         <MainLayout page="Projects">

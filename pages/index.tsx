@@ -1,19 +1,19 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
-import Typewriter from "typewriter-effect";
 import { useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
 import { EventObject, LanguageGroup } from "../types";
-import carouselData from "../public/json/carousel.json";
+import IndexContent from "../public/json/index.json";
 
 import Emoji from "../components/Global/Emoji";
 import Timeline from "../components/Index/Timeline";
 import LangGroup from "../components/Index/LangGroup";
 import MainLayout from "../components/Global/layouts/MainLayout";
+import Carousel from "../components/Index/Carousel";
 
 const SocialProfile = dynamic(import("../components/Index/SocialProfile"), {
     ssr: false
@@ -54,67 +54,11 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
         }
     };
 
-    const carousel = carouselData.imgs;
-    const pics = carousel.length;
-    const strings = carousel.map((entry) => entry.label);
-
-    const [imgClass, setImgClass] = useState(
-        "rounded-xl opacity-0 transition duration-200 ease-linear"
-    );
-    const [[pic, picData, init], cyclePics] = useState([1, carousel[0], true]);
-    const typewriter = useRef(null);
-    const typewriterListener = () => {
-        const cyclePicture = () => {
-            const loop = pic + 1 > pics;
-            const newPic = loop ? 1 : pic + 1;
-            setImgClass(imgClass.replace("opacity-100", "opacity-0"));
-            setTimeout(
-                () => cyclePics([newPic, carousel[newPic - 1], loop]),
-                250
-            );
-            setTimeout(
-                () => setImgClass(imgClass.replace("opacity-0", "opacity-100")),
-                250
-            );
-        };
-
-        const typewriterText = typewriter.current.children[0].innerText;
-
-        if (typewriterText.length === 1) {
-            if (init) {
-                setTimeout(
-                    () =>
-                        setImgClass(
-                            imgClass.replace("opacity-0", "opacity-100")
-                        ),
-                    250
-                );
-                cyclePics([pic, picData, false]);
-            } else {
-                cyclePicture();
-            }
-        }
-    };
-
     useEffect(() => {
         document.addEventListener("scroll", scrollListener);
 
-        let typewriterNode;
-        if (typewriter.current) {
-            typewriterNode = typewriter.current;
-            typewriter.current.addEventListener(
-                "DOMSubtreeModified",
-                typewriterListener
-            );
-        }
-
         return () => {
             document.removeEventListener("scroll", scrollListener);
-
-            typewriterNode.removeEventListener(
-                "DOMSubtreeModified",
-                typewriterListener
-            );
         };
     });
 
@@ -122,30 +66,10 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
         size: lgScreen ? 24 : 20
     };
 
-    const aboutMe1 = {
-        pic_props: {
-            src: "/img/about_me_1.jpg",
-            width: 309,
-            height: 413,
-            className: "rounded-xl"
-        },
-        paragraph: `I began my fateful journey to becoming a skilled programmer as a fledgling sophomore in high school. 
-         Ever since I took my first CS class, I have been in love with coding and all the bugs that come with it.
-         For me, the most exciting part of programming is the process of solving problems through creative ideas and 
-         innovative approaches.`
-    };
-
-    const aboutMe2 = {
-        pic_props: {
-            src: "/img/about_me_2.jpg",
-            width: 309,
-            height: 413,
-            className: "rounded-xl"
-        },
-        paragraph: `I'm also a very data-oriented person, hence my enjoyment for algorithmic optimization. Coming from a STEM-focused 
-         high school and given my CS major, I have come to love and embrace the scientific process and using numbers and rigorous testing
-         to make code more efficient.`
-    };
+    const {
+        intro,
+        aboutMe: { section1, section2 }
+    } = IndexContent;
 
     return (
         <MainLayout page="Portfolio">
@@ -171,13 +95,8 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                             </div>
                         </div>
                         <div className="w-full flex flex-col text-zinc-800 dark:text-zinc-200 lg:text-lg space-y-4">
+                            <p>{intro}</p>
                             <p>
-                                {`I'm currently a junior studying CS and finance at William & Mary. I'm super interested
-                        in exploring the intersection of technology and financial markets, hopefully through internships
-                        and other learning opportunities. I'm also passionate about coding and programming in
-                        general, so feel free to take a look around the website and learn more about me!`}
-                            </p>
-                            <p className="mt-2">
                                 Below are some of my socials. Feel free to check
                                 them out and connect with me there!
                             </p>
@@ -211,38 +130,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
-                        <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
-                            <Image
-                                key={pic}
-                                alt={`pic of me ${pic}`}
-                                src={`/img/carousel/${picData.pic}`}
-                                width={picData.width}
-                                height={picData.height}
-                                className={imgClass}
-                            />
-                        </div>
-                        <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
-                            <p className="inline-block text-center">I am</p>
-                            <div
-                                ref={typewriter}
-                                className="flex justify-center"
-                            >
-                                <Typewriter
-                                    options={{
-                                        strings,
-                                        autoStart: true,
-                                        loop: true,
-                                        pauseFor: 5000,
-                                        wrapperClassName:
-                                            "font-medium border-b-2 border-secondary ml-2 mr-1",
-                                        cursorClassName:
-                                            "text-primary shadow-md shadow-red-200/40 animate-pulse"
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <Carousel />
                 </div>
                 {lgScreen && <LearnMore {...{ learnMoreAnimations }} />}
             </div>
@@ -252,7 +140,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                         <div className="w-full lg:w-1/2 flex justify-center">
                             <Image
                                 alt="about me pic 1"
-                                {...aboutMe1.pic_props}
+                                {...section1.pic_props}
                             />
                         </div>
                         <div className="w-full lg:w-1/2 flex flex-col justify-between rounded-xl space-y-8">
@@ -262,7 +150,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                                     <Emoji label="waving guy" symbol="🙋🏻‍♂️" />
                                 </h1>
                                 <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition leading-snug">
-                                    {aboutMe1.paragraph}
+                                    {section1.paragraph}
                                 </p>
                             </div>
                             <div className="flex flex-col items-between bg-zinc-300/50 dark:bg-zinc-700/50 dark-transition rounded-xl shadow-lg space-y-2 px-5 py-3">
@@ -284,13 +172,13 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                     <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-10">
                         <div className="w-full lg:w-1/2 flex items-center">
                             <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition leading-snug mt-10 lg:mt-0">
-                                {aboutMe2.paragraph}
+                                {section2.paragraph}
                             </p>
                         </div>
                         <div className="w-full lg:w-1/2 flex justify-center">
                             <Image
                                 alt="about me pic 2"
-                                {...aboutMe2.pic_props}
+                                {...section2.pic_props}
                             />
                         </div>
                     </div>

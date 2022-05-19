@@ -75,7 +75,7 @@ const AdvancedInvestments = ({
                     <h1 className="text-3xl text-center font-bold">
                         Course Materials
                     </h1>
-                    <div className="w-full space-y-2 lg:space-y-10">
+                    <div className="w-full space-y-10">
                         <div className="space-y-2 lg:space-y-4">
                             <h2 className="text-lg md:text-2xl font-medium">
                                 Homework

@@ -8,6 +8,19 @@ type Query {
         where: AssetFilter
         order: [AssetOrder]
     ): AssetCollection
+    resumeTabSection(
+        id: String!
+        preview: Boolean
+        locale: String
+    ): ResumeTabSection
+    resumeTabSectionCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: ResumeTabSectionFilter
+        order: [ResumeTabSectionOrder]
+    ): ResumeTabSectionCollection
     resumeBubblesSection(
         id: String!
         preview: Boolean
@@ -61,19 +74,6 @@ type Query {
         where: ResumeTabSubsectionFilter
         order: [ResumeTabSubsectionOrder]
     ): ResumeTabSubsectionCollection
-    resumeTabSection(
-        id: String!
-        preview: Boolean
-        locale: String
-    ): ResumeTabSection
-    resumeTabSectionCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-        where: ResumeTabSectionFilter
-        order: [ResumeTabSectionOrder]
-    ): ResumeTabSectionCollection
     blogPost(id: String!, preview: Boolean, locale: String): BlogPost
     blogPostCollection(
         skip: Int = 0
@@ -558,6 +558,83 @@ enum AssetOrder {
     sys_publishedVersion_DESC
 }
 
+# Section of events styled under tabs [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeTabSection)
+type ResumeTabSection implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ResumeTabSectionLinkingCollections
+    heading(locale: String): String
+    subsectionsCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): ResumeTabSectionSubsectionsCollection
+    order(locale: String): Int
+}
+
+type ResumeTabSectionLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type ResumeTabSectionSubsectionsCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Entry]!
+}
+
+type ResumeTabSectionCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [ResumeTabSection]!
+}
+
+input ResumeTabSectionFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    subsectionsCollection_exists: Boolean
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
+    OR: [ResumeTabSectionFilter]
+    AND: [ResumeTabSectionFilter]
+}
+
+enum ResumeTabSectionOrder {
+    heading_ASC
+    heading_DESC
+    order_ASC
+    order_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 # Section of events styled as bubbles [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeBubblesSection)
 type ResumeBubblesSection implements Entry {
     sys: Sys!
@@ -954,71 +1031,6 @@ enum ResumeTabSubsectionOrder {
     endDate_DESC
     currentlyWorking_ASC
     currentlyWorking_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-# Section of events styled under tabs [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeTabSection)
-type ResumeTabSection implements Entry {
-    sys: Sys!
-    contentfulMetadata: ContentfulMetadata!
-    linkedFrom(allowedLocales: [String]): ResumeTabSectionLinkingCollections
-    heading(locale: String): String
-    subsectionsCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-    ): ResumeTabSectionSubsectionsCollection
-}
-
-type ResumeTabSectionLinkingCollections {
-    entryCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-    ): EntryCollection
-}
-
-type ResumeTabSectionSubsectionsCollection {
-    total: Int!
-    skip: Int!
-    limit: Int!
-    items: [Entry]!
-}
-
-type ResumeTabSectionCollection {
-    total: Int!
-    skip: Int!
-    limit: Int!
-    items: [ResumeTabSection]!
-}
-
-input ResumeTabSectionFilter {
-    sys: SysFilter
-    contentfulMetadata: ContentfulMetadataFilter
-    heading_exists: Boolean
-    heading: String
-    heading_not: String
-    heading_in: [String]
-    heading_not_in: [String]
-    heading_contains: String
-    heading_not_contains: String
-    subsectionsCollection_exists: Boolean
-    OR: [ResumeTabSectionFilter]
-    AND: [ResumeTabSectionFilter]
-}
-
-enum ResumeTabSectionOrder {
-    heading_ASC
-    heading_DESC
     sys_id_ASC
     sys_id_DESC
     sys_publishedAt_ASC
