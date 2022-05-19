@@ -83,7 +83,7 @@ const Navbar = ({ page, sticky }: NavbarProps) => {
 
     return lgScreen ? (
         <div
-            className={`w-full fixed z-20 bg-transparent lg:bg-zinc-100 lg:dark:bg-zinc-900 dark-transition ${
+            className={`w-full fixed z-50 bg-transparent lg:bg-zinc-100 lg:dark:bg-zinc-900 dark-transition ${
                 sticky ? "bg-opacity-80 backdrop-blur-lg" : "translate-y-1/2"
             } transition-transform duration-200 ease-linear`}
         >
@@ -110,12 +110,12 @@ const Navbar = ({ page, sticky }: NavbarProps) => {
     ) : (
         <motion.div
             animate={isExpanded ? "expanded" : "collapsed"}
-            className={`w-full fixed z-20 flex flex-col bg-slate-200 dark:bg-slate-800 dark-transition ${
+            className={`w-full fixed z-50 flex flex-col bg-slate-200 dark:bg-slate-800 dark-transition ${
                 sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
             } rounded-b-2xl pt-2`}
         >
             <div
-                className={`relative z-10 flex justify-between items-center ${
+                className={`relative z-40 flex justify-between items-center ${
                     isExpanded ? "shadow-lg" : ""
                 } px-6 py-2`}
             >

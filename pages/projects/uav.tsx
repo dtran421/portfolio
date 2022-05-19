@@ -9,11 +9,11 @@ const UAV = () => (
     >
         <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl flex flex-col xl:flex-row justify-between space-y-10 xl:space-y-0 xl:space-x-20 py-20 mx-10 md:mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-20 gap-y-10 xl:gap-y-0">
-                <div className="flex flex-col space-y-6">
-                    <h1 className="text-3xl font-bold">
+                <div className="flex flex-col space-y-4">
+                    <h1 className="text-2xl xl:text-3xl font-bold">
                         Background & Motivation
                     </h1>
-                    <p className="text-lg leading-relaxed">
+                    <p className="xl:text-lg leading-relaxed">
                         Over the summer of 2021, I interned for a research
                         program under the National Science Foundation (NSF) to
                         do research in VR. My specific project pertained to UAV
@@ -29,14 +29,15 @@ const UAV = () => (
                         paper, which can be viewed in full screen.
                     </p>
                 </div>
-                <FilePreview
-                    filePath="/uav/uav_paper.pdf"
-                    altText="uav paper page 1"
-                    previewImgPath="/projects/uav/cover_page.jpg"
-                    width={1700}
-                    height={2200}
-                    imgPosition="items-center"
-                />
+                <div>
+                    <FilePreview
+                        label="UAV Paper"
+                        filePath="/uav/uav_paper.pdf"
+                        previewImgPath="/projects/uav/cover_page.jpg"
+                        width={1700}
+                        height={2200}
+                    />
+                </div>
             </div>
         </div>
     </ProjectLayout>

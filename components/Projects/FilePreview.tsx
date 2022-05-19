@@ -5,8 +5,8 @@ import { FiMaximize2, FiDownload } from "react-icons/fi";
 import { mdScreenQuery, lgScreenQuery } from "../../configs/Breakpoints";
 
 type FilePreviewProps = {
+    label: string;
     filePath: string;
-    altText: string;
     previewImgPath: string;
     width: number;
     height: number;
@@ -14,8 +14,8 @@ type FilePreviewProps = {
 };
 
 const FilePreview = ({
+    label,
     filePath,
-    altText,
     previewImgPath,
     width,
     height,
@@ -55,6 +55,11 @@ const FilePreview = ({
                     special ? "h-full" : ""
                 } flex justify-center items-center group`}
             >
+                <div className="absolute left-0 top-0 z-20 bg-primary/80 group-hover:bg-primary backdrop-blur-lg rounded-full px-2 md:px-3 md:py-1 m-1 md:m-3">
+                    <p className="text-sm md:text-lg text-white font-medium">
+                        {label}
+                    </p>
+                </div>
                 {action === "view" ? (
                     <FiMaximize2 {...iconProps} />
                 ) : (
@@ -62,7 +67,7 @@ const FilePreview = ({
                 )}
                 <div className="absolute z-10 w-full h-full group-hover:bg-gray-800/60 transition duration-150 ease-in-out" />
                 <Image
-                    alt={altText}
+                    alt={label}
                     src={`/img${previewImgPath}`}
                     {...{ width, height }}
                     className="rounded-xl"

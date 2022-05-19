@@ -50,8 +50,8 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
                     <div className="flex flex-col lg:grid lg:grid-rows-2 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-16 gap-y-6 lg:gap-y-0">
                         <div className="row-span-2 flex items-center">
                             <FilePreview
+                                label="HES Report"
                                 filePath="/hess/HES_report.pdf"
-                                altText="hess report cover page"
                                 previewImgPath="/projects/hess/report_cover_page.png"
                                 width={1700}
                                 height={2200}
@@ -59,8 +59,8 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
                         </div>
                         <div>
                             <FilePreview
+                                label="HES Presentation"
                                 filePath="/hess/HES_presentation.pdf"
-                                altText="hess presentation title slide"
                                 previewImgPath="/projects/hess/presentation_title_slide.png"
                                 width={2667}
                                 height={1500}
@@ -68,8 +68,8 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
                         </div>
                         <div className="flex">
                             <FilePreview
+                                label="HES Valuation"
                                 filePath="/hess/HES_valuation.xlsx"
-                                altText="hess valuation excel icon"
                                 previewImgPath="/projects/excel.png"
                                 width={lgScreen ? 248 : 165}
                                 height={lgScreen ? 248 : 165}

@@ -13,12 +13,12 @@ const FilePreview = dynamic(import("../../components/Projects/FilePreview"), {
     ssr: false
 });
 
-type HessProps = {
+type MurphyUSAProps = {
     quoteData: Quote;
     companyData: Company;
 };
 
-const Hess = ({ quoteData, companyData }: HessProps) => {
+const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
     const mgScreen = useMediaQuery(mdScreenQuery);
     const lgScreen = useMediaQuery(lgScreenQuery);
 
@@ -54,16 +54,16 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
                     <div className="flex flex-col lg:grid lg:grid-cols-2 gap-y-6 lg:gap-x-10">
                         <div>
                             <FilePreview
+                                label="Murphy USA Presentation"
                                 filePath="/murphy-usa/MUSA_presentation.pdf"
-                                altText="murphy usa presentation title slide"
                                 previewImgPath="/projects/murphy-usa/presentation_title_slide.png"
                                 width={2667}
                                 height={1500}
                             />
                         </div>
                         <FilePreview
+                            label="Murphy USA Analysis"
                             filePath="/murphy-usa/MUSA_analysis.xlsx"
-                            altText="murphy usa analysis excel icon"
                             previewImgPath="/projects/excel.png"
                             width={excelIconDim}
                             height={excelIconDim}
@@ -78,4 +78,4 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
 
 export const getStaticProps = () => fetchStockData("MUSA");
 
-export default Hess;
+export default MurphyUSA;
