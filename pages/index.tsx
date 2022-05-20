@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
-import { useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
@@ -85,9 +85,18 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                                     Hi there! My name is{" "}
                                 </p>
                                 <div className="flex items-center space-x-3">
-                                    <p className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3">
+                                    <motion.p
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            delay: 0.5,
+                                            ease: "linear"
+                                        }}
+                                        className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3"
+                                    >
                                         Duke Tran
-                                    </p>
+                                    </motion.p>
                                     <div className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default">
                                         <Emoji label="wave" symbol="👋🏼" />
                                     </div>
@@ -268,20 +277,35 @@ const query = /* GraphQL */ `
 `;
 
 export async function getStaticProps() {
-    const response = await fetch(
-        `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
-            },
-            body: JSON.stringify({ query })
-        }
-    );
-    if (!response.ok) {
+    try {
+        const response = await fetch(
+            `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+                },
+                body: JSON.stringify({ query })
+            }
+        );
+
+        const {
+            data: {
+                timelineEventCollection: { items: timelineData },
+                languageGroupCollection: { items: languageGroupsData }
+            }
+        } = await response.json();
+
+        return {
+            props: {
+                timelineData,
+                languageGroupsData
+            }
+        };
+    } catch (exception) {
         console.error(
-            `Something went wrong with fetching resume data: ${response.status}`
+            `Something went wrong with fetching resume data: ${exception.message}`
         );
         return {
             props: {
@@ -290,20 +314,6 @@ export async function getStaticProps() {
             }
         };
     }
-
-    const {
-        data: {
-            timelineEventCollection: { items: timelineData },
-            languageGroupCollection: { items: languageGroupsData }
-        }
-    } = await response.json();
-
-    return {
-        props: {
-            timelineData,
-            languageGroupsData
-        }
-    };
 }
 
 export default Index;

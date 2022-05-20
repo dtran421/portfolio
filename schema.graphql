@@ -8,6 +8,15 @@ type Query {
         where: AssetFilter
         order: [AssetOrder]
     ): AssetCollection
+    blogPost(id: String!, preview: Boolean, locale: String): BlogPost
+    blogPostCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: BlogPostFilter
+        order: [BlogPostOrder]
+    ): BlogPostCollection
     resumeTabSection(
         id: String!
         preview: Boolean
@@ -74,15 +83,6 @@ type Query {
         where: ResumeTabSubsectionFilter
         order: [ResumeTabSubsectionOrder]
     ): ResumeTabSubsectionCollection
-    blogPost(id: String!, preview: Boolean, locale: String): BlogPost
-    blogPostCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-        where: BlogPostFilter
-        order: [BlogPostOrder]
-    ): BlogPostCollection
     entryCollection(
         skip: Int = 0
         limit: Int = 100
@@ -259,18 +259,18 @@ type AssetLinkingCollections {
         preview: Boolean
         locale: String
     ): EntryCollection
-    languageCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-    ): LanguageCollection
     blogPostCollection(
         skip: Int = 0
         limit: Int = 100
         preview: Boolean
         locale: String
     ): BlogPostCollection
+    languageCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): LanguageCollection
 }
 
 type EntryCollection {
@@ -283,6 +283,59 @@ type EntryCollection {
 interface Entry {
     sys: Sys!
     contentfulMetadata: ContentfulMetadata!
+}
+
+type BlogPostCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [BlogPost]!
+}
+
+# Individual blog post [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/blogPost)
+type BlogPost implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
+    postId(locale: String): String
+    title(locale: String): String
+    publishDate(locale: String): DateTime
+    topicTags(locale: String): [String]
+    heroBanner(preview: Boolean, locale: String): Asset
+    body(locale: String): BlogPostBody
+}
+
+type BlogPostLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type BlogPostBody {
+    json: JSON!
+    links: BlogPostBodyLinks!
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+type BlogPostBodyLinks {
+    entries: BlogPostBodyEntries!
+    assets: BlogPostBodyAssets!
+}
+
+type BlogPostBodyEntries {
+    inline: [Entry]!
+    hyperlink: [Entry]!
+    block: [Entry]!
+}
+
+type BlogPostBodyAssets {
+    hyperlink: [Asset]!
+    block: [Asset]!
 }
 
 type LanguageCollection {
@@ -357,58 +410,6 @@ type LanguageGroupLanguagesCollection {
     skip: Int!
     limit: Int!
     items: [Language]!
-}
-
-type BlogPostCollection {
-    total: Int!
-    skip: Int!
-    limit: Int!
-    items: [BlogPost]!
-}
-
-# [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/blogPost)
-type BlogPost implements Entry {
-    sys: Sys!
-    contentfulMetadata: ContentfulMetadata!
-    linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
-    title(locale: String): String
-    publishDate(locale: String): DateTime
-    tags(locale: String): [String]
-    heroBanner(preview: Boolean, locale: String): Asset
-    body(locale: String): BlogPostBody
-}
-
-type BlogPostLinkingCollections {
-    entryCollection(
-        skip: Int = 0
-        limit: Int = 100
-        preview: Boolean
-        locale: String
-    ): EntryCollection
-}
-
-type BlogPostBody {
-    json: JSON!
-    links: BlogPostBodyLinks!
-}
-
-# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-scalar JSON
-
-type BlogPostBodyLinks {
-    entries: BlogPostBodyEntries!
-    assets: BlogPostBodyAssets!
-}
-
-type BlogPostBodyEntries {
-    inline: [Entry]!
-    hyperlink: [Entry]!
-    block: [Entry]!
-}
-
-type BlogPostBodyAssets {
-    hyperlink: [Asset]!
-    block: [Asset]!
 }
 
 type AssetCollection {
@@ -548,6 +549,61 @@ enum AssetOrder {
     width_DESC
     height_ASC
     height_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+input BlogPostFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    postId_exists: Boolean
+    postId: String
+    postId_not: String
+    postId_in: [String]
+    postId_not_in: [String]
+    postId_contains: String
+    postId_not_contains: String
+    title_exists: Boolean
+    title: String
+    title_not: String
+    title_in: [String]
+    title_not_in: [String]
+    title_contains: String
+    title_not_contains: String
+    publishDate_exists: Boolean
+    publishDate: DateTime
+    publishDate_not: DateTime
+    publishDate_in: [DateTime]
+    publishDate_not_in: [DateTime]
+    publishDate_gt: DateTime
+    publishDate_gte: DateTime
+    publishDate_lt: DateTime
+    publishDate_lte: DateTime
+    topicTags_exists: Boolean
+    topicTags_contains_all: [String]
+    topicTags_contains_some: [String]
+    topicTags_contains_none: [String]
+    heroBanner_exists: Boolean
+    body_exists: Boolean
+    body_contains: String
+    body_not_contains: String
+    OR: [BlogPostFilter]
+    AND: [BlogPostFilter]
+}
+
+enum BlogPostOrder {
+    postId_ASC
+    postId_DESC
+    title_ASC
+    title_DESC
+    publishDate_ASC
+    publishDate_DESC
     sys_id_ASC
     sys_id_DESC
     sys_publishedAt_ASC
@@ -1031,52 +1087,6 @@ enum ResumeTabSubsectionOrder {
     endDate_DESC
     currentlyWorking_ASC
     currentlyWorking_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-input BlogPostFilter {
-    sys: SysFilter
-    contentfulMetadata: ContentfulMetadataFilter
-    title_exists: Boolean
-    title: String
-    title_not: String
-    title_in: [String]
-    title_not_in: [String]
-    title_contains: String
-    title_not_contains: String
-    publishDate_exists: Boolean
-    publishDate: DateTime
-    publishDate_not: DateTime
-    publishDate_in: [DateTime]
-    publishDate_not_in: [DateTime]
-    publishDate_gt: DateTime
-    publishDate_gte: DateTime
-    publishDate_lt: DateTime
-    publishDate_lte: DateTime
-    tags_exists: Boolean
-    tags_contains_all: [String]
-    tags_contains_some: [String]
-    tags_contains_none: [String]
-    heroBanner_exists: Boolean
-    body_exists: Boolean
-    body_contains: String
-    body_not_contains: String
-    OR: [BlogPostFilter]
-    AND: [BlogPostFilter]
-}
-
-enum BlogPostOrder {
-    title_ASC
-    title_DESC
-    publishDate_ASC
-    publishDate_DESC
     sys_id_ASC
     sys_id_DESC
     sys_publishedAt_ASC

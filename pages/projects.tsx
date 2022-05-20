@@ -18,7 +18,7 @@ const Projects = () => {
     return (
         <MainLayout page="Projects">
             <div className="min-h-screen">
-                <div className="w-3/5 max-w-sm md:w-full md:max-w-xl lg:max-w-3xl xl:w-3/4 xl:max-w-none flex flex-col gap-y-10 mx-auto mt-32">
+                <div className="w-3/5 max-w-sm md:w-full md:max-w-xl lg:max-w-3xl xl:w-3/4 xl:max-w-none flex flex-col gap-y-10 mx-auto mt-16">
                     <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-center md:text-left">
                         CODING <Emoji label="desktop computer" symbol="🖥️" />
                     </h1>

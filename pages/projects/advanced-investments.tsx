@@ -146,6 +146,6 @@ const AdvancedInvestments = ({
     );
 };
 
-export const getStaticProps = () => fetchStockData("RBLX");
+export const getServerSideProps = () => fetchStockData("RBLX");
 
 export default AdvancedInvestments;

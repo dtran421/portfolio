@@ -76,6 +76,6 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
     );
 };
 
-export const getStaticProps = () => fetchStockData("MUSA");
+export const getServerSideProps = () => fetchStockData("MUSA");
 
 export default MurphyUSA;

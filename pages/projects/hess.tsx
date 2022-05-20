@@ -83,6 +83,6 @@ const Hess = ({ quoteData, companyData }: HessProps) => {
     );
 };
 
-export const getStaticProps = () => fetchStockData("HES");
+export const getServerSideProps = () => fetchStockData("HES");
 
 export default Hess;

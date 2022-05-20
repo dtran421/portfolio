@@ -43,7 +43,7 @@ export type Company = {
 /**
  * Contentful Schemas
  */
-export type RichDescription = {
+export type RichText = {
     json: {
         data: Record<string, unknown>;
         content: {
@@ -51,7 +51,7 @@ export type RichDescription = {
             content: [
                 {
                     data: Record<string, unknown>;
-                    marks: [];
+                    marks: { type: string }[];
                     value: string;
                     nodeType: string;
                 }
@@ -67,7 +67,7 @@ export type SubsectionObject = {
     startDate: string;
     endDate: string;
     currentlyWorking: boolean;
-    description: RichDescription;
+    description: RichText;
 };
 
 export type EventObject = {
@@ -77,7 +77,7 @@ export type EventObject = {
     startDate: string;
     endDate: string;
     currentlyWorking: boolean;
-    description: RichDescription;
+    description: RichText;
 };
 
 export type Language = {
@@ -95,4 +95,18 @@ export type LanguageGroup = {
     emoji: string;
     emojiLabel: string;
     languagesCollection: { items: Language[] };
+};
+
+export type BlogPost = {
+    postId: string;
+    title: string;
+    publishDate: string;
+    topicTags: string[];
+    heroBanner: {
+        title: string;
+        url: string;
+        width: number;
+        height: number;
+    };
+    body: RichText;
 };
