@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 
 import { lgScreenQuery } from "../../configs/Breakpoints";
-import { expandVariants, convertDateToString } from "../Index/Event";
+import { expandVariants, convertDateToAbbrevString } from "../Index/Event";
 import { SubsectionObject } from "../../types";
 
 type SubsectionProps = {
@@ -27,8 +27,8 @@ const Subsection = ({
 
     const [isExpanded, setExpanded] = useState(false);
 
-    const startDateStr = convertDateToString(startDate);
-    const endDateStr = convertDateToString(endDate, currentlyWorking);
+    const startDateStr = convertDateToAbbrevString(startDate);
+    const endDateStr = convertDateToAbbrevString(endDate, currentlyWorking);
     const dateStr = `${startDateStr} - ${endDateStr}`;
 
     return (

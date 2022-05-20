@@ -41,7 +41,9 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
         page: rootPage || page
     };
 
-    const pageTitle = `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
+    const pageTitle = rootPage
+        ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}`
+        : `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
 
     return (
         <>

@@ -17,7 +17,7 @@ const tagVariants = {
     collapsed: (side) => ({ opacity: 0, x: (side === "L" ? -1 : 1) * 50 })
 };
 
-export const convertDateToString = (
+export const convertDateToAbbrevString = (
     rawDateStr: string,
     currentlyWorking?: boolean
 ): string => {
@@ -25,7 +25,7 @@ export const convertDateToString = (
         return "Present";
     }
 
-    const month = [
+    const abbrevMonths = [
         "Jan",
         "Feb",
         "Mar",
@@ -41,7 +41,7 @@ export const convertDateToString = (
     ];
 
     const date = rawDateStr.split("T")[0].split("-");
-    return `${month[parseInt(date[1], 10) - 1]} ${date[0]}`;
+    return `${abbrevMonths[parseInt(date[1], 10) - 1]} ${date[0]}`;
 };
 
 type CardProps = {
@@ -129,8 +129,8 @@ const Event = ({
         icon = <MdWork {...iconProps} />;
     }
 
-    const startDateStr = convertDateToString(startDate);
-    const endDateStr = convertDateToString(endDate, currentlyWorking);
+    const startDateStr = convertDateToAbbrevString(startDate);
+    const endDateStr = convertDateToAbbrevString(endDate, currentlyWorking);
     const dateStr = `${startDateStr} - ${endDateStr}`;
 
     return mdScreen ? (

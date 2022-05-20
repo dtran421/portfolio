@@ -8,6 +8,7 @@ import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { lgScreenQuery } from "../configs/Breakpoints";
 import { EventObject, LanguageGroup } from "../types";
 import IndexContent from "../public/json/index.json";
+import TimelineAndLanguageQuery from "../graphql/TimelineAndLanguageQuery";
 
 import Emoji from "../components/Global/Emoji";
 import Timeline from "../components/Index/Timeline";
@@ -241,41 +242,6 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
     );
 };
 
-const query = /* GraphQL */ `
-    {
-        timelineEventCollection {
-            items {
-                heading
-                type
-                startDate
-                endDate
-                currentlyWorking
-                description {
-                    json
-                }
-            }
-        }
-        languageGroupCollection(limit: 3, order: order_ASC) {
-            items {
-                heading
-                description
-                emoji
-                emojiLabel
-                languagesCollection {
-                    items {
-                        name
-                        img {
-                            url(transform: { width: 50, resizeStrategy: SCALE })
-                        }
-                        accentColor
-                        darkText
-                    }
-                }
-            }
-        }
-    }
-`;
-
 export async function getStaticProps() {
     try {
         const response = await fetch(
@@ -286,7 +252,7 @@ export async function getStaticProps() {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
                 },
-                body: JSON.stringify({ query })
+                body: JSON.stringify({ query: TimelineAndLanguageQuery })
             }
         );
 

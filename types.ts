@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { Document } from "@contentful/rich-text-types";
 
 /**
  * context types
@@ -43,22 +44,22 @@ export type Company = {
 /**
  * Contentful Schemas
  */
-export type RichText = {
-    json: {
-        data: Record<string, unknown>;
-        content: {
-            data: Record<string, unknown>;
-            content: [
-                {
-                    data: Record<string, unknown>;
-                    marks: { type: string }[];
-                    value: string;
-                    nodeType: string;
-                }
-            ];
-            nodeType: string;
-        }[];
+export type CodeSnippetBlock = {
+    sys: { id: string };
+    __typename: string;
+    code: string;
+    language: string;
+};
+
+export type Links = {
+    entries: {
+        block: CodeSnippetBlock[];
     };
+};
+
+export type RichText = {
+    json: Document;
+    links?: Links;
 };
 
 export type SubsectionObject = {

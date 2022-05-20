@@ -11,6 +11,8 @@
         "lintProd": "next lint --quiet --fix"
     },
     "dependencies": {
+        "@contentful/rich-text-react-renderer": "^15.12.1",
+        "@contentful/rich-text-types": "^15.12.1",
         "contentful": "^9.1.28",
         "framer-motion": "^3.1.4",
         "graphiql": "^1.8.9",
@@ -20,11 +22,13 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-icons": "^4.3.1",
+        "react-markdown": "^8.0.3",
         "react-parallax": "^3.1.2",
         "react-responsive": "^9.0.0-beta.5",
         "react-scroll": "^1.8.1",
         "react-scroll-parallax": "^2.3.5",
         "react-step-progress-bar": "^1.0.3",
+        "react-syntax-highlighter": "^15.5.0",
         "sharp": "^0.29.3",
         "typewriter-effect": "^2.18.2"
     },

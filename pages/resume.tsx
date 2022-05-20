@@ -1,15 +1,16 @@
 import { ReactNode } from "react";
-import { useMediaQuery } from "react-responsive";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { useMediaQuery } from "react-responsive";
 import { FiMail, FiPhone, FiHome } from "react-icons/fi";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
+import { SubsectionObject } from "../types";
+import ResumeSectionsQuery from "../graphql/ResumeSectionsQuery";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 import Section from "../components/Resume/Section";
-import { SubsectionObject } from "../types";
 
 const CheckMark = dynamic(import("../components/Resume/CheckMark"), {
     ssr: false
@@ -131,36 +132,6 @@ const Resume = ({ resumeData }: ResumeProps) => {
     );
 };
 
-const query = /* GraphQL */ `
-    {
-        resumeTabSectionCollection(order: order_ASC) {
-            items {
-                heading
-                subsectionsCollection {
-                    items {
-                        ... on ResumeTabSubsection {
-                            title
-                            organization
-                            startDate
-                            endDate
-                            currentlyWorking
-                            description {
-                                json
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        resumeBubblesSectionCollection(order: order_ASC) {
-            items {
-                heading
-                items
-            }
-        }
-    }
-`;
-
 export async function getStaticProps() {
     const response = await fetch(
         `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
@@ -170,7 +141,7 @@ export async function getStaticProps() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
             },
-            body: JSON.stringify({ query })
+            body: JSON.stringify({ query: ResumeSectionsQuery })
         }
     );
     if (!response.ok) {
