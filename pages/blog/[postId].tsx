@@ -136,6 +136,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { postId } }) {
     try {
+        console.log("SPACE_ID: ", process.env.CONTENTFUL_SPACE_ID);
+        console.log("ACCESS_TOKEN: ", process.env.CONTENTFUL_ACCESS_TOKEN);
+
         const response = await fetch(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
             {

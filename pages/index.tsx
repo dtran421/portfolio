@@ -105,7 +105,6 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                                         animate={{ opacity: 1 }}
                                         transition={{
                                             duration: 0.5,
-                                            delay: 0.5,
                                             ease: "linear"
                                         }}
                                         className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3"
@@ -171,7 +170,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                 </div>
                 {lgScreen && <LearnMore {...{ learnMoreAnimations }} />}
             </div>
-            <div id="page2" className="flex flex-col items-center my-28">
+            <div id="page2" className="flex flex-col items-center py-28">
                 <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
                     <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
                         <div className="w-full lg:w-1/2 flex justify-center">
