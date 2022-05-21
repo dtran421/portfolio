@@ -5,9 +5,7 @@ import { Company, Quote } from "../../types";
 import fetchStockData from "../../lib/fetchStockData";
 import { lgScreenQuery, mdScreenQuery } from "../../configs/Breakpoints";
 
-import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
-import ClassProfile from "../../components/Projects/ClassProfile";
-import StockCard from "../../components/Projects/StockCard";
+import FinanceLayout from "../../components/Global/layouts/FinanceLayout";
 
 const FilePreview = dynamic(import("../../components/Projects/FilePreview"), {
     ssr: false
@@ -31,48 +29,45 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
     }
 
     return (
-        <ProjectLayout page="MUSA Credit Analysis" type="finance">
-            <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl flex flex-col items-center space-y-10 lg:space-y-14 mx-10 md:mx-auto mt-10">
-                <ClassProfile
-                    heading="[BUAD 329] Corporate Valuation and Credit Analysis"
-                    dateString="Spring 2021"
-                >
-                    This course focuses on common methodologies for valuing
+        <FinanceLayout
+            page="MUSA Credit Analysis"
+            classProfileProps={{
+                heading: "[BUAD 329] Corporate Valuation and Credit Analysis",
+                dateString: "Spring 2021",
+                description: `This course focuses on common methodologies for valuing
                     corporate entities used by professionals working in
                     investments, private equity, venture capital and investment
                     banking. It aims to familiarize students with various data
-                    sources and software used in the financial industry.
-                </ClassProfile>
-                <StockCard
-                    {...{ quoteData, companyData }}
-                    purchasePrice={139.4}
-                />
-                <div className="w-full">
-                    <h1 className="text-3xl text-center font-bold mb-4 lg:mb-10">
-                        Analysis Materials
-                    </h1>
-                    <div className="flex flex-col lg:grid lg:grid-cols-2 gap-y-6 lg:gap-x-10">
-                        <div>
-                            <FilePreview
-                                label="Murphy USA Presentation"
-                                filePath="/murphy-usa/MUSA_presentation.pdf"
-                                previewImgPath="/projects/murphy-usa/presentation_title_slide.png"
-                                width={2667}
-                                height={1500}
-                            />
-                        </div>
+                    sources and software used in the financial industry.`
+            }}
+            {...{ quoteData, companyData }}
+            purchasePrice={139.4}
+        >
+            <div className="w-full">
+                <h1 className="text-3xl text-center font-bold mb-4 lg:mb-10">
+                    Analysis Materials
+                </h1>
+                <div className="flex flex-col lg:grid lg:grid-cols-2 gap-y-6 lg:gap-x-10">
+                    <div>
                         <FilePreview
-                            label="Murphy USA Analysis"
-                            filePath="/murphy-usa/MUSA_analysis.xlsx"
-                            previewImgPath="/projects/excel.png"
-                            width={excelIconDim}
-                            height={excelIconDim}
-                            special
+                            label="Murphy USA Presentation"
+                            filePath="/murphy-usa/MUSA_presentation.pdf"
+                            previewImgPath="/projects/murphy-usa/presentation_title_slide.png"
+                            width={2667}
+                            height={1500}
                         />
                     </div>
+                    <FilePreview
+                        label="Murphy USA Analysis"
+                        filePath="/murphy-usa/MUSA_analysis.xlsx"
+                        previewImgPath="/projects/excel.png"
+                        width={excelIconDim}
+                        height={excelIconDim}
+                        special
+                    />
                 </div>
             </div>
-        </ProjectLayout>
+        </FinanceLayout>
     );
 };
 

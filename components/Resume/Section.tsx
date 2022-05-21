@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
+
 import { SubsectionObject } from "../../types";
 
-import Subsection from "./Subsection";
+const Subsection = dynamic(() => import("./Subsection"), { ssr: false });
 
 type SectionProps = {
     type: string;

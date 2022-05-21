@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 import { motion, useAnimation } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
+import SquareLoader from "react-spinners/SquareLoader";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
 import { EventObject, LanguageGroup } from "../types";
@@ -225,7 +226,13 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                     My Journey
                 </h1>
                 <div className="mb-20">
-                    <Timeline {...{ timelineData }} />
+                    {timelineData ? (
+                        <Timeline {...{ timelineData }} />
+                    ) : (
+                        <div className="w-full flex justify-center items-center pt-10">
+                            <SquareLoader color="#9333ea" />
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex flex-col justify-center px-6 mx-auto mt-32 rounded-xl">
@@ -242,25 +249,31 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                     and perform my career functions to the best of my ability.
                 </p>
                 <div className="space-y-4">
-                    {languageGroupsData.map(
-                        ({
-                            heading,
-                            description,
-                            emoji,
-                            emojiLabel,
-                            languagesCollection: { items: languages }
-                        }) => (
-                            <LangGroup
-                                key={heading}
-                                {...{
-                                    heading,
-                                    description,
-                                    emoji,
-                                    emojiLabel,
-                                    languages
-                                }}
-                            />
+                    {languageGroupsData ? (
+                        languageGroupsData.map(
+                            ({
+                                heading,
+                                description,
+                                emoji,
+                                emojiLabel,
+                                languagesCollection: { items: languages }
+                            }) => (
+                                <LangGroup
+                                    key={heading}
+                                    {...{
+                                        heading,
+                                        description,
+                                        emoji,
+                                        emojiLabel,
+                                        languages
+                                    }}
+                                />
+                            )
                         )
+                    ) : (
+                        <div className="w-full flex justify-center items-center pt-10">
+                            <SquareLoader color="#9333ea" />
+                        </div>
                     )}
                 </div>
             </div>
@@ -297,7 +310,7 @@ export async function getStaticProps() {
         };
     } catch (exception) {
         console.error(
-            `Something went wrong with fetching resume data: ${exception.message}`
+            `Something went wrong with fetching index data: ${exception.message}`
         );
         return {
             props: {

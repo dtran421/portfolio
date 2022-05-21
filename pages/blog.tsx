@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FiTag } from "react-icons/fi";
+import SquareLoader from "react-spinners/SquareLoader";
 
 import { BlogPost } from "../types";
 import BlogPostsQuery from "../graphql/BlogPostsQuery";
@@ -95,14 +96,16 @@ const BlogPostCard = ({
         <Link href={`/blog/${postId}`} passHref>
             <button
                 type="button"
-                className={`overflow-hidden ${
-                    featured ? "grid grid-cols-3" : ""
-                } border-2 border-transparent hover:border-primary/75 dark-transition rounded-xl space-y-4`}
+                className={`${
+                    featured ? "flex flex-col lg:grid lg:grid-cols-3" : ""
+                } overflow-hidden border-2 border-transparent hover:border-primary/75 dark-transition rounded-xl space-y-4`}
             >
                 <div
-                    className={`w-full ${
-                        featured ? "col-span-2 w-full h-72" : "h-44"
-                    } overflow-hidden flex items-center rounded-lg`}
+                    className={`flex items-center overflow-hidden ${
+                        featured
+                            ? "lg:col-span-2 md:h-48 lg:h-72"
+                            : "lg:h-40 xl:h-44"
+                    } rounded-lg`}
                 >
                     <Image
                         src={url}
@@ -110,15 +113,24 @@ const BlogPostCard = ({
                         width={width}
                         height={height}
                         layout="intrinsic"
+                        className="rounded-lg"
                     />
                 </div>
-                <div className={`space-y-3 ${featured ? "p-4" : "px-4 pb-4"}`}>
+                <div
+                    className={`w-full space-y-2 lg:space-y-3 ${
+                        featured ? "p-3 lg:p-4" : "px-3 lg:px-4 pb-3 lg:pb-4"
+                    }`}
+                >
                     <div>
-                        <div className="flex justify-between text-gray-700 dark:text-gray-300">
-                            <p>{convertDateToFullString(publishDate)}</p>
-                            <p>{readTimeEstimate} min read</p>
+                        <div className="flex lg:flex-col xl:flex-row justify-between lg:items-start text-gray-700 dark:text-gray-300">
+                            <p className="text-sm lg:text-base">
+                                {convertDateToFullString(publishDate)}
+                            </p>
+                            <p className="text-sm lg:text-base">
+                                {readTimeEstimate} min read
+                            </p>
                         </div>
-                        <h2 className="text-left text-2xl font-semibold">
+                        <h2 className="text-left text-xl lg:text-2xl font-semibold">
                             {title}
                         </h2>
                     </div>
@@ -135,16 +147,25 @@ type BlogProps = {
 
 const Blog = ({ blogPosts }: BlogProps) => (
     <MainLayout page="Blog">
-        <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl space-y-8 mx-auto mt-10">
+        <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl space-y-8 px-8 mx-auto mt-10">
             <h1 className="text-5xl font-semibold">
                 devDeque <Emoji label="fountain pen" symbol="✒️" />
             </h1>
-            <BlogPostCard {...blogPosts[0]} featured />
-            <div className="grid grid-cols-3 gap-4">
-                {blogPosts.slice(1).map((blogPost) => (
-                    <BlogPostCard key={blogPost.postId} {...blogPost} />
-                ))}
-            </div>
+            {!blogPosts && (
+                <div className="w-full flex justify-center items-center pt-32">
+                    <SquareLoader color="#9333ea" />
+                </div>
+            )}
+            {blogPosts?.length && (
+                <>
+                    <BlogPostCard {...blogPosts[0]} featured />
+                    <div className="flex flex-col md:grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                        {blogPosts.slice(1).map((blogPost) => (
+                            <BlogPostCard key={blogPost.postId} {...blogPost} />
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     </MainLayout>
 );
@@ -175,7 +196,7 @@ export async function getStaticProps() {
         };
     } catch (exception) {
         console.error(
-            `Something went wrong with fetching blog posts ${exception.message}`
+            `Something went wrong with fetching blog posts: ${exception.message}`
         );
         return {
             props: {

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import { FiMail, FiPhone, FiHome } from "react-icons/fi";
+import SquareLoader from "react-spinners/SquareLoader";
 
 import { lgScreenQuery } from "../configs/Breakpoints";
 import { SubsectionObject } from "../types";
@@ -20,19 +21,17 @@ const ContactLabel = dynamic(import("../components/Resume/ContactLabel"), {
 });
 
 type ResumeProps = {
-    resumeData: {
-        tabs: {
-            heading: string;
-            subsections: SubsectionObject[];
-        }[];
-        bubbles: {
-            heading: string;
-            items: string[];
-        }[];
-    };
+    resumeTabsData: {
+        heading: string;
+        subsections: SubsectionObject[];
+    }[];
+    resumeBubblesData: {
+        heading: string;
+        items: string[];
+    }[];
 };
 
-const Resume = ({ resumeData }: ResumeProps) => {
+const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
     const lgScreen = useMediaQuery(lgScreenQuery);
 
     const iconProps = {
@@ -99,70 +98,91 @@ const Resume = ({ resumeData }: ResumeProps) => {
                 </div>
             </div>
             <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
-                {resumeData.tabs.map(({ heading, subsections: body }) => (
-                    <Section key={heading} type="Tabs" {...{ heading, body }} />
-                ))}
-                {resumeData.bubbles.map(({ heading, items: body }) => (
-                    <Section
-                        key={heading}
-                        type="Bubbles"
-                        {...{ heading, body }}
-                    />
-                ))}
+                {resumeTabsData && resumeBubblesData ? (
+                    <>
+                        {resumeTabsData.map(
+                            ({ heading: tabHeading, subsections: tabBody }) => (
+                                <Section
+                                    key={tabHeading}
+                                    type="Tabs"
+                                    heading={tabHeading}
+                                    body={tabBody}
+                                />
+                            )
+                        )}
+                        {resumeBubblesData.map(
+                            ({
+                                heading: bubblesHeading,
+                                items: bubblesBody
+                            }) => (
+                                <Section
+                                    key={bubblesHeading}
+                                    type="Bubbles"
+                                    heading={bubblesHeading}
+                                    body={bubblesBody}
+                                />
+                            )
+                        )}
+                    </>
+                ) : (
+                    <div className="w-full flex justify-center items-center">
+                        <SquareLoader color="#9333ea" />
+                    </div>
+                )}
             </div>
         </MainLayout>
     );
 };
 
 export async function getStaticProps() {
-    const response = await fetch(
-        `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
-            },
-            body: JSON.stringify({ query: ResumeSectionsQuery })
-        }
-    );
-    if (!response.ok) {
+    try {
+        const response = await fetch(
+            `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+                },
+                body: JSON.stringify({ query: ResumeSectionsQuery })
+            }
+        );
+
+        const {
+            data: {
+                resumeTabSectionCollection: { items: tabsData },
+                resumeBubblesSectionCollection: { items: bubblesData }
+            }
+        } = await response.json();
+
+        const resumeTabsData = tabsData.map(
+            ({ heading, subsectionsCollection: { items: subsections } }) => ({
+                heading,
+                subsections
+            })
+        );
+        const resumeBubblesData = bubblesData.map(({ heading, items }) => ({
+            heading,
+            items
+        }));
+
+        return {
+            props: {
+                resumeTabsData,
+                resumeBubblesData
+            }
+        };
+    } catch (exception) {
         console.error(
-            `Something went wrong with fetching resume data: ${response.status}`
+            `Something went wrong with fetching resume data: ${exception.message}`
         );
         return {
             props: {
-                resumeData: null
+                resumeTabsData: null,
+                resumeBubblesData: null
             }
         };
     }
-
-    const {
-        data: {
-            resumeTabSectionCollection: { items: tabsData },
-            resumeBubblesSectionCollection: { items: bubblesData }
-        }
-    } = await response.json();
-
-    const resumeTabsData = tabsData.map(
-        ({ heading, subsectionsCollection: { items: subsections } }) => ({
-            heading,
-            subsections
-        })
-    );
-    const resumeBubblesData = bubblesData.map(({ heading, items }) => ({
-        heading,
-        items
-    }));
-
-    return {
-        props: {
-            resumeData: {
-                tabs: resumeTabsData,
-                bubbles: resumeBubblesData
-            }
-        }
-    };
 }
 
 export default Resume;

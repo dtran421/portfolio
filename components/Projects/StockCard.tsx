@@ -100,7 +100,7 @@ const StockCard = ({
         column1: {
             "Market Cap": formatMarketCap(marketCap),
             "52 Week Range": `${low52Weeks} - ${high52Weeks}`,
-            "Dividend Yield": `${dividendYield}%`
+            "Dividend Yield": `${dividendYield.toFixed(2)}%`
         },
         column2: {
             Sector: titleCase(sector),
