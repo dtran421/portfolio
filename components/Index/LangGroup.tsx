@@ -34,7 +34,7 @@ const LangGroup = ({
                 </p>
             </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 xl:gap-x-10 pb-4 mx-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 xl:gap-x-10 mx-10">
             {languages.map(
                 ({ name, img: { url: img }, accentColor, darkText }) => (
                     <LangProfile

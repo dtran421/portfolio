@@ -79,7 +79,10 @@ const Carousel = () => {
             </div>
             <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
                 <p className="inline-block text-center">I am</p>
-                <div ref={typewriter} className="flex justify-center">
+                <div
+                    ref={typewriter}
+                    className="flex justify-center items-center"
+                >
                     <Typewriter
                         options={{
                             strings,

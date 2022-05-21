@@ -16,9 +16,9 @@ const MobileNavlink = ({ active, link }: MobileNavlinkProps) => (
     <Link href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`} passHref>
         <button
             type="button"
-            className={`w-1/2 flex justify-center text-xl border-2 rounded-xl ${
+            className={`w-full flex justify-center text-xl border-2 rounded-lg ${
                 active
-                    ? "dark:text-white border-black dark:border-white border-opacity-100"
+                    ? "dark:text-white dark:bg-zinc-500/20 border-black/40 dark:border-white/40 border-opacity-100"
                     : "border-transparent focus:border-primary text-primary hover:border-primary"
             } dark-transition px-6 py-1`}
         >
@@ -60,8 +60,7 @@ const navlinkListVariants = {
         opacity: 0,
         y: -150,
         transition: {
-            when: "afterChildren",
-            delay: 0.6,
+            delay: 0.5,
             duration: 0.1
         }
     }
@@ -78,11 +77,12 @@ const MobileNavbar = ({
     return (
         <motion.div
             animate={isExpanded ? "expanded" : "collapsed"}
-            className={`w-full fixed z-50 flex flex-col bg-slate-200 dark:bg-slate-800 dark-transition ${
-                sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
-            } rounded-b-2xl`}
+            className={`w-full fixed z-50 flex flex-col bg-neutral-200 dark:bg-neutral-800 border-b
+                border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
+                    sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
+                } shadow-lg`}
         >
-            <div className="relative z-40 grid grid-cols-3 shadow-lg px-6 py-2">
+            <div className="relative z-40 grid grid-cols-3 px-6 py-2">
                 <div className="flex justify-start items-center">
                     <button
                         type="button"
@@ -109,7 +109,7 @@ const MobileNavbar = ({
                             animate="expanded"
                             exit="collapsed"
                             variants={navlinkListVariants}
-                            className="flex flex-col items-center space-y-2 mt-4 mb-2"
+                            className="flex flex-col items-center space-y-2 px-4 mt-4 mb-2"
                         >
                             {tabs.map((link, idx) => (
                                 <motion.li

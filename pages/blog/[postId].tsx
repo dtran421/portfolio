@@ -14,7 +14,7 @@ type ProfileHeaderProps = {
 };
 
 const ProfileHeader = ({ publishDate }: ProfileHeaderProps) => (
-    <div className="flex justify-between items-center text-slate-700 dark:text-slate-300">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-slate-700 dark:text-slate-300 space-y-2 md:space-y-0">
         <div className="flex items-center space-x-4">
             <div className="w-10 h-10 overflow-hidden rounded-full">
                 <Image
@@ -24,9 +24,16 @@ const ProfileHeader = ({ publishDate }: ProfileHeaderProps) => (
                     height={1378}
                 />
             </div>
-            <h1 className="text-xl font-medium">Duke Tran</h1>
+            <div>
+                <h1 className="lg:text-lg font-medium">Duke Tran</h1>
+                <p className="text-sm lg:text-base">
+                    Published on {convertDateToFullString(publishDate)}
+                </p>
+            </div>
         </div>
-        <p>Published on {convertDateToFullString(publishDate)}</p>
+        <div>
+            <p>Also Published:</p>
+        </div>
     </div>
 );
 
@@ -44,22 +51,26 @@ const BlogPostPage = ({
     }
 }: BlogPostProps) => (
     <MainLayout page={title} rootPage="Blog">
-        <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-auto mt-10">
-            <div className="overflow-hidden w-full h-64 flex items-center rounded-t-xl mb-6">
+        <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
+            <div className="overflow-hidden w-full h-48 md:h-56 lg:h-64 flex items-center rounded-t-xl mb-6">
                 <Image src={url} alt={imgTitle} {...{ width, height }} />
             </div>
-            <div className="px-12 pb-12">
-                <div className="space-y-4 mb-16">
-                    <ProfileHeader {...{ publishDate }} />
-                    <h1 className="text-6xl font-bold">{title}</h1>
-                    <div className="flex flex-wrap space-x-3">
+            <div className="space-y-12 lg:space-y-16 px-4 md:px-12 pb-12">
+                <div className="space-y-4">
+                    <div className="space-y-8">
+                        <ProfileHeader {...{ publishDate }} />
+                        <h1 className="text-5xl lg:text-5xl font-bold">
+                            {title}
+                        </h1>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
                         {tags.map((tag) => (
                             <div
                                 key={tag}
                                 className="flex items-center text-white bg-secondary rounded-full space-x-2 px-4 py-1"
                             >
                                 <FiTag size={21} />
-                                <p className="text-lg">{tag}</p>
+                                <p className=" lg:text-base">{tag}</p>
                             </div>
                         ))}
                     </div>

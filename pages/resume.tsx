@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,26 +15,9 @@ const CheckMark = dynamic(import("../components/Resume/CheckMark"), {
     ssr: false
 });
 
-type ContactLabelProps = {
-    label: string;
-    special?: boolean;
-    icon: ReactNode;
-};
-
-const ContactLabel = ({ label, special = false, icon }: ContactLabelProps) => (
-    <div
-        className={`flex ${
-            !special ? "items-center" : "items-start"
-        } space-x-2`}
-    >
-        <span className="bg-zinc-200/75 dark:bg-zinc-700/75 rounded-full p-2">
-            {icon}
-        </span>
-        <p className={`text-sm lg:text-lg ${special ? "italic" : ""}`}>
-            {label}
-        </p>
-    </div>
-);
+const ContactLabel = dynamic(import("../components/Resume/ContactLabel"), {
+    ssr: false
+});
 
 type ResumeProps = {
     resumeData: {

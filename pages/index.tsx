@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
@@ -63,6 +63,19 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
         };
     });
 
+    const waveControls = useAnimation();
+    const waveAnimation = useMemo(
+        () => ({
+            scale: [1, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1],
+            rotate: [0, 10, 110, -90, 110, -90, 10, 0]
+        }),
+        []
+    );
+
+    useEffect(() => {
+        waveControls.start(waveAnimation);
+    }, [waveAnimation, waveControls]);
+
     const socialIconProps = {
         size: lgScreen ? 24 : 20
     };
@@ -76,9 +89,9 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
         <MainLayout page="Portfolio">
             <div
                 ref={page1}
-                className="w-5/6 xl:h-screen flex flex-col justify-between items-center mx-auto"
+                className="w-5/6 flex flex-col items-center xl:space-y-28 mx-auto"
             >
-                <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-24 xl:mt-40">
+                <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-2 xl:mt-16">
                     <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
                         <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
                             <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0">
@@ -98,9 +111,22 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                                     >
                                         Duke Tran
                                     </motion.p>
-                                    <div className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default">
+                                    <motion.div
+                                        animate={waveControls}
+                                        transition={{
+                                            duration: 1.5,
+                                            times: [
+                                                0, 0.1, 0.3, 0.5, 0.7, 0.9,
+                                                0.95, 1
+                                            ]
+                                        }}
+                                        onHoverStart={() =>
+                                            waveControls.start(waveAnimation)
+                                        }
+                                        className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default"
+                                    >
                                         <Emoji label="wave" symbol="👋🏼" />
-                                    </div>
+                                    </motion.div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +170,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                 </div>
                 {lgScreen && <LearnMore {...{ learnMoreAnimations }} />}
             </div>
-            <div id="page2" className="flex flex-col items-center pt-28 mb-28">
+            <div id="page2" className="flex flex-col items-center my-28">
                 <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
                     <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
                         <div className="w-full lg:w-1/2 flex justify-center">

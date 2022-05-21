@@ -52,7 +52,7 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
                 <meta property="og:title" content={pageTitle} key="title" />
             </Head>
             <div className={`${darkMode ? "dark" : ""}`}>
-                <div className="absolute w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
+                <div className="w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
                     {lgScreen ? (
                         <DesktopNavbar {...responsiveNavbarProps} />
                     ) : (

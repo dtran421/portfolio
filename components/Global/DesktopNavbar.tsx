@@ -21,7 +21,7 @@ const Navlink = ({ active, link }: NavlinkProps) => (
                 type="button"
                 className={`w-full flex justify-center text-xl border-b-4 ${
                     active
-                        ? "dark:text-white border-black dark:border-white border-opacity-100"
+                        ? "border-black dark:border-white border-opacity-100"
                         : "border-b-transparent text-primary hover:border-primary"
                 } dark-transition px-5 py-3`}
             >

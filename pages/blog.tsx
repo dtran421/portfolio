@@ -6,6 +6,7 @@ import { BlogPost } from "../types";
 import BlogPostsQuery from "../graphql/BlogPostsQuery";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
+import Emoji from "../components/Global/Emoji";
 
 type TagsProps = {
     tags: string[];
@@ -96,7 +97,7 @@ const BlogPostCard = ({
                 type="button"
                 className={`overflow-hidden ${
                     featured ? "grid grid-cols-3" : ""
-                } border-2 border-transparent hover:border-primary dark-transition rounded-xl space-y-4`}
+                } border-2 border-transparent hover:border-primary/75 dark-transition rounded-xl space-y-4`}
             >
                 <div
                     className={`w-full ${
@@ -135,7 +136,9 @@ type BlogProps = {
 const Blog = ({ blogPosts }: BlogProps) => (
     <MainLayout page="Blog">
         <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl space-y-8 mx-auto mt-10">
-            <h1 className="text-5xl font-semibold">devDeque</h1>
+            <h1 className="text-5xl font-semibold">
+                devDeque <Emoji label="fountain pen" symbol="✒️" />
+            </h1>
             <BlogPostCard {...blogPosts[0]} featured />
             <div className="grid grid-cols-3 gap-4">
                 {blogPosts.slice(1).map((blogPost) => (

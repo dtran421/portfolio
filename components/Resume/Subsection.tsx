@@ -19,7 +19,9 @@ const Subsection = ({
         startDate,
         endDate,
         currentlyWorking,
-        description
+        description: {
+            json: { content }
+        }
     },
     style
 }: SubsectionProps) => {
@@ -37,7 +39,7 @@ const Subsection = ({
                 <motion.button
                     initial={false}
                     animate={isExpanded ? { rotate: 90 } : { rotate: 0 }}
-                    transition={{ duration: 0.25, ease: "linear" }}
+                    transition={{ duration: 0.2, ease: "linear" }}
                     className="h-min hover:bg-zinc-400/25 dark:hover:bg-zinc-600/75 dark-transition rounded-full p-1"
                     onClick={() => setExpanded(!isExpanded)}
                 >
@@ -85,17 +87,22 @@ const Subsection = ({
                             variants={expandVariants}
                             transition={{ duration: 0.25, ease: "linear" }}
                         >
-                            {description.json.content.map(
-                                ({ content }, idx) => (
-                                    <p
-                                        // eslint-disable-next-line react/no-array-index-key
-                                        key={idx}
-                                        className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4"
-                                    >
-                                        {content[0].value}
-                                    </p>
-                                )
-                            )}
+                            {content.map(({ content: blocks }, idx) => {
+                                const { nodeType } = blocks[0];
+                                if (nodeType === "text") {
+                                    const { value } = blocks[0];
+                                    return (
+                                        <p
+                                            // eslint-disable-next-line react/no-array-index-key
+                                            key={idx}
+                                            className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition space-y-4 pt-4"
+                                        >
+                                            {value}
+                                        </p>
+                                    );
+                                }
+                                return null;
+                            })}
                         </motion.div>
                     )}
                 </AnimatePresence>

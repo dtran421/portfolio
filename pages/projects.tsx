@@ -1,13 +1,8 @@
-import dynamic from "next/dynamic";
-
 import projects from "../public/json/projects.json";
 
 import MainLayout from "../components/Global/layouts/MainLayout";
 import Emoji from "../components/Global/Emoji";
-
-const ProjectCard = dynamic(import("../components/Projects/ProjectCard"), {
-    ssr: false
-});
+import ProjectCard from "../components/Projects/ProjectCard";
 
 const Projects = () => {
     const { coding, finance } = projects;

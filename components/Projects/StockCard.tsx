@@ -128,7 +128,7 @@ const StockCard = ({
                             <span className="font-bold">{symbol}</span>]
                         </span>
                     </h2>
-                    <p className="text-sm md:text-md md:text-right text-gray-300">
+                    <p className="text-sm md:text-base md:text-right text-gray-300">
                         Last Market Close: {latestBusinessDayStr}
                     </p>
                 </div>

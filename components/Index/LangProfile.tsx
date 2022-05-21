@@ -29,7 +29,7 @@ const LangProfile = ({
             style={{ backgroundColor: accentColor }}
             className={`w-5/6 rounded-full ${
                 darkText ? "text-zinc-900" : "text-zinc-100"
-            } font-semibold text-sm lg:text-md text-center py-1 my-2`}
+            } font-semibold text-sm lg:text-base text-center py-1 my-2`}
         >
             {name}
         </p>

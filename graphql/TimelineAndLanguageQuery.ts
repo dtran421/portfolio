@@ -1,6 +1,6 @@
 const TimelineAndLanguageQuery = /* GraphQL */ `
     query {
-        timelineEventCollection {
+        timelineEventCollection(order: startDate_ASC) {
             items {
                 heading
                 type

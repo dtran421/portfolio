@@ -1,20 +1,13 @@
 import { useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 
-import { lgScreenQuery } from "../../configs/Breakpoints";
 import { Project } from "../../types";
 
-const cardVariants = {
-    inactive: {
-        y: 0
-    },
-    hover: {
-        y: "70%"
-    }
-};
+const ProjectCardLabel = dynamic(import("./ProjectCardLabel"), {
+    ssr: false
+});
 
 type ProjectCardProps = Project & {
     name: string;
@@ -29,8 +22,6 @@ const ProjectCard = ({
     width,
     height
 }: ProjectCardProps) => {
-    const lgScreen = useMediaQuery(lgScreenQuery);
-
     const [isHovered, setHovered] = useState(false);
 
     return (
@@ -52,38 +43,9 @@ const ProjectCard = ({
                         />
                     </div>
                 </div>
-                {lgScreen ? (
-                    <AnimatePresence initial={false}>
-                        <motion.div
-                            animate={isHovered ? "hover" : "inactive"}
-                            variants={cardVariants}
-                            transition={{ duration: 0.2, ease: "linear" }}
-                            style={{ backgroundColor: accentColor }}
-                            className="w-full absolute bottom-0 z-0 rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
-                        >
-                            <p
-                                className={`text-xl xl:text-2xl ${
-                                    darkText ? "text-black" : "text-white"
-                                } font-medium transition duration-200 ease-linear`}
-                            >
-                                {name}
-                            </p>
-                        </motion.div>
-                    </AnimatePresence>
-                ) : (
-                    <div
-                        style={{ backgroundColor: accentColor }}
-                        className="w-full absolute -bottom-10 z-0 rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
-                    >
-                        <p
-                            className={`flex justify-center items-center text-lg md:text-xl ${
-                                darkText ? "text-black" : "text-white"
-                            } font-medium transition duration-200 ease-linear`}
-                        >
-                            {name}
-                        </p>
-                    </div>
-                )}
+                <ProjectCardLabel
+                    {...{ isHovered, accentColor, darkText, name }}
+                />
             </button>
         </Link>
     );

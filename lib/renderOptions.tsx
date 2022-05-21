@@ -40,7 +40,9 @@ const renderOptions = (links) => {
                             <SyntaxHighlighter
                                 language={language}
                                 style={oneDark}
-                                codeTagProps={{ className: "bg-slate-900" }}
+                                codeTagProps={{
+                                    className: "bg-slate-900"
+                                }}
                                 customStyle={{
                                     background: "",
                                     backgroundColor: "rgb(15 23 42)",
@@ -53,7 +55,6 @@ const renderOptions = (links) => {
                                 }}
                                 showLineNumbers
                                 showInlineLineNumbers
-                                wrapLongLines
                             >
                                 {code}
                             </SyntaxHighlighter>
