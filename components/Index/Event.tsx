@@ -57,7 +57,9 @@ const Card = ({
     isExpanded,
     setExpanded,
     heading,
-    description
+    description: {
+        json: { content }
+    }
 }: CardProps) => {
     const iconClass = { size: 24, className: "text-white" };
 
@@ -87,15 +89,22 @@ const Card = ({
                         variants={expandVariants}
                         transition={{ duration: 0.25, ease: "linear" }}
                     >
-                        {description.json.content.map(({ content }, idx) => (
-                            <p
-                                // eslint-disable-next-line react/no-array-index-key
-                                key={idx}
-                                className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3"
-                            >
-                                {content[0].value}
-                            </p>
-                        ))}
+                        {content.map(({ content: blocks }, idx) => {
+                            const { nodeType } = blocks[0];
+                            if (nodeType === "text") {
+                                const { value } = blocks[0];
+                                return (
+                                    <p
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        key={idx}
+                                        className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3"
+                                    >
+                                        {value}
+                                    </p>
+                                );
+                            }
+                            return null;
+                        })}
                     </motion.div>
                 )}
             </AnimatePresence>

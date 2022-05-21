@@ -43,7 +43,7 @@ const ProjectLayout = ({
         <MainLayout {...{ page }} rootPage="Projects">
             <div
                 style={{ backgroundColor: accentColor }}
-                className="w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end space-y-6 px-5 xl:px-12 py-6 mt-10 lg:mt-0"
+                className="w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end space-y-6 px-5 xl:px-12 py-6"
             >
                 <h1
                     className={`w-full ${

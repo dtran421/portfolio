@@ -77,7 +77,7 @@ const MobileNavbar = ({
     return (
         <motion.div
             animate={isExpanded ? "expanded" : "collapsed"}
-            className={`w-full fixed z-50 flex flex-col bg-neutral-200 dark:bg-neutral-800 border-b
+            className={`w-full sticky z-50 flex flex-col bg-neutral-200 dark:bg-neutral-800 border-b
                 border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
                     sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
                 } shadow-lg`}
