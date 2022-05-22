@@ -1,6 +1,10 @@
 const BlogPostQuery = /* GraphQL */ `
-    query ($postId: String) {
-        blogPostCollection(limit: 1, where: { postId: $postId }) {
+    query ($preview: Boolean, $postId: String) {
+        blogPostCollection(
+            preview: $preview
+            limit: 1
+            where: { postId: $postId }
+        ) {
             items {
                 postId
                 title

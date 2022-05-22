@@ -134,7 +134,7 @@ const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
     );
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
     try {
         const response = await fetch(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
@@ -142,7 +142,7 @@ export async function getStaticProps() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+                    Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`
                 },
                 body: JSON.stringify({ query: ResumeSectionsQuery })
             }
@@ -183,6 +183,6 @@ export async function getStaticProps() {
             }
         };
     }
-}
+};
 
 export default Resume;

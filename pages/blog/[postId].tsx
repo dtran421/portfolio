@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { GetStaticProps } from "next";
 import { FiTag } from "react-icons/fi";
 import SquareLoader from "react-spinners/SquareLoader";
 
 import BlogPostsQuery from "../../graphql/BlogPostsQuery";
 import BlogPostQuery from "../../graphql/BlogPostQuery";
 import { BlogPost } from "../../types";
+import getContentfulAccessToken from "../../lib/getContentfulAccessToken";
 
 import MainLayout from "../../components/Global/layouts/MainLayout";
 import { convertDateToFullString } from "../blog";
@@ -96,15 +98,17 @@ const BlogPostPage = ({ postData }: BlogPostProps) => {
     );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = async ({ preview }) => {
     try {
+        const accessToken = getContentfulAccessToken(preview);
+
         const response = await fetch(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+                    Authorization: `Bearer ${accessToken}`
                 },
                 body: JSON.stringify({ query: BlogPostsQuery })
             }
@@ -125,28 +129,33 @@ export async function getStaticPaths() {
         };
     } catch (exception) {
         console.error(
-            `Something went wrong with fetching blog posts ${exception.message}`
+            `Something went wrong with fetching blog posts: ${exception.message}`
         );
         return {
             paths: [],
             fallback: true
         };
     }
-}
+};
 
-export async function getStaticProps({ params: { postId } }) {
+export const getStaticProps: GetStaticProps = async ({
+    preview,
+    params: { postId }
+}) => {
     try {
+        const accessToken = getContentfulAccessToken(preview);
+
         const response = await fetch(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`
+                    Authorization: `Bearer ${accessToken}`
                 },
                 body: JSON.stringify({
                     query: BlogPostQuery,
-                    variables: { postId }
+                    variables: { preview, postId }
                 })
             }
         );
@@ -171,6 +180,6 @@ export async function getStaticProps({ params: { postId } }) {
             }
         };
     }
-}
+};
 
 export default BlogPostPage;
