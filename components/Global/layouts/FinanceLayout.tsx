@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { Quote, Company } from "../../../types";
 
 import ClassProfile from "../../Projects/ClassProfile";
-import StockCard from "../../Projects/StockCard";
+import StockCard from "../../Projects/Finance/StockCard";
 import ProjectLayout from "./ProjectLayout";
 
 type FinanceLayoutProps = {

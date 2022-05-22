@@ -1,9 +1,9 @@
 import machineLearningData from "../../public/json/machine-learning.json";
 
-import RepoPage from "../../components/Projects/RepoPage";
+import RepoLayout from "../../components/Global/layouts/RepoLayout";
 
 const MachineLearning = () => (
-    <RepoPage
+    <RepoLayout
         bannerHeading="Machine Learning"
         heading="[CSCI 416] Intro to Machine Learning"
         dateString="Fall 2021"
@@ -15,7 +15,7 @@ const MachineLearning = () => (
         support vector machines, kernel methods, ensemble methods, clustering
         methods, dimension reduction, performance evaluation, data
         preprocessing, and hyperparameter tuning.
-    </RepoPage>
+    </RepoLayout>
 );
 
 export default MachineLearning;

@@ -8,6 +8,14 @@
             "width": 193,
             "height": 227
         },
+        "CollegeTalk": {
+            "link": "collegetalk",
+            "accentColor": "#2f95dc",
+            "darkText": false,
+            "thumbnail": "/img/projects/collegetalk.png",
+            "width": 256,
+            "height": 256
+        },
         "Whispearrings": {
             "link": "whispearrings",
             "accentColor": "#faebeb",

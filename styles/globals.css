@@ -41,6 +41,5 @@
     height: 100%;
     border-radius: 9999px;
     border-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgb(239 68 68 / var(--tw-border-opacity));
+    border-color: rgb(147 51 234);
 }

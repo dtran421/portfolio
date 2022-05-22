@@ -1,9 +1,9 @@
 import dataMiningData from "../../public/json/data-mining.json";
 
-import RepoPage from "../../components/Projects/RepoPage";
+import RepoLayout from "../../components/Global/layouts/RepoLayout";
 
 const DataMining = () => (
-    <RepoPage
+    <RepoLayout
         bannerHeading="Data Mining"
         heading="[CSCI 420] Data Mining"
         dateString="Spring 2022"
@@ -17,7 +17,7 @@ const DataMining = () => (
         platforms, healthcare, social networks, business, finance, and more.
         Extracting useful and valuable information from big data can help
         improve quality of life and make our world a better place.
-    </RepoPage>
+    </RepoLayout>
 );
 
 export default DataMining;

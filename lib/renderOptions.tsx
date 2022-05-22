@@ -55,6 +55,7 @@ const renderOptions = (links) => {
                                 }}
                                 showLineNumbers
                                 showInlineLineNumbers
+                                wrapLongLines={/* switch for mobile */ false}
                             >
                                 {code}
                             </SyntaxHighlighter>
