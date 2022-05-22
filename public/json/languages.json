@@ -1,0 +1,225 @@
+{
+   "experienced": [
+      {
+         "text": "Java",
+         "img": "java.png",
+         "width": 40,
+         "height": 50,
+         "darkText": true
+      },
+      {
+         "text": "Python",
+         "img": "python.png",
+         "width": 80,
+         "height": 80,
+         "darkText": true
+      },
+      {
+         "text": "React",
+         "img": "react.png",
+         "width": 150,
+         "height": 150,
+         "darkText": true
+      },
+      {
+         "text": "Next.js",
+         "img": "nextjs.svg",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "Node.js",
+         "img": "node.png",
+         "width": 60,
+         "height": 70,
+         "darkText": true
+      },
+      {
+         "text": "Typescript",
+         "img": "typescript.png",
+         "width": 80,
+         "height": 80,
+         "darkText": false
+      },
+      {
+         "text": "Tailwind",
+         "img": "tailwind.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "MySQL",
+         "img": "mysql.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "HTML",
+         "img": "html.svg",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "CSS",
+         "img": "css.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Javascript",
+         "img": "javascript.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      }
+   ],
+   "learning": [
+      {
+         "text": "C",
+         "img": "c.png",
+         "width": 60,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "C++",
+         "img": "cpp.png",
+         "width": 60,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "C#",
+         "img": "csharp.png",
+         "width": 60,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "MongoDB",
+         "img": "mongo.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Swift",
+         "img": "swift.png",
+         "width": 80,
+         "height": 80,
+         "darkText": false
+      },
+      {
+         "text": "GCloud",
+         "img": "gcloud.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "SQLite",
+         "img": "sqlite.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "Unity",
+         "img": "unity.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Haskell",
+         "img": "haskell.svg",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      }
+   ],
+   "future": [
+      {
+         "text": "AWS",
+         "img": "aws.png",
+         "width": 256,
+         "height": 153,
+         "darkText": false
+      },
+      {
+         "text": "GraphQL",
+         "img": "graphql.png",
+         "width": 70,
+         "height": 70,
+         "darkText": false
+      },
+      {
+         "text": "Docker",
+         "img": "docker.png",
+         "width": 100,
+         "height": 90,
+         "darkText": false
+      },
+      {
+         "text": "Kubernetes",
+         "img": "kubernetes.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "Redux",
+         "img": "redux.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Angular",
+         "img": "angular.png",
+         "width": 90,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Django",
+         "img": "django.jpeg",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Elixir",
+         "img": "elixir.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Electron",
+         "img": "electron.png",
+         "width": 100,
+         "height": 100,
+         "darkText": true
+      },
+      {
+         "text": "Rust",
+         "img": "rust.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      },
+      {
+         "text": "Visual Basic",
+         "img": "vb.png",
+         "width": 100,
+         "height": 100,
+         "darkText": false
+      }
+   ]
+}
