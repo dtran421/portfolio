@@ -6,185 +6,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
 ::-webkit-scrollbar {
-   width: 8px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-   background: #2b2b2b;
+    background: #2b2b2b;
 }
 
 ::-webkit-scrollbar-thumb {
-   background: rgb(113, 1, 165);
-   border-radius: 6px;
+    background: rgb(107 33 168);
+    border-radius: 6px;
 }
 
 .flex-special {
-   flex: 0 0 auto;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
 }
 
 /* transition duration-200 ease-in */
 .dark-transition {
-   transition-property: color, background-color, border-color, fill, stroke, box-shadow;
-   transition-duration: 200ms;
-   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    transition-property: color, background-color, border-color, fill, stroke,
+        box-shadow;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* absolute top-0 z-10 w-full h-full rounded-full border-2 border-primary */
 .active {
-   position: absolute;
-   top: 0px;
-   z-index: 10;
-   width: 100%;
-   height: 100%;
-   border-radius: 9999px;
-   border-width: 2px;
-   --tw-border-opacity: 1;
-   border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
-/* bg colors for projects */
-.bg-whispearrings {
-   background-color: #faebeb;
-}
-
-.bg-maze {
-   background-color: #e94560;
-}
-
-.bg-godspeed {
-   background-color: #9c00ff;
-}
-
-.bg-uav {
-   background-color: #0d0deb;
-}
-
-.bg-ai {
-   background-color: #a6cee3;
-}
-
-/* bg colors for languages */
-
-.bg-java {
-   background-color: #e76f00;
-}
-
-.bg-python {
-   background-color: #ffcf3e;
-}
-
-.bg-react {
-   background-color: #61dbfb;
-}
-
-.bg-redux {
-   background-color: #7749be;
-}
-
-.bg-angular {
-   background-color: #e23237;
-}
-
-.bg-django {
-   background-color: #092e20;
-}
-
-.bg-elixir {
-   background-color: #37144c;
-}
-
-.bg-electron {
-   background-color: #a0ebf9;
-}
-
-.bg-node {
-   background-color: #8cc84b;
-}
-
-.bg-nextjs {
-   background-color: #ffffff;
-}
-
-.bg-typescript {
-   background-color: #007acc;
-}
-
-.bg-swift {
-   background-color: #eb4548;
-}
-
-.bg-c {
-   background-color: #00599e;
-}
-
-.bg-cpp {
-   background-color: #00589d;
-}
-
-.bg-csharp {
-   background-color: #390091;
-}
-
-.bg-haskell {
-   background-color: #5e5086;
-}
-
-.bg-rust {
-   background-color: #000000;
-}
-
-.bg-vb {
-   background-color: #209cdc;
-}
-
-.bg-mongo {
-   background-color: #4caf50;
-}
-
-.bg-graphql {
-   background-color: #e632ad;
-}
-
-.bg-tailwind {
-   background-color: #17b9b9;
-}
-
-.bg-html {
-   background-color: #e34f26;
-}
-
-.bg-css {
-   background-color: #214ce5;
-}
-
-.bg-javascript {
-   background-color: #f7e018;
-}
-
-.bg-gcloud {
-   background-color: #34a853;
-}
-
-.bg-aws {
-   background-color: #ff9a00;
-}
-
-.bg-docker {
-   background-color: #2496ed;
-}
-
-.bg-kubernetes {
-   background-color: #2e6ce6;
-}
-
-.bg-mysql {
-   background-color: #00546b;
-}
-
-.bg-sqlite {
-   background-color: #41a3dd;
-}
-
-.bg-unity {
-   background-color: #000000;
+    position: absolute;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    border-width: 2px;
+    border-color: rgb(147 51 234);
 }

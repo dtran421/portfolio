@@ -1,19 +1,25 @@
-import { useContext, useState, useEffect, ReactNode } from "react";
-import Head from "next/head";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useMediaQuery } from "react-responsive";
 
 import Contexts from "../../../Contexts";
+import { lgScreenQuery } from "../../../configs/Breakpoints";
 
-const Navbar = dynamic(() => import("../Navbar"), { ssr: false });
+const DesktopNavbar = dynamic(() => import("../DesktopNavbar"), { ssr: false });
+const MobileNavbar = dynamic(() => import("../MobileNavbar"), { ssr: false });
 
 type MainLayoutProps = {
+    rootPage?: "Blog" | "Projects";
     page: string;
     children: ReactNode;
 };
 
-const MainLayout = ({ page, children }: MainLayoutProps) => {
+const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
     const { ThemeContext } = Contexts;
-    const { darkMode } = useContext(ThemeContext);
+    const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
+    const lgScreen = useMediaQuery(lgScreenQuery);
 
     const [stickyNavbar, toggleStickyNavbar] = useState(false);
     const stickyScrollListener = () => {
@@ -28,7 +34,16 @@ const MainLayout = ({ page, children }: MainLayoutProps) => {
         };
     });
 
-    const pageTitle = `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
+    const responsiveNavbarProps = {
+        sticky: stickyNavbar,
+        darkMode,
+        toggleDarkMode,
+        page: rootPage || page
+    };
+
+    const pageTitle = rootPage
+        ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}`
+        : `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
 
     return (
         <>
@@ -36,14 +51,13 @@ const MainLayout = ({ page, children }: MainLayoutProps) => {
                 <title>{pageTitle}</title>
                 <meta property="og:title" content={pageTitle} key="title" />
             </Head>
-
             <div className={`${darkMode ? "dark" : ""}`}>
-                <div
-                    className={`absolute w-full bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white ${
-                        page !== "Contact" ? "pb-32" : "pb-16"
-                    }`}
-                >
-                    <Navbar page={page} sticky={stickyNavbar} />
+                <div className="w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
+                    {lgScreen ? (
+                        <DesktopNavbar {...responsiveNavbarProps} />
+                    ) : (
+                        <MobileNavbar {...responsiveNavbarProps} />
+                    )}
                     {children}
                 </div>
             </div>
