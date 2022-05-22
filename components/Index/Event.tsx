@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdSchool, MdWork, MdDesktopMac } from "react-icons/md";
 
-import { mdScreenQuery } from "../Global/configs/Breakpoints";
-import { EventObject } from "../../types";
+import { mdScreenQuery } from "../../configs/Breakpoints";
+import { RichText, EventObject } from "../../types";
 
 export const expandVariants = {
     open: { opacity: 1, height: "auto" },
@@ -17,15 +17,50 @@ const tagVariants = {
     collapsed: (side) => ({ opacity: 0, x: (side === "L" ? -1 : 1) * 50 })
 };
 
+export const convertDateToAbbrevString = (
+    rawDateStr: string,
+    currentlyWorking?: boolean
+): string => {
+    if (currentlyWorking !== null && currentlyWorking) {
+        return "Present";
+    }
+
+    const abbrevMonths = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+    ];
+
+    const date = rawDateStr.split("T")[0].split("-");
+    return `${abbrevMonths[parseInt(date[1], 10) - 1]} ${date[0]}`;
+};
+
 type CardProps = {
     side: string;
     isExpanded: boolean;
     setExpanded: Dispatch<SetStateAction<boolean>>;
     heading: string;
-    body: string;
+    description: RichText;
 };
 
-const Card = ({ side, isExpanded, setExpanded, heading, body }: CardProps) => {
+const Card = ({
+    side,
+    isExpanded,
+    setExpanded,
+    heading,
+    description: {
+        json: { content }
+    }
+}: CardProps) => {
     const iconClass = { size: 24, className: "text-white" };
 
     return (
@@ -54,9 +89,22 @@ const Card = ({ side, isExpanded, setExpanded, heading, body }: CardProps) => {
                         variants={expandVariants}
                         transition={{ duration: 0.25, ease: "linear" }}
                     >
-                        <p className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3">
-                            {body}
-                        </p>
+                        {content.map(({ content: blocks }, idx) => {
+                            const { nodeType } = blocks[0];
+                            if (nodeType === "text") {
+                                const { value } = blocks[0];
+                                return (
+                                    <p
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        key={idx}
+                                        className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3"
+                                    >
+                                        {value}
+                                    </p>
+                                );
+                            }
+                            return null;
+                        })}
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -69,7 +117,10 @@ type EventProps = {
     data: EventObject;
 };
 
-const Event = ({ side, data: { heading, type, date, body } }: EventProps) => {
+const Event = ({
+    side,
+    data: { heading, type, startDate, endDate, currentlyWorking, description }
+}: EventProps) => {
     const mdScreen = useMediaQuery(mdScreenQuery);
     const [isExpanded, setExpanded] = useState(false);
 
@@ -87,13 +138,19 @@ const Event = ({ side, data: { heading, type, date, body } }: EventProps) => {
         icon = <MdWork {...iconProps} />;
     }
 
+    const startDateStr = convertDateToAbbrevString(startDate);
+    const endDateStr = convertDateToAbbrevString(endDate, currentlyWorking);
+    const dateStr = `${startDateStr} - ${endDateStr}`;
+
     return mdScreen ? (
         <div
             className={`w-full flex ${
-                side === "R" && "flex-row-reverse"
+                side === "R" ? "flex-row-reverse" : ""
             } justify-between items-center`}
         >
-            <Card {...{ side, isExpanded, setExpanded, heading, body }} />
+            <Card
+                {...{ side, isExpanded, setExpanded, heading, description }}
+            />
             <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
                 <h1 className="mx-auto font-semibold">{icon}</h1>
             </div>
@@ -118,7 +175,7 @@ const Event = ({ side, data: { heading, type, date, body } }: EventProps) => {
                             }}
                             className="bg-zinc-700 dark:bg-zinc-300 lg:text-lg text-white dark:text-black dark-transition rounded-lg px-4 py-1"
                         >
-                            {date}
+                            {dateStr}
                         </motion.p>
                     )}
                 </AnimatePresence>
@@ -129,7 +186,9 @@ const Event = ({ side, data: { heading, type, date, body } }: EventProps) => {
             <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
                 <h1 className="mx-auto font-semibold">{icon}</h1>
             </div>
-            <Card {...{ side, isExpanded, setExpanded, heading, body }} />
+            <Card
+                {...{ side, isExpanded, setExpanded, heading, description }}
+            />
         </div>
     );
 };

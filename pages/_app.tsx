@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import "../styles/globals.css";
 import Contexts from "../Contexts";
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const Portfolio = ({ Component, pageProps }: AppProps) => {
     const [darkMode, toggleDarkMode] = useState(true);
 
     const { ThemeContext } = Contexts;
@@ -24,4 +24,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     );
 };
 
-export default MyApp;
+export default Portfolio;

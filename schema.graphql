@@ -1,0 +1,1184 @@
+type Query {
+    asset(id: String!, preview: Boolean, locale: String): Asset
+    assetCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: AssetFilter
+        order: [AssetOrder]
+    ): AssetCollection
+    blogPost(id: String!, preview: Boolean, locale: String): BlogPost
+    blogPostCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: BlogPostFilter
+        order: [BlogPostOrder]
+    ): BlogPostCollection
+    codeSnippet(id: String!, preview: Boolean, locale: String): CodeSnippet
+    codeSnippetCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: CodeSnippetFilter
+        order: [CodeSnippetOrder]
+    ): CodeSnippetCollection
+    resumeTabSection(
+        id: String!
+        preview: Boolean
+        locale: String
+    ): ResumeTabSection
+    resumeTabSectionCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: ResumeTabSectionFilter
+        order: [ResumeTabSectionOrder]
+    ): ResumeTabSectionCollection
+    resumeBubblesSection(
+        id: String!
+        preview: Boolean
+        locale: String
+    ): ResumeBubblesSection
+    resumeBubblesSectionCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: ResumeBubblesSectionFilter
+        order: [ResumeBubblesSectionOrder]
+    ): ResumeBubblesSectionCollection
+    languageGroup(id: String!, preview: Boolean, locale: String): LanguageGroup
+    languageGroupCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: LanguageGroupFilter
+        order: [LanguageGroupOrder]
+    ): LanguageGroupCollection
+    language(id: String!, preview: Boolean, locale: String): Language
+    languageCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: LanguageFilter
+        order: [LanguageOrder]
+    ): LanguageCollection
+    timelineEvent(id: String!, preview: Boolean, locale: String): TimelineEvent
+    timelineEventCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: TimelineEventFilter
+        order: [TimelineEventOrder]
+    ): TimelineEventCollection
+    resumeTabSubsection(
+        id: String!
+        preview: Boolean
+        locale: String
+    ): ResumeTabSubsection
+    resumeTabSubsectionCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: ResumeTabSubsectionFilter
+        order: [ResumeTabSubsectionOrder]
+    ): ResumeTabSubsectionCollection
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+        where: EntryFilter
+        order: [EntryOrder]
+    ): EntryCollection
+}
+
+# Represents a binary file in a space. An asset can be any file type.
+type Asset {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    title(locale: String): String
+    description(locale: String): String
+    contentType(locale: String): String
+    fileName(locale: String): String
+    size(locale: String): Int
+    url(transform: ImageTransformOptions, locale: String): String
+    width(locale: String): Int
+    height(locale: String): Int
+    linkedFrom(allowedLocales: [String]): AssetLinkingCollections
+}
+
+type Sys {
+    id: String!
+    spaceId: String!
+    environmentId: String!
+    publishedAt: DateTime
+    firstPublishedAt: DateTime
+    publishedVersion: Int
+}
+
+# A date-time string at UTC, such as 2007-12-03T10:15:30Z,
+#     compliant with the 'date-time' format outlined in section 5.6 of
+#     the RFC 3339 profile of the ISO 8601 standard for representation
+#     of dates and times using the Gregorian calendar.
+scalar DateTime
+
+type ContentfulMetadata {
+    tags: [ContentfulTag]!
+}
+
+# Represents a tag entity for finding and organizing content easily.
+#     Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+type ContentfulTag {
+    id: String
+    name: String
+}
+
+input ImageTransformOptions {
+    # Desired width in pixels. Defaults to the original image width.
+    width: Dimension
+
+    # Desired height in pixels. Defaults to the original image height.
+    height: Dimension
+
+    # Desired quality of the image in percents.
+    #         Used for `PNG8`, `JPG`, `JPG_PROGRESSIVE` and `WEBP` formats.
+    quality: Quality
+
+    # Desired corner radius in pixels.
+    #         Results in an image with rounded corners (pass `-1` for a full circle/ellipse).
+    #         Defaults to `0`. Uses desired background color as padding color,
+    #         unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.
+    cornerRadius: Int
+
+    # Desired resize strategy. Defaults to `FIT`.
+    resizeStrategy: ImageResizeStrategy
+
+    # Desired resize focus area. Defaults to `CENTER`.
+    resizeFocus: ImageResizeFocus
+
+    # Desired background color, used with corner radius or `PAD` resize strategy.
+    #         Defaults to transparent (for `PNG`, `PNG8` and `WEBP`) or white (for `JPG` and `JPG_PROGRESSIVE`).
+    backgroundColor: HexColor
+
+    # Desired image format. Defaults to the original image format.
+    format: ImageFormat
+}
+
+# The 'Dimension' type represents dimensions as whole numeric values between `1` and `4000`.
+scalar Dimension
+
+# The 'Quality' type represents quality as whole numeric values between `1` and `100`.
+scalar Quality
+
+enum ImageResizeStrategy {
+    # Resizes the image to fit into the specified dimensions.
+    FIT
+
+    # Resizes the image to the specified dimensions, padding the image if needed.
+    #         Uses desired background color as padding color.
+    PAD
+
+    # Resizes the image to the specified dimensions, cropping the image if needed.
+    FILL
+
+    # Resizes the image to the specified dimensions, changing the original aspect ratio if needed.
+    SCALE
+
+    # Crops a part of the original image to fit into the specified dimensions.
+    CROP
+
+    # Creates a thumbnail from the image.
+    THUMB
+}
+
+enum ImageResizeFocus {
+    # Focus the resizing on the center.
+    CENTER
+
+    # Focus the resizing on the top.
+    TOP
+
+    # Focus the resizing on the top right.
+    TOP_RIGHT
+
+    # Focus the resizing on the right.
+    RIGHT
+
+    # Focus the resizing on the bottom right.
+    BOTTOM_RIGHT
+
+    # Focus the resizing on the bottom.
+    BOTTOM
+
+    # Focus the resizing on the bottom left.
+    BOTTOM_LEFT
+
+    # Focus the resizing on the left.
+    LEFT
+
+    # Focus the resizing on the top left.
+    TOP_LEFT
+
+    # Focus the resizing on the largest face.
+    FACE
+
+    # Focus the resizing on the area containing all the faces.
+    FACES
+}
+
+# The 'HexColor' type represents color in `rgb:ffffff` string format.
+scalar HexColor
+
+enum ImageFormat {
+    # JPG image format.
+    JPG
+
+    # Progressive JPG format stores multiple passes of an image in progressively higher detail.
+    #         When a progressive image is loading, the viewer will first see a lower quality pixelated version which
+    #         will gradually improve in detail, until the image is fully downloaded. This is to display an image as
+    #         early as possible to make the layout look as designed.
+    JPG_PROGRESSIVE
+
+    # PNG image format
+    PNG
+
+    # 8-bit PNG images support up to 256 colors and weigh less than the standard 24-bit PNG equivalent.
+    #         The 8-bit PNG format is mostly used for simple images, such as icons or logos.
+    PNG8
+
+    # WebP image format.
+    WEBP
+    AVIF
+}
+
+type AssetLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+    blogPostCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): BlogPostCollection
+    languageCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): LanguageCollection
+}
+
+type EntryCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Entry]!
+}
+
+interface Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+}
+
+type BlogPostCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [BlogPost]!
+}
+
+# Individual blog post [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/blogPost)
+type BlogPost implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
+    postId(locale: String): String
+    title(locale: String): String
+    publishDate(locale: String): DateTime
+    topicTags(locale: String): [String]
+    heroBanner(preview: Boolean, locale: String): Asset
+    body(locale: String): BlogPostBody
+}
+
+type BlogPostLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type BlogPostBody {
+    json: JSON!
+    links: BlogPostBodyLinks!
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+type BlogPostBodyLinks {
+    entries: BlogPostBodyEntries!
+    assets: BlogPostBodyAssets!
+}
+
+type BlogPostBodyEntries {
+    inline: [Entry]!
+    hyperlink: [Entry]!
+    block: [Entry]!
+}
+
+type BlogPostBodyAssets {
+    hyperlink: [Asset]!
+    block: [Asset]!
+}
+
+type LanguageCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Language]!
+}
+
+# Programming language profile [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/language)
+type Language implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): LanguageLinkingCollections
+    name(locale: String): String
+    img(preview: Boolean, locale: String): Asset
+    accentColor(locale: String): String
+    darkText(locale: String): Boolean
+}
+
+type LanguageLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+    languageGroupCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): LanguageGroupCollection
+}
+
+type LanguageGroupCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [LanguageGroup]!
+}
+
+# Group of programming languages [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/languageGroup)
+type LanguageGroup implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): LanguageGroupLinkingCollections
+    heading(locale: String): String
+    description(locale: String): String
+    emoji(locale: String): String
+    emojiLabel(locale: String): String
+    order(locale: String): Int
+    languagesCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): LanguageGroupLanguagesCollection
+}
+
+type LanguageGroupLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type LanguageGroupLanguagesCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Language]!
+}
+
+type AssetCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Asset]!
+}
+
+input AssetFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    title_exists: Boolean
+    title: String
+    title_not: String
+    title_in: [String]
+    title_not_in: [String]
+    title_contains: String
+    title_not_contains: String
+    description_exists: Boolean
+    description: String
+    description_not: String
+    description_in: [String]
+    description_not_in: [String]
+    description_contains: String
+    description_not_contains: String
+    url_exists: Boolean
+    url: String
+    url_not: String
+    url_in: [String]
+    url_not_in: [String]
+    url_contains: String
+    url_not_contains: String
+    size_exists: Boolean
+    size: Int
+    size_not: Int
+    size_in: [Int]
+    size_not_in: [Int]
+    size_gt: Int
+    size_gte: Int
+    size_lt: Int
+    size_lte: Int
+    contentType_exists: Boolean
+    contentType: String
+    contentType_not: String
+    contentType_in: [String]
+    contentType_not_in: [String]
+    contentType_contains: String
+    contentType_not_contains: String
+    fileName_exists: Boolean
+    fileName: String
+    fileName_not: String
+    fileName_in: [String]
+    fileName_not_in: [String]
+    fileName_contains: String
+    fileName_not_contains: String
+    width_exists: Boolean
+    width: Int
+    width_not: Int
+    width_in: [Int]
+    width_not_in: [Int]
+    width_gt: Int
+    width_gte: Int
+    width_lt: Int
+    width_lte: Int
+    height_exists: Boolean
+    height: Int
+    height_not: Int
+    height_in: [Int]
+    height_not_in: [Int]
+    height_gt: Int
+    height_gte: Int
+    height_lt: Int
+    height_lte: Int
+    OR: [AssetFilter]
+    AND: [AssetFilter]
+}
+
+input SysFilter {
+    id_exists: Boolean
+    id: String
+    id_not: String
+    id_in: [String]
+    id_not_in: [String]
+    id_contains: String
+    id_not_contains: String
+    publishedAt_exists: Boolean
+    publishedAt: DateTime
+    publishedAt_not: DateTime
+    publishedAt_in: [DateTime]
+    publishedAt_not_in: [DateTime]
+    publishedAt_gt: DateTime
+    publishedAt_gte: DateTime
+    publishedAt_lt: DateTime
+    publishedAt_lte: DateTime
+    firstPublishedAt_exists: Boolean
+    firstPublishedAt: DateTime
+    firstPublishedAt_not: DateTime
+    firstPublishedAt_in: [DateTime]
+    firstPublishedAt_not_in: [DateTime]
+    firstPublishedAt_gt: DateTime
+    firstPublishedAt_gte: DateTime
+    firstPublishedAt_lt: DateTime
+    firstPublishedAt_lte: DateTime
+    publishedVersion_exists: Boolean
+    publishedVersion: Float
+    publishedVersion_not: Float
+    publishedVersion_in: [Float]
+    publishedVersion_not_in: [Float]
+    publishedVersion_gt: Float
+    publishedVersion_gte: Float
+    publishedVersion_lt: Float
+    publishedVersion_lte: Float
+}
+
+input ContentfulMetadataFilter {
+    tags_exists: Boolean
+    tags: ContentfulMetadataTagsFilter
+}
+
+input ContentfulMetadataTagsFilter {
+    id_contains_all: [String]
+    id_contains_some: [String]
+    id_contains_none: [String]
+}
+
+enum AssetOrder {
+    url_ASC
+    url_DESC
+    size_ASC
+    size_DESC
+    contentType_ASC
+    contentType_DESC
+    fileName_ASC
+    fileName_DESC
+    width_ASC
+    width_DESC
+    height_ASC
+    height_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+input BlogPostFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    postId_exists: Boolean
+    postId: String
+    postId_not: String
+    postId_in: [String]
+    postId_not_in: [String]
+    postId_contains: String
+    postId_not_contains: String
+    title_exists: Boolean
+    title: String
+    title_not: String
+    title_in: [String]
+    title_not_in: [String]
+    title_contains: String
+    title_not_contains: String
+    publishDate_exists: Boolean
+    publishDate: DateTime
+    publishDate_not: DateTime
+    publishDate_in: [DateTime]
+    publishDate_not_in: [DateTime]
+    publishDate_gt: DateTime
+    publishDate_gte: DateTime
+    publishDate_lt: DateTime
+    publishDate_lte: DateTime
+    topicTags_exists: Boolean
+    topicTags_contains_all: [String]
+    topicTags_contains_some: [String]
+    topicTags_contains_none: [String]
+    heroBanner_exists: Boolean
+    body_exists: Boolean
+    body_contains: String
+    body_not_contains: String
+    OR: [BlogPostFilter]
+    AND: [BlogPostFilter]
+}
+
+enum BlogPostOrder {
+    postId_ASC
+    postId_DESC
+    title_ASC
+    title_DESC
+    publishDate_ASC
+    publishDate_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+# Code snippet with metadata for rich text [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/codeSnippet)
+type CodeSnippet implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): CodeSnippetLinkingCollections
+    code(locale: String): String
+    language(locale: String): String
+}
+
+type CodeSnippetLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type CodeSnippetCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [CodeSnippet]!
+}
+
+input CodeSnippetFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    code_exists: Boolean
+    code: String
+    code_not: String
+    code_in: [String]
+    code_not_in: [String]
+    code_contains: String
+    code_not_contains: String
+    language_exists: Boolean
+    language: String
+    language_not: String
+    language_in: [String]
+    language_not_in: [String]
+    language_contains: String
+    language_not_contains: String
+    OR: [CodeSnippetFilter]
+    AND: [CodeSnippetFilter]
+}
+
+enum CodeSnippetOrder {
+    language_ASC
+    language_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+# Section of events styled under tabs [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeTabSection)
+type ResumeTabSection implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ResumeTabSectionLinkingCollections
+    heading(locale: String): String
+    subsectionsCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): ResumeTabSectionSubsectionsCollection
+    order(locale: String): Int
+}
+
+type ResumeTabSectionLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type ResumeTabSectionSubsectionsCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [Entry]!
+}
+
+type ResumeTabSectionCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [ResumeTabSection]!
+}
+
+input ResumeTabSectionFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    subsectionsCollection_exists: Boolean
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
+    OR: [ResumeTabSectionFilter]
+    AND: [ResumeTabSectionFilter]
+}
+
+enum ResumeTabSectionOrder {
+    heading_ASC
+    heading_DESC
+    order_ASC
+    order_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+# Section of events styled as bubbles [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeBubblesSection)
+type ResumeBubblesSection implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ResumeBubblesSectionLinkingCollections
+    heading(locale: String): String
+    order(locale: String): Int
+    items(locale: String): [String]
+}
+
+type ResumeBubblesSectionLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type ResumeBubblesSectionCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [ResumeBubblesSection]!
+}
+
+input ResumeBubblesSectionFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
+    items_exists: Boolean
+    items_contains_all: [String]
+    items_contains_some: [String]
+    items_contains_none: [String]
+    OR: [ResumeBubblesSectionFilter]
+    AND: [ResumeBubblesSectionFilter]
+}
+
+enum ResumeBubblesSectionOrder {
+    heading_ASC
+    heading_DESC
+    order_ASC
+    order_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+input LanguageGroupFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    description_exists: Boolean
+    description: String
+    description_not: String
+    description_in: [String]
+    description_not_in: [String]
+    description_contains: String
+    description_not_contains: String
+    emoji_exists: Boolean
+    emoji: String
+    emoji_not: String
+    emoji_in: [String]
+    emoji_not_in: [String]
+    emoji_contains: String
+    emoji_not_contains: String
+    emojiLabel_exists: Boolean
+    emojiLabel: String
+    emojiLabel_not: String
+    emojiLabel_in: [String]
+    emojiLabel_not_in: [String]
+    emojiLabel_contains: String
+    emojiLabel_not_contains: String
+    order_exists: Boolean
+    order: Int
+    order_not: Int
+    order_in: [Int]
+    order_not_in: [Int]
+    order_gt: Int
+    order_gte: Int
+    order_lt: Int
+    order_lte: Int
+    languagesCollection_exists: Boolean
+    OR: [LanguageGroupFilter]
+    AND: [LanguageGroupFilter]
+}
+
+enum LanguageGroupOrder {
+    heading_ASC
+    heading_DESC
+    emoji_ASC
+    emoji_DESC
+    emojiLabel_ASC
+    emojiLabel_DESC
+    order_ASC
+    order_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+input LanguageFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    name_exists: Boolean
+    name: String
+    name_not: String
+    name_in: [String]
+    name_not_in: [String]
+    name_contains: String
+    name_not_contains: String
+    img_exists: Boolean
+    accentColor_exists: Boolean
+    accentColor: String
+    accentColor_not: String
+    accentColor_in: [String]
+    accentColor_not_in: [String]
+    accentColor_contains: String
+    accentColor_not_contains: String
+    darkText_exists: Boolean
+    darkText: Boolean
+    darkText_not: Boolean
+    OR: [LanguageFilter]
+    AND: [LanguageFilter]
+}
+
+enum LanguageOrder {
+    name_ASC
+    name_DESC
+    accentColor_ASC
+    accentColor_DESC
+    darkText_ASC
+    darkText_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+# Event for home screen timeline [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/timelineEvent)
+type TimelineEvent implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): TimelineEventLinkingCollections
+    heading(locale: String): String
+    type(locale: String): String
+    startDate(locale: String): DateTime
+    endDate(locale: String): DateTime
+    currentlyWorking(locale: String): Boolean
+    description(locale: String): TimelineEventDescription
+}
+
+type TimelineEventLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type TimelineEventDescription {
+    json: JSON!
+    links: TimelineEventDescriptionLinks!
+}
+
+type TimelineEventDescriptionLinks {
+    entries: TimelineEventDescriptionEntries!
+    assets: TimelineEventDescriptionAssets!
+}
+
+type TimelineEventDescriptionEntries {
+    inline: [Entry]!
+    hyperlink: [Entry]!
+    block: [Entry]!
+}
+
+type TimelineEventDescriptionAssets {
+    hyperlink: [Asset]!
+    block: [Asset]!
+}
+
+type TimelineEventCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [TimelineEvent]!
+}
+
+input TimelineEventFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    heading_exists: Boolean
+    heading: String
+    heading_not: String
+    heading_in: [String]
+    heading_not_in: [String]
+    heading_contains: String
+    heading_not_contains: String
+    type_exists: Boolean
+    type: String
+    type_not: String
+    type_in: [String]
+    type_not_in: [String]
+    type_contains: String
+    type_not_contains: String
+    startDate_exists: Boolean
+    startDate: DateTime
+    startDate_not: DateTime
+    startDate_in: [DateTime]
+    startDate_not_in: [DateTime]
+    startDate_gt: DateTime
+    startDate_gte: DateTime
+    startDate_lt: DateTime
+    startDate_lte: DateTime
+    endDate_exists: Boolean
+    endDate: DateTime
+    endDate_not: DateTime
+    endDate_in: [DateTime]
+    endDate_not_in: [DateTime]
+    endDate_gt: DateTime
+    endDate_gte: DateTime
+    endDate_lt: DateTime
+    endDate_lte: DateTime
+    currentlyWorking_exists: Boolean
+    currentlyWorking: Boolean
+    currentlyWorking_not: Boolean
+    description_exists: Boolean
+    description_contains: String
+    description_not_contains: String
+    OR: [TimelineEventFilter]
+    AND: [TimelineEventFilter]
+}
+
+enum TimelineEventOrder {
+    heading_ASC
+    heading_DESC
+    type_ASC
+    type_DESC
+    startDate_ASC
+    startDate_DESC
+    endDate_ASC
+    endDate_DESC
+    currentlyWorking_ASC
+    currentlyWorking_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+# Subsection of specific event for resume tab section [See type definition](https://app.contentful.com/spaces/tyqot91f5gwl/content_types/resumeTabSubsection)
+type ResumeTabSubsection implements Entry {
+    sys: Sys!
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ResumeTabSubsectionLinkingCollections
+    title(locale: String): String
+    organization(locale: String): String
+    startDate(locale: String): DateTime
+    endDate(locale: String): DateTime
+    currentlyWorking(locale: String): Boolean
+    description(locale: String): ResumeTabSubsectionDescription
+}
+
+type ResumeTabSubsectionLinkingCollections {
+    entryCollection(
+        skip: Int = 0
+        limit: Int = 100
+        preview: Boolean
+        locale: String
+    ): EntryCollection
+}
+
+type ResumeTabSubsectionDescription {
+    json: JSON!
+    links: ResumeTabSubsectionDescriptionLinks!
+}
+
+type ResumeTabSubsectionDescriptionLinks {
+    entries: ResumeTabSubsectionDescriptionEntries!
+    assets: ResumeTabSubsectionDescriptionAssets!
+}
+
+type ResumeTabSubsectionDescriptionEntries {
+    inline: [Entry]!
+    hyperlink: [Entry]!
+    block: [Entry]!
+}
+
+type ResumeTabSubsectionDescriptionAssets {
+    hyperlink: [Asset]!
+    block: [Asset]!
+}
+
+type ResumeTabSubsectionCollection {
+    total: Int!
+    skip: Int!
+    limit: Int!
+    items: [ResumeTabSubsection]!
+}
+
+input ResumeTabSubsectionFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    title_exists: Boolean
+    title: String
+    title_not: String
+    title_in: [String]
+    title_not_in: [String]
+    title_contains: String
+    title_not_contains: String
+    organization_exists: Boolean
+    organization: String
+    organization_not: String
+    organization_in: [String]
+    organization_not_in: [String]
+    organization_contains: String
+    organization_not_contains: String
+    startDate_exists: Boolean
+    startDate: DateTime
+    startDate_not: DateTime
+    startDate_in: [DateTime]
+    startDate_not_in: [DateTime]
+    startDate_gt: DateTime
+    startDate_gte: DateTime
+    startDate_lt: DateTime
+    startDate_lte: DateTime
+    endDate_exists: Boolean
+    endDate: DateTime
+    endDate_not: DateTime
+    endDate_in: [DateTime]
+    endDate_not_in: [DateTime]
+    endDate_gt: DateTime
+    endDate_gte: DateTime
+    endDate_lt: DateTime
+    endDate_lte: DateTime
+    currentlyWorking_exists: Boolean
+    currentlyWorking: Boolean
+    currentlyWorking_not: Boolean
+    description_exists: Boolean
+    description_contains: String
+    description_not_contains: String
+    OR: [ResumeTabSubsectionFilter]
+    AND: [ResumeTabSubsectionFilter]
+}
+
+enum ResumeTabSubsectionOrder {
+    title_ASC
+    title_DESC
+    organization_ASC
+    organization_DESC
+    startDate_ASC
+    startDate_DESC
+    endDate_ASC
+    endDate_DESC
+    currentlyWorking_ASC
+    currentlyWorking_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+input EntryFilter {
+    sys: SysFilter
+    contentfulMetadata: ContentfulMetadataFilter
+    OR: [EntryFilter]
+    AND: [EntryFilter]
+}
+
+enum EntryOrder {
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
