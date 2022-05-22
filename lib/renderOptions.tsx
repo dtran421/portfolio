@@ -4,7 +4,7 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { CodeSnippetBlock } from "../types";
 
-const renderOptions = (links, lgScreen) => {
+const renderOptions = (links) => {
     // create an entry map
     const entryBlockMap = new Map<string, CodeSnippetBlock>();
     // loop through the block linked entries and add them to the map
@@ -17,9 +17,15 @@ const renderOptions = (links, lgScreen) => {
             [BLOCKS.DOCUMENT]: (node, children) => (
                 <div className="space-y-4">{children}</div>
             ),
-            [BLOCKS.PARAGRAPH]: (node, children) => <div>{children}</div>
+            [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>
         },
         renderNode: {
+            [BLOCKS.UL_LIST]: (node, children) => (
+                <ul className="list-disc list-outside space-y-2 mx-8">
+                    {children}
+                </ul>
+            ),
+            [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
                 // find the entry in the entryMap by ID
@@ -55,7 +61,6 @@ const renderOptions = (links, lgScreen) => {
                                 }}
                                 showLineNumbers
                                 showInlineLineNumbers
-                                wrapLongLines={lgScreen}
                             >
                                 {code}
                             </SyntaxHighlighter>

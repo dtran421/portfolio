@@ -9,7 +9,7 @@ const Error404 = () => (
     <MainLayout page="Page Not Found">
         <div className="max-w-xl lg:max-w-3xl xl:max-w-5xl max-h-screen flex justify-center items-center mx-auto mt-40 lg:mt-32">
             <div className="w-full flex flex-col lg:flex-row justify-center xl:gap-x-20 gap-y-10 lg:gap-y-0">
-                <div className="flex justify-center lg:justify-end items-center">
+                <div className="flex justify-center items-center">
                     <div className="xl:w-2/3 space-y-6 px-10 md:px-0">
                         <div>
                             <div className="flex items-center space-x-3">
