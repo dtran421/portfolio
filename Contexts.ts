@@ -7,11 +7,11 @@ const ThemeContext = createContext<ThemeContextObject>({
     toggleDarkMode: () => null
 });
 
-const AppProjectContext = createContext(null);
+const WhispearringsContext = createContext(null);
 
 const Contexts = {
     ThemeContext,
-    AppProjectContext
+    WhispearringsContext
 };
 
 export default Contexts;

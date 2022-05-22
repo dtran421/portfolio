@@ -29,7 +29,7 @@ const LearnMore = ({ learnMoreAnimations }: LearnMoreProps) => (
     <AnimatePresence>
         <motion.div
             key="learn_more"
-            className="flex justify-center"
+            className="mt-auto flex justify-center"
             animate={learnMoreAnimations}
             variants={learnMoreVariants}
         >

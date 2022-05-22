@@ -3,10 +3,11 @@ import ProjectLayout from "../../components/Global/layouts/ProjectLayout";
 const Godspeed = () => (
     <ProjectLayout
         page="Godspeed"
-        type="coding"
+        accent="bg-godspeed"
+        darkText={false}
         github="https://github.com/dtran421/project-godspeed"
     >
-        <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex mx-10 md:mx-auto">
+        <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex mx-10 md:mx-auto">
             <div className="w-full flex flex-col items-center">
                 <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4">
                     <h2 className="text-2xl font-medium">View the project:</h2>
@@ -14,7 +15,7 @@ const Godspeed = () => (
                         href="https://godspeed.vercel.app/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-xl font-medium border-2 border-primary hover:bg-primary transition duration-200 ease-out rounded-lg px-5 py-3"
+                        className="flex items-center text-2xl border-2 border-primary hover:bg-primary transition duration-200 ease-out rounded-lg p-3"
                     >
                         godspeed.vercel.app
                     </a>
@@ -38,7 +39,10 @@ const Godspeed = () => (
                         pair of sneakers) find and keep track of the latest drops. Hence, the birth of Godspeed. A comprehensive web
                         platform designed to help sneaker enthusiasts identify drop dates for shoes they're looking to cop. It also
                         provides useful market data (similar to those for stocks) to enable shoe resellers to spot their next favorable 
-                        sneaker resell.`}
+                        sneaker resell.`}{" "}
+                            <span className="italic">
+                                All for the wonderful price of $0.
+                            </span>
                         </p>
                     </div>
                 </div>

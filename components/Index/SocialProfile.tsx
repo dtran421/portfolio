@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { motion } from "framer-motion";
 
-import { lgScreenQuery } from "../../configs/Breakpoints";
+import { lgScreenQuery } from "../Global/configs/Breakpoints";
 
 const logoMotion = {
     inactive: { x: 0, zIndex: 1 },

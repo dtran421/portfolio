@@ -1,10 +1,13 @@
-import ScrollContainer, { ContainerBody, MazeDemo } from "./ScrollContainer";
+import Image from "next/image";
 
 const AndroidSection = () => (
     <div className="w-full snap-x snap-mandatory scroll-smooth flex flex-nowrap overflow-x-scroll">
-        <ScrollContainer>
-            <ContainerBody heading="Introduction">
-                <div className="flex flex-col lg:flex-row text-lg lg:text-xl text-left leading-relaxed space-y-4 lg:space-y-0 lg:space-x-24">
+        <div className="w-full snap-center flex-special">
+            <div className="w-full flex flex-col items-center px-4 lg:px-10 pb-10 mx-auto">
+                <h2 className="w-full text-3xl text-left font-semibold mb-6">
+                    Intro
+                </h2>
+                <div className="flex flex-col lg:flex-row text-xl text-left leading-relaxed space-y-10 lg:space-y-0 lg:space-x-24">
                     <p className="w-full lg:w-1/2">
                         In order to run the Android version, you must have the
                         Java Development Kit (JDK) Version 1.8 installed on your
@@ -22,57 +25,121 @@ const AndroidSection = () => (
                         game.
                     </p>
                 </div>
-            </ContainerBody>
-        </ScrollContainer>
-        <ScrollContainer>
-            <ContainerBody heading="Gameplay">
-                The maze gameplay is pretty much the exact same as the desktop
-                version. In this version, you also have the ability to jump by
-                pressing the button at the bottom left of the maze screen.
-                Before maze generation, you can set the maze generation
-                algorithm and the difficulty level from the main menu by sliding
-                the crossed swords. You also have the option to modify the
-                gameplay (changing the driver and sensor reliability) before
-                entering the maze. If you need a little help to beat a maze,
-                there are options in the menu at the top left of the maze screen
-                to toggle the map, solution, and maze walls. The background
-                color also fades to a brighter blue on the top half of the
-                screen as you get closer to the exit.
-            </ContainerBody>
-            <MazeDemo type="Android" img="amaze1" />
-        </ScrollContainer>
-        <ScrollContainer>
-            <ContainerBody heading="Automated Gameplay">
-                Similar to the desktop version, you can choose to play using an
-                automated robot driver. The options are still the same with
-                Wizard and WallFollower. As for sensor reliability, there are 4
-                choices you can choose from, ranging from most reliable to most
-                unreliable: Demigod, Warrior, Captain, Soldier. The
-                Demigod&apos;s sensors will never fail. One of the
-                Warrior&apos;s sensors will periodically fail, as will two of
-                the Captain&apos;s. All four of the Soldier&apos;s sensors are
-                susceptible to failing. You also have the options to start/stop
-                the animation, adjust the animation speed, and view the
-                operational status of the sensors.
-            </ContainerBody>
-            <div className="w-full flex flex-col md:flex-row justify-around items-center">
-                <MazeDemo type="Android" img="amaze2" />
-                <MazeDemo type="Android" img="amaze3" />
             </div>
-        </ScrollContainer>
-        <ScrollContainer>
-            <ContainerBody heading="Revisiting a Maze">
-                The Android version re-implements the desktop version&#39;s
-                feature to load in a maze in a slightly different way. Instead
-                of storing the maze generation data, it stores the seed used to
-                generate the maze within the Android device&#39;s local storage.
-                If you want to revisit a previously generated maze, change the
-                generation settings to match that of a previous maze and then
-                click the Revisit button. This will fetch the previous seed that
-                matches the same settings and use it to re-generate the maze.
-            </ContainerBody>
-            <MazeDemo type="Android" img="amaze4" />
-        </ScrollContainer>
+        </div>
+        <div className="w-full snap-center flex-special">
+            <div className="flex flex-col items-center space-y-10 px-4 lg:px-10 pb-10 mx-auto">
+                <div className="w-full xl:w-3/4">
+                    <h2 className="text-3xl text-left font-semibold mb-6">
+                        Gameplay
+                    </h2>
+                    <p className="text-xl text-left leading-relaxed">
+                        The maze gameplay is pretty much the exact same as the
+                        desktop version. In this version, you also have the
+                        ability to jump by pressing the button at the bottom
+                        left of the maze screen. Before maze generation, you can
+                        set the maze generation algorithm and the difficulty
+                        level from the main menu by sliding the crossed swords.
+                        You also have the option to modify the gameplay
+                        (changing the driver and sensor reliability) before
+                        entering the maze. If you need a little help to beat a
+                        maze, there are options in the menu at the top left of
+                        the maze screen to toggle the map, solution, and maze
+                        walls. The background color also fades to a brighter
+                        blue on the top half of the screen as you get closer to
+                        the exit.
+                    </p>
+                </div>
+                <div className="flex flex-col items-center">
+                    <div className="w-min rounded-xl overflow-hidden">
+                        <Image
+                            alt="maze video 1 android"
+                            src="/img/maze/amaze1.gif"
+                            width={208}
+                            height={430}
+                            layout="fixed"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="w-full snap-center flex-special">
+            <div className="flex flex-col items-center space-y-10 px-4 lg:px-10 pb-10 mx-auto">
+                <div className="w-full xl:w-3/4">
+                    <h2 className="text-3xl text-left font-semibold mb-6">
+                        Automated Gameplay
+                    </h2>
+                    <p className="text-xl text-left leading-relaxed">
+                        Similar to the desktop version, you can choose to play
+                        using an automated robot driver. The options are still
+                        the same with Wizard and WallFollower. As for sensor
+                        reliability, there are 4 choices you can choose from,
+                        ranging from most reliable to most unreliable: Demigod,
+                        Warrior, Captain, Soldier. The Demigod&#39;s sensors do
+                        not fail, one of the Warrior&#39;s sensors will
+                        periodically fail, two for the Captain, and all four of
+                        the Soldier&#39;s sensors are susceptible to failing.
+                        You also have the options to start/stop the animation,
+                        adjust the animation speed, and view the operational
+                        status of the sensors.
+                    </p>
+                </div>
+                <div className="w-full xl:w-2/3 flex flex-col md:flex-row justify-between items-center space-y-10 md:space-y-0 px-10 lg:px-20">
+                    <div className="w-min rounded-xl overflow-hidden">
+                        <Image
+                            alt="maze video 2 android"
+                            src="/img/maze/amaze2.gif"
+                            width={208}
+                            height={430}
+                            layout="fixed"
+                        />
+                    </div>
+                    <div className="w-min rounded-xl overflow-hidden">
+                        <Image
+                            alt="maze video 3 android"
+                            src="/img/maze/amaze3.gif"
+                            width={208}
+                            height={430}
+                            layout="fixed"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="w-full snap-center flex-special">
+            <div className="flex flex-col items-center space-y-10 px-4 lg:px-10 pb-10 mx-auto">
+                <div className="w-full xl:w-3/4">
+                    <h2 className="text-3xl text-left font-semibold mb-6">
+                        Revisiting a Maze
+                    </h2>
+                    <p className="text-xl text-left leading-relaxed">
+                        The Android version re-implements the desktop
+                        version&#39;s feature to load in a maze in a slightly
+                        different way. Instead of storing the maze generation
+                        data, it stores the seed used to generate the maze
+                        within the Android device&#39;s local storage. If you
+                        want to revisit a previously generated maze, change the
+                        generation settings to match that of a previous maze and
+                        then click the Revisit button. This will fetch the
+                        previous seed that matches the same settings and use it
+                        to re-generate the maze.
+                    </p>
+                </div>
+                <div className="w-full flex justify-center space-x-4">
+                    <div className="flex flex-col items-center">
+                        <div className="w-min rounded-xl overflow-hidden">
+                            <Image
+                                alt="maze video 4 android"
+                                src="/img/maze/amaze4.gif"
+                                width={208}
+                                height={430}
+                                layout="fixed"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 );
 
