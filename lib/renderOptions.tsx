@@ -4,7 +4,7 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { CodeSnippetBlock } from "../types";
 
-const renderOptions = (links) => {
+const renderOptions = (links, lgScreen) => {
     // create an entry map
     const entryBlockMap = new Map<string, CodeSnippetBlock>();
     // loop through the block linked entries and add them to the map
@@ -55,7 +55,7 @@ const renderOptions = (links) => {
                                 }}
                                 showLineNumbers
                                 showInlineLineNumbers
-                                wrapLongLines={/* switch for mobile */ false}
+                                wrapLongLines={lgScreen}
                             >
                                 {code}
                             </SyntaxHighlighter>
