@@ -1,39 +1,86 @@
 {
-   "projectList": [
-      {
-         "link": "godspeed",
-         "name": "Godspeed",
-         "thumbnail": "/img/godspeed.png",
-         "width": 193,
-         "height": 227
-      },
-      {
-         "link": "whispearrings",
-         "name": "Whispearrings",
-         "thumbnail": "/img/whispearrings_logo.png",
-         "width": 256,
-         "height": 256
-      },
-      {
-         "link": "maze",
-         "name": "Maze Game",
-         "thumbnail": "/img/maze_minotaur.png",
-         "width": 256,
-         "height": 256
-      },
-      {
-         "link": "uav",
-         "name": "UAV Swarms",
-         "thumbnail": "/img/uav_swarm.png",
-         "width": 350,
-         "height": 350
-      },
-      {
-         "link": "ai",
-         "name": "Machine Learning",
-         "thumbnail": "/img/machine_learning.png",
-         "width": 350,
-         "height": 350
-      }
-   ]
+    "coding": {
+        "Godspeed": {
+            "link": "godspeed",
+            "accentColor": "#9c00ff",
+            "darkText": false,
+            "thumbnail": "/img/projects/godspeed.png",
+            "width": 193,
+            "height": 227
+        },
+        "CollegeTalk": {
+            "link": "collegetalk",
+            "accentColor": "#2f95dc",
+            "darkText": false,
+            "thumbnail": "/img/projects/collegetalk.png",
+            "width": 256,
+            "height": 256
+        },
+        "Whispearrings": {
+            "link": "whispearrings",
+            "accentColor": "#faebeb",
+            "darkText": true,
+            "thumbnail": "/img/projects/whispearrings.png",
+            "width": 256,
+            "height": 256
+        },
+        "Maze Game": {
+            "link": "maze",
+            "accentColor": "#e94560",
+            "darkText": false,
+            "thumbnail": "/img/projects/maze_minotaur.png",
+            "width": 256,
+            "height": 256
+        },
+        "UAV Swarms": {
+            "link": "uav",
+            "accentColor": "#0d0deb",
+            "darkText": false,
+            "thumbnail": "/img/projects/uav_swarm.png",
+            "width": 641,
+            "height": 516
+        },
+        "Machine Learning": {
+            "link": "machine-learning",
+            "accentColor": "#a6cee3",
+            "darkText": true,
+            "thumbnail": "/img/projects/machine_learning.png",
+            "width": 667,
+            "height": 517
+        },
+        "Data Mining": {
+            "link": "data-mining",
+            "accentColor": "#ff7f0e",
+            "darkText": true,
+            "thumbnail": "/img/projects/data_mining.png",
+            "width": 587,
+            "height": 393
+        }
+    },
+    "finance": {
+        "HES Pitch": {
+            "link": "hess",
+            "accentColor": "#007049",
+            "darkText": false,
+            "thumbnail": "/img/projects/hess.png",
+            "width": 600,
+            "height": 358
+        },
+        "MUSA Credit Analysis": {
+            "link": "murphy-usa",
+            "accentColor": "#235ba8",
+            "darkText": false,
+            "thumbnail": "/img/projects/murphy_usa.png",
+            "width": 544,
+            "height": 254
+        },
+        "Advanced Investments": {
+            "link": "advanced-investments",
+            "accentColor": "#652b91",
+            "darkText": false,
+            "thumbnail": "/img/projects/advanced_investments.png",
+            "width": 556,
+            "height": 300
+        }
+    }
 }
