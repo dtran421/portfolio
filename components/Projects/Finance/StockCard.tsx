@@ -135,7 +135,7 @@ const StockCard = ({
                 <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end space-y-2">
                     <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end md:space-x-4">
                         <h1 className="text-3xl md:text-4xl font-bold">
-                            ${price}
+                            ${price.toFixed(2)}
                         </h1>
                         <ReturnText {...{ change, changePct }} />
                     </div>
