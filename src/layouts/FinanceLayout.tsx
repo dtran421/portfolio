@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { Quote, Company } from "../types";
+import { Quote, Company } from "../lib/types";
 
 import ClassProfile from "../components/Projects/ClassProfile";
 import StockCard from "../components/Projects/Finance/StockCard";

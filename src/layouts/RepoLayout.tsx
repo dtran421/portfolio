@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import projects from "../public/json/projects.json";
+import projects from "../../public/json/projects.json";
 
 import ProjectLayout from "./ProjectLayout";
 import ClassProfile from "../components/Projects/ClassProfile";

@@ -2,7 +2,7 @@ import { useState, useRef, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import projects from "../public/json/projects.json";
+import projects from "../../public/json/projects.json";
 import MainLayout from "./MainLayout";
 
 const ProjectsBackButton = dynamic(
