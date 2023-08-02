@@ -254,6 +254,13 @@ export const getStaticProps = async () => {
             }
         );
 
+        if (!response.ok) {
+            console.error(response);
+            throw new Error(
+                `Something went wrong with fetching index data: [${response.status}] ${response.statusText}`
+            );
+        }
+
         const data = await response.json();
         if (!data || !data.data) {
             console.error("No data returned from Contentful");
@@ -262,8 +269,8 @@ export const getStaticProps = async () => {
 
         return {
             props: {
-                timelineData: data.data.timelineEventCollection,
-                languageGroupsData: data.data.languageGroupCollection
+                timelineData: data.data.timelineEventCollection.items,
+                languageGroupsData: data.data.languageGroupCollection.items
             }
         };
     } catch (e) {
