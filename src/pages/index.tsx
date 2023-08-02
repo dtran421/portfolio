@@ -1,28 +1,22 @@
 import { useEffect, useMemo, useRef } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useMediaQuery } from "react-responsive";
 import { motion, useAnimation } from "framer-motion";
+import { IconContext } from "react-icons";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 import SquareLoader from "react-spinners/SquareLoader";
 
-import { lgScreenQuery } from "../lib/Breakpoints";
-import { EventObject, LanguageGroup } from "../lib/types";
-import IndexContent from "../../public/json/index.json";
-import TimelineAndLanguageQuery from "../graphql/TimelineAndLanguageQuery";
+import { EventObject, LanguageGroup } from "@/lib/types";
+import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
 
-import Emoji from "../components/Global/Emoji";
-import Timeline from "../components/Index/Timeline";
-import LangGroup from "../components/Index/LangGroup";
-import MainLayout from "../layouts/MainLayout";
-import Carousel from "../components/Index/Carousel";
+import MainLayout from "@/layouts/MainLayout";
+import Emoji from "@/components/Global/Emoji";
+import Timeline from "@/components/Index/Timeline";
+import LangGroup from "@/components/Index/LangGroup";
+import Carousel from "@/components/Index/Carousel";
+import SocialProfile from "@/components/Index/SocialProfile";
+import LearnMore from "@/components/Index/LearnMore";
 
-const SocialProfile = dynamic(import("../components/Index/SocialProfile"), {
-  ssr: false,
-});
-const LearnMore = dynamic(import("../components/Index/LearnMore"), {
-  ssr: false,
-});
+import IndexContent from "@/public/json/index.json";
 
 export function isInViewport(el) {
   const rect = el.getBoundingClientRect();
@@ -41,7 +35,6 @@ type IndexProps = {
 };
 
 const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
-  const lgScreen = useMediaQuery(lgScreenQuery);
   const learnMoreAnimations = useAnimation();
 
   const page1 = useRef(null);
@@ -73,9 +66,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
     waveControls.start(waveAnimation);
   }, [waveAnimation, waveControls]);
 
-  const socialIconProps = {
-    size: lgScreen ? 24 : 20,
-  };
+  const iconClassName = useMemo(() => ({ className: "w-full h-full" }), []);
 
   const {
     intro,
@@ -121,30 +112,34 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
               <p>Below are some of my socials. Feel free to check them out and connect with me there!</p>
               <div className="w-full flex justify-center md:px-4 lg:px-0">
                 <div className="w-full lg:w-2/3 xl:w-full grid grid-cols-2 xl:flex xl:justify-center gap-x-8 lg:gap-x-4 xl:gap-x-2 gap-y-4">
-                  <SocialProfile name="dtran421" link="https://github.com/dtran421">
-                    <FaGithub {...socialIconProps} />
-                  </SocialProfile>
-                  <SocialProfile name="duketran" link="https://www.linkedin.com/in/duketran/">
-                    <FaLinkedinIn {...socialIconProps} />
-                  </SocialProfile>
-                  <SocialProfile name="dtran421" link="https://www.facebook.com/dtran421">
-                    <FaFacebookF {...socialIconProps} />
-                  </SocialProfile>
-                  <SocialProfile name="dtran421" link="https://www.twitter.com/dtran421">
-                    <FaTwitter {...socialIconProps} />
-                  </SocialProfile>
+                  <IconContext.Provider value={iconClassName}>
+                    <SocialProfile name="dtran421" link="https://github.com/dtran421">
+                      <FaGithub />
+                    </SocialProfile>
+                    <SocialProfile name="duketran" link="https://www.linkedin.com/in/duketran/">
+                      <FaLinkedinIn />
+                    </SocialProfile>
+                    <SocialProfile name="dtran421" link="https://www.facebook.com/dtran421">
+                      <FaFacebookF />
+                    </SocialProfile>
+                    <SocialProfile name="dtran421" link="https://www.twitter.com/dtran421">
+                      <FaTwitter />
+                    </SocialProfile>
+                  </IconContext.Provider>
                 </div>
               </div>
             </div>
           </div>
           <Carousel />
         </div>
-        {lgScreen && <LearnMore {...{ learnMoreAnimations }} />}
+        <LearnMore {...{ learnMoreAnimations }} />
       </div>
       <div id="page2" className="flex flex-col items-center py-28">
         <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
           <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
             <div className="w-full lg:w-1/2 flex justify-center">
+              {/* // TODO: fix this */}
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <Image alt="about me pic 1" {...section1.pic_props} />
             </div>
             <div className="w-full lg:w-1/2 flex flex-col justify-between rounded-xl space-y-8">
@@ -176,6 +171,8 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
               </p>
             </div>
             <div className="w-full lg:w-1/2 flex justify-center">
+              {/* // TODO: fix this */}
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <Image alt="about me pic 2" {...section2.pic_props} />
             </div>
           </div>
@@ -252,7 +249,7 @@ export const getStaticProps = async () => {
     }
 
     const data = await response.json();
-    if (!data || !data.data) {
+    if (!data?.data) {
       console.error("No data returned from Contentful");
       throw new Error("No data returned from Contentful");
     }

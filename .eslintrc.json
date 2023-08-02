@@ -30,7 +30,6 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".tsx"] }],
     "react/prop-types": "off", // Since we do not use prop-types
     "react/require-default-props": "off", // Since we do not use prop-types,
