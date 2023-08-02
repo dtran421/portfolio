@@ -1,43 +1,24 @@
 {
-    "data": [
-        {
-            "name": "machine-learning--gradient-descent",
-            "url": "https://github.com/dtran421/machine-learning--gradient-descent",
-            "tags": [
-                "gradient descent",
-                "minimization",
-                "cost function",
-                "linear regression"
-            ]
-        },
-        {
-            "name": "machine-learning--classification",
-            "url": "https://github.com/dtran421/machine-learning--classification",
-            "tags": [
-                "classification",
-                "multi-class",
-                "logistic regression",
-                "gradient descent"
-            ]
-        },
-        {
-            "name": "machine-learning--support-vector-machines",
-            "url": "https://github.com/dtran421/machine-learning--support-vector-machines",
-            "tags": [
-                "support vector machine",
-                "matrix factorization",
-                "recommendation system"
-            ]
-        },
-        {
-            "name": "machine-learning--principal-components",
-            "url": "https://github.com/dtran421/machine-learning--principal-components",
-            "tags": [
-                "principal component analysis",
-                "singular value decomposition",
-                "clustering",
-                "k-means"
-            ]
-        }
-    ]
+  "data": [
+    {
+      "name": "machine-learning--gradient-descent",
+      "url": "https://github.com/dtran421/machine-learning--gradient-descent",
+      "tags": ["gradient descent", "minimization", "cost function", "linear regression"]
+    },
+    {
+      "name": "machine-learning--classification",
+      "url": "https://github.com/dtran421/machine-learning--classification",
+      "tags": ["classification", "multi-class", "logistic regression", "gradient descent"]
+    },
+    {
+      "name": "machine-learning--support-vector-machines",
+      "url": "https://github.com/dtran421/machine-learning--support-vector-machines",
+      "tags": ["support vector machine", "matrix factorization", "recommendation system"]
+    },
+    {
+      "name": "machine-learning--principal-components",
+      "url": "https://github.com/dtran421/machine-learning--principal-components",
+      "tags": ["principal component analysis", "singular value decomposition", "clustering", "k-means"]
+    }
+  ]
 }

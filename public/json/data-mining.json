@@ -1,33 +1,24 @@
 {
-    "data": [
-        {
-            "name": "data-mining--data-preprocessing",
-            "url": "https://github.com/dtran421/data-mining--data-preprocessing",
-            "tags": ["data preprocessing", "data visualization"]
-        },
-        {
-            "name": "data-mining--classification",
-            "url": "https://github.com/dtran421/data-mining--classification",
-            "tags": [
-                "classification",
-                "clustering",
-                "k-means",
-                "k-nearest neighbors"
-            ]
-        },
-        {
-            "name": "data-mining--cnn",
-            "url": "https://github.com/dtran421/data-mining--cnn",
-            "tags": ["classification", "convolutional neural network"]
-        },
-        {
-            "name": "data-mining--nlp",
-            "url": "https://github.com/dtran421/data-mining--nlp",
-            "tags": [
-                "natural language processing",
-                "long short term memory",
-                "sentiment analysis"
-            ]
-        }
-    ]
+  "data": [
+    {
+      "name": "data-mining--data-preprocessing",
+      "url": "https://github.com/dtran421/data-mining--data-preprocessing",
+      "tags": ["data preprocessing", "data visualization"]
+    },
+    {
+      "name": "data-mining--classification",
+      "url": "https://github.com/dtran421/data-mining--classification",
+      "tags": ["classification", "clustering", "k-means", "k-nearest neighbors"]
+    },
+    {
+      "name": "data-mining--cnn",
+      "url": "https://github.com/dtran421/data-mining--cnn",
+      "tags": ["classification", "convolutional neural network"]
+    },
+    {
+      "name": "data-mining--nlp",
+      "url": "https://github.com/dtran421/data-mining--nlp",
+      "tags": ["natural language processing", "long short term memory", "sentiment analysis"]
+    }
+  ]
 }
