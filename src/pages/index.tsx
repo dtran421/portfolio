@@ -48,11 +48,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
     const scrollListener = () => {
         if (page1.current) {
             const page1Visible = isInViewport(page1.current);
-            if (page1Visible) {
-                learnMoreAnimations.start("visible");
-            } else {
-                learnMoreAnimations.start("hidden");
-            }
+            learnMoreAnimations.start(page1Visible ? "visible" : "hidden");
         }
     };
 
@@ -88,17 +84,12 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
 
     return (
         <MainLayout page="Portfolio">
-            <div
-                ref={page1}
-                className="w-5/6 flex flex-col items-center xl:space-y-28 mx-auto"
-            >
+            <div ref={page1} className="w-5/6 flex flex-col items-center xl:space-y-28 mx-auto">
                 <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-2 xl:mt-16">
                     <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
                         <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
                             <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0">
-                                <p className="inline dark:text-white dark-transition">
-                                    Hi there! My name is{" "}
-                                </p>
+                                <p className="inline dark:text-white dark-transition">Hi there! My name is </p>
                                 <div className="flex items-center space-x-3">
                                     <motion.p
                                         initial={{ opacity: 0 }}
@@ -115,14 +106,9 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                                         animate={waveControls}
                                         transition={{
                                             duration: 1.5,
-                                            times: [
-                                                0, 0.1, 0.3, 0.5, 0.7, 0.9,
-                                                0.95, 1
-                                            ]
+                                            times: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 1]
                                         }}
-                                        onHoverStart={() =>
-                                            waveControls.start(waveAnimation)
-                                        }
+                                        onHoverStart={() => waveControls.start(waveAnimation)}
                                         className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default"
                                     >
                                         <Emoji label="wave" symbol="👋🏼" />
@@ -132,34 +118,19 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                         </div>
                         <div className="w-full flex flex-col text-zinc-800 dark:text-zinc-200 lg:text-lg space-y-4">
                             <p>{intro}</p>
-                            <p>
-                                Below are some of my socials. Feel free to check
-                                them out and connect with me there!
-                            </p>
+                            <p>Below are some of my socials. Feel free to check them out and connect with me there!</p>
                             <div className="w-full flex justify-center md:px-4 lg:px-0">
                                 <div className="w-full lg:w-2/3 xl:w-full grid grid-cols-2 xl:flex xl:justify-center gap-x-8 lg:gap-x-4 xl:gap-x-2 gap-y-4">
-                                    <SocialProfile
-                                        name="dtran421"
-                                        link="https://github.com/dtran421"
-                                    >
+                                    <SocialProfile name="dtran421" link="https://github.com/dtran421">
                                         <FaGithub {...socialIconProps} />
                                     </SocialProfile>
-                                    <SocialProfile
-                                        name="duketran"
-                                        link="https://www.linkedin.com/in/duketran/"
-                                    >
+                                    <SocialProfile name="duketran" link="https://www.linkedin.com/in/duketran/">
                                         <FaLinkedinIn {...socialIconProps} />
                                     </SocialProfile>
-                                    <SocialProfile
-                                        name="dtran421"
-                                        link="https://www.facebook.com/dtran421"
-                                    >
+                                    <SocialProfile name="dtran421" link="https://www.facebook.com/dtran421">
                                         <FaFacebookF {...socialIconProps} />
                                     </SocialProfile>
-                                    <SocialProfile
-                                        name="dtran421"
-                                        link="https://www.twitter.com/dtran421"
-                                    >
+                                    <SocialProfile name="dtran421" link="https://www.twitter.com/dtran421">
                                         <FaTwitter {...socialIconProps} />
                                     </SocialProfile>
                                 </div>
@@ -174,10 +145,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                 <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
                     <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
                         <div className="w-full lg:w-1/2 flex justify-center">
-                            <Image
-                                alt="about me pic 1"
-                                {...section1.pic_props}
-                            />
+                            <Image alt="about me pic 1" {...section1.pic_props} />
                         </div>
                         <div className="w-full lg:w-1/2 flex flex-col justify-between rounded-xl space-y-8">
                             <div>
@@ -191,15 +159,12 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                             </div>
                             <div className="flex flex-col items-between bg-zinc-300/50 dark:bg-zinc-700/50 dark-transition rounded-xl shadow-lg space-y-2 px-5 py-3">
                                 <p className="text-lg lg:text-xl text-center italic">
-                                    &quot;We can not solve our problems with the
-                                    same level of thinking that created
+                                    &quot;We can not solve our problems with the same level of thinking that created
                                     them.&quot;
                                 </p>
                                 <div className="flex justify-center items-center">
                                     <div className="w-full border-b-2 border-black/50 dark:border-white/50 dark-transition" />
-                                    <p className="whitespace-nowrap lg:text-lg text-center mx-2">
-                                        Albert Einstein
-                                    </p>
+                                    <p className="whitespace-nowrap lg:text-lg text-center mx-2">Albert Einstein</p>
                                     <div className="w-full border-b-2 border-black/50 dark:border-white/50 dark-transition" />
                                 </div>
                             </div>
@@ -212,10 +177,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                             </p>
                         </div>
                         <div className="w-full lg:w-1/2 flex justify-center">
-                            <Image
-                                alt="about me pic 2"
-                                {...section2.pic_props}
-                            />
+                            <Image alt="about me pic 2" {...section2.pic_props} />
                         </div>
                     </div>
                 </div>
@@ -239,13 +201,11 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
                     Technologies
                 </h1>
                 <p className="lg:text-lg text-zinc-800 dark:text-zinc-200 dark-transition pb-6">
-                    As the digital world evolves, technologies and frameworks
-                    are constantly being developed and pushed to the forefront
-                    of our ever-advancing society. As a developer, it is my
-                    lifelong mission and ambition to stay on top of these
-                    incredible innovations and strive for mastery of these
-                    powerful tools that will enable me to explore my passions
-                    and perform my career functions to the best of my ability.
+                    As the digital world evolves, technologies and frameworks are constantly being developed and pushed
+                    to the forefront of our ever-advancing society. As a developer, it is my lifelong mission and
+                    ambition to stay on top of these incredible innovations and strive for mastery of these powerful
+                    tools that will enable me to explore my passions and perform my career functions to the best of my
+                    ability.
                 </p>
                 <div className="space-y-4">
                     {languageGroupsData ? (
@@ -294,23 +254,20 @@ export const getStaticProps = async () => {
             }
         );
 
-        const {
-            data: {
-                timelineEventCollection: { items: timelineData },
-                languageGroupCollection: { items: languageGroupsData }
-            }
-        } = await response.json();
+        const data = await response.json();
+        if (!data || !data.data) {
+            console.error("No data returned from Contentful");
+            throw new Error("No data returned from Contentful");
+        }
 
         return {
             props: {
-                timelineData,
-                languageGroupsData
+                timelineData: data.data.timelineEventCollection,
+                languageGroupsData: data.data.languageGroupCollection
             }
         };
-    } catch (exception) {
-        console.error(
-            `Something went wrong with fetching index data: ${exception.message}`
-        );
+    } catch (e) {
+        console.error(`Something went wrong with fetching index data: ${e.message}`);
         return {
             props: {
                 timelineData: null,
