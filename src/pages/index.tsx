@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { IconContext } from "react-icons";
+import axios from "axios";
 import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
 import SquareLoader from "react-spinners/SquareLoader";
 
@@ -17,6 +18,7 @@ import SocialProfile from "@/components/Index/SocialProfile";
 import LearnMore from "@/components/Index/LearnMore";
 
 import IndexContent from "@/public/json/index.json";
+import { getBaseContentfulUrl } from "./api/ContentfulUtil";
 
 export function isInViewport(el) {
   const rect = el.getBoundingClientRect();
@@ -231,27 +233,32 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+    const { data, status, statusText } = await axios.post<{
+      data: {
+        timelineEventCollection: {
+          items: EventObject[];
+        };
+        languageGroupCollection: {
+          items: LanguageGroup[];
+        };
+      };
+    }>(
+      getBaseContentfulUrl(),
+      { query: TimelineAndLanguageQuery },
       {
-        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
         },
-        body: JSON.stringify({ query: TimelineAndLanguageQuery }),
       }
     );
 
-    if (!response.ok) {
-      console.error(response);
-      throw new Error(`Something went wrong with fetching index data: [${response.status}] ${response.statusText}`);
+    if (status !== 200) {
+      throw new Error(`Something went wrong with fetching index data: [${status}] ${statusText}`);
     }
 
-    const data = await response.json();
-    if (!data?.data) {
-      console.error("No data returned from Contentful");
-      throw new Error("No data returned from Contentful");
+    if (!data.data) {
+      throw new Error("Something went wrong with fetching index data: no data returned");
     }
 
     return {

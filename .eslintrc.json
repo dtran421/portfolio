@@ -37,6 +37,7 @@
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     "react/jsx-curly-brace-presence": "warn",
     "import/extensions": ["error", "never", { "json": "always" }],
+    "import/prefer-default-export": "off",
     "no-unused-vars": "off",
     "no-console": ["warn", { "allow": ["info", "error"] }]
   }
