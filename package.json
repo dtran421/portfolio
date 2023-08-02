@@ -4,11 +4,12 @@
     "private": true,
     "scripts": {
         "postinstall": "patch-package",
+        "pull-env": "npx vercel env pull .env.local",
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "lintProd": "next lint --quiet --fix"
+        "lint-prod": "next lint --quiet --fix"
     },
     "dependencies": {
         "@contentful/rich-text-react-renderer": "^15.12.1",
