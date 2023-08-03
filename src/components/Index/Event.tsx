@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowDownCircle } from "react-icons/fi";
-import { MdSchool, MdWork, MdDesktopMac } from "react-icons/md";
+import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
+import { useMediaQuery } from "react-responsive";
 
 import { mdScreenQuery } from "../../lib/Breakpoints";
-import { RichText, EventObject } from "../../lib/types";
+import { EventObject, RichText } from "../../lib/types";
 
 export const expandVariants = {
   open: { opacity: 1, height: "auto" },

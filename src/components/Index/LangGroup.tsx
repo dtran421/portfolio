@@ -1,6 +1,6 @@
 import { Language } from "../../lib/types";
-
 import Emoji from "../Global/Emoji";
+
 import LangProfile from "./LangProfile";
 
 type LangGroupProps = {

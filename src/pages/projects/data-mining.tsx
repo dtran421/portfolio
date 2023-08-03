@@ -1,6 +1,6 @@
-import dataMiningData from "../../../public/json/data-mining.json";
-
 import RepoLayout from "../../layouts/RepoLayout";
+
+import dataMiningData from "../../../public/json/data-mining.json";
 
 const DataMining = () => (
   <RepoLayout

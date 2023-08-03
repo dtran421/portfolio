@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { FiAlertTriangle, FiHome } from "react-icons/fi";
 
 import MainLayout from "../layouts/MainLayout";

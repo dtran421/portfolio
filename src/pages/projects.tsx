@@ -1,8 +1,8 @@
-import projects from "../../public/json/projects.json";
-
-import MainLayout from "../layouts/MainLayout";
 import Emoji from "../components/Global/Emoji";
 import ProjectCard from "../components/Projects/ProjectCard";
+import MainLayout from "../layouts/MainLayout";
+
+import projects from "../../public/json/projects.json";
 
 const Projects = () => {
   const { coding, finance } = projects;

@@ -1,6 +1,6 @@
-import { AnimationControls, AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-scroll";
+import { AnimatePresence, AnimationControls, motion } from "framer-motion";
 import { FiChevronsDown } from "react-icons/fi";
+import { Link } from "react-scroll";
 
 const learnMoreVariants = {
   hidden: {

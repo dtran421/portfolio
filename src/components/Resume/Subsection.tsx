@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
+import { useMediaQuery } from "react-responsive";
 
 import { lgScreenQuery } from "../../lib/Breakpoints";
-import { expandVariants, convertDateToAbbrevString } from "../Index/Event";
 import { SubsectionObject } from "../../lib/types";
+import { convertDateToAbbrevString, expandVariants } from "../Index/Event";
 
 type SubsectionProps = {
   content: SubsectionObject;

@@ -3,7 +3,6 @@ build
 coverage
 .next
 .vercel
-.vscode
 
 # Ignore all HTML files:
 **/*.html

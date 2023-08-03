@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { ReactNode } from "react";
+import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 
 import { lgScreenQuery } from "../../../lib/Breakpoints";

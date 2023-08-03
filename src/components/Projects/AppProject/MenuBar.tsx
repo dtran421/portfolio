@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { Link } from "react-scroll";
-import { useMediaQuery } from "react-responsive";
 import { AnimateSharedLayout, motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
+import { Link } from "react-scroll";
 
-import Contexts from "../../../lib/Contexts";
 import { lgScreenQuery } from "../../../lib/Breakpoints";
+import Contexts from "../../../lib/Contexts";
 
 const { AppProjectContext } = Contexts;
 

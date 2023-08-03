@@ -1,13 +1,12 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { FiTag } from "react-icons/fi";
 import SquareLoader from "react-spinners/SquareLoader";
 
-import { BlogPost } from "../lib/types";
-import BlogPostsQuery from "../graphql/BlogPostsQuery";
-
-import MainLayout from "../layouts/MainLayout";
 import Emoji from "../components/Global/Emoji";
+import BlogPostsQuery from "../graphql/BlogPostsQuery";
+import MainLayout from "../layouts/MainLayout";
+import { BlogPost } from "../lib/types";
 
 type TagsProps = {
   tags: string[];

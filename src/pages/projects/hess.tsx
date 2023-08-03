@@ -1,11 +1,10 @@
 import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
 
-import { Company, Quote } from "../../lib/types";
-import fetchStockData from "../../lib/fetchStockData";
-import { lgScreenQuery } from "../../lib/Breakpoints";
-
 import FinanceLayout from "../../layouts/FinanceLayout";
+import { lgScreenQuery } from "../../lib/Breakpoints";
+import fetchStockData from "../../lib/fetchStockData";
+import { Company, Quote } from "../../lib/types";
 
 const FilePreview = dynamic(import("../../components/Projects/FilePreview"), {
   ssr: false,

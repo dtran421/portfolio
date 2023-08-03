@@ -1,8 +1,9 @@
-import type { AppProps } from "next/app";
 import { useMemo, useState } from "react";
+import type { AppProps } from "next/app";
+
+import Contexts from "../lib/Contexts";
 
 import "../styles/globals.css";
-import Contexts from "../lib/Contexts";
 
 const Portfolio = ({ Component, pageProps }: AppProps) => {
   const [darkMode, toggleDarkMode] = useState(true);

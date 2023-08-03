@@ -1,8 +1,8 @@
 import Image from "next/image";
+import { FiDownload, FiMaximize2 } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
-import { FiMaximize2, FiDownload } from "react-icons/fi";
 
-import { mdScreenQuery, lgScreenQuery } from "../../lib/Breakpoints";
+import { lgScreenQuery, mdScreenQuery } from "../../lib/Breakpoints";
 
 type FilePreviewProps = {
   label: string;

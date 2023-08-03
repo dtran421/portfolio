@@ -1,24 +1,23 @@
 import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import axios from "axios";
 import { motion, useAnimation } from "framer-motion";
 import { IconContext } from "react-icons";
-import axios from "axios";
-import { FaGithub, FaLinkedinIn, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import SquareLoader from "react-spinners/SquareLoader";
 
-import { EventObject, LanguageGroup } from "@/lib/types";
-import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
-
-import MainLayout from "@/layouts/MainLayout";
 import Emoji from "@/components/Global/Emoji";
-import Timeline from "@/components/Index/Timeline";
-import LangGroup from "@/components/Index/LangGroup";
 import Carousel from "@/components/Index/Carousel";
-import SocialProfile from "@/components/Index/SocialProfile";
+import LangGroup from "@/components/Index/LangGroup";
 import LearnMore from "@/components/Index/LearnMore";
+import SocialProfile from "@/components/Index/SocialProfile";
+import Timeline from "@/components/Index/Timeline";
+import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
+import MainLayout from "@/layouts/MainLayout";
+import { getBaseContentfulUrl } from "@/lib/ContentfulUtil";
+import { EventObject, LanguageGroup } from "@/lib/types";
 
 import IndexContent from "@/public/json/index.json";
-import { getBaseContentfulUrl } from "./api/ContentfulUtil";
 
 export function isInViewport(el) {
   const rect = el.getBoundingClientRect();

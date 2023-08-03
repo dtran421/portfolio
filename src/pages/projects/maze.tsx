@@ -1,6 +1,6 @@
-import ProjectLayout from "../../layouts/ProjectLayout";
-import JavaSection from "../../components/Projects/Maze/JavaSection";
 import AndroidSection from "../../components/Projects/Maze/AndroidSection";
+import JavaSection from "../../components/Projects/Maze/JavaSection";
+import ProjectLayout from "../../layouts/ProjectLayout";
 
 const Maze = () => (
   <ProjectLayout page="Maze Game" type="coding" github="https://github.com/dtran421/MazeByDukeTran">

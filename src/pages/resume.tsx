@@ -1,16 +1,15 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { FiHome, FiMail, FiPhone } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
-import { FiMail, FiPhone, FiHome } from "react-icons/fi";
 import SquareLoader from "react-spinners/SquareLoader";
 
+import Section from "../components/Resume/Section";
+import ResumeSectionsQuery from "../graphql/ResumeSectionsQuery";
+import MainLayout from "../layouts/MainLayout";
 import { lgScreenQuery } from "../lib/Breakpoints";
 import { SubsectionObject } from "../lib/types";
-import ResumeSectionsQuery from "../graphql/ResumeSectionsQuery";
-
-import MainLayout from "../layouts/MainLayout";
-import Section from "../components/Resume/Section";
 
 const CheckMark = dynamic(import("../components/Resume/CheckMark"), {
   ssr: false,

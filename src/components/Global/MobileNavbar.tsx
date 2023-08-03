@@ -3,9 +3,8 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
-import { ResponsiveNavbarProps, tabs } from "./DesktopNavbar";
-
 import DarkModeToggle from "./DarkModeToggle";
+import { ResponsiveNavbarProps, tabs } from "./DesktopNavbar";
 
 type MobileNavlinkProps = {
   active: boolean;

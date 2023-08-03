@@ -1,16 +1,15 @@
-import Image from "next/image";
 import { GetStaticProps } from "next";
+import Image from "next/image";
 import { FiTag } from "react-icons/fi";
 import SquareLoader from "react-spinners/SquareLoader";
 
-import BlogPostsQuery from "../../graphql/BlogPostsQuery";
-import BlogPostQuery from "../../graphql/BlogPostQuery";
-import { BlogPost } from "../../lib/types";
-import getContentfulAccessToken from "../../lib/getContentfulAccessToken";
-
-import MainLayout from "../../layouts/MainLayout";
-import { convertDateToFullString } from "../blog";
 import Body from "../../components/BlogPost/Body";
+import BlogPostQuery from "../../graphql/BlogPostQuery";
+import BlogPostsQuery from "../../graphql/BlogPostsQuery";
+import MainLayout from "../../layouts/MainLayout";
+import getContentfulAccessToken from "../../lib/getContentfulAccessToken";
+import { BlogPost } from "../../lib/types";
+import { convertDateToFullString } from "../blog";
 
 type ProfileHeaderProps = {
   publishDate: string;

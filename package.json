@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "lint-prod": "next lint --quiet --fix"
   },
   "dependencies": {
@@ -56,6 +56,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.5",
     "prettier": "^2.6.2",

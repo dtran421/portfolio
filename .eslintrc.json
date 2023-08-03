@@ -20,8 +20,9 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "simple-import-sort"],
   "rules": {
+    "simple-import-sort/imports": "error",
     "@typescript-eslint/no-unused-vars": ["warn"],
     "react/function-component-definition": [
       "error",
@@ -40,5 +41,33 @@
     "import/prefer-default-export": "off",
     "no-unused-vars": "off",
     "no-console": ["warn", { "allow": ["info", "error"] }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // `react` first, `next` second, then packages starting with a character
+              ["^react$", "^next", "^[a-z]"],
+              // Packages starting with `@`
+              ["^@"],
+              // Absolute imports
+              ["^@/"],
+              // Imports starting with `../`
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Imports starting with `./`
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Json imports
+              ["^.+\\.json$"],
+              // Style imports
+              ["^.+\\.s?css$"]
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
