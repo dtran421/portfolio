@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
-import { useMediaQuery } from "react-responsive";
 
 import FinanceLayout from "../../layouts/FinanceLayout";
-import { lgScreenQuery, mdScreenQuery } from "../../lib/Breakpoints";
 import fetchStockData from "../../lib/fetchStockData";
 import { Company, Quote } from "../../lib/types";
 
@@ -16,16 +14,7 @@ type MurphyUSAProps = {
 };
 
 const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
-  const mgScreen = useMediaQuery(mdScreenQuery);
-  const lgScreen = useMediaQuery(lgScreenQuery);
-
-  let excelIconDim = 165;
-  if (mgScreen) {
-    excelIconDim = 248;
-  }
-  if (lgScreen) {
-    excelIconDim = 186;
-  }
+  const EXCEL_ICON_DIM = 165;
 
   return (
     <FinanceLayout
@@ -58,8 +47,8 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
             label="Murphy USA Analysis"
             filePath="/murphy-usa/MUSA_analysis.xlsx"
             previewImgPath="/projects/excel.png"
-            width={excelIconDim}
-            height={excelIconDim}
+            width={EXCEL_ICON_DIM}
+            height={EXCEL_ICON_DIM}
             special
           />
         </div>

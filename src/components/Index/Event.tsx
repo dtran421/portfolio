@@ -99,14 +99,12 @@ type EventProps = {
 const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorking, description } }: EventProps) => {
   const [isExpanded, setExpanded] = useState(false);
 
-  let Icon;
-  if (type === "Education") {
-    Icon = MdSchool;
-  } else if (type === "Internship") {
-    Icon = MdDesktopMac;
-  } else if (type === "Work") {
-    Icon = MdWork;
-  }
+  const eventTypeToIcon = {
+    Education: MdSchool,
+    Internship: MdDesktopMac,
+    Work: MdWork,
+  };
+  const Icon = eventTypeToIcon[type];
 
   const startDateStr = convertDateToAbbrevString(startDate);
   const endDateStr = convertDateToAbbrevString(endDate, currentlyWorking);

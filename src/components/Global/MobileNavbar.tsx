@@ -65,13 +65,13 @@ const navlinkListVariants = {
   },
 };
 
-const MobileNavbar = ({ sticky, darkMode, toggleDarkMode, page }: ResponsiveNavbarProps) => {
+const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
   const [isExpanded, toggleExpanded] = useState(false);
 
   return (
     <motion.div
       animate={isExpanded ? "expanded" : "collapsed"}
-      className={`w-full sticky z-50 flex flex-col bg-neutral-200 dark:bg-neutral-800 border-b
+      className={`w-full sticky z-50 flex lg:hidden flex-col bg-neutral-200 dark:bg-neutral-800 border-b
                 border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
                   sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
                 } shadow-lg`}
@@ -92,7 +92,7 @@ const MobileNavbar = ({ sticky, darkMode, toggleDarkMode, page }: ResponsiveNavb
           </p>
         </div>
         <div className="flex justify-end items-center">
-          <DarkModeToggle {...{ darkMode, toggleDarkMode }} />
+          <DarkModeToggle />
         </div>
       </div>
       <div className="overflow-hidden bg-transparent">

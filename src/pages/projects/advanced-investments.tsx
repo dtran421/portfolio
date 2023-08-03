@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
 import * as _ from "lodash";
-import { useMediaQuery } from "react-responsive";
 
 import FinanceLayout from "../../layouts/FinanceLayout";
-import { lgScreenQuery, mdScreenQuery, xlScreenQuery } from "../../lib/Breakpoints";
 import fetchStockData from "../../lib/fetchStockData";
 import { Company, Quote } from "../../lib/types";
 
@@ -17,28 +15,8 @@ type AdvancedInvestmentsProps = {
 };
 
 const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProps) => {
-  const mgScreen = useMediaQuery(mdScreenQuery);
-  const lgScreen = useMediaQuery(lgScreenQuery);
-  const xlScreen = useMediaQuery(xlScreenQuery);
-
-  let smallExcelIconDim = 83;
-  if (mgScreen) {
-    smallExcelIconDim = 165;
-  }
-  if (lgScreen) {
-    smallExcelIconDim = 83;
-  }
-  if (xlScreen) {
-    smallExcelIconDim = 165;
-  }
-
-  let largeExcelIconDim = 165;
-  if (mgScreen) {
-    largeExcelIconDim = 248;
-  }
-  if (lgScreen) {
-    largeExcelIconDim = 186;
-  }
+  const SMALL_EXCEL_ICON_DIM = 83;
+  const LARGE_EXCEL_ICON_DIM = 186;
 
   return (
     <FinanceLayout
@@ -72,8 +50,8 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
                     label={`HW${num}`}
                     filePath={`/advanced-investments/HW${num}.xlsx`}
                     previewImgPath="/projects/excel.png"
-                    width={smallExcelIconDim}
-                    height={smallExcelIconDim}
+                    width={SMALL_EXCEL_ICON_DIM}
+                    height={SMALL_EXCEL_ICON_DIM}
                     special
                   />
                 ))}
@@ -106,16 +84,16 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
                   label="Portfolio Inception"
                   filePath="/advanced-investments/Portfolio_inception.xlsx"
                   previewImgPath="/projects/excel.png"
-                  width={largeExcelIconDim}
-                  height={largeExcelIconDim}
+                  width={LARGE_EXCEL_ICON_DIM}
+                  height={LARGE_EXCEL_ICON_DIM}
                   special
                 />
                 <FilePreview
                   label="Portfolio Performance"
                   filePath="/advanced-investments/Portfolio_performance.xlsx"
                   previewImgPath="/projects/excel.png"
-                  width={largeExcelIconDim}
-                  height={largeExcelIconDim}
+                  width={LARGE_EXCEL_ICON_DIM}
+                  height={LARGE_EXCEL_ICON_DIM}
                   special
                 />
               </div>

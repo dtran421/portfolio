@@ -72,9 +72,15 @@ export type SubsectionObject = {
   description: RichText;
 };
 
+enum EventType {
+  EDUCATION = "Education",
+  INTERNSHIP = "Internship",
+  WORK = "Work",
+}
+
 export type EventObject = {
   heading: string;
-  type: string;
+  type: EventType;
   date: string;
   startDate: string;
   endDate: string;

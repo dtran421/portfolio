@@ -1,13 +1,9 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useMediaQuery } from "react-responsive";
 
-import Contexts from "../lib/Contexts";
-import { lgScreenQuery } from "../lib/Breakpoints";
-
-const DesktopNavbar = dynamic(() => import("../components/Global/DesktopNavbar"), { ssr: false });
-const MobileNavbar = dynamic(() => import("../components/Global/MobileNavbar"), { ssr: false });
+import DesktopNavbar from "@/components/Global/DesktopNavbar";
+import MobileNavbar from "@/components/Global/MobileNavbar";
+import { ThemeContext } from "@/lib/Contexts";
 
 type MainLayoutProps = {
   rootPage?: "Blog" | "Projects";
@@ -16,10 +12,7 @@ type MainLayoutProps = {
 };
 
 const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
-  const { ThemeContext } = Contexts;
-  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
-
-  const lgScreen = useMediaQuery(lgScreenQuery);
+  const { darkMode } = useContext(ThemeContext);
 
   const [stickyNavbar, toggleStickyNavbar] = useState(false);
   const stickyScrollListener = () => {
@@ -34,13 +27,6 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
     };
   });
 
-  const responsiveNavbarProps = {
-    sticky: stickyNavbar,
-    darkMode,
-    toggleDarkMode,
-    page: rootPage || page,
-  };
-
   const pageTitle = rootPage
     ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}`
     : `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
@@ -53,7 +39,9 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
       </Head>
       <div className={`${darkMode ? "dark" : ""}`}>
         <div className="w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
-          {lgScreen ? <DesktopNavbar {...responsiveNavbarProps} /> : <MobileNavbar {...responsiveNavbarProps} />}
+          {[DesktopNavbar, MobileNavbar].map((Navbar) => (
+            <Navbar key={Navbar.name} sticky={stickyNavbar} page={rootPage || page} />
+          ))}
           {children}
         </div>
       </div>

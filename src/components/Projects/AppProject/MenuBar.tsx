@@ -1,12 +1,8 @@
 import { useContext } from "react";
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive";
 import { Link } from "react-scroll";
 
-import { lgScreenQuery } from "../../../lib/Breakpoints";
-import Contexts from "../../../lib/Contexts";
-
-const { AppProjectContext } = Contexts;
+import { AppProjectContext } from "@/lib/Contexts";
 
 type NavButtonProps = {
   heading: string;
@@ -46,15 +42,12 @@ type MenuBarProps = {
 const MenuBar = ({ paragraphs }: MenuBarProps) => {
   const { activeP, pRefs, setAutoScroll } = useContext(AppProjectContext);
 
-  const lgScreen = useMediaQuery(lgScreenQuery);
-
-  return lgScreen ? (
-    <div className="sticky top-24 z-10 rounded-full flex bg-zinc-100/75 dark:bg-zinc-900/75 backdrop-blur-lg border-2 border-zinc-300 dark:border-zinc-700 dark-transition mt-10">
+  return (
+    <div className="sticky top-24 z-10 rounded-full hidden lg:flex bg-zinc-100/75 dark:bg-zinc-900/75 backdrop-blur-lg border-2 border-zinc-300 dark:border-zinc-700 dark-transition mt-10">
       <AnimateSharedLayout>
-        {(window || document) &&
-          activeP !== -1 &&
+        {activeP !== -1 &&
           paragraphs.map(({ heading }, idx) => {
-            const midHeight = (window.innerHeight || document.documentElement.clientHeight) / 2;
+            const midHeight = document.documentElement.clientHeight / 2;
 
             const rect = pRefs[idx].current.getBoundingClientRect();
             const height = rect.bottom - rect.top;
@@ -79,7 +72,7 @@ const MenuBar = ({ paragraphs }: MenuBarProps) => {
           })}
       </AnimateSharedLayout>
     </div>
-  ) : null;
+  );
 };
 
 export default MenuBar;

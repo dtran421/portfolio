@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
-import { useMediaQuery } from "react-responsive";
 
-import { lgScreenQuery } from "../../lib/Breakpoints";
-import { SubsectionObject } from "../../lib/types";
-import { convertDateToAbbrevString, expandVariants } from "../Index/Event";
+import { convertDateToAbbrevString, expandVariants } from "@/components/Index/Event";
+import { SubsectionObject } from "@/lib/types";
 
 type SubsectionProps = {
   content: SubsectionObject;
@@ -25,8 +23,6 @@ const Subsection = ({
   },
   style,
 }: SubsectionProps) => {
-  const lgScreen = useMediaQuery(lgScreenQuery);
-
   const [isExpanded, setExpanded] = useState(false);
 
   const startDateStr = convertDateToAbbrevString(startDate);
@@ -62,9 +58,9 @@ const Subsection = ({
           <div className="flex flex-col">
             <p className="max-w-md text-lg lg:text-xl font-medium text-secondary">{title}</p>
             <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{organization}</p>
-            {!lgScreen && <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{dateStr}</p>}
+            <p className="block lg:hidden lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{dateStr}</p>
           </div>
-          {lgScreen && <p className="lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{dateStr}</p>}
+          <p className="hidden lg:block lg:text-lg text-zinc-700 dark:text-zinc-300 dark-transition">{dateStr}</p>
         </div>
         <AnimatePresence initial={false}>
           {isExpanded && (

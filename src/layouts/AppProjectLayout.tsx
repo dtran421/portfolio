@@ -1,14 +1,11 @@
-import { useRef, useState, useEffect, useMemo, createRef, RefObject, ReactNode } from "react";
+import { createRef, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
-import Contexts from "../lib/Contexts";
+import MenuBar from "@/components/Projects/AppProject/MenuBar";
+import Paragraph from "@/components/Projects/AppProject/Paragraph";
+import { AppProjectContext } from "@/lib/Contexts";
 
 import ProjectLayout from "./ProjectLayout";
-import Paragraph from "../components/Projects/AppProject/Paragraph";
-
-const MenuBar = dynamic(() => import("../components/Projects/AppProject/MenuBar"), {
-  ssr: false,
-});
 
 const PhoneDemo = dynamic(() => import("../components/Projects/AppProject/PhoneDemo"), {
   ssr: false,
@@ -40,8 +37,6 @@ type AppProjectLayoutProps = {
 };
 
 const AppProjectLayout = ({ page, github, projectData, placeholder, children: description }: AppProjectLayoutProps) => {
-  const { AppProjectContext } = Contexts;
-
   const { data: paragraphs } = projectData;
 
   const pRefsRef = useRef<RefObject<HTMLParagraphElement | null>[]>(

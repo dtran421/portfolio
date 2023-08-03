@@ -1,23 +1,16 @@
-import dynamic from "next/dynamic";
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { IconContext } from "react-icons";
 import { FiHome, FiMail, FiPhone } from "react-icons/fi";
-import { useMediaQuery } from "react-responsive";
 import SquareLoader from "react-spinners/SquareLoader";
 
-import Section from "../components/Resume/Section";
-import ResumeSectionsQuery from "../graphql/ResumeSectionsQuery";
-import MainLayout from "../layouts/MainLayout";
-import { lgScreenQuery } from "../lib/Breakpoints";
-import { SubsectionObject } from "../lib/types";
-
-const CheckMark = dynamic(import("../components/Resume/CheckMark"), {
-  ssr: false,
-});
-
-const ContactLabel = dynamic(import("../components/Resume/ContactLabel"), {
-  ssr: false,
-});
+import CheckMark from "@/components/Resume/CheckMark";
+import ContactLabel from "@/components/Resume/ContactLabel";
+import Section from "@/components/Resume/Section";
+import ResumeSectionsQuery from "@/graphql/ResumeSectionsQuery";
+import MainLayout from "@/layouts/MainLayout";
+import { SubsectionObject } from "@/lib/types";
 
 type ResumeProps = {
   resumeTabsData: {
@@ -31,12 +24,12 @@ type ResumeProps = {
 };
 
 const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
-  const lgScreen = useMediaQuery(lgScreenQuery);
-
-  const iconProps = {
-    size: lgScreen ? 18 : 12,
-    className: "dark:text-white",
-  };
+  const iconContext = useMemo(
+    () => ({
+      className: "dark:text-white",
+    }),
+    []
+  );
 
   return (
     <MainLayout page="Resume">
@@ -77,13 +70,11 @@ const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
             </Link>
           </div>
           <div className="lg:w-1/3 space-y-2">
-            <ContactLabel label="duketran2001@gmail.com" icon={<FiMail {...iconProps} />} />
-            <ContactLabel label="(703)-409-3681" icon={<FiPhone {...iconProps} />} />
-            <ContactLabel
-              label="Please contact me personally if you need my address"
-              special
-              icon={<FiHome {...iconProps} />}
-            />
+            <IconContext.Provider value={iconContext}>
+              <ContactLabel label="duketran2001@gmail.com" icon={<FiMail />} />
+              <ContactLabel label="(703)-409-3681" icon={<FiPhone />} />
+              <ContactLabel label="Please contact me personally if you need my address" special icon={<FiHome />} />
+            </IconContext.Provider>
           </div>
         </div>
       </div>

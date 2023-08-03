@@ -1,14 +1,12 @@
 import { useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 
-import Contexts from "../lib/Contexts";
+import { ThemeContext } from "@/lib/Contexts";
 
-import "../styles/globals.css";
+import "@/styles/globals.css";
 
 const Portfolio = ({ Component, pageProps }: AppProps) => {
   const [darkMode, toggleDarkMode] = useState(true);
-
-  const { ThemeContext } = Contexts;
 
   const themeContextObject = useMemo(() => ({ darkMode, toggleDarkMode }), [darkMode]);
 
@@ -17,6 +15,7 @@ const Portfolio = ({ Component, pageProps }: AppProps) => {
   }
   return (
     <ThemeContext.Provider value={themeContextObject}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Component {...pageProps} />
     </ThemeContext.Provider>
   );
