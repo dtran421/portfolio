@@ -68,7 +68,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
     waveControls.start(waveAnimation);
   }, [waveAnimation, waveControls]);
 
-  const iconClassName = useMemo(() => ({ className: "w-full h-full" }), []);
+  const iconContext = useMemo(() => ({ className: "w-full h-full" }), []);
 
   const {
     intro,
@@ -114,7 +114,7 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
               <p>Below are some of my socials. Feel free to check them out and connect with me there!</p>
               <div className="w-full flex justify-center md:px-4 lg:px-0">
                 <div className="w-full lg:w-2/3 xl:w-full grid grid-cols-2 xl:flex xl:justify-center gap-x-8 lg:gap-x-4 xl:gap-x-2 gap-y-4">
-                  <IconContext.Provider value={iconClassName}>
+                  <IconContext.Provider value={iconContext}>
                     <SocialProfile name="dtran421" link="https://github.com/dtran421">
                       <FaGithub />
                     </SocialProfile>
