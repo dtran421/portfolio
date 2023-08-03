@@ -1,5 +1,5 @@
-import { Language } from "../../lib/types";
-import Emoji from "../Global/Emoji";
+import Emoji from "@/components/Global/Emoji";
+import { Language } from "@/lib/types";
 
 import LangProfile from "./LangProfile";
 

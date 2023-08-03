@@ -1,15 +1,11 @@
 import { createRef, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 
 import MenuBar from "@/components/Projects/AppProject/MenuBar";
 import Paragraph from "@/components/Projects/AppProject/Paragraph";
+import PhoneDemo from "@/components/Projects/AppProject/PhoneDemo";
 import { AppProjectContext } from "@/lib/Contexts";
 
 import ProjectLayout from "./ProjectLayout";
-
-const PhoneDemo = dynamic(() => import("../components/Projects/AppProject/PhoneDemo"), {
-  ssr: false,
-});
 
 const getActiveParagraph = (pRefs: RefObject<HTMLParagraphElement>[]) => {
   const midHeight = (window.innerHeight || document.documentElement.clientHeight) / 2;

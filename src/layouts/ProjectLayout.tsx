@@ -1,13 +1,11 @@
-import { useState, useRef, ReactNode } from "react";
-import dynamic from "next/dynamic";
+import { ReactNode, useRef, useState } from "react";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import projects from "../../public/json/projects.json";
+import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
+
 import MainLayout from "./MainLayout";
 
-const ProjectsBackButton = dynamic(() => import("../components/Projects/ProjectsBackButton"), {
-  ssr: false,
-});
+import projects from "@/public/json/projects.json";
 
 type ProjectLayoutProps = {
   page: string;

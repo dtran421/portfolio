@@ -1,4 +1,4 @@
-import { Company, Quote } from "../../../lib/types";
+import { Company, Quote } from "@/lib/types";
 
 const formatDateStr = (rawDateStr: string): string => {
   const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

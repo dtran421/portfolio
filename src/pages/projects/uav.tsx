@@ -1,5 +1,5 @@
-import FilePreview from "../../components/Projects/FilePreview";
-import ProjectLayout from "../../layouts/ProjectLayout";
+import FilePreview from "@/components/Projects/FilePreview";
+import ProjectLayout from "@/layouts/ProjectLayout";
 
 const UAV = () => (
   <ProjectLayout page="UAV Swarms" type="coding" github="https://github.com/dtran421/3D-SHARKS">

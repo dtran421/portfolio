@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
 
-import { EventObject, RichText } from "../../lib/types";
+import { EventObject, RichText } from "@/lib/types";
 
 export const expandVariants = {
   open: { opacity: 1, height: "auto" },

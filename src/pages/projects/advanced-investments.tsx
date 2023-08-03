@@ -1,13 +1,9 @@
-import dynamic from "next/dynamic";
 import * as _ from "lodash";
 
-import FinanceLayout from "../../layouts/FinanceLayout";
-import fetchStockData from "../../lib/fetchStockData";
-import { Company, Quote } from "../../lib/types";
-
-const FilePreview = dynamic(import("../../components/Projects/FilePreview"), {
-  ssr: false,
-});
+import FilePreview from "@/components/Projects/FilePreview";
+import FinanceLayout from "@/layouts/FinanceLayout";
+import fetchStockData from "@/lib/fetchStockData";
+import { Company, Quote } from "@/lib/types";
 
 type AdvancedInvestmentsProps = {
   quoteData: Quote;

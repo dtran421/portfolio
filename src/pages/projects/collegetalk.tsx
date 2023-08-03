@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import AppProjectLayout from "../../layouts/AppProjectLayout";
+import AppProjectLayout from "@/layouts/AppProjectLayout";
 
-import collegetalkData from "../../../public/json/collegetalk.json";
+import collegetalkData from "@/public/json/collegetalk.json";
 
 const CollegeTalk = () => (
   <AppProjectLayout

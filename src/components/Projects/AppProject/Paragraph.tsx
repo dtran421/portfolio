@@ -1,7 +1,6 @@
 import { RefObject } from "react";
-import dynamic from "next/dynamic";
 
-const MobileImage = dynamic(import("./MobileImage"), { ssr: false });
+import MobileImage from "./MobileImage";
 
 type ParagraphProps = {
   pRefs: RefObject<HTMLParagraphElement>[];

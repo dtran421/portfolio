@@ -1,13 +1,10 @@
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Project } from "../../lib/types";
+import { Project } from "@/lib/types";
 
-const ProjectCardLabel = dynamic(import("./ProjectCardLabel"), {
-  ssr: false,
-});
+import ProjectCardLabel from "./ProjectCardLabel";
 
 type ProjectCardProps = Project & {
   name: string;

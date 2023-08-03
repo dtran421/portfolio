@@ -1,6 +1,6 @@
-import RepoLayout from "../../layouts/RepoLayout";
+import RepoLayout from "@/layouts/RepoLayout";
 
-import machineLearningData from "../../../public/json/machine-learning.json";
+import machineLearningData from "@/public/json/machine-learning.json";
 
 const MachineLearning = () => (
   <RepoLayout

@@ -1,8 +1,6 @@
-import dynamic from "next/dynamic";
+import { EventObject } from "@/lib/types";
 
-import { EventObject } from "../../lib/types";
-
-const Event = dynamic(import("./Event"), { ssr: false });
+import Event from "./Event";
 
 type TimelineProps = {
   timelineData: EventObject[];

@@ -1,8 +1,8 @@
 import { FaApple } from "react-icons/fa";
 
-import AppProjectLayout from "../../layouts/AppProjectLayout";
+import AppProjectLayout from "@/layouts/AppProjectLayout";
 
-import whispearringsData from "../../../public/json/whispearrings.json";
+import whispearringsData from "@/public/json/whispearrings.json";
 
 const Whispearrings = () => (
   <AppProjectLayout

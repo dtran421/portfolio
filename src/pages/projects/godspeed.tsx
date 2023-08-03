@@ -1,4 +1,4 @@
-import ProjectLayout from "../../layouts/ProjectLayout";
+import ProjectLayout from "@/layouts/ProjectLayout";
 
 const Godspeed = () => (
   <ProjectLayout page="Godspeed" type="coding" github="https://github.com/dtran421/project-godspeed">

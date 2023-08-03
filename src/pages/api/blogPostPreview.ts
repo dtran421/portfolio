@@ -1,5 +1,6 @@
-import BlogPostQuery from "../../graphql/BlogPostQuery";
-import getContentfulAccessToken from "../../lib/getContentfulAccessToken";
+import getContentfulAccessToken from "@/lib/getContentfulAccessToken";
+
+import BlogPostQuery from "@/graphql/BlogPostQuery";
 
 const getPost = async (postId) => {
   try {

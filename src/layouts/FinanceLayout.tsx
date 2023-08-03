@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
 
-import { Quote, Company } from "../lib/types";
+import ClassProfile from "@/components/Projects/ClassProfile";
+import StockCard from "@/components/Projects/Finance/StockCard";
 
-import ClassProfile from "../components/Projects/ClassProfile";
-import StockCard from "../components/Projects/Finance/StockCard";
+import { Company, Quote } from "@/lib/types";
+
 import ProjectLayout from "./ProjectLayout";
 
 type FinanceLayoutProps = {
