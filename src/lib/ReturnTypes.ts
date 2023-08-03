@@ -17,3 +17,8 @@ export const unwrap = <T, E>(result: Result<T, E>): T => {
 
   throw new Error(`called unwrap on an error: ${(result as Err<E>).error}`);
 };
+
+export const isNone = <T>(value: Option<T>): value is null | undefined => value === null || value === undefined;
+export const isSome = <T>(value: Option<T>): value is T => !isNone(value);
+
+export const some = <T>(value: T): Option<T> => value;
