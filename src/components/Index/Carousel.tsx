@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
 
-import carouselData from "../../../public/json/carousel.json";
+import carouselData from "@/public/json/carousel.json";
 
 const Carousel = () => {
   const carousel = carouselData.imgs;
@@ -34,14 +34,16 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    let typewriterNode;
+    const typewriterObserver = new MutationObserver(typewriterListener);
     if (typewriter.current) {
-      typewriterNode = typewriter.current;
-      typewriter.current.addEventListener("DOMSubtreeModified", typewriterListener);
+      typewriterObserver.observe(typewriter.current, {
+        childList: true,
+        subtree: true,
+      });
     }
 
     return () => {
-      typewriterNode.removeEventListener("DOMSubtreeModified", typewriterListener);
+      typewriterObserver.disconnect();
     };
   });
 
