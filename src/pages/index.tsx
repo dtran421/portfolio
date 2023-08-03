@@ -14,7 +14,9 @@ import SocialProfile from "@/components/Index/SocialProfile";
 import Timeline from "@/components/Index/Timeline";
 import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
 import MainLayout from "@/layouts/MainLayout";
-import { getBaseContentfulUrl } from "@/lib/ContentfulUtil";
+import { queryContentful } from "@/lib/ContentfulUtil";
+import { logger } from "@/lib/Logger";
+import { isOk, unwrap } from "@/lib/ReturnTypes";
 import { EventObject, LanguageGroup } from "@/lib/types";
 
 import IndexContent from "@/public/json/index.json";
@@ -230,44 +232,16 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
   );
 };
 
+interface IndexQR {
+  timelineEventCollection: { items: EventObject[] };
+  languageGroupCollection: { items: LanguageGroup[] };
+}
+
 export const getStaticProps = async () => {
-  try {
-    const { data, status, statusText } = await axios.post<{
-      data: {
-        timelineEventCollection: {
-          items: EventObject[];
-        };
-        languageGroupCollection: {
-          items: LanguageGroup[];
-        };
-      };
-    }>(
-      getBaseContentfulUrl(),
-      { query: TimelineAndLanguageQuery },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
-        },
-      }
-    );
+  const response = await queryContentful<IndexQR>(TimelineAndLanguageQuery);
 
-    if (status !== 200) {
-      throw new Error(`Something went wrong with fetching index data: [${status}] ${statusText}`);
-    }
-
-    if (!data.data) {
-      throw new Error("Something went wrong with fetching index data: no data returned");
-    }
-
-    return {
-      props: {
-        timelineData: data.data.timelineEventCollection.items,
-        languageGroupsData: data.data.languageGroupCollection.items,
-      },
-    };
-  } catch (e) {
-    console.error(`Something went wrong with fetching index data: ${e.message}`);
+  if (!isOk(response)) {
+    logger.error(`Something went wrong with fetching index data: ${response.error.message}`);
     return {
       props: {
         timelineData: null,
@@ -275,6 +249,15 @@ export const getStaticProps = async () => {
       },
     };
   }
+
+  const { timelineEventCollection, languageGroupCollection } = unwrap(response);
+
+  return {
+    props: {
+      timelineData: timelineEventCollection.items,
+      languageGroupsData: languageGroupCollection.items,
+    },
+  };
 };
 
 export default Index;
