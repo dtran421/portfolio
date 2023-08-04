@@ -3,9 +3,14 @@ import { ReactNode } from "react";
 import ClassProfile from "@/components/Projects/ClassProfile";
 import RepoCard from "@/components/Projects/Repo/RepoCard";
 
+import projects from "@/public/json/projects.json";
+
 import ProjectLayout from "./ProjectLayout";
 
-import projects from "@/public/json/projects.json";
+
+
+
+
 
 type RepoPageProps = {
   bannerHeading: string;

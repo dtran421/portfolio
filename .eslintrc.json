@@ -58,14 +58,14 @@
               ["^@"],
               // Absolute imports
               ["^@/"],
-              // Imports starting with `../`
-              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-              // Imports starting with `./`
-              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
               // Json imports
               ["^.+\\.json$"],
               // Style imports
-              ["^.+\\.s?css$"]
+              ["^.+\\.s?css$"],
+              // Imports starting with `../`
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Imports starting with `./`
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
             ]
           }
         ]

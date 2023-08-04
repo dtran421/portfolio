@@ -22,10 +22,13 @@ const Projects = () => {
               {Object.keys(coding).map((name) => (
                 <ProjectCard
                   key={name}
-                  {...{
-                    name,
-                    ...coding[name],
-                  }}
+                  name={name}
+                  link={coding[name].link}
+                  accentColor={coding[name].accentColor}
+                  darkText={coding[name].darkText}
+                  thumbnail={coding[name].thumbnail}
+                  width={coding[name].width}
+                  height={coding[name].height}
                 />
               ))}
             </div>
@@ -38,10 +41,13 @@ const Projects = () => {
               {Object.keys(finance).map((name) => (
                 <ProjectCard
                   key={name}
-                  {...{
-                    name,
-                    ...finance[name],
-                  }}
+                  name={name}
+                  link={coding[name].link}
+                  accentColor={coding[name].accentColor}
+                  darkText={coding[name].darkText}
+                  thumbnail={coding[name].thumbnail}
+                  width={coding[name].width}
+                  height={coding[name].height}
                 />
               ))}
             </div>

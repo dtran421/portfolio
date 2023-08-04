@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 
 import ClassProfile from "@/components/Projects/ClassProfile";
 import StockCard from "@/components/Projects/Finance/StockCard";
-
 import { Company, Quote } from "@/lib/types";
 
 import ProjectLayout from "./ProjectLayout";

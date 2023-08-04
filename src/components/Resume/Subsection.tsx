@@ -3,10 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 
 import { convertDateToAbbrevString, expandVariants } from "@/components/Index/Event";
-import { SubsectionObject } from "@/lib/types";
+import { ResumeSubsection } from "@/lib/types";
 
 type SubsectionProps = {
-  content: SubsectionObject;
+  content: ResumeSubsection;
   style: string;
 };
 

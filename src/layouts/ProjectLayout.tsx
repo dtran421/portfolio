@@ -3,9 +3,9 @@ import { FiCheck, FiCopy } from "react-icons/fi";
 
 import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
 
-import MainLayout from "./MainLayout";
-
 import projects from "@/public/json/projects.json";
+
+import MainLayout from "./MainLayout";
 
 type ProjectLayoutProps = {
   page: string;

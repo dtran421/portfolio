@@ -1,11 +1,11 @@
-import { SubsectionObject } from "@/lib/types";
+import { ResumeSubsection } from "@/lib/types";
 
 import Subsection from "./Subsection";
 
 type SectionProps = {
   type: string;
   heading: string;
-  body: (SubsectionObject | string)[];
+  body: (ResumeSubsection | string)[];
 };
 
 const Section = ({ type, heading, body }: SectionProps) => (
@@ -18,7 +18,7 @@ const Section = ({ type, heading, body }: SectionProps) => (
       {heading}
     </p>
     {type === "Tabs" ? (
-      body.map((content: SubsectionObject, idx, arr) => {
+      body.map((content: ResumeSubsection, idx, arr) => {
         let style;
         if (idx === 0) style = "border-b-4 border-zinc-300 dark:border-zinc-600 dark-transition pb-6";
         else if (idx + 1 === arr.length) style = "pt-6";
