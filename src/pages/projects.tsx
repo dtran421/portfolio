@@ -42,12 +42,12 @@ const Projects = () => {
                 <ProjectCard
                   key={name}
                   name={name}
-                  link={coding[name].link}
-                  accentColor={coding[name].accentColor}
-                  darkText={coding[name].darkText}
-                  thumbnail={coding[name].thumbnail}
-                  width={coding[name].width}
-                  height={coding[name].height}
+                  link={finance[name].link}
+                  accentColor={finance[name].accentColor}
+                  darkText={finance[name].darkText}
+                  thumbnail={finance[name].thumbnail}
+                  width={finance[name].width}
+                  height={finance[name].height}
                 />
               ))}
             </div>
