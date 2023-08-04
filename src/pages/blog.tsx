@@ -6,6 +6,9 @@ import SquareLoader from "react-spinners/SquareLoader";
 import Emoji from "@/components/Global/Emoji";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
+import { queryContentful } from "@/lib/ContentfulUtil";
+import { logger } from "@/lib/Logger";
+import { isOk, unwrap } from "@/lib/ReturnTypes";
 import { BlogPost } from "@/lib/types";
 
 type TagsProps = {
@@ -130,10 +133,26 @@ const Blog = ({ blogPosts }: BlogProps) => (
       )}
       {blogPosts?.length && (
         <>
-          <BlogPostCard {...blogPosts[0]} featured />
+          <BlogPostCard
+            postId={blogPosts[0].postId}
+            title={blogPosts[0].title}
+            publishDate={blogPosts[0].publishDate}
+            topicTags={blogPosts[0].topicTags}
+            heroBanner={blogPosts[0].heroBanner}
+            body={blogPosts[0].body}
+            featured
+          />
           <div className="flex flex-col md:grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {blogPosts.slice(1).map((blogPost) => (
-              <BlogPostCard key={blogPost.postId} {...blogPost} />
+              <BlogPostCard
+                key={blogPost.postId}
+                postId={blogPost.postId}
+                title={blogPost.title}
+                publishDate={blogPost.publishDate}
+                topicTags={blogPost.topicTags}
+                heroBanner={blogPost.heroBanner}
+                body={blogPost.body}
+              />
             ))}
           </div>
         </>
@@ -142,38 +161,33 @@ const Blog = ({ blogPosts }: BlogProps) => (
   </MainLayout>
 );
 
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({ query: BlogPostsQuery }),
-      }
-    );
-    const {
-      data: {
-        blogPostCollection: { items: blogPosts },
-      },
-    } = await response.json();
+interface BlogQR {
+  blogPostCollection: {
+    items: BlogPost[];
+  };
+}
 
-    return {
-      props: {
-        blogPosts,
-      },
-    };
-  } catch (exception) {
-    console.error(`Something went wrong with fetching blog posts: ${exception.message}`);
+export const getStaticProps = async () => {
+  const response = await queryContentful<BlogQR>(BlogPostsQuery);
+
+  if (!isOk(response)) {
+    logger.error(`Something went wrong with fetching blog posts: ${response.error.message}`);
     return {
       props: {
         blogPosts: [],
       },
     };
   }
+
+  const {
+    blogPostCollection: { items: blogPosts },
+  } = unwrap(response);
+
+  return {
+    props: {
+      blogPosts,
+    },
+  };
 };
 
 export default Blog;

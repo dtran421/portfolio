@@ -10,18 +10,21 @@ import ContactLabel from "@/components/Resume/ContactLabel";
 import Section from "@/components/Resume/Section";
 import ResumeSectionsQuery from "@/graphql/ResumeSectionsQuery";
 import MainLayout from "@/layouts/MainLayout";
-import { SubsectionObject } from "@/lib/types";
+import { queryContentful } from "@/lib/ContentfulUtil";
+import { logger } from "@/lib/Logger";
+import { isOk, unwrap } from "@/lib/ReturnTypes";
+import { ResumeBubblesSection, ResumeSubsection, ResumeTabSection } from "@/lib/types";
 
-type ResumeProps = {
+interface ResumeProps {
   resumeTabsData: {
     heading: string;
-    subsections: SubsectionObject[];
+    subsections: ResumeSubsection[];
   }[];
   resumeBubblesData: {
     heading: string;
     items: string[];
   }[];
-};
+}
 
 const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
   const iconContext = useMemo(
@@ -98,44 +101,16 @@ const Resume = ({ resumeTabsData, resumeBubblesData }: ResumeProps) => {
   );
 };
 
+interface ResumeQR {
+  resumeTabSectionCollection: { items: ResumeTabSection[] };
+  resumeBubblesSectionCollection: { items: ResumeBubblesSection[] };
+}
+
 export const getStaticProps = async () => {
-  try {
-    const response = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({ query: ResumeSectionsQuery }),
-      }
-    );
+  const response = await queryContentful<ResumeQR>(ResumeSectionsQuery);
 
-    const {
-      data: {
-        resumeTabSectionCollection: { items: tabsData },
-        resumeBubblesSectionCollection: { items: bubblesData },
-      },
-    } = await response.json();
-
-    const resumeTabsData = tabsData.map(({ heading, subsectionsCollection: { items: subsections } }) => ({
-      heading,
-      subsections,
-    }));
-    const resumeBubblesData = bubblesData.map(({ heading, items }) => ({
-      heading,
-      items,
-    }));
-
-    return {
-      props: {
-        resumeTabsData,
-        resumeBubblesData,
-      },
-    };
-  } catch (exception) {
-    console.error(`Something went wrong with fetching resume data: ${exception.message}`);
+  if (!isOk(response)) {
+    logger.error(`Something went wrong with fetching resume data: ${response.error.message}`);
     return {
       props: {
         resumeTabsData: null,
@@ -143,6 +118,27 @@ export const getStaticProps = async () => {
       },
     };
   }
+
+  const {
+    resumeTabSectionCollection: { items: tabsData },
+    resumeBubblesSectionCollection: { items: bubblesData },
+  } = unwrap(response);
+
+  const resumeTabsData = tabsData.map(({ heading, subsectionsCollection: { items: subsections } }) => ({
+    heading,
+    subsections,
+  }));
+  const resumeBubblesData = bubblesData.map(({ heading, items }) => ({
+    heading,
+    items,
+  }));
+
+  return {
+    props: {
+      resumeTabsData,
+      resumeBubblesData,
+    },
+  };
 };
 
 export default Resume;

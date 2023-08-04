@@ -7,17 +7,26 @@ import { err, ok } from "./ReturnTypes";
 const getBaseContentfulUrl = () =>
   `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`;
 
-export const queryContentful = async <T>(query: string) => {
+export const queryContentful = async <T>(
+  query: string,
+  variables?: {
+    preview?: boolean;
+    postId: string;
+  },
+  preview = false
+) => {
   try {
     const { data, status, statusText } = await axios.post<{
       data: T;
     }>(
       getBaseContentfulUrl(),
-      { query },
+      { query, variables },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN}`,
+          Authorization: `Bearer ${
+            preview ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN : process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN
+          }`,
         },
       }
     );

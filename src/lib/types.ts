@@ -63,14 +63,29 @@ export type RichText = {
   links?: Links;
 };
 
-export type SubsectionObject = {
+export interface ResumeSubsection {
   title: string;
   organization: string;
   startDate: string;
   endDate: string;
   currentlyWorking: boolean;
   description: RichText;
-};
+}
+
+export interface ResumeTabSection {
+  heading: string;
+  subsectionsCollection: { items: ResumeSubsection[] };
+}
+
+export interface BubbleSection {
+  heading: string;
+  items: string[];
+}
+
+export interface ResumeBubblesSection {
+  heading: string;
+  items: BubbleSection[];
+}
 
 enum EventType {
   EDUCATION = "Education",
@@ -78,7 +93,7 @@ enum EventType {
   WORK = "Work",
 }
 
-export type EventObject = {
+export interface EventObject {
   heading: string;
   type: EventType;
   date: string;
@@ -86,26 +101,26 @@ export type EventObject = {
   endDate: string;
   currentlyWorking: boolean;
   description: RichText;
-};
+}
 
-export type Language = {
+export interface Language {
   name: string;
   img: {
     url: string;
   };
   accentColor: string;
   darkText: boolean;
-};
+}
 
-export type LanguageGroup = {
+export interface LanguageGroup {
   heading: string;
   description: string;
   emoji: string;
   emojiLabel: string;
   languagesCollection: { items: Language[] };
-};
+}
 
-export type BlogPost = {
+export interface BlogPost {
   postId: string;
   title: string;
   publishDate: string;
@@ -117,4 +132,4 @@ export type BlogPost = {
     height: number;
   };
   body: RichText;
-};
+}

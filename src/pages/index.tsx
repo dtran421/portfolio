@@ -31,10 +31,10 @@ export function isInViewport(el) {
   );
 }
 
-type IndexProps = {
+interface IndexProps {
   timelineData: EventObject[];
   languageGroupsData: LanguageGroup[];
-};
+}
 
 const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
   const learnMoreAnimations = useAnimation();

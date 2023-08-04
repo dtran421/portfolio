@@ -1,15 +1,18 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { FiTag } from "react-icons/fi";
 import SquareLoader from "react-spinners/SquareLoader";
 
 import Body from "@/components/BlogPost/Body";
-import MainLayout from "@/layouts/MainLayout";
-import getContentfulAccessToken from "@/lib/getContentfulAccessToken";
-import { BlogPost } from "@/lib/types";
-
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
+import MainLayout from "@/layouts/MainLayout";
+import { queryContentful } from "@/lib/ContentfulUtil";
+import { logger } from "@/lib/Logger";
+import { isOk, unwrap } from "@/lib/ReturnTypes";
+import { BlogPost } from "@/lib/types";
+
+import { BlogPostQR } from "../api/blogPostPreview";
 import { convertDateToFullString } from "../blog";
 
 type ProfileHeaderProps = {
@@ -86,9 +89,9 @@ const BlogPostPage = ({ postData }: BlogPostProps) => {
   );
 };
 
-export const getStaticPaths = async ({ preview }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const accessToken = getContentfulAccessToken(preview);
+    const accessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
 
     const response = await fetch(
       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
@@ -124,43 +127,34 @@ export const getStaticPaths = async ({ preview }) => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async ({ preview, params: { postId } }) => {
-  try {
-    const accessToken = getContentfulAccessToken(preview);
+export const getStaticProps: GetStaticProps<
+  BlogPostProps,
+  {
+    postId: string;
+  }
+> = async ({ preview = false, params: { postId } }) => {
+  const response = await queryContentful<BlogPostQR>(BlogPostQuery, { preview, postId }, preview);
 
-    const response = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          query: BlogPostQuery,
-          variables: { preview, postId },
-        }),
-      }
-    );
-    const {
-      data: {
-        blogPostCollection: { items: postData },
-      },
-    } = await response.json();
-
-    return {
-      props: {
-        postData: postData[0],
-      },
-    };
-  } catch (exception) {
-    console.error(`Something went wrong with fetching blog post: ${exception.message}`);
+  if (!isOk(response)) {
+    logger.error(`Something went wrong with fetching blog post: ${response.error.message}`);
     return {
       props: {
         postData: null,
       },
     };
   }
+
+  const {
+    blogPostCollection: {
+      items: [postData],
+    },
+  } = unwrap(response);
+
+  return {
+    props: {
+      postData,
+    },
+  };
 };
 
 export default BlogPostPage;
