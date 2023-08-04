@@ -1,47 +1,75 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "next",
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb",
-        "next",
-        "prettier",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "react/function-component-definition": [
+      "error",
+      {
+        "unnamedComponents": "arrow-function",
+        "namedComponents": "arrow-function"
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 13,
-        "sourceType": "module"
-    },
-    "plugins": ["react", "react-hooks", "@typescript-eslint"],
-    "rules": {
-        "@typescript-eslint/no-unused-vars": ["warn"],
-        "react/function-component-definition": [
-            "error",
-            {
-                "unnamedComponents": "arrow-function",
-                "namedComponents": "arrow-function"
-            }
-        ],
-        "react/jsx-props-no-spreading": "off",
-        "react/jsx-filename-extension": [
-            "warn",
-            { "extensions": [".jsx", ".tsx"] }
-        ],
-        "react/prop-types": "off", // Since we do not use prop-types
-        "react/require-default-props": "off", // Since we do not use prop-types,
-        "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-        "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
-        "react/jsx-curly-brace-presence": "warn",
-        "import/extensions": ["error", "never", { "json": "always" }],
-        "no-unused-vars": "off",
-        "no-console": ["warn", { "allow": ["info", "error"] }]
+    "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".tsx"] }],
+    "react/prop-types": "off", // Since we do not use prop-types
+    "react/require-default-props": "off", // Since we do not use prop-types,
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react/jsx-curly-brace-presence": "warn",
+    "import/extensions": ["error", "never", { "json": "always" }],
+    "import/prefer-default-export": "off",
+    "no-unused-vars": "off",
+    "no-console": ["warn", { "allow": ["info", "error"] }],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // `react` first, `next` second, then packages starting with a character
+              ["^react$", "^next", "^[a-z]"],
+              // Packages starting with `@`
+              ["^@"],
+              // Absolute imports
+              ["^@/"],
+              // Json imports
+              ["^.+\\.json$"],
+              // Style imports
+              ["^.+\\.s?css$"],
+              // Imports starting with `../`
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Imports starting with `./`
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+            ]
+          }
+        ]
+      }
     }
+  ]
 }

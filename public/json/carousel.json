@@ -1,46 +1,46 @@
 {
-    "imgs": [
-        {
-            "label": "a Programmer",
-            "pic": "programmer.jpg",
-            "width": 201,
-            "height": 389
-        },
-        {
-            "label": "a Developer",
-            "pic": "developer.jpg",
-            "width": 275,
-            "height": 367
-        },
-        {
-            "label": "an Investor",
-            "pic": "investor.jpg",
-            "width": 275,
-            "height": 367
-        },
-        {
-            "label": "a Scientist",
-            "pic": "scientist.jpeg",
-            "width": 432,
-            "height": 288
-        },
-        {
-            "label": "an Innovator",
-            "pic": "innovator.jpg",
-            "width": 244,
-            "height": 390
-        },
-        {
-            "label": "a Curious Learner",
-            "pic": "curious_learner.jpg",
-            "width": 275,
-            "height": 367
-        },
-        {
-            "label": "a Critical Thinker",
-            "pic": "critical_thinker.jpg",
-            "width": 275,
-            "height": 367
-        }
-    ]
+  "imgs": [
+    {
+      "label": "a Programmer",
+      "pic": "programmer.jpg",
+      "width": 201,
+      "height": 389
+    },
+    {
+      "label": "a Developer",
+      "pic": "developer.jpg",
+      "width": 275,
+      "height": 367
+    },
+    {
+      "label": "an Investor",
+      "pic": "investor.jpg",
+      "width": 275,
+      "height": 367
+    },
+    {
+      "label": "a Scientist",
+      "pic": "scientist.jpeg",
+      "width": 432,
+      "height": 288
+    },
+    {
+      "label": "an Innovator",
+      "pic": "innovator.jpg",
+      "width": 244,
+      "height": 390
+    },
+    {
+      "label": "a Curious Learner",
+      "pic": "curious_learner.jpg",
+      "width": 275,
+      "height": 367
+    },
+    {
+      "label": "a Critical Thinker",
+      "pic": "critical_thinker.jpg",
+      "width": 275,
+      "height": 367
+    }
+  ]
 }

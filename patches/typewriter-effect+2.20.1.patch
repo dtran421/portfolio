@@ -1,5 +1,5 @@
 diff --git a/node_modules/typewriter-effect/index.d.ts b/node_modules/typewriter-effect/index.d.ts
-index a292b9c..a680bd5 100644
+index 3541220..623b05f 100644
 --- a/node_modules/typewriter-effect/index.d.ts
 +++ b/node_modules/typewriter-effect/index.d.ts
 @@ -39,6 +39,12 @@ declare module "typewriter-effect" {

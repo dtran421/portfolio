@@ -1,24 +1,24 @@
 {
-    "data": [
-        {
-            "heading": "App",
-            "body": "The core function of the app was to provide a user-friendly platform for college students to ask questions, provide answers, and foster meaningful discussions. I successfully developed the majority of the app's functional UI and the crucial backend and database models. Within the app, there are three main screens that support capabilities to view posts (Home), create posts to ask questions (Create Post), and switch between users (Profile). There are several other sub-screens that support these main functions."
-        },
-        {
-            "heading": "Posts",
-            "body": "The Home tab enables users to scroll through a feed of posts. We originally intended to implement a feature to only display posts belonging to subgroups in which users were members, but we unfortunately did not have enough time to implement this. On the Create Post tab, users can ask questions and post them to subgroups in which they're members."
-        },
-        {
-            "heading": "Subgroups",
-            "body": "The Home tab's side drawer displays all of the subgroups that a user belongs to. At the top, it displays the university they're currently attending (and therefore its constituent subgroups). Users can view a separate screen where they can join or leave subgroups as they please. Within the individual subgroup screens, they can view posts belonging to that particular subgroup."
-        },
-        {
-            "heading": "Upvotes",
-            "body": "All posts and comments support upvotes, which users can freely provide or revoke as they please. This feature helps indicate which posts and comments are most insightful, helpful, etc. Comments are currently sorted in descending order by upvotes. We decided to not include a downvote feature since it could potentially foster negativity and toxicity in an otherwise welcoming community aimed to help students get answers they're looking for. Instead, we planned on implementing a reporting feature to flag potentially harmful or disruptive posts."
-        },
-        {
-            "heading": "Users",
-            "body": "We hoped to be able to develop a simple system for user authentication and sessions, but this turned out to be too grand of a task given the timeframe we had to complete the project. Therefore, we opted to implement a very crude system to switch between users for prototyping purposes. Each user is attributed to their own posts and comments and are appropriately linked to the subgroups in which they're members."
-        }
-    ]
+  "data": [
+    {
+      "heading": "App",
+      "body": "The core function of the app was to provide a user-friendly platform for college students to ask questions, provide answers, and foster meaningful discussions. I successfully developed the majority of the app's functional UI and the crucial backend and database models. Within the app, there are three main screens that support capabilities to view posts (Home), create posts to ask questions (Create Post), and switch between users (Profile). There are several other sub-screens that support these main functions."
+    },
+    {
+      "heading": "Posts",
+      "body": "The Home tab enables users to scroll through a feed of posts. We originally intended to implement a feature to only display posts belonging to subgroups in which users were members, but we unfortunately did not have enough time to implement this. On the Create Post tab, users can ask questions and post them to subgroups in which they're members."
+    },
+    {
+      "heading": "Subgroups",
+      "body": "The Home tab's side drawer displays all of the subgroups that a user belongs to. At the top, it displays the university they're currently attending (and therefore its constituent subgroups). Users can view a separate screen where they can join or leave subgroups as they please. Within the individual subgroup screens, they can view posts belonging to that particular subgroup."
+    },
+    {
+      "heading": "Upvotes",
+      "body": "All posts and comments support upvotes, which users can freely provide or revoke as they please. This feature helps indicate which posts and comments are most insightful, helpful, etc. Comments are currently sorted in descending order by upvotes. We decided to not include a downvote feature since it could potentially foster negativity and toxicity in an otherwise welcoming community aimed to help students get answers they're looking for. Instead, we planned on implementing a reporting feature to flag potentially harmful or disruptive posts."
+    },
+    {
+      "heading": "Users",
+      "body": "We hoped to be able to develop a simple system for user authentication and sessions, but this turned out to be too grand of a task given the timeframe we had to complete the project. Therefore, we opted to implement a very crude system to switch between users for prototyping purposes. Each user is attributed to their own posts and comments and are appropriately linked to the subgroups in which they're members."
+    }
+  ]
 }

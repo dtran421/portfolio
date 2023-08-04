@@ -1,23 +1,23 @@
 {
-    "intro": "I'm currently a junior studying CS and finance at William & Mary. I'm super interested in exploring the intersection of technology and financial markets, hopefully through internships and other learning opportunities. I'm also passionate about coding and programming in general, so feel free to take a look around the website and learn more about me!",
-    "aboutMe": {
-        "section1": {
-            "pic_props": {
-                "src": "/img/about_me_1.jpg",
-                "width": 309,
-                "height": 413,
-                "className": "rounded-xl"
-            },
-            "paragraph": "I began my fateful journey to becoming a skilled programmer as a fledgling sophomore in high school. Ever since I took my first CS class, I have been in love with coding and all the bugs that come with it. For me, the most exciting part of programming is the process of solving problems through creative ideas and innovative approaches."
-        },
-        "section2": {
-            "pic_props": {
-                "src": "/img/about_me_2.jpg",
-                "width": 309,
-                "height": 413,
-                "className": "rounded-xl"
-            },
-            "paragraph": "I'm also a very data-oriented person, hence my enjoyment for algorithmic optimization. Coming from a STEM-focused high school, I have come to love and embrace the scientific process and using numbers and rigorous testing to make code more efficient."
-        }
+  "intro": "I'm a recent graduate from William & Mary with a Bachelor's in CS and a minor in Finance. I'm super interested in exploring the intersection of technology and financial markets. I am currently working at Arch as a Full Stack Software Engineer. Feel free to take a look around the website and learn more about me!",
+  "aboutMe": {
+    "section1": {
+      "pic_props": {
+        "src": "/img/about_me_1.jpg",
+        "width": 309,
+        "height": 413,
+        "className": "rounded-xl"
+      },
+      "paragraph": "I began my fateful journey to becoming a skilled programmer as a fledgling sophomore in high school. Ever since I took my first CS class, I have been in love with coding and all the bugs that come with it. For me, the most exciting part of programming is the process of solving problems through creative ideas and innovative approaches."
+    },
+    "section2": {
+      "pic_props": {
+        "src": "/img/about_me_2.jpg",
+        "width": 309,
+        "height": 413,
+        "className": "rounded-xl"
+      },
+      "paragraph": "I'm also a very data-oriented person, hence my enjoyment for algorithmic optimization. Coming from a STEM-focused high school, I have come to love and embrace the scientific process and using numbers and rigorous testing to make code more efficient."
     }
+  }
 }

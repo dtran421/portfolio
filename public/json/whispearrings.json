@@ -1,24 +1,24 @@
 {
-    "data": [
-        {
-            "heading": "App",
-            "body": "The core function of the app was to play whispers to the user at certain times throughout the day. I successfully managed to design an appealing and functional UI that enabled users to play back audio files saved within the app. More importantly, these whispers were stored within a queue that could be managed by the user (whispers could be manually added and removed)."
-        },
-        {
-            "heading": "Record",
-            "body": "The Record tab enables users to record their own whispers, name them however they wish, and save them to their libraries. It also supports playback capabilities for users to listen to it and re-record if they wish until they're content."
-        },
-        {
-            "heading": "Library",
-            "body": "The Library tab displays all of the whispers that are currently stored on a user's device. It comes equipped with three menu buttons: one to display all whispers, one to filter by the default whispers that come pre-installed with the app, and one to filter by user-recorded whispers. Keep in mind that these user-recorded whispers are local only to the user (a user can't view other users' whispers)."
-        },
-        {
-            "heading": "Queue",
-            "body": "The queue comes fully equipped with comprehensive capabilities to manage whispers. Within the Queue tab, users can remove the default whispers as they please. From the Library tab, they can also add whispers, including their recorded ones, to the queue."
-        },
-        {
-            "heading": "Playback",
-            "body": "Playback and scheduling of the queue can be fine-tuned to the preferences of each user. Within the top-right menu, users can customize their queue with a multitude of options ranging from playback time intervals (which can also be random), shuffle play, and repeat. For individual whispers, users can assign them time intervals or even specific times throughout the day at which they should play."
-        }
-    ]
+  "data": [
+    {
+      "heading": "App",
+      "body": "The core function of the app was to play whispers to the user at certain times throughout the day. I successfully managed to design an appealing and functional UI that enabled users to play back audio files saved within the app. More importantly, these whispers were stored within a queue that could be managed by the user (whispers could be manually added and removed)."
+    },
+    {
+      "heading": "Record",
+      "body": "The Record tab enables users to record their own whispers, name them however they wish, and save them to their libraries. It also supports playback capabilities for users to listen to it and re-record if they wish until they're content."
+    },
+    {
+      "heading": "Library",
+      "body": "The Library tab displays all of the whispers that are currently stored on a user's device. It comes equipped with three menu buttons: one to display all whispers, one to filter by the default whispers that come pre-installed with the app, and one to filter by user-recorded whispers. Keep in mind that these user-recorded whispers are local only to the user (a user can't view other users' whispers)."
+    },
+    {
+      "heading": "Queue",
+      "body": "The queue comes fully equipped with comprehensive capabilities to manage whispers. Within the Queue tab, users can remove the default whispers as they please. From the Library tab, they can also add whispers, including their recorded ones, to the queue."
+    },
+    {
+      "heading": "Playback",
+      "body": "Playback and scheduling of the queue can be fine-tuned to the preferences of each user. Within the top-right menu, users can customize their queue with a multitude of options ranging from playback time intervals (which can also be random), shuffle play, and repeat. For individual whispers, users can assign them time intervals or even specific times throughout the day at which they should play."
+    }
+  ]
 }

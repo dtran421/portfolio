@@ -1,41 +1,46 @@
+import { ContentfulQuery } from "@/lib/ContentfulUtil";
+
+import { ContentfulResource } from "./Resources";
+
 const BlogPostQuery = /* GraphQL */ `
-    query ($preview: Boolean, $postId: String) {
-        blogPostCollection(
-            preview: $preview
-            limit: 1
-            where: { postId: $postId }
-        ) {
-            items {
-                postId
-                title
-                body {
-                    json
-                    links {
-                        entries {
-                            block {
-                                sys {
-                                    id
-                                }
-                                __typename
-                                ... on CodeSnippet {
-                                    code
-                                    language
-                                }
-                            }
-                        }
-                    }
+  query ($preview: Boolean, $postId: String) {
+    blogPostCollection(preview: $preview, limit: 1, where: { postId: $postId }) {
+      items {
+        postId
+        title
+        body {
+          json
+          links {
+            entries {
+              block {
+                sys {
+                  id
                 }
-                heroBanner {
-                    title
-                    url
-                    width
-                    height
+                __typename
+                ... on CodeSnippet {
+                  code
+                  language
                 }
-                publishDate
-                topicTags
+              }
             }
+          }
         }
+        heroBanner {
+          title
+          url
+          width
+          height
+        }
+        publishDate
+        topicTags
+      }
     }
+  }
 `;
 
-export default BlogPostQuery;
+const q: ContentfulQuery = {
+  resources: [ContentfulResource.BlogPost],
+  query: BlogPostQuery,
+};
+
+export default q;

@@ -1,12 +1,5 @@
 import { HiBadgeCheck } from "react-icons/hi";
-import { useMediaQuery } from "react-responsive";
 
-import { lgScreenQuery } from "../../lib/Breakpoints";
-
-const CheckMark = () => {
-    const lgScreen = useMediaQuery(lgScreenQuery);
-
-    return <HiBadgeCheck color="#9333EA" size={lgScreen ? 28 : 20} />;
-};
+const CheckMark = () => <HiBadgeCheck color="#9333EA" className="w-6 h-6 lg:w-8 lg:h-8" />;
 
 export default CheckMark;

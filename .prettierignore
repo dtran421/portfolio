@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+.next
+.vercel
+
+# Ignore all HTML files:
+**/*.html
+next-env.d.ts
