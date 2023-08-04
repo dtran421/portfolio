@@ -1,3 +1,7 @@
+import { ContentfulQuery } from "@/lib/ContentfulUtil";
+
+import { ContentfulResource } from "./Resources";
+
 const BlogPostsQuery = /* GraphQL */ `
   query {
     blogPostCollection(order: publishDate_DESC) {
@@ -20,4 +24,9 @@ const BlogPostsQuery = /* GraphQL */ `
   }
 `;
 
-export default BlogPostsQuery;
+const q: ContentfulQuery = {
+  resources: [ContentfulResource.BlogPost],
+  query: BlogPostsQuery,
+};
+
+export default q;

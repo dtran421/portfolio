@@ -1,3 +1,7 @@
+import { ContentfulQuery } from "@/lib/ContentfulUtil";
+
+import { ContentfulResource } from "./Resources";
+
 const ResumeSectionsQuery = /* GraphQL */ `
   query {
     resumeTabSectionCollection(order: order_ASC) {
@@ -28,4 +32,9 @@ const ResumeSectionsQuery = /* GraphQL */ `
   }
 `;
 
-export default ResumeSectionsQuery;
+const q: ContentfulQuery = {
+  resources: [ContentfulResource.ResumeTabSection, ContentfulResource.ResumeBubblesSection],
+  query: ResumeSectionsQuery,
+};
+
+export default q;

@@ -1,20 +1,28 @@
 import axios, { AxiosError } from "axios";
 
+import { ContentfulResource } from "@/graphql/Resources";
 import { logger } from "@/lib/Logger";
 
-import { err, ok } from "./ReturnTypes";
+import { Result } from "./ReturnTypes";
 
 const getBaseContentfulUrl = () =>
   `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`;
 
+export interface ContentfulQuery {
+  resources: ContentfulResource[];
+  query: string;
+}
+
 export const queryContentful = async <T>(
-  query: string,
+  gqlQuery: ContentfulQuery,
   variables?: {
     preview?: boolean;
     postId: string;
   },
   preview = false
-) => {
+): Promise<Result<T, Error>> => {
+  const { resources, query } = gqlQuery;
+
   try {
     const { data, status, statusText } = await axios.post<{
       data: T;
@@ -32,21 +40,26 @@ export const queryContentful = async <T>(
     );
 
     if (status !== 200) {
-      return err(new Error(`[${status}] ${statusText}`));
+      return Result<T, Error>(new Error(`[${status}] ${statusText}`));
     }
 
     if (!data.data) {
-      return err(new Error("no data returned"));
+      return Result<T, Error>(new Error("no data returned"));
     }
 
-    return ok({
-      ...data.data,
-    });
+    const { data: qr } = data;
+
+    return Result<T, Error>(
+      resources.reduce(
+        (map, r) => ({ ...map, [`${ContentfulResource[r]}s`]: qr[`${ContentfulResource[r]}Collection`].items }),
+        {}
+      ) as T
+    );
   } catch (error) {
     if (axios.isAxiosError(error)) {
       logger.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return err<Error | AxiosError>(error);
+    return Result<T, Error | AxiosError>(error);
   }
 };

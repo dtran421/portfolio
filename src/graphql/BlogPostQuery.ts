@@ -1,3 +1,7 @@
+import { ContentfulQuery } from "@/lib/ContentfulUtil";
+
+import { ContentfulResource } from "./Resources";
+
 const BlogPostQuery = /* GraphQL */ `
   query ($preview: Boolean, $postId: String) {
     blogPostCollection(preview: $preview, limit: 1, where: { postId: $postId }) {
@@ -34,4 +38,9 @@ const BlogPostQuery = /* GraphQL */ `
   }
 `;
 
-export default BlogPostQuery;
+const q: ContentfulQuery = {
+  resources: [ContentfulResource.BlogPost],
+  query: BlogPostQuery,
+};
+
+export default q;
