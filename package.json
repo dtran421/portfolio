@@ -3,7 +3,6 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "patch-package",
     "pull-env": "npx vercel env pull .env.local",
     "dev": "next dev",
     "build": "next build",
