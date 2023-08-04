@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "pull-env": "npx vercel env pull .env.local",
     "dev": "next dev",
     "build": "next build",
@@ -22,6 +23,7 @@
     "graphql": "^16.5.0",
     "lodash": "^4.17.21",
     "next": "^12.1.0",
+    "patch-package": "^8.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-icons": "^4.3.1",
