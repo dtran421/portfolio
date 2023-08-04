@@ -49,12 +49,7 @@ export const queryContentful = async <T>(
 
     const { data: qr } = data;
 
-    return Result<T, Error>(
-      resources.reduce(
-        (map, r) => ({ ...map, [`${ContentfulResource[r]}s`]: qr[`${ContentfulResource[r]}Collection`].items }),
-        {}
-      ) as T
-    );
+    return Result<T, Error>(resources.reduce((map, r) => ({ ...map, [`${r}s`]: qr[`${r}Collection`].items }), {}) as T);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       logger.error("Something went wrong with axios: ", error.toJSON());
