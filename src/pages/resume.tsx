@@ -16,7 +16,7 @@ import { Err, Ok } from "@/lib/ReturnTypes";
 import { ResumeBubblesSection, ResumeSubsection, ResumeTabSection } from "@/lib/types";
 
 interface ResumeProps {
-  resumeTabsSections: {
+  resumeTabSections: {
     heading: string;
     subsections: ResumeSubsection[];
   }[];
@@ -26,7 +26,7 @@ interface ResumeProps {
   }[];
 }
 
-const Resume = ({ resumeTabsSections, resumeBubblesSections }: ResumeProps) => {
+const Resume = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
   const iconContext = useMemo(
     () => ({
       className: "dark:text-white",
@@ -82,9 +82,9 @@ const Resume = ({ resumeTabsSections, resumeBubblesSections }: ResumeProps) => {
         </div>
       </div>
       <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
-        {resumeTabsSections && resumeBubblesSections ? (
+        {resumeTabSections && resumeBubblesSections ? (
           <>
-            {resumeTabsSections.map(({ heading: tabHeading, subsections: tabBody }) => (
+            {resumeTabSections.map(({ heading: tabHeading, subsections: tabBody }) => (
               <Section key={tabHeading} type="Tabs" heading={tabHeading} body={tabBody} />
             ))}
             {resumeBubblesSections.map(({ heading: bubblesHeading, items: bubblesBody }) => (
