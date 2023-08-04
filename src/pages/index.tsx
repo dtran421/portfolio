@@ -15,8 +15,8 @@ import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
 import MainLayout from "@/layouts/MainLayout";
 import { queryContentful } from "@/lib/ContentfulUtil";
 import { logger } from "@/lib/Logger";
-import { isOk, unwrap } from "@/lib/ReturnTypes";
-import { EventObject, LanguageGroup } from "@/lib/types";
+import { Err, Ok } from "@/lib/ReturnTypes";
+import { LanguageGroup, TimelineEvent } from "@/lib/types";
 
 import IndexContent from "@/public/json/index.json";
 
@@ -32,11 +32,11 @@ export function isInViewport(el) {
 }
 
 interface IndexProps {
-  timelineData: EventObject[];
-  languageGroupsData: LanguageGroup[];
+  timelineEvents: TimelineEvent[];
+  languageGroups: LanguageGroup[];
 }
 
-const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
+const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
   const learnMoreAnimations = useAnimation();
 
   const page1 = useRef(null);
@@ -185,8 +185,8 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
           My Journey
         </h1>
         <div className="mb-20">
-          {timelineData ? (
-            <Timeline {...{ timelineData }} />
+          {timelineEvents ? (
+            <Timeline timelineEvents={timelineEvents} />
           ) : (
             <div className="w-full flex justify-center items-center pt-10">
               <SquareLoader color="#9333ea" />
@@ -205,8 +205,8 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
           my passions and perform my career functions to the best of my ability.
         </p>
         <div className="space-y-4">
-          {languageGroupsData ? (
-            languageGroupsData.map(
+          {languageGroups ? (
+            languageGroups.map(
               ({ heading, description, emoji, emojiLabel, languagesCollection: { items: languages } }) => (
                 <LangGroup
                   key={heading}
@@ -231,30 +231,28 @@ const Index = ({ timelineData, languageGroupsData }: IndexProps) => {
   );
 };
 
-interface IndexQR {
-  timelineEventCollection: { items: EventObject[] };
-  languageGroupCollection: { items: LanguageGroup[] };
-}
+type IndexQR = IndexProps;
 
 export const getStaticProps = async () => {
   const response = await queryContentful<IndexQR>(TimelineAndLanguageQuery);
 
-  if (!isOk(response)) {
-    logger.error(`Something went wrong with fetching index data: ${response.error.message}`);
+  if (response.isErr()) {
+    const err = (response as Err<Error>).unwrap();
+    logger.error(`Something went wrong with fetching index data: ${err.message}`);
     return {
       props: {
-        timelineData: null,
-        languageGroupsData: null,
+        timelineEvents: null,
+        languageGroups: null,
       },
     };
   }
 
-  const { timelineEventCollection, languageGroupCollection } = unwrap(response);
+  const { timelineEvents, languageGroups } = (response as Ok<IndexQR>).unwrap();
 
   return {
     props: {
-      timelineData: timelineEventCollection.items,
-      languageGroupsData: languageGroupCollection.items,
+      timelineEvents,
+      languageGroups,
     },
   };
 };

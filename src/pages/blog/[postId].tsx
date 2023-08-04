@@ -9,7 +9,7 @@ import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
 import { queryContentful } from "@/lib/ContentfulUtil";
 import { logger } from "@/lib/Logger";
-import { isOk, unwrap } from "@/lib/ReturnTypes";
+import { Err, Ok } from "@/lib/ReturnTypes";
 import { BlogPost } from "@/lib/types";
 
 import { BlogPostQR } from "../api/blogPostPreview";
@@ -37,11 +37,11 @@ const ProfileHeader = ({ publishDate }: ProfileHeaderProps) => (
 );
 
 type BlogPostProps = {
-  postData: BlogPost;
+  blogPost: BlogPost;
 };
 
-const BlogPostPage = ({ postData }: BlogPostProps) => {
-  if (!postData) {
+const BlogPostPage = ({ blogPost }: BlogPostProps) => {
+  if (!blogPost) {
     return (
       <MainLayout page="" rootPage="Blog">
         <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
@@ -59,7 +59,7 @@ const BlogPostPage = ({ postData }: BlogPostProps) => {
     topicTags: tags,
     heroBanner: { title: imgTitle, url, width, height },
     body,
-  } = postData;
+  } = blogPost;
 
   return (
     <MainLayout page={title} rootPage="Blog">
@@ -90,41 +90,27 @@ const BlogPostPage = ({ postData }: BlogPostProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const accessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+  const response = await queryContentful<BlogPostQR>(BlogPostsQuery);
 
-    const response = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ query: BlogPostsQuery }),
-      }
-    );
-    const {
-      data: {
-        blogPostCollection: { items: blogPosts },
-      },
-    } = await response.json();
-
-    const paths = blogPosts.map(({ postId }) => ({
-      params: { postId },
-    }));
-
-    return {
-      paths,
-      fallback: false,
-    };
-  } catch (exception) {
-    console.error(`Something went wrong with fetching blog posts: ${exception.message}`);
+  if (response.isErr()) {
+    const err = (response as Err<Error>).unwrap();
+    logger.error(`Something went wrong with fetching blog posts: ${err.message}`);
     return {
       paths: [],
       fallback: true,
     };
   }
+
+  const { blogPosts } = (response as Ok<BlogPostQR>).unwrap();
+
+  const paths = blogPosts.map(({ postId }) => ({
+    params: { postId },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps<
@@ -135,24 +121,23 @@ export const getStaticProps: GetStaticProps<
 > = async ({ preview = false, params: { postId } }) => {
   const response = await queryContentful<BlogPostQR>(BlogPostQuery, { preview, postId }, preview);
 
-  if (!isOk(response)) {
-    logger.error(`Something went wrong with fetching blog post: ${response.error.message}`);
+  if (response.isErr()) {
+    const err = (response as Err<Error>).unwrap();
+    logger.error(`Something went wrong with fetching blog post: ${err.message}`);
     return {
       props: {
-        postData: null,
+        blogPost: null,
       },
     };
   }
 
   const {
-    blogPostCollection: {
-      items: [postData],
-    },
-  } = unwrap(response);
+    blogPosts: [blogPost],
+  } = (response as Ok<BlogPostQR>).unwrap();
 
   return {
     props: {
-      postData,
+      blogPost,
     },
   };
 };

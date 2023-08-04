@@ -1,3 +1,7 @@
+import { ContentfulQuery } from "@/lib/ContentfulUtil";
+
+import { ContentfulResource } from "./Resources";
+
 const TimelineAndLanguageQuery = /* GraphQL */ `
   query {
     timelineEventCollection(order: startDate_ASC) {
@@ -33,4 +37,9 @@ const TimelineAndLanguageQuery = /* GraphQL */ `
   }
 `;
 
-export default TimelineAndLanguageQuery;
+const q: ContentfulQuery = {
+  resources: [ContentfulResource.TimelineEvent, ContentfulResource.LanguageGroup],
+  query: TimelineAndLanguageQuery,
+};
+
+export default q;

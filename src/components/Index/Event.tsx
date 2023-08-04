@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
 
-import { EventObject, RichText } from "@/lib/types";
+import { RichText, TimelineEvent } from "@/lib/types";
 
 export const expandVariants = {
   open: { opacity: 1, height: "auto" },
@@ -93,7 +93,7 @@ const Card = ({
 
 type EventProps = {
   side: string;
-  data: EventObject;
+  data: TimelineEvent;
 };
 
 const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorking, description } }: EventProps) => {

@@ -93,7 +93,7 @@ enum EventType {
   WORK = "Work",
 }
 
-export interface EventObject {
+export interface TimelineEvent {
   heading: string;
   type: EventType;
   date: string;

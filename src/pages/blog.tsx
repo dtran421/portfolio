@@ -8,7 +8,7 @@ import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
 import { queryContentful } from "@/lib/ContentfulUtil";
 import { logger } from "@/lib/Logger";
-import { isOk, unwrap } from "@/lib/ReturnTypes";
+import { Err, Ok } from "@/lib/ReturnTypes";
 import { BlogPost } from "@/lib/types";
 
 type TagsProps = {
@@ -161,17 +161,14 @@ const Blog = ({ blogPosts }: BlogProps) => (
   </MainLayout>
 );
 
-interface BlogQR {
-  blogPostCollection: {
-    items: BlogPost[];
-  };
-}
+type BlogQR = BlogProps;
 
 export const getStaticProps = async () => {
   const response = await queryContentful<BlogQR>(BlogPostsQuery);
 
-  if (!isOk(response)) {
-    logger.error(`Something went wrong with fetching blog posts: ${response.error.message}`);
+  if (response.isErr()) {
+    const err = (response as Err<Error>).unwrap();
+    logger.error(`Something went wrong with fetching blog posts: ${err.message}`);
     return {
       props: {
         blogPosts: [],
@@ -179,9 +176,7 @@ export const getStaticProps = async () => {
     };
   }
 
-  const {
-    blogPostCollection: { items: blogPosts },
-  } = unwrap(response);
+  const { blogPosts } = (response as Ok<BlogQR>).unwrap();
 
   return {
     props: {
