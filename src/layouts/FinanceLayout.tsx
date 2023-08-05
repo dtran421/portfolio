@@ -52,7 +52,7 @@ const FinanceLayout = ({
   const isLoading = isLoadingQuote || isLoadingCompany;
 
   const stockCardData = useMemo(() => {
-    if (isLoading)
+    if (isLoading) {
       return {
         symbol,
         name: "",
@@ -61,9 +61,18 @@ const FinanceLayout = ({
         price: 0,
         change: 0,
         changePct: 0,
-        column1: {},
-        column2: {},
+        column1: {
+          "Market Cap": "",
+          "52 Week Range": "",
+          "Dividend Yield": "",
+        },
+        column2: {
+          Sector: "",
+          Industry: "",
+          "EPS (TTM)": "",
+        },
       };
+    }
 
     const { price, change, changePct, latestBusinessDay } = quoteData;
     const { name, exchange, sector, industry, marketCap, dividendYield, eps, high52Weeks, low52Weeks } = companyData;

@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { ThemeContext } from "@/lib/Contexts";
 
@@ -22,6 +23,7 @@ const Portfolio = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeContext.Provider>
   );
