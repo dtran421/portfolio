@@ -7,7 +7,7 @@ import { Company, Quote } from "@/lib/types";
 import ProjectLayout from "./ProjectLayout";
 
 type FinanceLayoutProps = {
-  page: string;
+  pageTitle: string;
   classProfileProps: {
     heading: string;
     dateString: string;
@@ -20,14 +20,14 @@ type FinanceLayoutProps = {
 };
 
 const FinanceLayout = ({
-  page,
+  pageTitle,
   classProfileProps: { heading, dateString, description },
   quoteData,
   companyData,
   purchasePrice,
   children,
 }: FinanceLayoutProps) => (
-  <ProjectLayout {...{ page }} type="finance">
+  <ProjectLayout pageTitle={pageTitle} type="finance">
     <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl flex flex-col items-center space-y-10 lg:space-y-14 mx-10 md:mx-auto">
       <ClassProfile {...{ heading, dateString }}>{description}</ClassProfile>
       <StockCard {...{ quoteData, companyData, purchasePrice }} />

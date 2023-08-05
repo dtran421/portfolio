@@ -6,7 +6,7 @@ import whispearringsData from "@/public/json/whispearrings.json";
 
 const Whispearrings = () => (
   <AppProjectLayout
-    page="Whispearrings"
+    pageTitle="Whispearrings"
     github="https://github.com/dtran421/Whispearrings-swift"
     projectData={whispearringsData}
     placeholder={

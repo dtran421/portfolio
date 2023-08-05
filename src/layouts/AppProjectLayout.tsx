@@ -20,7 +20,7 @@ const getActiveParagraph = (pRefs: RefObject<HTMLParagraphElement>[]) => {
 };
 
 type AppProjectLayoutProps = {
-  page: string;
+  pageTitle: string;
   github: string;
   projectData: {
     data: {
@@ -32,7 +32,13 @@ type AppProjectLayoutProps = {
   children: ReactNode;
 };
 
-const AppProjectLayout = ({ page, github, projectData, placeholder, children: description }: AppProjectLayoutProps) => {
+const AppProjectLayout = ({
+  pageTitle,
+  github,
+  projectData,
+  placeholder,
+  children: description,
+}: AppProjectLayoutProps) => {
   const { data: paragraphs } = projectData;
 
   const pRefsRef = useRef<RefObject<HTMLParagraphElement | null>[]>(
@@ -84,7 +90,7 @@ const AppProjectLayout = ({ page, github, projectData, placeholder, children: de
   );
 
   return (
-    <ProjectLayout {...{ page, github }} type="coding">
+    <ProjectLayout pageTitle={pageTitle} github={github} type="coding">
       <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl relative flex flex-col items-center gap-y-20 mx-10 md:mx-auto mt-10 lg:mb-30">
         <div className="w-full lg:w-3/4 flex flex-col items-center space-y-6">
           <h1 className="text-4xl text-center font-bold">Background & Motivation</h1>
@@ -96,10 +102,10 @@ const AppProjectLayout = ({ page, github, projectData, placeholder, children: de
         <div className="flex">
           <div className="w-full lg:w-1/2 flex flex-col items-center">
             {paragraphs.map((paragraph, idx) => (
-              <Paragraph key={paragraph.heading} {...{ pRefs, idx, paragraph }} page={page.toLowerCase()} />
+              <Paragraph key={paragraph.heading} {...{ pRefs, idx, paragraph }} page={pageTitle.toLowerCase()} />
             ))}
           </div>
-          <PhoneDemo {...{ activeP, imgClass, placeholder }} page={page.toLowerCase()} />
+          <PhoneDemo {...{ activeP, imgClass, placeholder }} page={pageTitle.toLowerCase()} />
         </div>
       </div>
     </ProjectLayout>

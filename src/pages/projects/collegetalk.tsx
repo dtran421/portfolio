@@ -6,7 +6,7 @@ import collegetalkData from "@/public/json/collegetalk.json";
 
 const CollegeTalk = () => (
   <AppProjectLayout
-    page="CollegeTalk"
+    pageTitle="CollegeTalk"
     github="https://github.com/CollegeTalk/CollegeTalk"
     projectData={collegetalkData}
     placeholder={

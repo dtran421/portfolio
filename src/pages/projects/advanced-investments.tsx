@@ -16,7 +16,7 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
 
   return (
     <FinanceLayout
-      page="Advanced Investments"
+      pageTitle="Advanced Investments"
       classProfileProps={{
         heading: "[BUAD 427] Advanced Investments",
         dateString: "Fall 2021",

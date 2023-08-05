@@ -1,7 +1,7 @@
 import ProjectLayout from "@/layouts/ProjectLayout";
 
 const Godspeed = () => (
-  <ProjectLayout page="Godspeed" type="coding" github="https://github.com/dtran421/project-godspeed">
+  <ProjectLayout pageTitle="Godspeed" type="coding" github="https://github.com/dtran421/project-godspeed">
     <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex mx-10 md:mx-auto">
       <div className="w-full flex flex-col items-center">
         <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4">

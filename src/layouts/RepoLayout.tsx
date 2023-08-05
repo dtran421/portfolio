@@ -23,7 +23,7 @@ const RepoLayout = ({ bannerHeading, heading, dateString, data, children }: Repo
   const { accentColor } = projects.coding[bannerHeading];
 
   return (
-    <ProjectLayout page={bannerHeading} type="coding">
+    <ProjectLayout pageTitle={bannerHeading} type="coding">
       <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col mx-8 md:mx-auto">
         <ClassProfile {...{ heading, dateString }}>{children}</ClassProfile>
         <div className="w-full flex flex-col lg:grid lg:grid-cols-2 gap-y-10 lg:gap-6 md:px-10 lg:px-0 mt-20">

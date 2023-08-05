@@ -13,7 +13,7 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
 
   return (
     <FinanceLayout
-      page="MUSA Credit Analysis"
+      pageTitle="MUSA Credit Analysis"
       classProfileProps={{
         heading: "[BUAD 329] Corporate Valuation and Credit Analysis",
         dateString: "Spring 2021",

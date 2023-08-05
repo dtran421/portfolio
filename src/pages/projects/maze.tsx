@@ -3,7 +3,7 @@ import JavaSection from "@/components/Projects/Maze/JavaSection";
 import ProjectLayout from "@/layouts/ProjectLayout";
 
 const Maze = () => (
-  <ProjectLayout page="Maze Game" type="coding" github="https://github.com/dtran421/MazeByDukeTran">
+  <ProjectLayout pageTitle="Maze Game" type="coding" github="https://github.com/dtran421/MazeByDukeTran">
     <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex mx-10 md:mx-auto">
       <div className="w-full flex flex-col items-center space-y-20">
         <div className="flex flex-col items-center space-y-6">

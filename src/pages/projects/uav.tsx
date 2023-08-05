@@ -2,7 +2,7 @@ import FilePreview from "@/components/Projects/FilePreview";
 import ProjectLayout from "@/layouts/ProjectLayout";
 
 const UAV = () => (
-  <ProjectLayout page="UAV Swarms" type="coding" github="https://github.com/dtran421/3D-SHARKS">
+  <ProjectLayout pageTitle="UAV Swarms" type="coding" github="https://github.com/dtran421/3D-SHARKS">
     <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl flex flex-col xl:flex-row justify-between space-y-10 xl:space-y-0 xl:space-x-20 py-20 mx-10 md:mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-20 gap-y-10 xl:gap-y-0">
         <div className="flex flex-col space-y-4">

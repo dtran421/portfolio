@@ -4,14 +4,16 @@ import Head from "next/head";
 import DesktopNavbar, { TABS } from "@/components/Global/DesktopNavbar";
 import MobileNavbar from "@/components/Global/MobileNavbar";
 import { ThemeContext } from "@/lib/Contexts";
+import { isNullish } from "@/lib/Util";
 
 type MainLayoutProps = {
   rootPage?: "Blog" | "Projects";
-  page: (typeof TABS)[number];
+  page?: (typeof TABS)[number];
+  pageTitle?: string;
   children: ReactNode;
 };
 
-const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
+const MainLayout = ({ rootPage = null, page, pageTitle, children }: MainLayoutProps) => {
   const { darkMode } = useContext(ThemeContext);
 
   const [stickyNavbar, toggleStickyNavbar] = useState(false);
@@ -27,12 +29,15 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
     };
   });
 
-  const pageTitle = rootPage ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}` : `Duke Tran | ${page}`;
-
+  if (isNullish(page) && isNullish(rootPage)) {
+    console.warn("MainLayout: page and rootPage are both nullish");
+  }
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
+        <title>
+          {rootPage ? `${pageTitle.substring(0, 50)}${page.length > 50 ? "..." : ""}` : `Duke Tran | ${pageTitle}`}
+        </title>
         <meta property="og:title" content={pageTitle} key="title" />
       </Head>
       <div className={`${darkMode ? "dark" : ""}`}>

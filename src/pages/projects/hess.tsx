@@ -10,7 +10,7 @@ type HessProps = {
 
 const Hess = ({ quoteData, companyData }: HessProps) => (
   <FinanceLayout
-    page="HES Pitch"
+    pageTitle="HES Pitch"
     classProfileProps={{
       heading: "[BUAD 421] Student Managed Investment Fund",
       dateString: "Spring 2022",

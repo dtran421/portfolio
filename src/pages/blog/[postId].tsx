@@ -43,7 +43,7 @@ type BlogPostProps = {
 const BlogPostPage = ({ blogPost }: BlogPostProps) => {
   if (!blogPost) {
     return (
-      <MainLayout page="" rootPage="Blog">
+      <MainLayout rootPage="Blog">
         <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
           <div className="w-full flex justify-center items-center py-10">
             <SquareLoader color="#9333ea" />
@@ -62,7 +62,7 @@ const BlogPostPage = ({ blogPost }: BlogPostProps) => {
   } = blogPost;
 
   return (
-    <MainLayout page={title} rootPage="Blog">
+    <MainLayout rootPage="Blog" pageTitle={title}>
       <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
         <div className="overflow-hidden w-full h-48 md:h-56 lg:h-64 flex items-center rounded-t-xl mb-6">
           <Image src={url} alt={imgTitle} {...{ width, height }} />

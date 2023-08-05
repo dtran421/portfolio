@@ -9,8 +9,9 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
     "lint": "next lint --fix",
-    "lint-prod": "next lint --quiet --fix",
+    "precommit": "yarn run format && yarn run typecheck && yarn run lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic"

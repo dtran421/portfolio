@@ -8,13 +8,13 @@ import projects from "@/public/json/projects.json";
 import MainLayout from "./MainLayout";
 
 type ProjectLayoutProps = {
-  page: string;
+  pageTitle: string;
   type: "coding" | "finance";
   github?: string;
   children: ReactNode;
 };
 
-const ProjectLayout = ({ page, type, github, children }: ProjectLayoutProps) => {
+const ProjectLayout = ({ pageTitle, type, github, children }: ProjectLayoutProps) => {
   const githubLink = useRef(null);
   const [isFocused, setFocused] = useState(false);
   const [isCopyActive, setCopyActive] = useState(false);
@@ -27,10 +27,10 @@ const ProjectLayout = ({ page, type, github, children }: ProjectLayoutProps) => 
     }, 3000);
   };
 
-  const { accentColor, darkText } = projects[type][page];
+  const { accentColor, darkText } = projects[type][pageTitle];
 
   return (
-    <MainLayout {...{ page }} rootPage="Projects">
+    <MainLayout rootPage="Projects" pageTitle={pageTitle}>
       <div
         style={{ backgroundColor: accentColor }}
         className="w-full xl:h-60 flex flex-col xl:flex-row justify-end xl:justify-between items-center xl:items-end space-y-6 px-5 xl:px-12 py-6"
@@ -42,7 +42,7 @@ const ProjectLayout = ({ page, type, github, children }: ProjectLayoutProps) => 
             darkText ? "text-black" : "text-white"
           }`}
         >
-          {page}
+          {pageTitle}
         </h1>
         {github && (
           <div className="flex justify-center items-center space-x-4">

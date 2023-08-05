@@ -40,7 +40,7 @@
     "import/extensions": ["error", "never", { "json": "always" }],
     "import/prefer-default-export": "off",
     "no-unused-vars": "off",
-    "no-console": ["warn", { "allow": ["info", "error"] }],
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn"
   },
