@@ -86,7 +86,7 @@ export const Option = <T>(value?: T): Option<T> => {
       },
     },
     coalesce: {
-      value: (defaultValue?: T) => (o.some ? value : defaultValue),
+      value: (defaultValue?: T) => (o.some ? value : defaultValue ?? null),
     },
     isNone: {
       value: () => !o.some,

@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconContext } from "react-icons";
 import { FiHome, FiMail, FiPhone } from "react-icons/fi";
-import SquareLoader from "react-spinners/SquareLoader";
 
+import FetchError from "@/components/Global/FetchError";
 import CheckMark from "@/components/Resume/CheckMark";
 import ContactLabel from "@/components/Resume/ContactLabel";
 import Section from "@/components/Resume/Section";
@@ -92,9 +92,7 @@ const Resume = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
             ))}
           </>
         ) : (
-          <div className="w-full flex justify-center items-center">
-            <SquareLoader color="#9333ea" />
-          </div>
+          <FetchError />
         )}
       </div>
     </MainLayout>

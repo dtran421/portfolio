@@ -22,15 +22,15 @@ const learnMoreVariants = {
 };
 
 type LearnMoreProps = {
-  learnMoreAnimations: AnimationControls;
+  animations: AnimationControls;
 };
 
-const LearnMore = ({ learnMoreAnimations }: LearnMoreProps) => (
+const LearnMore = ({ animations }: LearnMoreProps) => (
   <AnimatePresence>
     <motion.div
       key="learn_more"
       className="hidden lg:flex justify-center"
-      animate={learnMoreAnimations}
+      animate={animations}
       variants={learnMoreVariants}
     >
       <Link to="page2" smooth="easeOutCubic" offset={25} duration={1000} className="flex justify-center">

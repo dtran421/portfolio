@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiTag } from "react-icons/fi";
-import SquareLoader from "react-spinners/SquareLoader";
 
 import Emoji from "@/components/Global/Emoji";
+import FetchError from "@/components/Global/FetchError";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
 import { queryContentful } from "@/lib/ContentfulUtil";
@@ -126,11 +126,7 @@ const Blog = ({ blogPosts }: BlogProps) => (
       <h1 className="text-5xl font-semibold">
         devDeque <Emoji label="fountain pen" symbol="✒️" />
       </h1>
-      {!blogPosts && (
-        <div className="w-full flex justify-center items-center pt-32">
-          <SquareLoader color="#9333ea" />
-        </div>
-      )}
+      {!blogPosts && <FetchError />}
       {blogPosts?.length && (
         <>
           <BlogPostCard

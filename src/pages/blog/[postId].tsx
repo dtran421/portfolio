@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { FiTag } from "react-icons/fi";
-import SquareLoader from "react-spinners/SquareLoader";
 
 import Body from "@/components/BlogPost/Body";
+import FetchError from "@/components/Global/FetchError";
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
@@ -45,9 +45,7 @@ const BlogPostPage = ({ blogPost }: BlogPostProps) => {
     return (
       <MainLayout rootPage="Blog">
         <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
-          <div className="w-full flex justify-center items-center py-10">
-            <SquareLoader color="#9333ea" />
-          </div>
+          <FetchError />
         </div>
       </MainLayout>
     );

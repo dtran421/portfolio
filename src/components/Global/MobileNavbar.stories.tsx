@@ -8,6 +8,7 @@ const meta: Meta<typeof MobileNavbar> = {
     viewport: {
       defaultViewport: "mobile1",
     },
+    chromatic: { viewports: [320, 414, 834] },
   },
 };
 
