@@ -11,6 +11,17 @@ export type ThemeContextObject = {
 };
 
 /**
+ * api types
+ */
+export type APIResponse<T> =
+  | {
+      data: T;
+    }
+  | {
+      error: string;
+    };
+
+/**
  * JSON schemas
  */
 export type Project = {
@@ -20,26 +31,6 @@ export type Project = {
   thumbnail: string;
   width: number;
   height: number;
-};
-
-export type Quote = {
-  symbol: string;
-  price: number;
-  change: number;
-  changePct: number;
-  latestBusinessDay: string;
-};
-
-export type Company = {
-  name: string;
-  exchange: string;
-  sector: string;
-  industry: string;
-  marketCap: number;
-  dividendYield: number;
-  eps: number;
-  high52Weeks: number;
-  low52Weeks: number;
 };
 
 /**
@@ -133,3 +124,33 @@ export interface BlogPost {
   };
   body: RichText;
 }
+
+/**
+ * Alphavantage schemas
+ */
+
+export type Quote = {
+  price: number;
+  change: number;
+  changePct: number;
+  latestBusinessDay: string;
+};
+
+export type Company = {
+  name: string;
+  exchange: string;
+  sector: string;
+  industry: string;
+  marketCap: number;
+  dividendYield: number;
+  eps: string;
+  high52Weeks: string;
+  low52Weeks: string;
+};
+
+export const ALPHAVANTAGE_FUNCTIONS = ["GLOBAL_QUOTE", "OVERVIEW"] as const;
+
+export const ALPHAVANTAGE_FN_TO_ROUTE = {
+  GLOBAL_QUOTE: "quote",
+  OVERVIEW: "company",
+} as const;

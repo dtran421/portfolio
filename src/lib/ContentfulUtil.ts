@@ -45,14 +45,14 @@ export const queryContentful = async <T>(
 ): Promise<Result<T, Error>> => {
   const { resources, query } = gqlQuery;
 
+  const contentfulUrl = getBaseContentfulUrl();
+  const contentfulAccessToken = getContentfulAccessToken(preview);
+
+  if (contentfulUrl.isNone() || contentfulAccessToken.isNone()) {
+    return Result<T, Error>(new Error("Env variables not set, this is a problem with the server"));
+  }
+
   try {
-    const contentfulUrl = getBaseContentfulUrl();
-    const contentfulAccessToken = getContentfulAccessToken(preview);
-
-    if (contentfulUrl.isNone() || contentfulAccessToken.isNone()) {
-      return Result<T, Error>(new Error("Env variables not set, this is a problem with the server"));
-    }
-
     const { data, status, statusText } = await axios.post<{
       data: T;
     }>(
