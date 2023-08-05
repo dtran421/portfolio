@@ -1,13 +1,13 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import Head from "next/head";
 
-import DesktopNavbar from "@/components/Global/DesktopNavbar";
+import DesktopNavbar, { TABS } from "@/components/Global/DesktopNavbar";
 import MobileNavbar from "@/components/Global/MobileNavbar";
 import { ThemeContext } from "@/lib/Contexts";
 
 type MainLayoutProps = {
   rootPage?: "Blog" | "Projects";
-  page: string;
+  page: (typeof TABS)[number];
   children: ReactNode;
 };
 
@@ -27,9 +27,7 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
     };
   });
 
-  const pageTitle = rootPage
-    ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}`
-    : `Duke Tran | ${page === "Main" ? "Portfolio" : page}`;
+  const pageTitle = rootPage ? `${page.substring(0, 50)}${page.length > 50 ? "..." : ""}` : `Duke Tran | ${page}`;
 
   return (
     <>

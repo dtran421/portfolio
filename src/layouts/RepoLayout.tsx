@@ -7,11 +7,6 @@ import projects from "@/public/json/projects.json";
 
 import ProjectLayout from "./ProjectLayout";
 
-
-
-
-
-
 type RepoPageProps = {
   bannerHeading: string;
   heading: string;
