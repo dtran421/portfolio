@@ -8,7 +8,7 @@ import { isNullish } from "@/lib/Util";
 
 type MainLayoutProps = {
   rootPage?: "Blog" | "Projects";
-  page?: (typeof TABS)[number];
+  page?: typeof TABS[number];
   pageTitle?: string;
   children: ReactNode;
 };
@@ -36,7 +36,7 @@ const MainLayout = ({ rootPage = null, page, pageTitle, children }: MainLayoutPr
     <>
       <Head>
         <title>
-          {rootPage ? `${pageTitle.substring(0, 50)}${page.length > 50 ? "..." : ""}` : `Duke Tran | ${pageTitle}`}
+          {rootPage ? `${pageTitle.substring(0, 50)}${pageTitle.length > 50 ? "..." : ""}` : `Duke Tran | ${pageTitle}`}
         </title>
         <meta property="og:title" content={pageTitle} key="title" />
       </Head>
