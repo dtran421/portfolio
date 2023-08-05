@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 
 import DarkModeToggle from "./DarkModeToggle";
 
-export const tabs = ["Portfolio", "Resume", "Blog", "Projects"];
+export const TABS = ["Portfolio", "Resume", "Blog", "Projects"] as const;
 
 type NavlinkProps = {
   active: boolean;
-  link: string;
+  link: typeof TABS[number];
 };
 
 const Navlink = ({ active, link }: NavlinkProps) => (
@@ -17,7 +17,7 @@ const Navlink = ({ active, link }: NavlinkProps) => (
         type="button"
         className={`w-full flex justify-center text-xl border-b-4 ${
           active
-            ? "border-black dark:border-white border-opacity-100"
+            ? "text-black dark:text-white border-black dark:border-white border-opacity-100"
             : "border-b-transparent text-primary hover:border-primary"
         } dark-transition px-5 py-3`}
       >
@@ -40,7 +40,7 @@ const navbarVariants = {
 
 export type ResponsiveNavbarProps = {
   sticky: boolean;
-  page: string;
+  page: typeof TABS[number];
 };
 
 const DesktopNavbar = ({ sticky, page }: ResponsiveNavbarProps) => (
@@ -55,7 +55,7 @@ const DesktopNavbar = ({ sticky, page }: ResponsiveNavbarProps) => (
         DT
       </p>
       <div className="grid grid-cols-4 gap-x-4">
-        {tabs.map((link, idx) => (
+        {TABS.map((link, idx) => (
           <Navlink key={link} active={page === link} {...{ link, idx }} />
         ))}
       </div>

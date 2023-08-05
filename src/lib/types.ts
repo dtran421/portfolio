@@ -87,7 +87,7 @@ export interface ResumeBubblesSection {
   items: BubbleSection[];
 }
 
-enum EventType {
+export enum EventType {
   EDUCATION = "Education",
   INTERNSHIP = "Internship",
   WORK = "Work",

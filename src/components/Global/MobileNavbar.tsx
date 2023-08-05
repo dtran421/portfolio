@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import DarkModeToggle from "./DarkModeToggle";
-import { ResponsiveNavbarProps, tabs } from "./DesktopNavbar";
+import { ResponsiveNavbarProps, TABS } from "./DesktopNavbar";
 
 type MobileNavlinkProps = {
   active: boolean;
@@ -32,7 +32,7 @@ const navlinkVariants = {
     opacity: 1,
     transition: {
       duration: 0.4,
-      delay: 0.1 * (tabs.length - order),
+      delay: 0.1 * (TABS.length - order),
     },
   }),
   collapsed: (order: number) => ({
@@ -105,7 +105,7 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
               variants={navlinkListVariants}
               className="flex flex-col items-center space-y-2 px-4 mt-4 mb-2"
             >
-              {tabs.map((link, idx) => (
+              {TABS.map((link, idx) => (
                 <motion.li
                   key={link}
                   custom={idx + 1}
@@ -115,14 +115,7 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
                   variants={navlinkVariants}
                   className="w-full flex justify-center"
                 >
-                  <MobileNavlink
-                    active={page === link}
-                    {...{
-                      link,
-                      idx,
-                      numLinks: tabs.length,
-                    }}
-                  />
+                  <MobileNavlink active={page === link} link={link} />
                 </motion.li>
               ))}
             </motion.ul>

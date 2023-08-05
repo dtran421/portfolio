@@ -92,7 +92,7 @@ const Card = ({
 );
 
 type EventProps = {
-  side: string;
+  side: "L" | "R";
   data: TimelineEvent;
 };
 
