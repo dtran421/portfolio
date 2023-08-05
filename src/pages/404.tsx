@@ -6,7 +6,7 @@ import { FiAlertTriangle, FiHome } from "react-icons/fi";
 import MainLayout from "@/layouts/MainLayout";
 
 const Error404 = () => (
-  <MainLayout pageTitle="Page Not Found">
+  <MainLayout rootPage="Error" pageTitle="Page Not Found">
     <div className="max-w-xl lg:max-w-3xl xl:max-w-5xl max-h-screen flex justify-center items-center mx-auto mt-40 lg:mt-32">
       <div className="w-full flex flex-col lg:flex-row justify-center xl:gap-x-20 gap-y-10 lg:gap-y-0">
         <div className="flex justify-center items-center">

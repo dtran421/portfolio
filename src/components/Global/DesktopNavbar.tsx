@@ -7,7 +7,7 @@ export const TABS = ["Portfolio", "Resume", "Blog", "Projects"] as const;
 
 type NavlinkProps = {
   active: boolean;
-  link: (typeof TABS)[number];
+  link: typeof TABS[number];
 };
 
 const Navlink = ({ active, link }: NavlinkProps) => (
@@ -40,7 +40,7 @@ const navbarVariants = {
 
 export type ResponsiveNavbarProps = {
   sticky: boolean;
-  page: (typeof TABS)[number];
+  page?: typeof TABS[number];
 };
 
 const DesktopNavbar = ({ sticky, page }: ResponsiveNavbarProps) => (

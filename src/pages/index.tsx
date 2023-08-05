@@ -3,9 +3,9 @@ import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { IconContext } from "react-icons";
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
-import SquareLoader from "react-spinners/SquareLoader";
 
 import Emoji from "@/components/Global/Emoji";
+import FetchError from "@/components/Global/FetchError";
 import Carousel from "@/components/Index/Carousel";
 import LangGroup from "@/components/Index/LangGroup";
 import LearnMore from "@/components/Index/LearnMore";
@@ -134,15 +134,19 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
           </div>
           <Carousel />
         </div>
-        <LearnMore {...{ learnMoreAnimations }} />
+        <LearnMore animations={learnMoreAnimations} />
       </div>
       <div id="page2" className="flex flex-col items-center py-28">
         <div className="w-3/4 md:max-w-xl lg:max-w-4xl xl:max-w-6xl space-y-28 lg:space-y-16 mx-auto">
           <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-10">
             <div className="w-full lg:w-1/2 flex justify-center">
-              {/* // TODO: fix this */}
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Image alt="about me pic 1" {...section1.pic_props} />
+              <Image
+                alt="about me pic 1"
+                src={section1.pic_props.src}
+                width={section1.pic_props.width}
+                height={section1.pic_props.height}
+                className={section1.pic_props.className}
+              />
             </div>
             <div className="w-full lg:w-1/2 flex flex-col justify-between rounded-xl space-y-8">
               <div>
@@ -173,9 +177,13 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
               </p>
             </div>
             <div className="w-full lg:w-1/2 flex justify-center">
-              {/* // TODO: fix this */}
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Image alt="about me pic 2" {...section2.pic_props} />
+              <Image
+                alt="about me pic 2"
+                src={section2.pic_props.src}
+                width={section2.pic_props.width}
+                height={section2.pic_props.height}
+                className={section2.pic_props.className}
+              />
             </div>
           </div>
         </div>
@@ -184,15 +192,7 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
         <h1 className="text-2xl lg:text-3xl dark:text-white dark-transition text-center font-semibold mb-8">
           My Journey
         </h1>
-        <div className="mb-20">
-          {timelineEvents ? (
-            <Timeline timelineEvents={timelineEvents} />
-          ) : (
-            <div className="w-full flex justify-center items-center pt-10">
-              <SquareLoader color="#9333ea" />
-            </div>
-          )}
-        </div>
+        <div className="mb-20">{timelineEvents ? <Timeline timelineEvents={timelineEvents} /> : <FetchError />}</div>
       </div>
       <div className="max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl flex flex-col justify-center px-6 mx-auto mt-32 rounded-xl">
         <h1 className="text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold mb-4">
@@ -210,20 +210,16 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
               ({ heading, description, emoji, emojiLabel, languagesCollection: { items: languages } }) => (
                 <LangGroup
                   key={heading}
-                  {...{
-                    heading,
-                    description,
-                    emoji,
-                    emojiLabel,
-                    languages,
-                  }}
+                  heading={heading}
+                  description={description}
+                  emoji={emoji}
+                  emojiLabel={emojiLabel}
+                  languages={languages}
                 />
               )
             )
           ) : (
-            <div className="w-full flex justify-center items-center pt-10">
-              <SquareLoader color="#9333ea" />
-            </div>
+            <FetchError />
           )}
         </div>
       </div>
