@@ -4,6 +4,7 @@ import { withThemeByClassName, withThemeByDataAttribute } from "@storybook/addon
 
 import "../src/styles/globals.css";
 
+// viewport sizes: https://github.com/storybookjs/storybook/blob/master/addons/viewport/src/defaults.ts#L167
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
