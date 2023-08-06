@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from "react";
-import { startCase } from "lodash";
+import { lowerCase, startCase } from "lodash";
 import moment from "moment";
 
 import ClassProfile from "@/components/Projects/ClassProfile";
@@ -91,8 +91,8 @@ const FinanceLayout = ({
         "Dividend Yield": `${dividendYield.toFixed(2)}%`,
       },
       column2: {
-        Sector: startCase(sector),
-        Industry: startCase(industry),
+        Sector: startCase(lowerCase(sector)),
+        Industry: startCase(lowerCase(industry)),
         "EPS (TTM)": eps,
       },
     };
@@ -101,7 +101,9 @@ const FinanceLayout = ({
   return (
     <ProjectLayout pageTitle={pageTitle} type="finance">
       <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl flex flex-col items-center space-y-10 lg:space-y-14 mx-10 md:mx-auto">
-        <ClassProfile {...{ heading, dateString }}>{description}</ClassProfile>
+        <ClassProfile heading={heading} dateString={dateString}>
+          {description}
+        </ClassProfile>
         <StockCard
           data={stockCardData}
           errors={[quoteError, companyError].filter((err) => !isNullish(err))}

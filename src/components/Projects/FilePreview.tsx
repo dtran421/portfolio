@@ -38,7 +38,7 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, special =
           {action === "view" ? <FiMaximize2 /> : <FiDownload />}
         </IconContext.Provider>
         <div className="absolute z-10 w-full h-full group-hover:bg-gray-800/60 transition duration-150 ease-in-out" />
-        <Image alt={label} src={`/img${previewImgPath}`} {...{ width, height }} className="rounded-xl" />
+        <Image alt={label} src={`/img${previewImgPath}`} width={width} height={height} className="rounded-xl" />
       </a>
     </div>
   );

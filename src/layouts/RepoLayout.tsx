@@ -24,19 +24,13 @@ const RepoLayout = ({ bannerHeading, heading, dateString, data, children }: Repo
 
   return (
     <ProjectLayout pageTitle={bannerHeading} type="coding">
-      <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex flex-col mx-8 md:mx-auto">
-        <ClassProfile {...{ heading, dateString }}>{children}</ClassProfile>
+      <div className="md:max-w-xl lg:max-w-4xl xl:max-w-6xl flex flex-col mx-8 md:mx-auto">
+        <ClassProfile heading={heading} dateString={dateString}>
+          {children}
+        </ClassProfile>
         <div className="w-full flex flex-col lg:grid lg:grid-cols-2 gap-y-10 lg:gap-6 md:px-10 lg:px-0 mt-20">
           {data.map(({ name, url, tags }) => (
-            <RepoCard
-              key={name}
-              {...{
-                name,
-                url,
-                tags,
-                accentColor,
-              }}
-            />
+            <RepoCard key={name} name={name} url={url} tags={tags} accentColor={accentColor} />
           ))}
         </div>
       </div>

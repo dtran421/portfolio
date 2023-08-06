@@ -23,10 +23,10 @@ const ProjectCard = ({ name, link, accentColor, darkText, thumbnail, width, heig
       >
         <div className="z-10 absolute top-0 overflow-hidden w-full h-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
           <div className="w-3/4 md:w-full flex justify-center items-center p-4 md:p-0">
-            <Image alt={name.toLowerCase()} src={thumbnail} {...{ width, height }} layout="intrinsic" priority />
+            <Image alt={name.toLowerCase()} src={thumbnail} width={width} height={height} layout="intrinsic" priority />
           </div>
         </div>
-        <ProjectCardLabel {...{ isHovered, accentColor, darkText, name }} />
+        <ProjectCardLabel name={name} isHovered={isHovered} accentColor={accentColor} darkText={darkText} />
       </button>
     </Link>
   );
