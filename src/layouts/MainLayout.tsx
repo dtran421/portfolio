@@ -8,7 +8,7 @@ import { isNullish } from "@/lib/Util";
 
 type MainLayoutProps = {
   rootPage?: "Blog" | "Projects" | "Error";
-  page?: typeof TABS[number];
+  page?: (typeof TABS)[number];
   pageTitle?: string;
   children: ReactNode;
 };

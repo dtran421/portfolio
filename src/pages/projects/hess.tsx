@@ -1,14 +1,7 @@
 import FilePreview from "@/components/Projects/FilePreview";
 import FinanceLayout from "@/layouts/FinanceLayout";
-import fetchStockData from "@/lib/fetchStockData";
-import { Company, Quote } from "@/lib/types";
 
-type HessProps = {
-  quoteData: Quote;
-  companyData: Company;
-};
-
-const Hess = ({ quoteData, companyData }: HessProps) => (
+const Hess = () => (
   <FinanceLayout
     pageTitle="HES Pitch"
     classProfileProps={{
@@ -24,7 +17,7 @@ const Hess = ({ quoteData, companyData }: HessProps) => (
                 to colleagues and faculty for inclusion in a real endowment
                 portfolio of common stocks.`,
     }}
-    {...{ quoteData, companyData }}
+    symbol="HES"
     purchasePrice={107.63}
   >
     <div>
@@ -62,7 +55,5 @@ const Hess = ({ quoteData, companyData }: HessProps) => (
     </div>
   </FinanceLayout>
 );
-
-export const getServerSideProps = () => fetchStockData("HES");
 
 export default Hess;

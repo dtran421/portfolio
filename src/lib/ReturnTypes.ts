@@ -23,7 +23,7 @@ export type Err<E> = { error: E; unwrap: () => E; ok: () => never; isOk: () => f
 export type Result<T, E> = Ok<T> | Err<E>;
 
 /* Constructor */
-export const Result = <T, E>(p: T | E): Result<T, E> => {
+export const Result = <T = unknown, E = Error>(p: T | E): Result<T, E> => {
   const ok = !(p instanceof Error);
   const o = { isOk: () => ok, isErr: () => !ok };
 
@@ -60,11 +60,17 @@ export const Result = <T, E>(p: T | E): Result<T, E> => {
  *
  * `coalesce()` will return the value if it is called on a Some variant, regardless of whether a default value is provided.
  */
-type Some<T> = { some: true; value: T; coalesce: (defaultValue?: T) => T; isNone: () => false; isSome: () => true };
+export type Some<T> = {
+  some: true;
+  value: T;
+  coalesce: (defaultValue?: T) => T;
+  isNone: () => false;
+  isSome: () => true;
+};
 /**
  * None: The option does not contain a value.
  */
-type None<T> = {
+export type None<T> = {
   some: false;
   value: null | undefined;
   coalesce: (defaultValue?: T) => T;
@@ -76,7 +82,7 @@ type None<T> = {
 export type Option<T> = Some<T> | None<T>;
 
 /* Constructor */
-export const Option = <T>(value?: T): Option<T> => {
+export const Option = <T = unknown>(value?: T): Option<T> => {
   const o = { some: !isNullish(value) };
 
   Object.defineProperties(o, {

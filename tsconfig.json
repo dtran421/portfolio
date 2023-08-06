@@ -19,8 +19,8 @@
       "@/pages/*": ["pages/*"],
       "@/layouts/*": ["layouts/*"],
       "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
       "@/styles/*": ["styles/*"],
-      "@/utils/*": ["utils/*"],
       "@/graphql/*": ["graphql/*"],
       "@/lib/*": ["lib/*"],
       "@/public/*": ["../public/*"]

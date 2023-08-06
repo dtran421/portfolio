@@ -1,9 +1,33 @@
 import axios, { AxiosError } from "axios";
 
+import { BLOCKS } from "@contentful/rich-text-types";
+
 import { ContentfulResource } from "@/graphql/Resources";
 import { logger } from "@/lib/Logger";
 
 import { Option, Result } from "./ReturnTypes";
+import { RichText } from "./types";
+
+export const generateRichTextStub = (text?: string): RichText => ({
+  json: {
+    nodeType: "document" as BLOCKS.DOCUMENT,
+    data: {},
+    content: [
+      {
+        nodeType: "paragraph" as BLOCKS.PARAGRAPH,
+        data: {},
+        content: [
+          {
+            nodeType: "text",
+            value: text || "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            marks: [],
+            data: {},
+          },
+        ],
+      },
+    ],
+  },
+});
 
 const getBaseContentfulUrl = () => {
   if (!process.env.CONTENTFUL_SPACE_ID) {
@@ -45,14 +69,14 @@ export const queryContentful = async <T>(
 ): Promise<Result<T, Error>> => {
   const { resources, query } = gqlQuery;
 
+  const contentfulUrl = getBaseContentfulUrl();
+  const contentfulAccessToken = getContentfulAccessToken(preview);
+
+  if (contentfulUrl.isNone() || contentfulAccessToken.isNone()) {
+    return Result<T, Error>(new Error("Env variables not set, this is a problem with the server"));
+  }
+
   try {
-    const contentfulUrl = getBaseContentfulUrl();
-    const contentfulAccessToken = getContentfulAccessToken(preview);
-
-    if (contentfulUrl.isNone() || contentfulAccessToken.isNone()) {
-      return Result<T, Error>(new Error("Env variables not set, this is a problem with the server"));
-    }
-
     const { data, status, statusText } = await axios.post<{
       data: T;
     }>(

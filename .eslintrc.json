@@ -9,6 +9,7 @@
     "airbnb",
     "next",
     "prettier",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
@@ -20,7 +21,7 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "simple-import-sort"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "@tanstack/query", "simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": "error",
     "@typescript-eslint/no-unused-vars": ["warn"],
@@ -42,7 +43,10 @@
     "no-unused-vars": "off",
     "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "warn"
+    "@typescript-eslint/no-shadow": "warn",
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/prefer-query-object-syntax": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   },
   "overrides": [
     {
