@@ -1,0 +1,86 @@
+name: Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  test:
+    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ["18"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3
+
+      - name: Install Vercel CLI
+        run: yarn add --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install
+        run: |
+          echo "📥 Installing dependencies..."
+          yarn install
+
+      - name: Format, Lint, Typecheck
+        run: |
+          echo "🧹 Formatting..."
+          yarn format
+          echo "🧼 Linting..."
+          yarn lint
+          echo "🔎 Typechecking..."
+          yarn typecheck
+
+      - name: Test
+        run: |
+          echo "🔬 Testing..."
+          echo "⏳ Please hold. This might take a while..."
+          yarn test
+          echo "🌟 Testing complete!"
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Vitest Tests
+          path: reports/vitest-*.xml
+          reporter: jest-junit
+          list-suites: all
+          list-tests: all
+          max-annotations: 10
+          fail-on-error: true
+
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: yarn add --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
