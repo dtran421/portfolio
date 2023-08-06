@@ -1,16 +1,9 @@
-import * as _ from "lodash";
+import { range } from "lodash";
 
 import FilePreview from "@/components/Projects/FilePreview";
 import FinanceLayout from "@/layouts/FinanceLayout";
-import fetchStockData from "@/lib/fetchStockData";
-import { Company, Quote } from "@/lib/types";
 
-type AdvancedInvestmentsProps = {
-  quoteData: Quote;
-  companyData: Company;
-};
-
-const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProps) => {
+const AdvancedInvestments = () => {
   const SMALL_EXCEL_ICON_DIM = 83;
   const LARGE_EXCEL_ICON_DIM = 186;
 
@@ -30,7 +23,7 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
                     futures, credit spreads, mortgage loans, mortgage
                     pass-through securities, and interest rate swaps.`,
       }}
-      {...{ quoteData, companyData }}
+      symbol="RBLX"
       purchasePrice={108.06}
     >
       <div className="space-y-2">
@@ -40,7 +33,7 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
             <h2 className="text-lg md:text-2xl font-medium">Homework</h2>
             <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-8 gap-y-4">
               <div className="h-full grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-4 gap-x-2 lg:gap-x-10 gap-y-2 lg:gap-y-4">
-                {_.range(1, 5).map((num) => (
+                {range(1, 5).map((num) => (
                   <FilePreview
                     key={`HW${num}`}
                     label={`HW${num}`}
@@ -100,7 +93,5 @@ const AdvancedInvestments = ({ quoteData, companyData }: AdvancedInvestmentsProp
     </FinanceLayout>
   );
 };
-
-export const getServerSideProps = () => fetchStockData("RBLX");
 
 export default AdvancedInvestments;

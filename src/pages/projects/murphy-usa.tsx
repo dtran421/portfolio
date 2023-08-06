@@ -1,14 +1,7 @@
 import FilePreview from "@/components/Projects/FilePreview";
 import FinanceLayout from "@/layouts/FinanceLayout";
-import fetchStockData from "@/lib/fetchStockData";
-import { Company, Quote } from "@/lib/types";
 
-type MurphyUSAProps = {
-  quoteData: Quote;
-  companyData: Company;
-};
-
-const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
+const MurphyUSA = () => {
   const EXCEL_ICON_DIM = 165;
 
   return (
@@ -23,7 +16,7 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
                     banking. It aims to familiarize students with various data
                     sources and software used in the financial industry.`,
       }}
-      {...{ quoteData, companyData }}
+      symbol="MUSA"
       purchasePrice={139.4}
     >
       <div className="w-full">
@@ -51,7 +44,5 @@ const MurphyUSA = ({ quoteData, companyData }: MurphyUSAProps) => {
     </FinanceLayout>
   );
 };
-
-export const getServerSideProps = () => fetchStockData("MUSA");
 
 export default MurphyUSA;
