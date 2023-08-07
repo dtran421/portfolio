@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import Head from "next/head";
 
 import DesktopNavbar, { TABS } from "@/components/Global/DesktopNavbar";
@@ -17,9 +17,9 @@ const MainLayout = ({ rootPage = null, page, pageTitle, children }: MainLayoutPr
   const { darkMode } = useContext(ThemeContext);
 
   const [stickyNavbar, toggleStickyNavbar] = useState(false);
-  const stickyScrollListener = () => {
+  const stickyScrollListener = useCallback(() => {
     toggleStickyNavbar(window.scrollY > 0);
-  };
+  }, []);
 
   useEffect(() => {
     document.addEventListener("scroll", stickyScrollListener);
@@ -27,7 +27,7 @@ const MainLayout = ({ rootPage = null, page, pageTitle, children }: MainLayoutPr
     return () => {
       document.removeEventListener("scroll", stickyScrollListener);
     };
-  });
+  }, [stickyScrollListener]);
 
   if (isNullish(page) && isNullish(rootPage)) {
     console.warn("MainLayout: page and rootPage are both nullish");

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/legacy/image";
 import Typewriter from "typewriter-effect";
 
@@ -12,7 +12,7 @@ const Carousel = () => {
   const [imgClass, setImgClass] = useState("rounded-xl opacity-0 transition duration-200 ease-linear");
   const [[pic, picData, init], cyclePics] = useState([1, carousel[0], true]);
   const typewriter = useRef(null);
-  const typewriterListener = () => {
+  const typewriterListener = useCallback(() => {
     const cyclePicture = () => {
       const loop = pic + 1 > pics;
       const newPic = loop ? 1 : pic + 1;
@@ -31,7 +31,7 @@ const Carousel = () => {
         cyclePicture();
       }
     }
-  };
+  }, [carousel, imgClass, init, pic, picData, pics]);
 
   useEffect(() => {
     const typewriterObserver = new MutationObserver(typewriterListener);
@@ -45,7 +45,7 @@ const Carousel = () => {
     return () => {
       typewriterObserver.disconnect();
     };
-  });
+  }, [typewriterListener]);
 
   return (
     <div className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">

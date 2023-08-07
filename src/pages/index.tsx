@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import Image from "next/legacy/image";
 import { motion, useAnimation } from "framer-motion";
 import { IconContext } from "react-icons";
@@ -40,12 +40,12 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
   const learnMoreAnimations = useAnimation();
 
   const page1 = useRef(null);
-  const scrollListener = () => {
+  const scrollListener = useCallback(() => {
     if (page1.current) {
       const page1Visible = isInViewport(page1.current);
       learnMoreAnimations.start(page1Visible ? "visible" : "hidden");
     }
-  };
+  }, [learnMoreAnimations]);
 
   useEffect(() => {
     document.addEventListener("scroll", scrollListener);
@@ -53,7 +53,7 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
     return () => {
       document.removeEventListener("scroll", scrollListener);
     };
-  });
+  }, [scrollListener]);
 
   const waveControls = useAnimation();
   const waveAnimation = useMemo(
