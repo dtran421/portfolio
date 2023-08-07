@@ -38,7 +38,7 @@ const MainLayout = ({ rootPage = null, page, pageTitle, children }: MainLayoutPr
         <title>
           {rootPage
             ? `${`${rootPage} | ${pageTitle}`.substring(0, 50)}${pageTitle.length > 50 ? "..." : ""}`
-            : `Duke Tran | ${pageTitle}`}
+            : `Duke Tran | ${page ?? pageTitle}`}
         </title>
         <meta property="og:title" content={pageTitle} key="title" />
       </Head>
