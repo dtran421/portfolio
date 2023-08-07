@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { motion, useAnimation } from "framer-motion";
 import { IconContext } from "react-icons";
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";

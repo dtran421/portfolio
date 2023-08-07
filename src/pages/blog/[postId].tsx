@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { FiTag } from "react-icons/fi";
 
 import Body from "@/components/BlogPost/Body";

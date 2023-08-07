@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiAlertTriangle, FiHome } from "react-icons/fi";

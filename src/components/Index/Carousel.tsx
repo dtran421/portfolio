@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Typewriter from "typewriter-effect";
 
 import carouselData from "@/public/json/carousel.json";
