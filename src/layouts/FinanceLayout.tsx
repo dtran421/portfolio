@@ -29,11 +29,10 @@ const formatMarketCap = (marketCap: number): string => {
 
 type FinanceLayoutProps = {
   pageTitle: string;
-  classProfileProps: {
-    heading: string;
-    dateString: string;
-    description: string;
-  };
+  heading: string;
+  dateString: string;
+  description: string;
+
   symbol: string;
   purchasePrice: number;
   children: ReactNode;
@@ -41,7 +40,9 @@ type FinanceLayoutProps = {
 
 const FinanceLayout = ({
   pageTitle,
-  classProfileProps: { heading, dateString, description },
+  heading,
+  dateString,
+  description,
   symbol,
   purchasePrice,
   children,
@@ -50,9 +51,10 @@ const FinanceLayout = ({
   const { data: companyData, isLoading: isLoadingCompany, error: companyError } = useGetStockCompany(symbol);
 
   const isLoading = isLoadingQuote || isLoadingCompany;
+  const errors = [quoteError, companyError].filter((err) => !isNullish(err));
 
   const stockCardData = useMemo(() => {
-    if (isLoading) {
+    if (isLoading || errors.length) {
       return {
         symbol,
         name: "",
@@ -96,7 +98,7 @@ const FinanceLayout = ({
         "EPS (TTM)": eps,
       },
     };
-  }, [isLoading, quoteData, companyData, symbol]);
+  }, [isLoading, errors.length, quoteData, companyData, symbol]);
 
   return (
     <ProjectLayout pageTitle={pageTitle} type="finance">
@@ -104,12 +106,7 @@ const FinanceLayout = ({
         <ClassProfile heading={heading} dateString={dateString}>
           {description}
         </ClassProfile>
-        <StockCard
-          data={stockCardData}
-          errors={[quoteError, companyError].filter((err) => !isNullish(err))}
-          loading={isLoading}
-          purchasePrice={purchasePrice}
-        />
+        <StockCard data={stockCardData} errors={errors} loading={isLoading} purchasePrice={purchasePrice} />
         {children}
       </div>
     </ProjectLayout>

@@ -1,13 +1,13 @@
 import FilePreview from "@/components/Projects/FilePreview";
+import ExcelFilePreview from "@/components/Projects/Finance/ExcelFilePreview";
 import FinanceLayout from "@/layouts/FinanceLayout";
 
 const Hess = () => (
   <FinanceLayout
     pageTitle="HES Pitch"
-    classProfileProps={{
-      heading: "[BUAD 421] Student Managed Investment Fund",
-      dateString: "Spring 2022",
-      description: `This course provides a hands-on experience with portfolio
+    heading="[BUAD 421] Student Managed Investment Fund"
+    dateString="Spring 2022"
+    description={`This course provides a hands-on experience with portfolio
                 management and security analysis through the management of the
                 Mason School Student Managed Investment Fund (SMIF). Students
                 must select companies from an S&P stock universe, do research on
@@ -15,8 +15,7 @@ const Hess = () => (
                 of future financial performance and conduct valuation analyses,
                 write an investment report, and present an oral recommendation
                 to colleagues and faculty for inclusion in a real endowment
-                portfolio of common stocks.`,
-    }}
+                portfolio of common stocks.`}
     symbol="HES"
     purchasePrice={107.63}
   >
@@ -42,14 +41,7 @@ const Hess = () => (
           />
         </div>
         <div className="flex">
-          <FilePreview
-            label="HES Valuation"
-            filePath="/hess/HES_valuation.xlsx"
-            previewImgPath="/projects/excel.png"
-            width={165}
-            height={165}
-            special
-          />
+          <ExcelFilePreview label="HES Valuation" filePath="/hess/HES_valuation.xlsx" />
         </div>
       </div>
     </div>

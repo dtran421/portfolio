@@ -9,10 +9,10 @@ type FilePreviewProps = {
   previewImgPath: string;
   width: number;
   height: number;
-  special?: boolean;
+  addBg?: boolean;
 };
 
-const FilePreview = ({ label, filePath, previewImgPath, width, height, special = false }: FilePreviewProps) => {
+const FilePreview = ({ label, filePath, previewImgPath, width, height, addBg = false }: FilePreviewProps) => {
   const iconContext = useMemo(
     () => ({
       className:
@@ -24,12 +24,12 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, special =
   const action = filePath.substring(filePath.indexOf(".") + 1) === "pdf" ? "view" : "download";
 
   return (
-    <div className={`w-full flex justify-center ${special ? "bg-white rounded-xl" : ""}`}>
+    <div className={`w-full h-full flex justify-center ${addBg ? "bg-white rounded-xl" : ""}`}>
       <a
         href={`/files${filePath}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`relative overflow-hidden w-full ${special ? "h-full" : ""} flex justify-center items-center group`}
+        className={`relative overflow-hidden w-full ${addBg ? "h-full" : ""} flex justify-center items-center group`}
       >
         <div className="absolute left-0 top-0 z-20 bg-primary/80 group-hover:bg-primary backdrop-blur-lg rounded-full px-2 md:px-3 md:py-1 m-1 md:m-3">
           <p className="text-sm md:text-lg text-white font-medium">{label}</p>
