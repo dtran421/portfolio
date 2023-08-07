@@ -23,6 +23,17 @@ export const Default: Story = {
     previewImgPath: "/projects/advanced-investments/portfolio_report_cover_page.png",
     width: 750,
     height: 1000,
-    special: false,
+    addBg: false,
+  },
+};
+
+export const WithBg: Story = {
+  args: {
+    label: "Test File",
+    filePath: "/test.pdf",
+    previewImgPath: "/projects/excel.png",
+    width: 500,
+    height: 500,
+    addBg: true,
   },
 };

@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
+    "init-pre-commit": "cp scripts/pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit && echo 'pre-commit hook installed'",
     "postinstall": "patch-package",
     "pull-env": "npx vercel env pull .env",
     "dev": "next dev",
@@ -13,7 +14,7 @@
     "lint": "next lint --fix",
     "test-dev": "vitest dev --update",
     "test": "vitest run --coverage --reporter junit --outputFile reports/vitest-report.xml",
-    "precommit": "yarn run format && yarn run typecheck && yarn run lint",
+    "pre-commit": "yarn run format && yarn run typecheck && yarn run lint && yarn run test-dev",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic"
