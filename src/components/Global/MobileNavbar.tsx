@@ -1,32 +1,12 @@
 import { useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import DarkModeToggle from "./DarkModeToggle";
-import { ResponsiveNavbarProps, TABS } from "./DesktopNavbar";
+import { ResponsiveNavbarProps } from "./DesktopNavbar";
+import NavLink, { TABS } from "./NavLink";
 
-type MobileNavlinkProps = {
-  active: boolean;
-  link: string;
-};
-
-const MobileNavlink = ({ active, link }: MobileNavlinkProps) => (
-  <Link href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`} passHref>
-    <button
-      type="button"
-      className={`w-full flex justify-center text-xl border-2 rounded-lg ${
-        active
-          ? "dark:text-white dark:bg-zinc-500/20 border-black/40 dark:border-white/40 border-opacity-100"
-          : "border-transparent focus:border-primary text-primary hover:border-primary"
-      } dark-transition px-6 py-1`}
-    >
-      {link}
-    </button>
-  </Link>
-);
-
-const navlinkVariants = {
+const navLinkVariants = {
   expanded: (order: number) => ({
     y: 0,
     opacity: 1,
@@ -45,7 +25,7 @@ const navlinkVariants = {
   }),
 };
 
-const navlinkListVariants = {
+const navLinkListVariants = {
   expanded: {
     height: "auto",
     opacity: 1,
@@ -65,7 +45,7 @@ const navlinkListVariants = {
   },
 };
 
-const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
+const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
   const [isExpanded, toggleExpanded] = useState(false);
 
   return (
@@ -102,7 +82,7 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
               initial="collapsed"
               animate="expanded"
               exit="collapsed"
-              variants={navlinkListVariants}
+              variants={navLinkListVariants}
               className="flex flex-col items-center space-y-2 px-4 mt-4 mb-2"
             >
               {TABS.map((link, idx) => (
@@ -112,10 +92,10 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
                   initial="collapsed"
                   animate="expanded"
                   exit="collapsed"
-                  variants={navlinkVariants}
+                  variants={navLinkVariants}
                   className="w-full flex justify-center"
                 >
-                  <MobileNavlink active={page === link} link={link} />
+                  <NavLink link={link} mobile />
                 </motion.li>
               ))}
             </motion.ul>

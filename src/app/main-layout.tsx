@@ -5,20 +5,17 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import DesktopNavbar, { TABS } from "@/components/Global/DesktopNavbar";
+import DesktopNavbar from "@/components/Global/DesktopNavbar";
 import MobileNavbar from "@/components/Global/MobileNavbar";
-import { isNullish } from "@/utils/Common";
 import { ThemeContext } from "@/utils/Contexts";
 
 const queryClient = new QueryClient();
 
 type MainLayoutProps = {
-  rootPage?: "Blog" | "Projects" | "Error" | null;
-  page?: (typeof TABS)[number];
   children: ReactNode;
 };
 
-const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
   const [darkMode, toggleDarkMode] = useState(true);
   const themeContextObject = useMemo(() => ({ darkMode, toggleDarkMode }), [darkMode]);
 
@@ -34,10 +31,6 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
       document.removeEventListener("scroll", stickyScrollListener);
     };
   }, [stickyScrollListener]);
-
-  if (isNullish(page) && isNullish(rootPage)) {
-    console.warn("MainLayout: page and rootPage are both nullish");
-  }
 
   if (themeContextObject === null) {
     return null;
@@ -58,11 +51,7 @@ const MainLayout = ({ rootPage = null, page, children }: MainLayoutProps) => {
           <div className={`${darkMode ? "dark" : ""}`}>
             <div className="w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
               {[DesktopNavbar, MobileNavbar].map((Navbar) => (
-                <Navbar
-                  key={Navbar.name}
-                  sticky={stickyNavbar}
-                  page={rootPage !== "Error" ? rootPage || page : undefined}
-                />
+                <Navbar key={Navbar.name} sticky={stickyNavbar} />
               ))}
               {children}
             </div>

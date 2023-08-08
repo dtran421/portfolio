@@ -17,8 +17,6 @@ import { LanguageGroup, TimelineEvent } from "@/utils/types";
 
 import PortfolioContent from "@/public/json/index.json";
 
-import MainLayout from "./main-layout";
-
 export function isInViewport(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   return (
@@ -75,7 +73,7 @@ const Portfolio = ({ timelineEvents, languageGroups }: PortfolioProps) => {
   } = PortfolioContent;
 
   return (
-    <MainLayout page="Portfolio">
+    <>
       <div ref={page1} className="w-5/6 h-screen flex flex-col items-center xl:space-y-28 mx-auto">
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-2 xl:mt-16">
           <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
@@ -222,7 +220,7 @@ const Portfolio = ({ timelineEvents, languageGroups }: PortfolioProps) => {
           )}
         </div>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

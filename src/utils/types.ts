@@ -28,6 +28,7 @@ export type Project = {
   link: string;
   accentColor: string;
   darkText: boolean;
+  github?: string;
   thumbnail: string;
   width: number;
   height: number;

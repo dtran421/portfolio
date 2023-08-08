@@ -6,8 +6,6 @@ import { Project } from "@/utils/types";
 
 import projects from "@/public/json/projects.json";
 
-import MainLayout from "../main-layout";
-
 const Projects = () => {
   const {
     coding,
@@ -25,7 +23,7 @@ const Projects = () => {
   const preloadClass = `hidden ${preloadColors.join(" ")}`;
 
   return (
-    <MainLayout page="Projects">
+    <>
       <div className="min-h-screen pb-10">
         <div className="w-3/5 max-w-sm md:w-full md:max-w-xl lg:max-w-3xl xl:w-3/4 xl:max-w-none flex flex-col gap-y-10 mx-auto mt-8">
           <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-center md:text-left">
@@ -69,7 +67,7 @@ const Projects = () => {
         </div>
       </div>
       <div className={preloadClass} />
-    </MainLayout>
+    </>
   );
 };
 

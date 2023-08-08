@@ -12,8 +12,6 @@ import ContactLabel from "@/components/Resume/ContactLabel";
 import Section from "@/components/Resume/Section";
 import { ResumeSubsection } from "@/utils/types";
 
-import MainLayout from "../main-layout";
-
 interface ResumeProps {
   resumeTabSections: {
     [heading: string]: ResumeSubsection[];
@@ -32,7 +30,7 @@ const ResumePage = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) =
   );
 
   return (
-    <MainLayout page="Resume">
+    <>
       <div className="md:max-w-2xl lg:max-w-4xl xl:max-w-6xl h-48 lg:h-64 mx-auto">
         <div
           className="h-full overflow-hidden bg-no-repeat bg-auto lg:bg-cover bg-center "
@@ -92,7 +90,7 @@ const ResumePage = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) =
           <FetchError />
         )}
       </div>
-    </MainLayout>
+    </>
   );
 };
 

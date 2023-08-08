@@ -3,6 +3,8 @@ import { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+import MainLayout from "./main-layout";
+
 export const openGraph = {
   title: "Duke Tran | Portfolio",
   description: "Learn more about Duke Tran and his projects.",
@@ -24,7 +26,9 @@ const RootLayout = ({
   children: ReactNode;
 }) => (
   <html lang="en">
-    <body suppressHydrationWarning>{children}</body>
+    <body suppressHydrationWarning>
+      <MainLayout>{children}</MainLayout>
+    </body>
   </html>
 );
 
