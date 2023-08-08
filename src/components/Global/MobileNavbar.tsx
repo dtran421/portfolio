@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -96,8 +98,8 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
         </div>
       </div>
       <div className="overflow-hidden bg-transparent">
-        <AnimatePresence>
-          {isExpanded && (
+        {isExpanded ? (
+          <AnimatePresence>
             <motion.ul
               initial="collapsed"
               animate="expanded"
@@ -119,8 +121,8 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
                 </motion.li>
               ))}
             </motion.ul>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        ) : null}
       </div>
     </motion.div>
   );

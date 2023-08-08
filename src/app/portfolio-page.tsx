@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import Image from "next/legacy/image";
 import { motion, useAnimation } from "framer-motion";
@@ -11,16 +13,13 @@ import LangGroup from "@/components/Index/LangGroup";
 import LearnMore from "@/components/Index/LearnMore";
 import SocialProfile from "@/components/Index/SocialProfile";
 import Timeline from "@/components/Index/Timeline";
-import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
-import MainLayout from "@/layouts/MainLayout";
-import { queryContentful } from "@/lib/ContentfulUtil";
-import { logger } from "@/lib/Logger";
-import { Err, Ok } from "@/lib/ReturnTypes";
 import { LanguageGroup, TimelineEvent } from "@/lib/types";
 
 import IndexContent from "@/public/json/index.json";
 
-export function isInViewport(el) {
+import MainLayout from "./main-layout";
+
+export function isInViewport(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   return (
     // rect.top >= 0 ||
@@ -31,9 +30,9 @@ export function isInViewport(el) {
   );
 }
 
-interface IndexProps {
-  timelineEvents: TimelineEvent[];
-  languageGroups: LanguageGroup[];
+export interface IndexProps {
+  timelineEvents: TimelineEvent[] | null;
+  languageGroups: LanguageGroup[] | null;
 }
 
 const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
@@ -77,12 +76,12 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
 
   return (
     <MainLayout page="Portfolio">
-      <div ref={page1} className="w-5/6 flex flex-col items-center xl:space-y-28 mx-auto">
+      <div ref={page1} className="w-5/6 h-screen flex flex-col items-center xl:space-y-28 mx-auto">
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-14 lg:space-y-0 mt-20 lg:mt-2 xl:mt-16">
           <div className="w-full lg:w-1/2 flex flex-col justify-start items-start mx-4">
             <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
-              <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0">
-                <p className="inline dark:text-white dark-transition">Hi there! My name is </p>
+              <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row items-start md:items-center lg:items-start xl:items-center space-x-3 space-y-2 md:space-y-0 lg:space-y-2 xl:space-y-0 mb-2">
+                <p className="inline dark:text-white dark-transition py-1">Hi there! My name is </p>
                 <div className="flex items-center space-x-3">
                   <motion.p
                     initial={{ opacity: 0 }}
@@ -91,7 +90,7 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
                       duration: 0.5,
                       ease: "linear",
                     }}
-                    className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3 lg:ml-0 xl:ml-3"
+                    className="font-medium text-white bg-gradient-to-tr from-primary to-secondary rounded-lg px-3 py-1 md:ml-3"
                   >
                     Duke Tran
                   </motion.p>
@@ -225,32 +224,6 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
       </div>
     </MainLayout>
   );
-};
-
-type IndexQR = IndexProps;
-
-export const getStaticProps = async () => {
-  const response = await queryContentful<IndexQR>(TimelineAndLanguageQuery);
-
-  if (response.isErr()) {
-    const err = (response as Err<Error>).unwrap();
-    logger.error(`Something went wrong with fetching index data: ${err.message}`);
-    return {
-      props: {
-        timelineEvents: null,
-        languageGroups: null,
-      },
-    };
-  }
-
-  const { timelineEvents, languageGroups } = (response as Ok<IndexQR>).unwrap();
-
-  return {
-    props: {
-      timelineEvents,
-      languageGroups,
-    },
-  };
 };
 
 export default Index;

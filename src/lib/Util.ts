@@ -1,1 +1,1 @@
-export const isNullish = (value) => value === null || value === undefined;
+export const isNullish = (value: unknown) => value === null || value === undefined;

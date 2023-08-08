@@ -82,8 +82,9 @@ export type None<T> = {
 export type Option<T> = Some<T> | None<T>;
 
 /* Constructor */
-export const Option = <T = unknown>(value?: T): Option<T> => {
-  const o = { some: !isNullish(value) };
+export const Option = <T = unknown>(value?: T | null): Option<T> => {
+  const some = !isNullish(value);
+  const o = {};
 
   Object.defineProperties(o, {
     value: {
@@ -92,13 +93,13 @@ export const Option = <T = unknown>(value?: T): Option<T> => {
       },
     },
     coalesce: {
-      value: (defaultValue?: T) => (o.some ? value : defaultValue ?? null),
+      value: (defaultValue?: T) => (some ? value : defaultValue ?? null),
     },
     isNone: {
-      value: () => !o.some,
+      value: () => !some,
     },
     isSome: {
-      value: () => o.some,
+      value: () => some,
     },
   });
 

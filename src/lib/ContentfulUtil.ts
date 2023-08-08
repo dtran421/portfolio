@@ -4,9 +4,8 @@ import { BLOCKS } from "@contentful/rich-text-types";
 
 import { ContentfulResource } from "@/graphql/Resources";
 import { logger } from "@/lib/Logger";
-
-import { Option, Result } from "./ReturnTypes";
-import { RichText } from "./types";
+import { Option, Result } from "@/lib/ReturnTypes";
+import { RichText } from "@/lib/types";
 
 export const generateRichTextStub = (text?: string): RichText => ({
   json: {
@@ -78,7 +77,12 @@ export const queryContentful = async <T>(
 
   try {
     const { data, status, statusText } = await axios.post<{
-      data: T;
+      data: Record<
+        `${ContentfulResource}Collection`,
+        {
+          items: T[keyof T][];
+        }
+      >;
     }>(
       contentfulUrl.coalesce(),
       { query, variables },
@@ -107,6 +111,6 @@ export const queryContentful = async <T>(
       logger.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return Result<T, Error | AxiosError>(error);
+    return Result<T, Error | AxiosError>(error as Error);
   }
 };
