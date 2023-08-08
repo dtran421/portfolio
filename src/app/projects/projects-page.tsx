@@ -1,11 +1,25 @@
+"use client";
+
 import Emoji from "@/components/Global/Emoji";
 import ProjectCard from "@/components/Projects/ProjectCard";
-import MainLayout from "@/layouts/MainLayout";
+import { Project } from "@/utils/types";
 
 import projects from "@/public/json/projects.json";
 
+import MainLayout from "../main-layout";
+
 const Projects = () => {
-  const { coding, finance } = projects;
+  const {
+    coding,
+    finance,
+  }: {
+    coding: {
+      [name: string]: Project;
+    };
+    finance: {
+      [name: string]: Project;
+    };
+  } = projects;
 
   const preloadColors = ["border-[#a6cee3]", "border-[#ff7f0e]"];
   const preloadClass = `hidden ${preloadColors.join(" ")}`;
@@ -19,16 +33,16 @@ const Projects = () => {
           </h1>
           <div className="w-full flex justify-center">
             <div className="w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
-              {Object.keys(coding).map((name) => (
+              {Object.entries(coding).map(([name, data]) => (
                 <ProjectCard
                   key={name}
                   name={name}
-                  link={coding[name].link}
-                  accentColor={coding[name].accentColor}
-                  darkText={coding[name].darkText}
-                  thumbnail={coding[name].thumbnail}
-                  width={coding[name].width}
-                  height={coding[name].height}
+                  link={data.link}
+                  accentColor={data.accentColor}
+                  darkText={data.darkText}
+                  thumbnail={data.thumbnail}
+                  width={data.width}
+                  height={data.height}
                 />
               ))}
             </div>
@@ -38,16 +52,16 @@ const Projects = () => {
           </h1>
           <div className="w-full flex justify-center">
             <div className="w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
-              {Object.keys(finance).map((name) => (
+              {Object.entries(finance).map(([name, data]) => (
                 <ProjectCard
                   key={name}
                   name={name}
-                  link={finance[name].link}
-                  accentColor={finance[name].accentColor}
-                  darkText={finance[name].darkText}
-                  thumbnail={finance[name].thumbnail}
-                  width={finance[name].width}
-                  height={finance[name].height}
+                  link={data.link}
+                  accentColor={data.accentColor}
+                  darkText={data.darkText}
+                  thumbnail={data.thumbnail}
+                  width={data.width}
+                  height={data.height}
                 />
               ))}
             </div>

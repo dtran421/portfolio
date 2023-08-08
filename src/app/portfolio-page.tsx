@@ -8,14 +8,14 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 import Emoji from "@/components/Global/Emoji";
 import FetchError from "@/components/Global/FetchError";
-import Carousel from "@/components/Index/Carousel";
-import LangGroup from "@/components/Index/LangGroup";
-import LearnMore from "@/components/Index/LearnMore";
-import SocialProfile from "@/components/Index/SocialProfile";
-import Timeline from "@/components/Index/Timeline";
+import Carousel from "@/components/Portfolio/Carousel";
+import LangGroup from "@/components/Portfolio/LangGroup";
+import LearnMore from "@/components/Portfolio/LearnMore";
+import SocialProfile from "@/components/Portfolio/SocialProfile";
+import Timeline from "@/components/Portfolio/Timeline";
 import { LanguageGroup, TimelineEvent } from "@/utils/types";
 
-import IndexContent from "@/public/json/index.json";
+import PortfolioContent from "@/public/json/index.json";
 
 import MainLayout from "./main-layout";
 
@@ -30,12 +30,12 @@ export function isInViewport(el: HTMLElement) {
   );
 }
 
-export interface IndexProps {
+export interface PortfolioProps {
   timelineEvents: TimelineEvent[] | null;
   languageGroups: LanguageGroup[] | null;
 }
 
-const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
+const Portfolio = ({ timelineEvents, languageGroups }: PortfolioProps) => {
   const learnMoreAnimations = useAnimation();
 
   const page1 = useRef(null);
@@ -72,7 +72,7 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
   const {
     intro,
     aboutMe: { section1, section2 },
-  } = IndexContent;
+  } = PortfolioContent;
 
   return (
     <MainLayout page="Portfolio">
@@ -226,4 +226,4 @@ const Index = ({ timelineEvents, languageGroups }: IndexProps) => {
   );
 };
 
-export default Index;
+export default Portfolio;
