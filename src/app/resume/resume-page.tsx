@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -8,25 +10,20 @@ import FetchError from "@/components/Global/FetchError";
 import CheckMark from "@/components/Resume/CheckMark";
 import ContactLabel from "@/components/Resume/ContactLabel";
 import Section from "@/components/Resume/Section";
-import ResumeSectionsQuery from "@/graphql/ResumeSectionsQuery";
-import MainLayout from "@/layouts/MainLayout";
-import { queryContentful } from "@/lib/ContentfulUtil";
-import { logger } from "@/lib/Logger";
-import { Err, Ok } from "@/lib/ReturnTypes";
-import { ResumeBubblesSection, ResumeSubsection, ResumeTabSection } from "@/lib/types";
+import { ResumeSubsection } from "@/utils/types";
+
+import MainLayout from "../main-layout";
 
 interface ResumeProps {
   resumeTabSections: {
-    heading: string;
-    subsections: ResumeSubsection[];
-  }[];
+    [heading: string]: ResumeSubsection[];
+  } | null;
   resumeBubblesSections: {
-    heading: string;
-    items: string[];
-  }[];
+    [heading: string]: string[];
+  } | null;
 }
 
-const Resume = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
+const ResumePage = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
   const iconContext = useMemo(
     () => ({
       className: "dark:text-white",
@@ -84,11 +81,11 @@ const Resume = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
       <div className="w-3/4 md:max-w-xl lg:max-w-3xl xl:max-w-5xl space-y-20 mx-auto mt-10 lg:mt-20">
         {resumeTabSections && resumeBubblesSections ? (
           <>
-            {resumeTabSections.map(({ heading: tabHeading, subsections: tabBody }) => (
-              <Section key={tabHeading} type="Tabs" heading={tabHeading} body={tabBody} />
+            {Object.entries(resumeTabSections).map(([heading, tabs]) => (
+              <Section key={heading} type="Tabs" heading={heading} body={tabs} />
             ))}
-            {resumeBubblesSections.map(({ heading: bubblesHeading, items: bubblesBody }) => (
-              <Section key={bubblesHeading} type="Bubbles" heading={bubblesHeading} body={bubblesBody} />
+            {Object.entries(resumeBubblesSections).map(([heading, bubbles]) => (
+              <Section key={heading} type="Bubbles" heading={heading} body={bubbles} />
             ))}
           </>
         ) : (
@@ -99,36 +96,4 @@ const Resume = ({ resumeTabSections, resumeBubblesSections }: ResumeProps) => {
   );
 };
 
-interface ResumeQR {
-  resumeTabSections: ResumeTabSection[];
-  resumeBubblesSections: ResumeBubblesSection[];
-}
-
-export const getStaticProps = async () => {
-  const response = await queryContentful<ResumeQR>(ResumeSectionsQuery);
-
-  if (response.isErr()) {
-    const err = (response as Err<Error>).unwrap();
-    logger.error(`Something went wrong with fetching resume data: ${err.message}`);
-    return {
-      props: {
-        resumeTabsData: null,
-        resumeBubblesData: null,
-      },
-    };
-  }
-
-  const { resumeTabSections, resumeBubblesSections } = (response as Ok<ResumeQR>).unwrap();
-
-  return {
-    props: {
-      resumeTabSections: resumeTabSections.map(({ heading, subsectionsCollection: { items: subsections } }) => ({
-        heading,
-        subsections,
-      })),
-      resumeBubblesSections,
-    },
-  };
-};
-
-export default Resume;
+export default ResumePage;

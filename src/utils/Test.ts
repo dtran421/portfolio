@@ -4,11 +4,11 @@ import { ResumeSubsection, RichText } from "./types";
 
 export const generateRichTextStub = (text?: string): RichText => ({
   json: {
-    nodeType: "document" as BLOCKS.DOCUMENT,
+    nodeType: BLOCKS.DOCUMENT,
     data: {},
     content: [
       {
-        nodeType: "paragraph" as BLOCKS.PARAGRAPH,
+        nodeType: BLOCKS.PARAGRAPH,
         data: {},
         content: [
           {
@@ -24,11 +24,12 @@ export const generateRichTextStub = (text?: string): RichText => ({
 });
 
 export const generateSubsectionStub = (
+  title?: string,
   text?: string
 ): {
   description: TopLevelBlock[];
 } & Omit<ResumeSubsection, "description" | "currentlyWorking"> => ({
-  title: "Software Engineer",
+  title: title || "Software Engineer",
   organization: "Arch",
   startDate: "2021-01-01",
   endDate: "2021-01-01",
