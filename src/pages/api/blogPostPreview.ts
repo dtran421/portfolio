@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import BlogPostQuery from "@/graphql/BlogPostQuery";
-import { queryContentful } from "@/lib/ContentfulUtil";
-import { logger } from "@/lib/Logger";
-import { Err, Ok, Option } from "@/lib/ReturnTypes";
-import { BlogPost } from "@/lib/types";
-import { isNullish } from "@/lib/Util";
+import { isNullish } from "@/utils/Common";
+import { queryContentful } from "@/utils/Contentful";
+import { logger } from "@/utils/Logger";
+import { Err, Ok, Option } from "@/utils/ReturnTypes";
+import { BlogPost } from "@/utils/types";
 
 export interface BlogPostQR {
   blogPosts: BlogPost[];

@@ -1,5 +1,5 @@
-import { Result } from "@/lib/ReturnTypes";
-import { APIResponse } from "@/lib/types";
+import { Result } from "@/utils/ReturnTypes";
+import { APIResponse } from "@/utils/types";
 
 export const consumeAPIResponse = <T = unknown>(response: APIResponse<T>) => {
   if ("error" in response) {

@@ -13,7 +13,7 @@ import LangGroup from "@/components/Index/LangGroup";
 import LearnMore from "@/components/Index/LearnMore";
 import SocialProfile from "@/components/Index/SocialProfile";
 import Timeline from "@/components/Index/Timeline";
-import { LanguageGroup, TimelineEvent } from "@/lib/types";
+import { LanguageGroup, TimelineEvent } from "@/utils/types";
 
 import IndexContent from "@/public/json/index.json";
 

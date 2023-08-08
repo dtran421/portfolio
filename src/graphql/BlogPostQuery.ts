@@ -1,4 +1,4 @@
-import { ContentfulQuery } from "@/lib/ContentfulUtil";
+import { ContentfulQuery } from "@/utils/Contentful";
 
 import { ContentfulResource } from "./Resources";
 

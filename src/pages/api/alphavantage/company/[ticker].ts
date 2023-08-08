@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-import { logger } from "@/lib/Logger";
-import { APIResponse, Company } from "@/lib/types";
+import { logger } from "@/utils/Logger";
+import { APIResponse, Company } from "@/utils/types";
 
 import { getBaseAlphavantageUrl } from "../Utils";
 

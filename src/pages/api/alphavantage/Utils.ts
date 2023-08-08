@@ -1,6 +1,6 @@
-import { logger } from "@/lib/Logger";
-import { Option } from "@/lib/ReturnTypes";
-import { ALPHAVANTAGE_FUNCTIONS } from "@/lib/types";
+import { logger } from "@/utils/Logger";
+import { Option } from "@/utils/ReturnTypes";
+import { ALPHAVANTAGE_FUNCTIONS } from "@/utils/types";
 
 /**
  * Get base Alphavantage url

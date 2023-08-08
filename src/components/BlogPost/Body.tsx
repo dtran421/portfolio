@@ -1,8 +1,8 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-import renderOptions from "@/lib/renderOptions";
-import { Links } from "@/lib/types";
+import renderOptions from "@/utils/renderOptions";
+import { Links } from "@/utils/types";
 
 type BodyProps = {
   document: Document;

@@ -7,10 +7,10 @@ import FetchError from "@/components/Global/FetchError";
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import MainLayout from "@/layouts/MainLayout";
-import { queryContentful } from "@/lib/ContentfulUtil";
-import { logger } from "@/lib/Logger";
-import { Err, Ok } from "@/lib/ReturnTypes";
-import { BlogPost } from "@/lib/types";
+import { queryContentful } from "@/utils/Contentful";
+import { logger } from "@/utils/Logger";
+import { Err, Ok } from "@/utils/ReturnTypes";
+import { BlogPost } from "@/utils/types";
 
 import { BlogPostQR } from "../api/blogPostPreview";
 import { convertDateToFullString } from "../blog";

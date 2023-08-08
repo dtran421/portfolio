@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { Link } from "react-scroll";
 
-import { AppProjectContext } from "@/lib/Contexts";
+import { AppProjectContext } from "@/utils/Contexts";
 
 type NavButtonProps = {
   heading: string;

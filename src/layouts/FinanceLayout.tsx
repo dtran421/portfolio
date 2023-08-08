@@ -6,7 +6,8 @@ import ClassProfile from "@/components/Projects/ClassProfile";
 import StockCard from "@/components/Projects/Finance/StockCard";
 import useGetStockCompany from "@/hooks/useGetStockCompany";
 import useGetStockQuote from "@/hooks/useGetStockQuote";
-import { isNullish } from "@/lib/Util";
+import { isNullish } from "@/utils/Common";
+import { Company, Quote } from "@/utils/types";
 
 import ProjectLayout from "./ProjectLayout";
 
@@ -51,10 +52,10 @@ const FinanceLayout = ({
   const { data: companyData, isLoading: isLoadingCompany, error: companyError } = useGetStockCompany(symbol);
 
   const isLoading = isLoadingQuote || isLoadingCompany;
-  const errors = [quoteError, companyError].filter((err) => !isNullish(err));
+  const errors = [quoteError, companyError].filter((err) => !isNullish(err)) as Error[];
 
   const stockCardData = useMemo(() => {
-    if (isLoading || errors.length) {
+    if (isLoading || errors.length || isNullish(quoteData) || isNullish(companyData)) {
       return {
         symbol,
         name: "",
@@ -76,8 +77,9 @@ const FinanceLayout = ({
       };
     }
 
-    const { price, change, changePct, latestBusinessDay } = quoteData;
-    const { name, exchange, sector, industry, marketCap, dividendYield, eps, high52Weeks, low52Weeks } = companyData;
+    const { price, change, changePct, latestBusinessDay } = quoteData as Quote;
+    const { name, exchange, sector, industry, marketCap, dividendYield, eps, high52Weeks, low52Weeks } =
+      companyData as Company;
 
     return {
       symbol,

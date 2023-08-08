@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { isNullish } from "./Util";
+import { isNullish } from "./Common";
 
 describe("isNullish", () => {
   test("it returns true for null", () => {

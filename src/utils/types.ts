@@ -54,14 +54,17 @@ export type RichText = {
   links?: Links;
 };
 
-export interface ResumeSubsection {
-  title: string;
-  organization: string;
+export interface SummaryData {
   startDate: string;
   endDate: string;
   currentlyWorking: boolean;
   description: RichText;
 }
+
+export type ResumeSubsection = {
+  title: string;
+  organization: string;
+} & SummaryData;
 
 export interface ResumeTabSection {
   heading: string;
@@ -84,15 +87,11 @@ export enum EventType {
   WORK = "Work",
 }
 
-export interface TimelineEvent {
+export type TimelineEvent = {
   heading: string;
   type: EventType;
   date: string;
-  startDate: string;
-  endDate: string;
-  currentlyWorking: boolean;
-  description: RichText;
-}
+} & SummaryData;
 
 export interface Language {
   name: string;

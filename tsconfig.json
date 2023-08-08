@@ -23,7 +23,7 @@
       "@/hooks/*": ["hooks/*"],
       "@/styles/*": ["styles/*"],
       "@/graphql/*": ["graphql/*"],
-      "@/lib/*": ["lib/*"],
+      "@/utils/*": ["utils/*"],
       "@/public/*": ["../public/*"]
     },
     "plugins": [

@@ -2,9 +2,9 @@ import { cache } from "react";
 import { Metadata } from "next";
 
 import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
-import { queryContentful } from "@/lib/ContentfulUtil";
-import { logger } from "@/lib/Logger";
-import { Err, Ok } from "@/lib/ReturnTypes";
+import { queryContentful } from "@/utils/Contentful";
+import { logger } from "@/utils/Logger";
+import { Err, Ok } from "@/utils/ReturnTypes";
 
 import { openGraph } from "./layout";
 import PortfolioPage, { IndexProps } from "./portfolio-page";

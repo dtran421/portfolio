@@ -1,7 +1,7 @@
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
 
-import { queryAlphavantage } from "@/lib/AlphavantageUtil";
-import { Quote } from "@/lib/types";
+import { queryAlphavantage } from "@/utils/Alphavantage";
+import { Quote } from "@/utils/types";
 
 const getStockQuote = async ({ queryKey: [symbol] }: QueryFunctionContext<[string, string]>) => {
   const result = await queryAlphavantage(symbol, "GLOBAL_QUOTE");

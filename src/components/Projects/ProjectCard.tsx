@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
-import { Project } from "@/lib/types";
+import { Project } from "@/utils/types";
 
 import ProjectCardLabel from "./ProjectCardLabel";
 

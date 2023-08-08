@@ -1,4 +1,4 @@
-import { TimelineEvent } from "@/lib/types";
+import { TimelineEvent } from "@/utils/types";
 
 import Event from "./Event";
 

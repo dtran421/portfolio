@@ -4,7 +4,8 @@ import { IconContext } from "react-icons";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
 
-import { RichText, TimelineEvent } from "@/lib/types";
+import { convertDateToAbbrevString } from "@/utils/Date";
+import { RichText, TimelineEvent } from "@/utils/types";
 
 export const expandVariants = {
   open: { opacity: 1, height: "auto" },
@@ -13,18 +14,7 @@ export const expandVariants = {
 
 const tagVariants = {
   open: { opacity: 1, x: 0 },
-  collapsed: (side) => ({ opacity: 0, x: (side === "L" ? -1 : 1) * 50 }),
-};
-
-export const convertDateToAbbrevString = (rawDateStr: string, currentlyWorking?: boolean): string => {
-  if (currentlyWorking !== null && currentlyWorking) {
-    return "Present";
-  }
-
-  const abbrevMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  const date = rawDateStr.split("T")[0].split("-");
-  return `${abbrevMonths[parseInt(date[1], 10) - 1]} ${date[0]}`;
+  collapsed: (side: "L" | "R") => ({ opacity: 0, x: (side === "L" ? -1 : 1) * 50 }),
 };
 
 type CardProps = {

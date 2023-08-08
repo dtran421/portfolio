@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { motion } from "framer-motion";
 import { FiMoon, FiSun } from "react-icons/fi";
 
-import { ThemeContext } from "@/lib/Contexts";
+import { ThemeContext } from "@/utils/Contexts";
 
 const DarkModeToggle = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);

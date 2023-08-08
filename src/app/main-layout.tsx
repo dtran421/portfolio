@@ -7,8 +7,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import DesktopNavbar, { TABS } from "@/components/Global/DesktopNavbar";
 import MobileNavbar from "@/components/Global/MobileNavbar";
-import { ThemeContext } from "@/lib/Contexts";
-import { isNullish } from "@/lib/Util";
+import { isNullish } from "@/utils/Common";
+import { ThemeContext } from "@/utils/Contexts";
 
 const queryClient = new QueryClient();
 

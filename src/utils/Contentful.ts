@@ -1,32 +1,8 @@
 import axios, { AxiosError } from "axios";
 
-import { BLOCKS } from "@contentful/rich-text-types";
-
 import { ContentfulResource } from "@/graphql/Resources";
-import { logger } from "@/lib/Logger";
-import { Option, Result } from "@/lib/ReturnTypes";
-import { RichText } from "@/lib/types";
-
-export const generateRichTextStub = (text?: string): RichText => ({
-  json: {
-    nodeType: "document" as BLOCKS.DOCUMENT,
-    data: {},
-    content: [
-      {
-        nodeType: "paragraph" as BLOCKS.PARAGRAPH,
-        data: {},
-        content: [
-          {
-            nodeType: "text",
-            value: text || "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            marks: [],
-            data: {},
-          },
-        ],
-      },
-    ],
-  },
-});
+import { logger } from "@/utils/Logger";
+import { Option, Result } from "@/utils/ReturnTypes";
 
 const getBaseContentfulUrl = () => {
   if (!process.env.CONTENTFUL_SPACE_ID) {

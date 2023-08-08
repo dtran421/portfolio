@@ -3,7 +3,7 @@ import { createRef, ReactNode, RefObject, useEffect, useMemo, useRef, useState }
 import MenuBar from "@/components/Projects/AppProject/MenuBar";
 import Paragraph from "@/components/Projects/AppProject/Paragraph";
 import PhoneDemo from "@/components/Projects/AppProject/PhoneDemo";
-import { AppProjectContext } from "@/lib/Contexts";
+import { AppProjectContext } from "@/utils/Contexts";
 
 import ProjectLayout from "./ProjectLayout";
 
