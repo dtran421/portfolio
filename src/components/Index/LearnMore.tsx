@@ -29,12 +29,12 @@ const LearnMore = ({ animations }: LearnMoreProps) => (
   <AnimatePresence>
     <motion.div
       key="learn_more"
-      className="hidden lg:flex justify-center"
+      className="hidden lg:flex justify-center text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
       animate={animations}
       variants={learnMoreVariants}
     >
       <Link to="page2" smooth="easeOutCubic" offset={25} duration={1000} className="flex justify-center">
-        <div className="flex flex-col justify-end items-center text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 mt-4 transition duration-500 group hover:scale-110 cursor-pointer">
+        <div className="flex flex-col justify-end items-center mt-4 transition duration-500 group hover:scale-110 cursor-pointer">
           <p className="text-xl text-center opacity-100 mb-1">Learn more</p>
           <div className="-translate-y-1/4 transition duration-200 opacity-60 group-hover:opacity-100 group-hover:animate-bounce py-4">
             <FiChevronsDown size={24} />

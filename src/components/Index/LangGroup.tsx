@@ -25,8 +25,8 @@ const LangGroup = ({ heading, description, emoji, emojiLabel, languages }: LangG
       </div>
     </div>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 xl:gap-x-10 mx-10">
-      {languages.map(({ name, img: { url: img }, accentColor, darkText }) => (
-        <LangProfile key={name} {...{ name, img, accentColor, darkText }} />
+      {languages.map(({ name, img, accentColor, darkText }) => (
+        <LangProfile key={name} name={name} imgSrc={img.url} accentColor={accentColor} darkText={darkText} />
       ))}
     </div>
   </div>

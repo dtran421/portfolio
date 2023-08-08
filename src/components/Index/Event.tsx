@@ -39,15 +39,15 @@ const Card = ({
       side === "L" ? "bg-primary" : "bg-secondary"
     } rounded-lg shadow-xl w-10/12 md:w-5/12 p-4`}
   >
-    <div className="flex justify-between space-x-2">
-      <h3 className="font-bold text-white text-lg">{heading}</h3>
+    <div className="flex justify-between text-white space-x-2">
+      <h3 className="font-bold text-lg">{heading}</h3>
       <motion.button
         initial={false}
         animate={isExpanded ? { rotate: -180 } : { rotate: 0 }}
         transition={{ duration: 0.25, ease: "linear" }}
         onClick={() => setExpanded(!isExpanded)}
       >
-        <FiArrowDownCircle size={24} className="text-white" />
+        <FiArrowDownCircle size={24} />
       </motion.button>
     </div>
     <AnimatePresence initial={false}>
@@ -59,21 +59,21 @@ const Card = ({
           variants={expandVariants}
           transition={{ duration: 0.25, ease: "linear" }}
         >
-          {content.map(({ content: blocks }, idx) => {
-            const { nodeType } = blocks[0];
-            if (nodeType === "text") {
-              const { value } = blocks[0];
-              return (
-                <p
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={idx}
-                  className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3"
-                >
-                  {value}
-                </p>
-              );
+          {content.map(({ content: [block] }) => {
+            const { nodeType } = block;
+            if (nodeType !== "text") {
+              return null;
             }
-            return null;
+
+            const { value } = block;
+            return (
+              <p
+                key={value}
+                className="text-xs lg:text-sm font-medium leading-snug tracking-wide text-white text-opacity-100 mt-3"
+              >
+                {value}
+              </p>
+            );
           })}
         </motion.div>
       )}
@@ -146,7 +146,13 @@ const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorki
             <Icon />
           </h1>
         </div>
-        <Card {...{ side, isExpanded, setExpanded, heading, description }} />
+        <Card
+          side={side}
+          isExpanded={isExpanded}
+          setExpanded={setExpanded}
+          heading={heading}
+          description={description}
+        />
       </div>
     </IconContext.Provider>
   );

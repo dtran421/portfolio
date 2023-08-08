@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/legacy/image";
 import Typewriter from "typewriter-effect";
 
+import { isNullish } from "@/utils/Common";
+
 import carouselData from "@/public/json/carousel.json";
 
 const Carousel = () => {
@@ -11,8 +13,12 @@ const Carousel = () => {
 
   const [imgClass, setImgClass] = useState("rounded-xl opacity-0 transition duration-200 ease-linear");
   const [[pic, picData, init], cyclePics] = useState([1, carousel[0], true]);
-  const typewriter = useRef(null);
+  const typewriter = useRef<HTMLDivElement>(null);
   const typewriterListener = useCallback(() => {
+    if (isNullish(typewriter.current)) {
+      return;
+    }
+
     const cyclePicture = () => {
       const loop = pic + 1 > pics;
       const newPic = loop ? 1 : pic + 1;
@@ -21,7 +27,8 @@ const Carousel = () => {
       setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 250);
     };
 
-    const typewriterText = typewriter.current.children[0].innerText;
+    const parentDiv = typewriter.current as HTMLDivElement;
+    const typewriterText = (parentDiv.children[0] as HTMLSpanElement).innerText;
 
     if (typewriterText.length === 1) {
       if (init) {

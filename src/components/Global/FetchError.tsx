@@ -1,5 +1,3 @@
-"use client";
-
 import { BiSolidError } from "react-icons/bi";
 
 const FetchError = () => (
