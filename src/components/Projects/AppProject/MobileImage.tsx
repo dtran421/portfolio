@@ -1,7 +1,7 @@
 import Image from "next/legacy/image";
 
 type MobileImageProps = {
-  page: string;
+  page: string | null;
   num: number;
 };
 

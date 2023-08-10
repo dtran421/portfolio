@@ -26,7 +26,7 @@
 
 /* transition duration-200 ease-in */
 .dark-transition {
-  transition-property: color, background-color, border-color, fill, stroke, box-shadow;
+  transition-property: color, background-color, border-color, fill, stroke, box-shadow, opacity;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
