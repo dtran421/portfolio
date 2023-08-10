@@ -1,30 +1,31 @@
-import { ReactNode } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 type PhoneDemoProps = {
-  activeP: number;
   page: string;
-  imgClass: string;
-  placeholder: ReactNode;
+  ImagePlaceholder: JSX.Element;
+  activeParagraph: number;
+  active: boolean;
 };
 
-const PhoneDemo = ({ activeP, page, imgClass, placeholder }: PhoneDemoProps) => (
-  <div className="w-1/2 relative hidden lg:flex flex-col space-y-32">
-    <div className="h-min sticky right-1/4 inset-y-1/4 flex justify-center items-start">
-      <div className="relative flex items-center bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl p-2">
-        <div className="absolute left-0 top-0 z-20 w-full flex justify-center">
+const PhoneDemo = ({ page, ImagePlaceholder, activeParagraph, active }: PhoneDemoProps) => (
+  <div className="w-1/2 relative hidden lg:block">
+    <div className="sticky top-1/4 flex justify-center">
+      <div className="w-3/5 relative">
+        <div className="w-full absolute left-0 top-0 z-20 flex justify-center">
           <div className="w-1/2 h-7 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-b-xl" />
         </div>
-        {activeP >= 0 && (
-          <Image
-            alt={`${page} video ${activeP + 1}`}
-            src={`/img/projects/${page}/${page}${activeP + 1}.gif`}
-            className={imgClass}
-            width={240}
-            height={520}
-          />
-        )}
-        {placeholder}
+        <div className="w-full z-10 absolute left-0 top-0 p-2">
+          <div className="w-full relative rounded-3xl overflow-hidden">
+            <Image
+              alt={`${page} video ${activeParagraph + 1 || 1}`}
+              src={`/img/projects/${page}/${page}${activeParagraph + 1 || 1}.gif`}
+              className={`transition duration-200 ease-linear ${active ? "opacity-100" : "opacity-0"}`}
+              width={1170}
+              height={2532}
+            />
+          </div>
+        </div>
+        {ImagePlaceholder}
       </div>
     </div>
   </div>

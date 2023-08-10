@@ -24,18 +24,18 @@ const Projects = () => {
 
   return (
     <>
-      <div className="min-h-screen pb-10">
-        <div className="w-3/5 max-w-sm md:w-full md:max-w-xl lg:max-w-3xl xl:w-3/4 xl:max-w-none flex flex-col gap-y-10 mx-auto mt-8">
+      <div className="w-3/5 max-w-sm md:w-full md:max-w-xl lg:max-w-3xl xl:w-3/4 xl:max-w-none mx-auto">
+        <div className="flex flex-col gap-y-10 mx-auto mt-8">
           <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-center md:text-left">
             CODING <Emoji label="desktop computer" symbol="🖥️" />
           </h1>
           <div className="w-full flex justify-center">
-            <div className="w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
-              {Object.entries(coding).map(([name, data]) => (
+            <div className="w-full flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
+              {Object.entries(coding).map(([link, data]) => (
                 <ProjectCard
-                  key={name}
-                  name={name}
-                  link={data.link}
+                  key={link}
+                  title={data.title}
+                  link={link}
                   accentColor={data.accentColor}
                   darkText={data.darkText}
                   thumbnail={data.thumbnail}
@@ -50,11 +50,11 @@ const Projects = () => {
           </h1>
           <div className="w-full flex justify-center">
             <div className="w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
-              {Object.entries(finance).map(([name, data]) => (
+              {Object.entries(finance).map(([link, data]) => (
                 <ProjectCard
-                  key={name}
-                  name={name}
-                  link={data.link}
+                  key={link}
+                  title={data.title}
+                  link={link}
                   accentColor={data.accentColor}
                   darkText={data.darkText}
                   thumbnail={data.thumbnail}

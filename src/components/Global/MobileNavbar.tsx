@@ -51,7 +51,7 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
   return (
     <motion.div
       animate={isExpanded ? "expanded" : "collapsed"}
-      className={`w-full sticky z-50 flex lg:hidden flex-col bg-neutral-200 dark:bg-neutral-800 border-b
+      className={`w-full sticky top-0 z-50 flex lg:hidden flex-col bg-neutral-300 dark:bg-neutral-800 border-b
                 border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
                   sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
                 } shadow-lg`}
@@ -60,7 +60,7 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
         <div className="flex justify-start items-center">
           <button
             type="button"
-            className="flex justify-center items-end dark-transition rounded-full"
+            className="flex justify-center items-end dark:text-white dark-transition rounded-full"
             onClick={() => toggleExpanded(!isExpanded)}
           >
             {isExpanded ? <FiX size={28} /> : <FiMenu size={28} />}
@@ -76,8 +76,8 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
         </div>
       </div>
       <div className="overflow-hidden bg-transparent">
-        {isExpanded ? (
-          <AnimatePresence>
+        <AnimatePresence>
+          {isExpanded ? (
             <motion.ul
               initial="collapsed"
               animate="expanded"
@@ -99,8 +99,8 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
                 </motion.li>
               ))}
             </motion.ul>
-          </AnimatePresence>
-        ) : null}
+          ) : null}
+        </AnimatePresence>
       </div>
     </motion.div>
   );

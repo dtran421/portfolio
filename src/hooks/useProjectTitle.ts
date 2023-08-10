@@ -1,19 +1,15 @@
-import { startCase } from "lodash";
-
 import { Project } from "@/utils/types";
 
 import projects from "@/public/json/projects.json";
 
-export const useProjectData = (title: string | null, type: "coding" | "finance") => {
-  if (!title) {
+export const useProjectData = (link: string | null, type: "coding" | "finance") => {
+  if (!link) {
     return null;
   }
 
   if (!type) {
     return null;
   }
-
-  const pageTitle = startCase(title);
 
   const data = (
     projects as {
@@ -24,10 +20,10 @@ export const useProjectData = (title: string | null, type: "coding" | "finance")
         [key: string]: Project;
       };
     }
-  )[type][pageTitle];
+  )[type][link];
 
   return {
     ...data,
-    title: pageTitle,
+    link,
   };
 };

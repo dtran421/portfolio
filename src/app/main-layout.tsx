@@ -49,7 +49,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <ThemeContext.Provider value={themeContextObject}>
         <QueryClientProvider client={queryClient}>
           <div className={`${darkMode ? "dark" : ""}`}>
-            <div className="w-full min-h-screen bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
+            <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white mb-16">
               {[DesktopNavbar, MobileNavbar].map((Navbar) => (
                 <Navbar key={Navbar.name} sticky={stickyNavbar} />
               ))}

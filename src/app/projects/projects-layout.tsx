@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
 import ProjectsBanner from "@/components/Projects/ProjectsBanner";
@@ -12,7 +12,7 @@ type ProjectLayoutProps = {
 };
 
 const ProjectLayout = ({ children }: ProjectLayoutProps) => {
-  const segment = useSelectedLayoutSegment();
+  const segment = useSelectedLayoutSegments().at(-1) ?? null;
   const projectData = useProjectData(segment, "coding");
 
   // display main layout for root project page

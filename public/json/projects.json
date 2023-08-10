@@ -1,7 +1,7 @@
 {
   "coding": {
-    "Godspeed": {
-      "link": "godspeed",
+    "godspeed": {
+      "title": "Godspeed",
       "accentColor": "#9c00ff",
       "darkText": false,
       "github": "https://github.com/dtran421/project-godspeed",
@@ -9,48 +9,49 @@
       "width": 193,
       "height": 227
     },
-    "CollegeTalk": {
-      "link": "collegetalk",
+    "collegetalk": {
+      "title": "CollegeTalk",
       "accentColor": "#2f95dc",
       "darkText": false,
+      "github": "https://github.com/CollegeTalk/CollegeTalk",
       "thumbnail": "/img/projects/collegetalk.png",
       "width": 256,
       "height": 256
     },
-    "Whispearrings": {
-      "link": "whispearrings",
+    "whispearrings": {
+      "title": "Whispearrings",
       "accentColor": "#faebeb",
       "darkText": true,
       "thumbnail": "/img/projects/whispearrings.png",
       "width": 256,
       "height": 256
     },
-    "Maze Game": {
-      "link": "maze",
+    "maze": {
+      "title": "Maze Game",
       "accentColor": "#e94560",
       "darkText": false,
       "thumbnail": "/img/projects/maze_minotaur.png",
       "width": 256,
       "height": 256
     },
-    "UAV Swarms": {
-      "link": "uav",
+    "uav": {
+      "title": "UAV Swarms",
       "accentColor": "#0d0deb",
       "darkText": false,
       "thumbnail": "/img/projects/uav_swarm.png",
       "width": 641,
       "height": 516
     },
-    "Machine Learning": {
-      "link": "machine-learning",
+    "machine-learning": {
+      "title": "Machine Learning",
       "accentColor": "#a6cee3",
       "darkText": true,
       "thumbnail": "/img/projects/machine_learning.png",
       "width": 667,
       "height": 517
     },
-    "Data Mining": {
-      "link": "data-mining",
+    "data-mining": {
+      "title": "Data Mining",
       "accentColor": "#ff7f0e",
       "darkText": true,
       "thumbnail": "/img/projects/data_mining.png",
@@ -59,24 +60,24 @@
     }
   },
   "finance": {
-    "HES Pitch": {
-      "link": "hess",
+    "hess": {
+      "title": "HES Pitch",
       "accentColor": "#007049",
       "darkText": false,
       "thumbnail": "/img/projects/hess.png",
       "width": 600,
       "height": 358
     },
-    "MUSA Credit Analysis": {
-      "link": "murphy-usa",
+    "murphy-usa": {
+      "title": "MUSA Credit Analysis",
       "accentColor": "#235ba8",
       "darkText": false,
       "thumbnail": "/img/projects/murphy_usa.png",
       "width": 544,
       "height": 254
     },
-    "Advanced Investments": {
-      "link": "advanced-investments",
+    "advanced-investments": {
+      "title": "Advanced Investments",
       "accentColor": "#652b91",
       "darkText": false,
       "thumbnail": "/img/projects/advanced_investments.png",

@@ -25,7 +25,7 @@ export type APIResponse<T> =
  * JSON schemas
  */
 export type Project = {
-  link: string;
+  title: string;
   accentColor: string;
   darkText: boolean;
   github?: string;
