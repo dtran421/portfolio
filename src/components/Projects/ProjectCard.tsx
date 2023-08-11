@@ -15,19 +15,18 @@ const ProjectCard = ({ title, link, accentColor, darkText, thumbnail, width, hei
 
   return (
     <Link href={`/projects/${link}`} passHref>
-      <button
-        type="button"
-        className="w-full h-56 md:h-64 lg:h-72 xl:h-80 relative"
+      <section
+        className="w-full h-56 md:h-64 lg:h-72 xl:h-96 relative"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="z-10 absolute top-0 overflow-hidden w-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
-          <div className="w-3/4 md:w-full flex justify-center items-center p-4 md:p-0">
+        <div className="absolute z-10 top-0 overflow-hidden w-full h-full flex flex-col justify-center items-center bg-white rounded-xl shadow-xl p-10">
+          <div className="w-3/4 md:w-full h-full flex justify-center items-center p-4 md:p-0">
             <Image alt={title.toLowerCase()} src={thumbnail} width={width} height={height} priority />
           </div>
         </div>
         <ProjectCardLabel title={title} isHovered={isHovered} accentColor={accentColor} darkText={darkText} />
-      </button>
+      </section>
     </Link>
   );
 };

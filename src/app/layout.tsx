@@ -26,7 +26,7 @@ const RootLayout = ({
   children: ReactNode;
 }) => (
   <html lang="en">
-    <body suppressHydrationWarning>
+    <body>
       <MainLayout>{children}</MainLayout>
     </body>
   </html>

@@ -7,19 +7,19 @@ import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
 
 import { openGraph } from "./layout";
-import PortfolioPage, { IndexProps } from "./portfolio-page";
+import PortfolioPage, { PortfolioProps } from "./portfolio-page";
 
 export const metadata: Metadata = {
   title: "Duke Tran | Portfolio",
   openGraph,
 };
 
-type IndexQR = IndexProps;
+type PortfolioQR = PortfolioProps;
 
 export const revalidate = 3600; // revalidate the data at most every hour
 
-export const getIndexData = cache(async () => {
-  const response = await queryContentful<IndexQR>(TimelineAndLanguageQuery);
+export const getPortfolioData = cache(async () => {
+  const response = await queryContentful<PortfolioQR>(TimelineAndLanguageQuery);
 
   if (response.isErr()) {
     const err = (response as Err<Error>).unwrap();
@@ -30,7 +30,7 @@ export const getIndexData = cache(async () => {
     };
   }
 
-  const { timelineEvents, languageGroups } = (response as Ok<IndexQR>).unwrap();
+  const { timelineEvents, languageGroups } = (response as Ok<PortfolioQR>).unwrap();
 
   return {
     timelineEvents,
@@ -39,6 +39,6 @@ export const getIndexData = cache(async () => {
 });
 
 export default async function Page() {
-  const { timelineEvents, languageGroups } = await getIndexData();
+  const { timelineEvents, languageGroups } = await getPortfolioData();
   return <PortfolioPage timelineEvents={timelineEvents} languageGroups={languageGroups} />;
 }

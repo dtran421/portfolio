@@ -48,7 +48,7 @@ const Projects = () => {
           <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-center md:text-left mt-16">
             FINANCE <Emoji label="chart increasing" symbol="📈" />
           </h1>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center mb-20">
             <div className="w-full flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 xl:gap-x-8 gap-y-20">
               {Object.entries(finance).map(([link, data]) => (
                 <ProjectCard

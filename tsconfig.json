@@ -16,14 +16,7 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "@/app/*": ["app/*"],
-      "@/pages/*": ["pages/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/components/*": ["components/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/styles/*": ["styles/*"],
-      "@/graphql/*": ["graphql/*"],
-      "@/utils/*": ["utils/*"],
+      "@/*": ["*"],
       "@/public/*": ["../public/*"]
     },
     "plugins": [
