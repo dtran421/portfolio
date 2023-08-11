@@ -21,5 +21,5 @@ export const useProjectData = (link: string | null) => {
   return {
     ...routeDataMap[link],
     link,
-  };
+  } as Project & { link: string };
 };

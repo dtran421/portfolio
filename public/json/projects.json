@@ -49,6 +49,7 @@
       "title": "Machine Learning",
       "accentColor": "#a6cee3",
       "darkText": true,
+      "github": "https://github.com/orgs/dtran-machine-learning/repositories",
       "thumbnail": "/img/projects/machine_learning.png",
       "width": 667,
       "height": 517
@@ -57,6 +58,7 @@
       "title": "Data Mining",
       "accentColor": "#ff7f0e",
       "darkText": true,
+      "github": "https://github.com/orgs/dtran-data-mining/repositories",
       "thumbnail": "/img/projects/data_mining.png",
       "width": 587,
       "height": 393
