@@ -1,29 +1,25 @@
+import { useMemo } from "react";
+
 import { Project } from "@/utils/types";
 
 import projects from "@/public/json/projects.json";
 
-export const useProjectData = (link: string | null, type: "coding" | "finance") => {
+export const useProjectData = (link: string | null) => {
+  const routeDataMap = useMemo(
+    () =>
+      Object.values(projects as Record<string, Record<string, Project>>).reduce(
+        (map, data) => ({ ...map, ...data }),
+        {}
+      ),
+    []
+  );
+
   if (!link) {
     return null;
   }
 
-  if (!type) {
-    return null;
-  }
-
-  const data = (
-    projects as {
-      coding: {
-        [key: string]: Project;
-      };
-      finance: {
-        [key: string]: Project;
-      };
-    }
-  )[type][link];
-
   return {
-    ...data,
+    ...routeDataMap[link],
     link,
   };
 };

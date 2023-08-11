@@ -13,7 +13,7 @@ type ProjectLayoutProps = {
 
 const ProjectLayout = ({ children }: ProjectLayoutProps) => {
   const segment = useSelectedLayoutSegments().at(-1) ?? null;
-  const projectData = useProjectData(segment, "coding");
+  const projectData = useProjectData(segment);
 
   // display main layout for root project page
   if (segment === null || projectData === null) {

@@ -22,7 +22,14 @@ const ReturnText = ({ change, changePct }: ReturnTextProps) => {
   );
 };
 
-const renderCell = (label, value, lastRow, loading) => (
+interface CellProps {
+  label: string;
+  value: string | number;
+  lastRow: boolean;
+  loading: boolean;
+}
+
+const Cell = ({ label, value, lastRow, loading }: CellProps) => (
   <li
     key={label}
     className={`flex justify-between border-b-2 ${
@@ -59,13 +66,13 @@ interface StockCardProps {
 
 const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePrice = 0 }: StockCardProps) => {
   if (errors.length) {
-    errors.forEach((error) =>
+    errors.forEach(({ message, stack, cause }) =>
       console.error(
         JSON.stringify(
           {
-            message: error.message,
-            stack: error.stack,
-            cause: error.cause,
+            message,
+            stack,
+            cause,
           },
           null,
           2
@@ -83,7 +90,7 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
   const { symbol, name, exchange, latestBusinessDay, price, change, changePct, column1, column2 } = data;
 
   const numRows = Object.keys(column1).length;
-  const isLastRow = (idx) => (idx + 1) % numRows === 0;
+  const isLastRow = (idx: number) => (idx + 1) % numRows === 0;
 
   return (
     <div className="w-full lg:w-4/5 xl:w-2/3 bg-slate-300/50 dark:bg-slate-700/50 text-black dark:text-white border-2 border-slate-600/60 dark-transition backdrop-blur-lg rounded-xl space-y-4 p-4 md:pb-1">
@@ -121,7 +128,7 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
               ) : (
                 <ReturnText
                   change={price - purchasePrice}
-                  changePct={((price - purchasePrice) / purchasePrice) * 100}
+                  changePct={purchasePrice ? ((price - purchasePrice) / purchasePrice) * 100 : 0}
                 />
               )}
             </div>
@@ -129,8 +136,11 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
         </div>
       </div>
       <div className="grid grid-rows-6 md:grid-rows-3 grid-cols-1 md:grid-cols-2 grid-flow-col md:gap-x-8">
-        {Object.entries(column1).map(([label, value], idx) => renderCell(label, value, isLastRow(idx), loading))}
-        {Object.entries(column2).map(([label, value], idx) => renderCell(label, value, isLastRow(idx), loading))}
+        {[column1, column2].map((col) =>
+          Object.entries(col).map(([label, value], idx) => (
+            <Cell key={label} label={label} value={value} lastRow={isLastRow(idx)} loading={loading} />
+          ))
+        )}
       </div>
     </div>
   );
