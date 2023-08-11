@@ -5,6 +5,7 @@ import { Oxygen, Quicksand } from "next/font/google";
 import "@/styles/globals.css";
 
 import MainLayout from "./main-layout";
+import { openGraph } from "./shared-metadata";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -18,11 +19,6 @@ const oxygen = Oxygen({
   display: "swap",
   variable: "--font-oxygen",
 });
-
-export const openGraph = {
-  title: "Duke Tran | Portfolio",
-  description: "Learn more about Duke Tran and his projects.",
-};
 
 export const metadata: Metadata = {
   title: {

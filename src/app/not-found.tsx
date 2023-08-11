@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
-import { openGraph } from "./layout";
 import NotFoundPage from "./not-found-page";
+import { openGraph } from "./shared-metadata";
 
 export const metadata: Metadata = {
   title: "Error | Page Not Found",

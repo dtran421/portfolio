@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { openGraph } from "../layout";
+import { openGraph } from "../shared-metadata";
 
 import ProjectsPage from "./projects-page";
 

@@ -6,7 +6,7 @@ import { Links } from "@/utils/types";
 
 type BodyProps = {
   document: Document;
-  links: Links;
+  links: Links | undefined;
 };
 
 const Body = ({ document, links }: BodyProps) => (

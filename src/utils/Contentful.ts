@@ -37,9 +37,9 @@ export interface ContentfulQuery {
 export const queryContentful = async <T>(
   gqlQuery: ContentfulQuery,
   variables?: {
-    preview?: boolean;
     postId: string;
-  }
+  },
+  preview = false
 ): Promise<Result<T, Error>> => {
   const { resources, query } = gqlQuery;
 
@@ -60,7 +60,13 @@ export const queryContentful = async <T>(
       >;
     }>(
       contentfulUrl.coalesce(),
-      { query, variables },
+      {
+        query,
+        variables: {
+          ...variables,
+          preview,
+        },
+      },
       {
         headers: {
           "Content-Type": "application/json",

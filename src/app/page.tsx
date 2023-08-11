@@ -6,8 +6,8 @@ import { queryContentful } from "@/utils/Contentful";
 import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
 
-import { openGraph } from "./layout";
 import PortfolioPage, { PortfolioProps } from "./portfolio-page";
+import { openGraph } from "./shared-metadata";
 
 export const metadata: Metadata = {
   title: "Duke Tran | Portfolio",

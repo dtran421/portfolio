@@ -6,7 +6,7 @@ import { queryContentful } from "@/utils/Contentful";
 import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
 
-import { openGraph } from "../layout";
+import { openGraph } from "../shared-metadata";
 
 import BlogPage, { BlogProps } from "./blog-page";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 type BlogQR = BlogProps;
 
-export const getBlogPosts = cache(async () => {
+const getBlogPosts = cache(async () => {
   const response = await queryContentful<BlogQR>(BlogPostsQuery);
 
   if (response.isErr()) {
