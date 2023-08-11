@@ -65,11 +65,11 @@ const SplashScreen = (segment: string) => {
   }
 };
 
-type AppProjectLayoutProps = {
+type AppDemoLayoutProps = {
   children: ReactNode;
 };
 
-const AppProjectLayout = ({ children }: AppProjectLayoutProps) => {
+const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
   const segment = useSelectedLayoutSegment();
 
   const paragraphs = getParagraphs(segment as string);
@@ -112,4 +112,4 @@ const AppProjectLayout = ({ children }: AppProjectLayoutProps) => {
   );
 };
 
-export default AppProjectLayout;
+export default AppDemoLayout;
