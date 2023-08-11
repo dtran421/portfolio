@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
-import "@/styles/globals.css";
-
 import ProjectsLayoutComponent from "./projects-layout";
 
 export const metadata: Metadata = {

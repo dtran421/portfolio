@@ -20,9 +20,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      display: ["Quicksand"],
-      body: ["Quicksand"],
-      Oxygen: ["Oxygen", "sans-serif"],
+      display: ["var(--font-quicksand)"],
+      body: ["var(--font-quicksand)"],
+      Oxygen: ["var(--font-oxygen)", "sans-serif"],
     },
   },
   plugins: [],

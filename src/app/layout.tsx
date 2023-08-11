@@ -1,9 +1,23 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { Oxygen, Quicksand } from "next/font/google";
 
 import "@/styles/globals.css";
 
 import MainLayout from "./main-layout";
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-quicksand",
+});
+
+const oxygen = Oxygen({
+  weight: "700",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-oxygen",
+});
 
 export const openGraph = {
   title: "Duke Tran | Portfolio",
@@ -25,7 +39,7 @@ const RootLayout = ({
 }: {
   children: ReactNode;
 }) => (
-  <html lang="en">
+  <html lang="en" className={`${quicksand.variable} ${oxygen.variable}`}>
     <body>
       <MainLayout>{children}</MainLayout>
     </body>
