@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { consumeAPIResponse } from "@/pages/api/ApiUtils";
+import { consumeAPIResponse } from "@/app/api/ApiUtils";
 
 import { Option, Result } from "./ReturnTypes";
 import { ALPHAVANTAGE_FN_TO_ROUTE, ALPHAVANTAGE_FUNCTIONS, APIResponse } from "./types";

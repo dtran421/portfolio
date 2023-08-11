@@ -39,8 +39,7 @@ export const queryContentful = async <T>(
   variables?: {
     preview?: boolean;
     postId: string;
-  },
-  preview = false
+  }
 ): Promise<Result<T, Error>> => {
   const { resources, query } = gqlQuery;
 
