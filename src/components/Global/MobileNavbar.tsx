@@ -49,7 +49,7 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
   const [isExpanded, toggleExpanded] = useState(false);
 
   return (
-    <motion.div
+    <motion.header
       animate={isExpanded ? "expanded" : "collapsed"}
       className={`w-full sticky top-0 z-50 flex lg:hidden flex-col bg-neutral-300 dark:bg-neutral-800 border-b
                 border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
@@ -102,7 +102,7 @@ const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
           ) : null}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </motion.header>
   );
 };
 

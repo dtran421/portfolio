@@ -19,7 +19,7 @@ export type ResponsiveNavbarProps = {
 };
 
 const DesktopNavbar = ({ sticky }: ResponsiveNavbarProps) => (
-  <motion.div
+  <motion.header
     initial="fixed"
     animate={sticky ? "sticky" : "fixed"}
     variants={navbarVariants}
@@ -36,7 +36,7 @@ const DesktopNavbar = ({ sticky }: ResponsiveNavbarProps) => (
       </div>
       <DarkModeToggle />
     </div>
-  </motion.div>
+  </motion.header>
 );
 
 export default DesktopNavbar;

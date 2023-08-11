@@ -1,6 +1,6 @@
 "use client";
 
-const CollegeTalk = () => (
+const CollegeTalkPage = () => (
   <>
     This project was completed as our semester-long project for my CSCI 425 Entrepreneurship in CS class, taken in
     Spring 2022. We wanted to create a mobile platform for college students to connect with one another, ask questions,
@@ -9,4 +9,4 @@ const CollegeTalk = () => (
     created.
   </>
 );
-export default CollegeTalk;
+export default CollegeTalkPage;

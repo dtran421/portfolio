@@ -1,6 +1,6 @@
 "use client";
 
-const Whispearrings = () => (
+const WhispearringsPage = () => (
   <>
     For my summer internship with Whispearrings, I was the sole mobile app developer tasked with spearheading the
     development of their iOS app. Since this was my first time doing mobile app development, I needed to research
@@ -10,4 +10,4 @@ const Whispearrings = () => (
   </>
 );
 
-export default Whispearrings;
+export default WhispearringsPage;

@@ -5,7 +5,7 @@ import { range } from "lodash";
 import FilePreview from "@/components/Projects/FilePreview";
 import ExcelFilePreview from "@/components/Projects/Finance/ExcelFilePreview";
 
-const AdvancedInvestments = () => (
+const AdvancedInvestmentsPage = () => (
   <div className="space-y-2">
     <h1 className="text-3xl text-center font-bold">Course Materials</h1>
     <div className="w-full space-y-10">
@@ -53,4 +53,4 @@ const AdvancedInvestments = () => (
   </div>
 );
 
-export default AdvancedInvestments;
+export default AdvancedInvestmentsPage;

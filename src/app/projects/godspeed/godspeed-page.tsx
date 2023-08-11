@@ -1,6 +1,6 @@
 "use client";
 
-const Godspeed = () => (
+const GodspeedPage = () => (
   <div className="md:max-w-xl lg:max-w-3xl xl:max-w-5xl flex mx-10 md:mx-auto">
     <div className="w-full flex flex-col items-center">
       <div className="flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4">
@@ -28,7 +28,7 @@ const Godspeed = () => (
           <p>
             {`As we expanded our inventory and looked to acquire more shoes, I realized there wasn't really any
                         free, readily-available tools to help aspiring shoe resellers (and casual buyers looking to cop their favorite
-                        pair of sneakers) find and keep track of the latest drops. Hence, the birth of Godspeed. A comprehensive web
+                        pair of sneakers) find and keep track of the latest drops. Hence, the birth of GodspeedPage. A comprehensive web
                         platform designed to help sneaker enthusiasts identify drop dates for shoes they're looking to cop. It also
                         provides useful market data (similar to those for stocks) to enable shoe resellers to spot their next favorable 
                         sneaker resell.`}
@@ -39,4 +39,4 @@ const Godspeed = () => (
   </div>
 );
 
-export default Godspeed;
+export default GodspeedPage;

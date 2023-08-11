@@ -33,7 +33,7 @@ export interface PortfolioProps {
   languageGroups: LanguageGroup[] | null;
 }
 
-const Portfolio = ({ timelineEvents, languageGroups }: PortfolioProps) => {
+const PortfolioPage = ({ timelineEvents, languageGroups }: PortfolioProps) => {
   const learnMoreAnimations = useAnimation();
 
   const page1 = useRef(null);
@@ -226,4 +226,4 @@ const Portfolio = ({ timelineEvents, languageGroups }: PortfolioProps) => {
   );
 };
 
-export default Portfolio;
+export default PortfolioPage;

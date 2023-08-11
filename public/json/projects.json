@@ -22,6 +22,7 @@
       "title": "Whispearrings",
       "accentColor": "#faebeb",
       "darkText": true,
+      "github": "https://github.com/dtran421/Whispearrings-swift",
       "thumbnail": "/img/projects/whispearrings.png",
       "width": 256,
       "height": 256
@@ -30,6 +31,7 @@
       "title": "Maze Game",
       "accentColor": "#e94560",
       "darkText": false,
+      "github": "https://github.com/dtran421/MazeByDukeTran",
       "thumbnail": "/img/projects/maze_minotaur.png",
       "width": 256,
       "height": 256
@@ -38,6 +40,7 @@
       "title": "UAV Swarms",
       "accentColor": "#0d0deb",
       "darkText": false,
+      "github": "https://github.com/dtran421/3D-SHARKS",
       "thumbnail": "/img/projects/uav_swarm.png",
       "width": 641,
       "height": 516
