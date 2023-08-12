@@ -7,7 +7,7 @@ import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
 
 import BlogPostPage from "./blog-post-page";
-import { getBlogPost } from "./layout";
+import { getBlogPost } from "./query";
 
 export async function generateStaticParams() {
   const response = await queryContentful<BlogPostQR>(BlogPostsQuery);
@@ -15,10 +15,7 @@ export async function generateStaticParams() {
   if (response.isErr()) {
     const err = (response as Err<Error>).unwrap();
     logger.error(`Something went wrong with fetching blog posts: ${err.message}`);
-    return {
-      paths: [],
-      fallback: true,
-    };
+    return [];
   }
 
   const { blogPosts } = (response as Ok<BlogPostQR>).unwrap();
