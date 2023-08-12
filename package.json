@@ -21,6 +21,7 @@
     "chromatic": "npx chromatic"
   },
   "dependencies": {
+    "@contentful/live-preview": "^2.7.1",
     "@contentful/rich-text-react-renderer": "^15.12.1",
     "@contentful/rich-text-types": "^15.12.1",
     "@tanstack/react-query": "^4.32.6",
@@ -32,6 +33,7 @@
     "framer-motion": "^10.15.0",
     "graphiql": "^1.8.9",
     "graphql": "^16.5.0",
+    "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "^13.4.12",

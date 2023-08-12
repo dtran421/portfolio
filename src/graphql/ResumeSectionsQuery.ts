@@ -1,8 +1,10 @@
+import { gql } from "graphql-tag";
+
 import { ContentfulQuery } from "@/utils/Contentful";
 
 import { ContentfulResource } from "./Resources";
 
-const ResumeSectionsQuery = /* GraphQL */ `
+const ResumeSectionsQuery = gql`
   query {
     resumeTabSectionCollection(order: order_ASC) {
       items {

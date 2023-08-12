@@ -1,8 +1,10 @@
+import { gql } from "graphql-tag";
+
 import { ContentfulQuery } from "@/utils/Contentful";
 
 import { ContentfulResource } from "./Resources";
 
-const TimelineAndLanguageQuery = /* GraphQL */ `
+const TimelineAndLanguageQuery = gql`
   query {
     timelineEventCollection(order: startDate_ASC) {
       items {

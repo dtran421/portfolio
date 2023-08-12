@@ -5,6 +5,8 @@ import { FiTag } from "react-icons/fi";
 
 import Body from "@/components/BlogPost/Body";
 import FetchError from "@/components/Global/FetchError";
+import { ContentfulResource } from "@/graphql/Resources";
+import { useContentfulUpdatedData } from "@/hooks/useContentfulUpdatedData";
 import { BlogPost } from "@/utils/types";
 
 import { convertDateToFullString } from "../blog-page";
@@ -35,7 +37,9 @@ type BlogPostProps = {
 };
 
 const BlogPostPage = ({ blogPost }: BlogPostProps) => {
-  if (!blogPost) {
+  const updatedBlogPost = useContentfulUpdatedData<BlogPost | null>(ContentfulResource.BlogPost, blogPost);
+
+  if (!updatedBlogPost) {
     return (
       <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">
         <FetchError />
@@ -49,7 +53,7 @@ const BlogPostPage = ({ blogPost }: BlogPostProps) => {
     topicTags: tags,
     heroBanner: { title: imgTitle, url, width, height },
     body,
-  } = blogPost;
+  } = updatedBlogPost;
 
   return (
     <div className="max-w-lg lg:max-w-2xl xl:max-w-4xl bg-gray-200 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 dark-transition rounded-xl shadow-lg mx-6 md:mx-auto mt-8 md:mt-10">

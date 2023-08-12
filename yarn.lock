@@ -1161,6 +1161,15 @@
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
+"@contentful/live-preview@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@contentful/live-preview/-/live-preview-2.7.1.tgz#c8fc22fc95cea6ddab138f474d9b2b6b672e0a1f"
+  integrity sha512-a6BDRvsO/eafnU6iocFaMMbVZP/rmnV9BvCMJSOVtY1PYGdZgnFEBZ3Hrjki6KDhY/vz1Of1KDS2a+ZinSzJ4w==
+  dependencies:
+    "@contentful/rich-text-types" "^16.2.0"
+    "@contentful/visual-sdk" "^1.0.0-alpha.9"
+    lodash.isequal "^4.5.0"
+
 "@contentful/rich-text-react-renderer@^15.12.1":
   version "15.17.1"
   resolved "https://registry.npmjs.org/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-15.17.1.tgz"
@@ -1173,10 +1182,15 @@
   resolved "https://registry.npmjs.org/@contentful/rich-text-types/-/rich-text-types-15.15.1.tgz"
   integrity sha512-oheW0vkxWDuKBIIXDeJfZaRYo+NzKbC4gETMhH+MGJd4nfL9cqrOvtRxZBgnhICN4vDpH4my/zUIZGKcFqGSjQ==
 
-"@contentful/rich-text-types@^16.0.2", "@contentful/rich-text-types@^16.2.1":
+"@contentful/rich-text-types@^16.0.2", "@contentful/rich-text-types@^16.2.0", "@contentful/rich-text-types@^16.2.1":
   version "16.2.1"
   resolved "https://registry.npmjs.org/@contentful/rich-text-types/-/rich-text-types-16.2.1.tgz"
   integrity sha512-fBxqYcyG3Nw33DhifuE7Ndw3xlrWlOMjwsOvhLmVP4LO475Qyy9ioRChtEt6DPUdH2SFpobvM0qqC/fVe0MNDA==
+
+"@contentful/visual-sdk@^1.0.0-alpha.9":
+  version "1.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@contentful/visual-sdk/-/visual-sdk-1.0.0-alpha.9.tgz#b24571baaf1ef9b62ff3bc4596298979b269000b"
+  integrity sha512-YrVQObux12XDd3t0C60vJZSdlOTLA/3R6Ppmj/cnNPsU/s+9KFgq18RO8V0KAeO2exZWEBo83PZXHPLveS4aVg==
 
 "@dabh/diagnostics@^2.0.2":
   version "2.0.3"
@@ -6775,6 +6789,13 @@ graphql-language-service@^5.0.6:
     nullthrows "^1.0.0"
     vscode-languageserver-types "^3.17.1"
 
+graphql-tag@^2.12.6:
+  version "2.12.6"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
+  integrity sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==
+  dependencies:
+    tslib "^2.1.0"
+
 graphql@^16.5.0:
   version "16.7.1"
   resolved "https://registry.npmjs.org/graphql/-/graphql-16.7.1.tgz"
@@ -7852,6 +7873,11 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"

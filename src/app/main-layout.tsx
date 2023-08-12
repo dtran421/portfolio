@@ -2,6 +2,7 @@
 
 import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 
+import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -48,15 +49,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       </Head> */}
       <ThemeContext.Provider value={themeContextObject}>
         <QueryClientProvider client={queryClient}>
-          <div className={`${darkMode ? "dark" : ""}`}>
-            <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
-              {[DesktopNavbar, MobileNavbar].map((Navbar) => (
-                <Navbar key={Navbar.name} sticky={stickyNavbar} />
-              ))}
-              {children}
+          <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode enableLiveUpdates>
+            <div className={`${darkMode ? "dark" : ""}`}>
+              <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
+                {[DesktopNavbar, MobileNavbar].map((Navbar) => (
+                  <Navbar key={Navbar.name} sticky={stickyNavbar} />
+                ))}
+                {children}
+              </div>
             </div>
-          </div>
-          <ReactQueryDevtools initialIsOpen={false} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ContentfulLivePreviewProvider>
         </QueryClientProvider>
       </ThemeContext.Provider>
     </>

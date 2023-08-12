@@ -125,6 +125,8 @@ export interface BlogPost {
   body: RichText;
 }
 
+export type ContentfulEntity = TimelineEvent | LanguageGroup | BlogPost | ResumeTabSection | ResumeBubblesSection;
+
 /**
  * Alphavantage schemas
  */
