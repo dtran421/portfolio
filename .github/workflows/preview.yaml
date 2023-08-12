@@ -67,6 +67,11 @@ jobs:
           max-annotations: 10
           fail-on-error: true
 
+      - name: Build Chromatic Storybook
+        run: |
+          echo "📦 Building Chromatic Storybook..."
+          yarn chromatic
+
   preview:
     runs-on: ubuntu-latest
     steps:

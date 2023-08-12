@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { addColors, createLogger, format, transports } from "winston";
 
 const { combine, timestamp, label, printf, colorize, json } = format;
@@ -66,13 +66,9 @@ axios.interceptors.request.use(
 
     return config;
   },
-  (error) => {
-    logger.error(
-      `[${error.config.method?.toUpperCase()}]: ${error.config.url} ==> ${error.status} ${error.statusText}`
-    );
-    if (error.data) {
-      logger.error(`Error: ${JSON.stringify(error.data)}`);
-    }
+  (error: AxiosError) => {
+    const { cause, config } = error;
+    logger.error(`[${config?.method?.toUpperCase()}]: ${config?.url}${cause && `==> ${cause}`}`);
 
     return Promise.reject(error);
   }
@@ -92,9 +88,10 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    logger.error(`[${error.config.method?.toUpperCase()}]: ${error.config.url} - ${error.status} ${error.statusText}`);
-    if (error.data) {
-      logger.error(`Error: ${JSON.stringify(error.data)}`);
+    const { cause, config, response } = error;
+    logger.error(`[${config.method?.toUpperCase()}]: ${config.url} ==> ${response.status} ${response.statusText}`);
+    if (cause) {
+      logger.error(`Error: ${cause}`);
     }
 
     return Promise.reject(error);

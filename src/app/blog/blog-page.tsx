@@ -125,7 +125,7 @@ const Blog = ({ blogPosts }: BlogProps) => (
       devDeque <Emoji label="fountain pen" symbol="✒️" />
     </h1>
     {!blogPosts && <FetchError />}
-    {blogPosts?.length && (
+    {!!blogPosts?.length && (
       <>
         <BlogPostCard
           postId={blogPosts[0].postId}

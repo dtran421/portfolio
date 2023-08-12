@@ -1,28 +1,25 @@
+import { DocumentNode } from "graphql";
 import { gql } from "graphql-tag";
 
 import { useContentfulLiveUpdates } from "@contentful/live-preview/react";
 
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import { ContentfulResource } from "@/graphql/Resources";
-import { ContentfulQuery } from "@/utils/Contentful";
 import { ContentfulEntity } from "@/utils/types";
 
-const getQuery = (resource: ContentfulResource): ContentfulQuery => {
+const getQuery = (resource: ContentfulResource): DocumentNode => {
   switch (resource) {
     case ContentfulResource.BlogPost:
-      return BlogPostQuery;
+      return gql(BlogPostQuery.query);
     default:
-      return {
-        resources: [],
-        query: gql``,
-      };
+      return gql``;
   }
 };
 
 type ContentfulData = ContentfulEntity | ContentfulEntity[] | null | undefined;
 
 export const useContentfulUpdatedData = <T extends ContentfulData>(resource: ContentfulResource, data: T) => {
-  const { query } = getQuery(resource);
+  const query = getQuery(resource);
 
   const updatedData = useContentfulLiveUpdates<T>(data, { query });
 

@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { DocumentNode } from "graphql";
 
 import { ContentfulResource } from "@/graphql/Resources";
 import { Option, Result } from "@/utils/ReturnTypes";
@@ -32,7 +31,7 @@ const getContentfulAccessToken = (preview = false) => {
 
 export interface ContentfulQuery {
   resources: ContentfulResource[];
-  query: DocumentNode;
+  query: string;
 }
 
 export const queryContentful = async <T>(

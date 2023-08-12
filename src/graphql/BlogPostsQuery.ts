@@ -1,10 +1,8 @@
-import { gql } from "graphql-tag";
-
 import { ContentfulQuery } from "@/utils/Contentful";
 
 import { ContentfulResource } from "./Resources";
 
-const BlogPostsQuery = gql`
+const BlogPostsQuery = /* GraphQL */ `
   query {
     blogPostCollection(order: publishDate_DESC) {
       items {
