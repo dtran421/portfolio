@@ -27,9 +27,9 @@ const getPostBySlug = async (slug: string) => {
   return Option<BlogPost>(blogPost);
 };
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
   // Parse query string parameters
-  const { searchParams } = new URL(request.url);
+  const { searchParams } = new URL(req.url);
   const secret = Option<string>(searchParams.get("secret"));
   const slug = Option<string>(searchParams.get("slug"));
 

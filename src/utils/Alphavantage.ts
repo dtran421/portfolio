@@ -48,6 +48,6 @@ export const queryAlphavantage = async <T = unknown>(ticker: string, fn: (typeof
       console.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return Result<T, Error>(error);
+    return Result<T, Error>(error as Error);
   }
 };

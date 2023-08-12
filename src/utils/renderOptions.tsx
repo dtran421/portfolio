@@ -1,28 +1,27 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
+import { Options } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
-import { CodeSnippetBlock } from "./types";
+import { CodeSnippetBlock, Links } from "./types";
 
-const renderOptions = (links) => {
+const renderOptions = (links: Links | undefined): Options => {
   // create an entry map
   const entryBlockMap = new Map<string, CodeSnippetBlock>();
   // loop through the block linked entries and add them to the map
-  links.entries.block.forEach((entry) => {
+  links?.entries.block.forEach((entry) => {
     entryBlockMap.set(entry.sys.id, entry);
   });
 
   return {
-    renderBlock: {
-      [BLOCKS.DOCUMENT]: (node, children) => <div className="space-y-4">{children}</div>,
-      [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
-    },
     renderNode: {
-      [BLOCKS.UL_LIST]: (node, children) => <ul className="list-disc list-outside space-y-2 mx-8">{children}</ul>,
-      [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+      [BLOCKS.DOCUMENT]: (_node, children) => <div className="space-y-4">{children}</div>,
+      [BLOCKS.PARAGRAPH]: (_node, children) => <p>{children}</p>,
+      [BLOCKS.UL_LIST]: (_node, children) => <ul className="list-disc list-outside space-y-2 mx-8">{children}</ul>,
+      [BLOCKS.LIST_ITEM]: (_node, children) => <li>{children}</li>,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+      [BLOCKS.EMBEDDED_ENTRY]: (node, _children) => {
         // find the entry in the entryMap by ID
         const {
           data: {
@@ -32,6 +31,9 @@ const renderOptions = (links) => {
           },
         } = node;
         const entry = entryBlockMap.get(entryId);
+        if (!entry) {
+          return null;
+        }
         const { __typename: typename } = entry;
 
         if (typename === "CodeSnippet") {

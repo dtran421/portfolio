@@ -16,16 +16,17 @@ const ProjectLayout = ({ children }: ProjectLayoutProps) => {
   const projectData = useProjectData(segment);
 
   // display main layout for root project page
-  if (segment === null || projectData === null) {
-    return children;
-  }
-
-  const { title, accentColor, darkText, github } = projectData;
-
   return (
     <>
-      <ProjectsBanner pageTitle={title} accentColor={accentColor} darkText={darkText} github={github} />
-      <ProjectsBackButton />
+      {projectData && (
+        <ProjectsBanner
+          pageTitle={projectData.title}
+          accentColor={projectData.accentColor}
+          darkText={projectData.darkText}
+          github={projectData.github}
+        />
+      )}
+      {segment && projectData && <ProjectsBackButton />}
       {children}
     </>
   );

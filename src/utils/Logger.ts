@@ -1,19 +1,21 @@
-import winston, { addColors, format } from "winston";
+import { addColors, createLogger, format, transports } from "winston";
 
-const { combine, timestamp, label, printf, colorize } = format;
+const { combine, timestamp, label, printf, colorize, json } = format;
+const { File, Console } = transports;
 
-export const logger = winston.createLogger({
+export const logger = createLogger({
   level: "info",
-  format: winston.format.json(),
+  format: json(),
   defaultMeta: { service: "portfolio" },
   transports: [
     //
     // - Write all logs with importance level of `error` or less to `error.log`
     // - Write all logs with importance level of `info` or less to `combined.log`
     //
-    new winston.transports.File({ filename: "error.log", level: "error" }),
-    new winston.transports.File({ filename: "combined.log" }),
+    new File({ filename: "error.log", level: "error" }),
+    new File({ filename: "combined.log" }),
   ],
+  exceptionHandlers: [new File({ filename: "exceptions.log" })],
 });
 
 addColors({
@@ -32,7 +34,7 @@ const logFormat = printf(
 //
 if (process.env.NODE_ENV !== "production") {
   logger.add(
-    new winston.transports.Console({
+    new Console({
       format: combine(
         format((info) => ({
           ...info,

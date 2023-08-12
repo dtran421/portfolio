@@ -1,22 +1,34 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import axios from "axios";
 
 import { logger } from "@/utils/Logger";
-import { APIResponse, Company } from "@/utils/types";
 
 import { getBaseAlphavantageUrl } from "../Utils";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<APIResponse<Company>>) {
-  const { ticker } = req.query;
+interface CompanyQR {
+  Name: string;
+  Exchange: string;
+  Sector: string;
+  Industry: string;
+  MarketCapitalization: string;
+  DividendYield: number;
+  EPS: string;
+  "52WeekHigh": string;
+  "52WeekLow": string;
+}
+
+export default async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const ticker = searchParams.get("ticker");
 
   const alphavantageUrl = getBaseAlphavantageUrl(ticker as string, "OVERVIEW");
 
   if (alphavantageUrl.isNone()) {
-    return res.status(500).json({ error: "Env variables not set, this is a problem with the server" });
+    return NextResponse.json({ error: "Env variables not set, this is a problem with the server" }, { status: 500 });
   }
 
   try {
-    const { data, status, statusText } = await axios.get(alphavantageUrl.coalesce(), {
+    const { data, status, statusText } = await axios.get<CompanyQR>(alphavantageUrl.coalesce(), {
       headers: {
         "Content-Type": "application/json",
         "User-Agent": "request",
@@ -24,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     });
 
     if (status !== 200) {
-      return res.status(status).json({ error: statusText });
+      return new Response(null, { status, statusText });
     }
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -44,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       "52WeekLow": low52Weeks,
     } = data;
 
-    return res.json({
+    return NextResponse.json({
       data: {
         name,
         exchange,
@@ -62,6 +74,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       logger.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return res.status(500).json({ error: error.message });
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
 }

@@ -7,7 +7,7 @@ import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
 import { ResumeBubblesSection, ResumeTabSection } from "@/utils/types";
 
-import { openGraph } from "../layout";
+import { openGraph } from "../shared-metadata";
 
 import ResumePage from "./resume-page";
 

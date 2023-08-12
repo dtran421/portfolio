@@ -18,7 +18,7 @@ type Story = StoryObj<typeof ProjectCardLabel>;
 
 export const Default: Story = {
   args: {
-    name: "Test Project",
+    title: "Test Project",
     isHovered: false,
     accentColor: "#b4b",
     darkText: false,
@@ -27,7 +27,7 @@ export const Default: Story = {
 
 export const Hovered: Story = {
   args: {
-    name: "Test Project",
+    title: "Test Project",
     isHovered: true,
     accentColor: "#b4b",
     darkText: false,
@@ -36,7 +36,7 @@ export const Hovered: Story = {
 
 export const DarkText: Story = {
   args: {
-    name: "Test Project",
+    title: "Test Project",
     isHovered: false,
     accentColor: "#af3",
     darkText: true,

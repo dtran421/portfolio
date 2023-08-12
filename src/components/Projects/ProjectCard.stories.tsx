@@ -18,7 +18,7 @@ type Story = StoryObj<typeof ProjectCard>;
 
 export const Default: Story = {
   args: {
-    name: "Test Project",
+    title: "Project Title",
     link: "http://localhost:3000/",
     accentColor: "#b4b",
     darkText: false,
@@ -30,7 +30,7 @@ export const Default: Story = {
 
 export const DarkText: Story = {
   args: {
-    name: "Test Project",
+    title: "Project Title",
     link: "http://localhost:3000/",
     accentColor: "#af3",
     darkText: true,
