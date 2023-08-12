@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 
 import { ContentfulResource } from "@/graphql/Resources";
-import { logger } from "@/utils/Logger";
 import { Option, Result } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 
 const getBaseContentfulUrl = () => {
   if (!process.env.CONTENTFUL_SPACE_ID) {

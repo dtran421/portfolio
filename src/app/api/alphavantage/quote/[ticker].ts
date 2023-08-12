@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-import { logger } from "@/utils/Logger";
+import { logger } from "@/utils/ServerUtil";
 
 import { getBaseAlphavantageUrl } from "../Utils";
 

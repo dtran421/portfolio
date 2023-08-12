@@ -3,8 +3,8 @@ import { Metadata } from "next";
 
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 
 import { openGraph } from "../shared-metadata";
 

@@ -5,7 +5,7 @@ import { FiChevronRight } from "react-icons/fi";
 import { TopLevelBlock } from "@contentful/rich-text-types";
 
 import { expandVariants } from "@/components/Portfolio/Event";
-import { convertDateToAbbrevString } from "@/utils/Date";
+import { convertDateToAbbrevString } from "@/utils/ClientUtil";
 import { ResumeSubsection } from "@/utils/types";
 
 type SubsectionProps = {

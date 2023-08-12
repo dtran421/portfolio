@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok, Option } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 import { BlogPost } from "@/utils/types";
 
 export interface BlogPostQR {

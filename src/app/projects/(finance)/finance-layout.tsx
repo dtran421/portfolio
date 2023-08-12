@@ -10,7 +10,7 @@ import ClassProfile from "@/components/Projects/ClassProfile";
 import StockCard from "@/components/Projects/Finance/StockCard";
 import useGetStockCompany from "@/hooks/useGetStockCompany";
 import useGetStockQuote from "@/hooks/useGetStockQuote";
-import { isNullish } from "@/utils/Common";
+import { isNullish } from "@/utils/CommonUtil";
 import { Company, Quote } from "@/utils/types";
 
 const formatMarketCap = (marketCap: number): string => {

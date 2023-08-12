@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/legacy/image";
 import Typewriter from "typewriter-effect";
 
-import { isNullish } from "@/utils/Common";
+import { isNullish } from "@/utils/CommonUtil";
 
 import carouselData from "@/public/json/carousel.json";
 

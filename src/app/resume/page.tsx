@@ -3,8 +3,8 @@ import { Metadata } from "next";
 
 import ResumeSectionsQuery from "@/graphql/ResumeSectionsQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 import { ResumeBubblesSection, ResumeTabSection } from "@/utils/types";
 
 import { openGraph } from "../shared-metadata";

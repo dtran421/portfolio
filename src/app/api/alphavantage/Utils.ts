@@ -1,5 +1,5 @@
-import { logger } from "@/utils/Logger";
 import { Option } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 import { ALPHAVANTAGE_FUNCTIONS } from "@/utils/types";
 
 /**

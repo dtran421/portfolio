@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import { isNullish } from "@/utils/Common";
+import { isNullish } from "@/utils/CommonUtil";
 
 interface GithubLinkProps {
   github: string;

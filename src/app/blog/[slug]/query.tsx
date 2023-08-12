@@ -3,8 +3,8 @@ import { draftMode } from "next/headers";
 import { BlogPostQR } from "@/app/api/blog/draft/route";
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 
 export const getBlogPost = async (slug: string) => {
   const { isEnabled } = draftMode();

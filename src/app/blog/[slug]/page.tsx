@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { BlogPostQR } from "@/app/api/blog/draft/route";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 
 import BlogPostPage from "./blog-post-page";
 import { getBlogPost } from "./query";

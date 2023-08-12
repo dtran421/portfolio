@@ -3,8 +3,8 @@ import { Metadata } from "next";
 
 import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { logger } from "@/utils/Logger";
 import { Err, Ok } from "@/utils/ReturnTypes";
+import { logger } from "@/utils/ServerUtil";
 
 import PortfolioPage, { PortfolioProps } from "./portfolio-page";
 import { openGraph } from "./shared-metadata";
