@@ -1,32 +1,12 @@
 import { useState } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import DarkModeToggle from "./DarkModeToggle";
-import { ResponsiveNavbarProps, TABS } from "./DesktopNavbar";
+import { ResponsiveNavbarProps } from "./DesktopNavbar";
+import NavLink, { TABS } from "./NavLink";
 
-type MobileNavlinkProps = {
-  active: boolean;
-  link: string;
-};
-
-const MobileNavlink = ({ active, link }: MobileNavlinkProps) => (
-  <Link href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`} passHref>
-    <button
-      type="button"
-      className={`w-full flex justify-center text-xl border-2 rounded-lg ${
-        active
-          ? "dark:text-white dark:bg-zinc-500/20 border-black/40 dark:border-white/40 border-opacity-100"
-          : "border-transparent focus:border-primary text-primary hover:border-primary"
-      } dark-transition px-6 py-1`}
-    >
-      {link}
-    </button>
-  </Link>
-);
-
-const navlinkVariants = {
+const navLinkVariants = {
   expanded: (order: number) => ({
     y: 0,
     opacity: 1,
@@ -45,7 +25,7 @@ const navlinkVariants = {
   }),
 };
 
-const navlinkListVariants = {
+const navLinkListVariants = {
   expanded: {
     height: "auto",
     opacity: 1,
@@ -65,13 +45,13 @@ const navlinkListVariants = {
   },
 };
 
-const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
+const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
   const [isExpanded, toggleExpanded] = useState(false);
 
   return (
-    <motion.div
+    <motion.header
       animate={isExpanded ? "expanded" : "collapsed"}
-      className={`w-full sticky z-50 flex lg:hidden flex-col bg-neutral-200 dark:bg-neutral-800 border-b
+      className={`w-full sticky top-0 z-50 flex lg:hidden flex-col bg-neutral-300 dark:bg-neutral-800 border-b
                 border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
                   sticky ? "bg-opacity-80 backdrop-blur-lg" : ""
                 } shadow-lg`}
@@ -80,7 +60,7 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
         <div className="flex justify-start items-center">
           <button
             type="button"
-            className="flex justify-center items-end dark-transition rounded-full"
+            className="flex justify-center items-end dark:text-white dark-transition rounded-full"
             onClick={() => toggleExpanded(!isExpanded)}
           >
             {isExpanded ? <FiX size={28} /> : <FiMenu size={28} />}
@@ -97,12 +77,12 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
       </div>
       <div className="overflow-hidden bg-transparent">
         <AnimatePresence>
-          {isExpanded && (
+          {isExpanded ? (
             <motion.ul
               initial="collapsed"
               animate="expanded"
               exit="collapsed"
-              variants={navlinkListVariants}
+              variants={navLinkListVariants}
               className="flex flex-col items-center space-y-2 px-4 mt-4 mb-2"
             >
               {TABS.map((link, idx) => (
@@ -112,17 +92,17 @@ const MobileNavbar = ({ sticky, page }: ResponsiveNavbarProps) => {
                   initial="collapsed"
                   animate="expanded"
                   exit="collapsed"
-                  variants={navlinkVariants}
+                  variants={navLinkVariants}
                   className="w-full flex justify-center"
                 >
-                  <MobileNavlink active={page === link} link={link} />
+                  <NavLink link={link} mobile />
                 </motion.li>
               ))}
             </motion.ul>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </motion.header>
   );
 };
 

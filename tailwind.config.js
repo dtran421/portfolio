@@ -2,8 +2,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const colors = require("tailwindcss/colors");
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/pages/**/*.{ts,tsx}", "./src/components/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx,mdx}"],
   darkMode: ["class"], // or 'media' or 'class'
   theme: {
     extend: {
@@ -19,9 +20,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      display: ["Quicksand"],
-      body: ["Quicksand"],
-      Oxygen: ["Oxygen", "sans-serif"],
+      display: ["var(--font-quicksand)"],
+      body: ["var(--font-quicksand)"],
+      Oxygen: ["var(--font-oxygen)", "sans-serif"],
     },
   },
   plugins: [],

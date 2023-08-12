@@ -1,78 +1,43 @@
-import { useContext } from "react";
-import { AnimateSharedLayout, motion } from "framer-motion";
-import { Link } from "react-scroll";
-
-import { AppProjectContext } from "@/lib/Contexts";
+import { LayoutGroup, motion } from "framer-motion";
 
 type NavButtonProps = {
   heading: string;
+  scrollToParagraph: (paragraphNum: number) => void;
   idx: number;
   active: boolean;
-  offset: number;
 };
 
-const NavButton = ({ heading, idx, active, offset }: NavButtonProps) => {
-  const { setAutoScroll, setActiveP } = useContext(AppProjectContext);
-
-  return (
-    <Link
-      to={`paragraph${idx + 1}`}
-      smooth="easeLinear"
-      offset={offset}
-      duration={250}
-      onClick={() => {
-        setAutoScroll(true);
-        setActiveP(idx);
-        setTimeout(() => setAutoScroll(false), 250);
-      }}
-      className="relative flex justify-center text-xl rounded-full hover:bg-zinc-300/40 dark:hover:bg-zinc-700/40 transition duration-100 ease-linear cursor-pointer px-6 py-1"
-    >
-      {heading}
-      {active ? (
-        <motion.div className="active" layoutId="active" transition={{ duration: 0.2, ease: "easeIn" }} />
-      ) : null}
-    </Link>
-  );
-};
+const NavButton = ({ heading, scrollToParagraph, idx, active }: NavButtonProps) => (
+  <button
+    type="button"
+    onClick={() => scrollToParagraph(idx)}
+    className="relative flex justify-center text-xl rounded-full hover:bg-zinc-300/40 dark:hover:bg-zinc-700/40 transition duration-100 ease-linear cursor-pointer px-6 py-1"
+  >
+    {heading}
+    {active ? <motion.div className="active" layoutId="active" transition={{ duration: 0.2, ease: "easeIn" }} /> : null}
+  </button>
+);
 
 type MenuBarProps = {
-  paragraphs: { heading: string; body: string }[];
+  paragraphs: string[];
+  activeParagraph: number;
+  scrollToParagraph: (paragraphNum: number) => void;
 };
 
-const MenuBar = ({ paragraphs }: MenuBarProps) => {
-  const { activeP, pRefs, setAutoScroll } = useContext(AppProjectContext);
-
-  return (
-    <div className="sticky top-24 z-10 rounded-full hidden lg:flex bg-zinc-100/75 dark:bg-zinc-900/75 backdrop-blur-lg border-2 border-zinc-300 dark:border-zinc-700 dark-transition mt-10">
-      <AnimateSharedLayout>
-        {activeP !== -1 &&
-          paragraphs.map(({ heading }, idx) => {
-            const midHeight = document.documentElement.clientHeight / 2;
-
-            const rect = pRefs[idx].current.getBoundingClientRect();
-            const height = rect.bottom - rect.top;
-
-            // computed based on padding of element on page
-            const paddingOffset = idx === 0 ? 0 : 200;
-            const offset = -(midHeight - height / 2) + paddingOffset;
-
-            const active = activeP === idx;
-            return (
-              <NavButton
-                key={heading}
-                {...{
-                  setAutoScroll,
-                  heading,
-                  idx,
-                  active,
-                  offset,
-                }}
-              />
-            );
-          })}
-      </AnimateSharedLayout>
-    </div>
-  );
-};
+const MenuBar = ({ paragraphs, activeParagraph, scrollToParagraph }: MenuBarProps) => (
+  <div className="sticky top-24 z-10 rounded-full hidden lg:flex bg-zinc-100/75 dark:bg-zinc-900/75 backdrop-blur-lg border-2 border-zinc-300 dark:border-zinc-700 dark-transition mt-10">
+    <LayoutGroup>
+      {paragraphs.map((heading, idx) => (
+        <NavButton
+          key={heading}
+          heading={heading}
+          scrollToParagraph={scrollToParagraph}
+          idx={idx}
+          active={idx === activeParagraph}
+        />
+      ))}
+    </LayoutGroup>
+  </div>
+);
 
 export default MenuBar;

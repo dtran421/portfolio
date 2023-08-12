@@ -1,10 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import MobileNavbar from "./MobileNavbar";
+import { TABS } from "./NavLink";
 
 const meta: Meta<typeof MobileNavbar> = {
   component: MobileNavbar,
   parameters: {
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        segments: [TABS[0]],
+      },
+    },
     viewport: {
       defaultViewport: "mobile1",
     },
@@ -18,13 +25,11 @@ type Story = StoryObj<typeof MobileNavbar>;
 export const Default: Story = {
   args: {
     sticky: false,
-    page: "Portfolio",
   },
 };
 
 export const Sticky: Story = {
   args: {
     sticky: true,
-    page: "Portfolio",
   },
 };

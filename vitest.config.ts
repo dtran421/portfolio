@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@/lib", replacement: path.resolve(__dirname, "./src/lib") }],
+    alias: [{ find: "@/utils", replacement: path.resolve(__dirname, "./src/utils") }],
   },
   test: {
     globals: true,

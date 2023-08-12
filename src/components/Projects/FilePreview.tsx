@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { IconContext } from "react-icons";
 import { FiDownload, FiMaximize2 } from "react-icons/fi";
 

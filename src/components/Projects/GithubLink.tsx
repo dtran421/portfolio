@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import { isNullish } from "@/lib/Util";
+import { isNullish } from "@/utils/Common";
 
 interface GithubLinkProps {
   github: string;
@@ -10,7 +10,7 @@ interface GithubLinkProps {
 }
 
 const GithubLink = ({ github, darkText, compact = false }: GithubLinkProps) => {
-  const githubLink = useRef(null);
+  const githubLink = useRef<HTMLInputElement>(null);
   const [isFocused, setFocused] = useState(false);
   const [isCopyActive, setCopyActive] = useState(false);
 
@@ -38,7 +38,7 @@ const GithubLink = ({ github, darkText, compact = false }: GithubLinkProps) => {
           className={`${compact ? "w-40 md:w-64" : "w-56 md:w-80"} text-md xl:text-lg rounded-l-lg ${
             isFocused && "ring-2 ring-zinc-100/75"
           } px-3 py-1 cursor-default`}
-          onClick={() => githubLink.current.select()}
+          onClick={() => githubLink.current?.select()}
         >
           <input
             ref={githubLink}
