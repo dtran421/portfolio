@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 
 import FetchError from "@/components/Global/FetchError";
-import { isNullish } from "@/utils/Common";
+import { isNullish } from "@/utils/CommonUtil";
 
 import "react-loading-skeleton/dist/skeleton.css";
 

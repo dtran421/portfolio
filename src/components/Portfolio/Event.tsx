@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
 
-import { convertDateToAbbrevString } from "@/utils/Date";
+import { convertDateToAbbrevString } from "@/utils/ClientUtil";
 import { RichText, TimelineEvent } from "@/utils/types";
 
 export const expandVariants = {

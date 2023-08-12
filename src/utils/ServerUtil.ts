@@ -1,7 +1,10 @@
+import axios from "axios";
 import { addColors, createLogger, format, transports } from "winston";
 
 const { combine, timestamp, label, printf, colorize, json } = format;
 const { File, Console } = transports;
+
+export const IS_PROD = process.env.NODE_ENV === "production";
 
 export const logger = createLogger({
   level: "info",
@@ -32,7 +35,7 @@ const logFormat = printf(
 // If we're not in production then log to the `console` with the format:
 // `[DEBUG] ${timestamp} ${level}: ${info.message} JSON.stringify({ ...rest }) `
 //
-if (process.env.NODE_ENV !== "production") {
+if (!IS_PROD) {
   logger.add(
     new Console({
       format: combine(
@@ -50,3 +53,50 @@ if (process.env.NODE_ENV !== "production") {
     })
   );
 }
+
+// Add a request interceptor
+axios.interceptors.request.use(
+  (config) => {
+    if (!IS_PROD) {
+      logger.info(`[${config.method?.toUpperCase()}]: ${config.url}`);
+      if (config.data) {
+        logger.info(`Body: ${JSON.stringify(config.data)}`);
+      }
+    }
+
+    return config;
+  },
+  (error) => {
+    logger.error(
+      `[${error.config.method?.toUpperCase()}]: ${error.config.url} ==> ${error.status} ${error.statusText}`
+    );
+    if (error.data) {
+      logger.error(`Error: ${JSON.stringify(error.data)}`);
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Add a response interceptor
+axios.interceptors.response.use(
+  (response) => {
+    if (!IS_PROD) {
+      logger.info(
+        `[${response.config.method?.toUpperCase()}]: ${response.config.url} ==> ${response.status} ${
+          response.statusText
+        }`
+      );
+    }
+
+    return response;
+  },
+  (error) => {
+    logger.error(`[${error.config.method?.toUpperCase()}]: ${error.config.url} - ${error.status} ${error.statusText}`);
+    if (error.data) {
+      logger.error(`Error: ${JSON.stringify(error.data)}`);
+    }
+
+    return Promise.reject(error);
+  }
+);
