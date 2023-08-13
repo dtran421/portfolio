@@ -13,10 +13,11 @@ import { ThemeContext } from "@/utils/ClientUtil";
 const queryClient = new QueryClient();
 
 type MainLayoutProps = {
+  debug: boolean;
   children: ReactNode;
 };
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ debug, children }: MainLayoutProps) => {
   const [darkMode, toggleDarkMode] = useState(true);
   const themeContextObject = useMemo(() => ({ darkMode, toggleDarkMode }), [darkMode]);
 
@@ -49,7 +50,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       </Head> */}
       <ThemeContext.Provider value={themeContextObject}>
         <QueryClientProvider client={queryClient}>
-          <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode enableLiveUpdates>
+          <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode enableLiveUpdates debugMode={debug}>
             <div className={`${darkMode ? "dark" : ""}`}>
               <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
                 {[DesktopNavbar, MobileNavbar].map((Navbar) => (

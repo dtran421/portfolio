@@ -112,6 +112,10 @@ export interface LanguageGroup {
 }
 
 export interface BlogPost {
+  sys: {
+    id: string;
+  };
+
   postId: string;
   title: string;
   publishDate: string;

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 "use client";
 
 import Image from "next/legacy/image";
@@ -39,7 +41,7 @@ type BlogPostProps = {
 };
 
 const BlogPostPage = ({ blogPost }: BlogPostProps) => {
-  const inspectorProps = useContentfulInspectorMode();
+  const inspectorProps = useContentfulInspectorMode({ entryId: blogPost?.sys.id });
   const updatedBlogPost = useContentfulUpdatedData<BlogPost | null>(ContentfulResource.BlogPost, blogPost);
 
   if (!updatedBlogPost) {
@@ -63,11 +65,24 @@ const BlogPostPage = ({ blogPost }: BlogPostProps) => {
         <div className="space-y-4">
           <div className="space-y-8">
             {publishDate && <ProfileHeader publishDate={publishDate} />}
-            <h1 className="text-5xl lg:text-5xl font-bold">{title}</h1>
+            <h1
+              {...inspectorProps({
+                fieldId: "title",
+              })}
+              className="text-5xl lg:text-5xl font-bold"
+            >
+              {title}
+            </h1>
           </div>
           <div className="flex flex-wrap gap-3">
             {topicTags?.map((tag) => (
-              <div key={tag} className="flex items-center text-white bg-secondary rounded-full space-x-2 px-4 py-1">
+              <div
+                key={tag}
+                {...inspectorProps({
+                  fieldId: "topicTags",
+                })}
+                className="flex items-center text-white bg-secondary rounded-full space-x-2 px-4 py-1"
+              >
                 <FiTag size={21} />
                 <p className=" lg:text-base">{tag}</p>
               </div>

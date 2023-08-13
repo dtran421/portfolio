@@ -68,7 +68,7 @@ const Tags = ({ tags }: TagsProps) => (
   </div>
 );
 
-type BlogPostCardProps = BlogPost & {
+type BlogPostCardProps = Omit<BlogPost, "sys"> & {
   featured?: boolean;
 };
 
@@ -108,7 +108,7 @@ const BlogPostCard = ({
             </div>
             <h2 className="text-left text-xl lg:text-2xl font-semibold">{title}</h2>
           </div>
-          <Tags {...{ tags }} />
+          <Tags tags={tags} />
         </div>
       </button>
     </Link>

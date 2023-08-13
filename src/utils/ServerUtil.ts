@@ -6,7 +6,7 @@ import "server-only";
 const { combine, timestamp, label, printf, colorize, json } = format;
 const { File, Console } = transports;
 
-export const IS_PROD = process.env.NODE_ENV === "production";
+export const IS_PROD = process.env.VERCEL_ENV === "production";
 
 export const logger = createLogger({
   level: "info",

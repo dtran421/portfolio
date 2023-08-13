@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ThemeContext } from "@/utils/Contexts";
+import { ThemeContext } from "@/utils/ClientUtil";
 import { ThemeContextObject } from "@/utils/types";
 
 import DarkModeToggle from "./DarkModeToggle";

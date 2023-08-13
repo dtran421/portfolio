@@ -2,7 +2,10 @@ import { ReactNode } from "react";
 import { Metadata } from "next";
 import { Oxygen, Quicksand } from "next/font/google";
 
+import { IS_PROD } from "@/utils/ServerUtil";
+
 import "@/styles/globals.css";
+import "@contentful/live-preview/style.css";
 
 import MainLayout from "./main-layout";
 import { openGraph } from "./shared-metadata";
@@ -37,7 +40,7 @@ const RootLayout = ({
 }) => (
   <html lang="en" className={`${quicksand.variable} ${oxygen.variable}`}>
     <body>
-      <MainLayout>{children}</MainLayout>
+      <MainLayout debug={!IS_PROD}>{children}</MainLayout>
     </body>
   </html>
 );
