@@ -21,7 +21,7 @@ type ContentfulData = ContentfulEntity | ContentfulEntity[] | null | undefined;
 export const useContentfulUpdatedData = <T extends ContentfulData>(resource: ContentfulResource, data: T) => {
   const query = getQuery(resource);
 
-  const updatedData = useContentfulLiveUpdates<T>(data, { query });
+  const updatedData = useContentfulLiveUpdates<T>(data);
 
   if (!query) {
     return data;

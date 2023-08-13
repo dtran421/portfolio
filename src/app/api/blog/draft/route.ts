@@ -2,13 +2,13 @@ import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 
 import BlogPostQuery from "@/graphql/BlogPostQuery";
+import { IBlogPostFields } from "@/root/contentful";
 import { queryContentful } from "@/utils/Contentful";
 import { Err, Ok, Option } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
-import { BlogPost } from "@/utils/types";
 
 export interface BlogPostQR {
-  blogPosts: BlogPost[];
+  blogPosts: IBlogPostFields[];
 }
 
 const getPostBySlug = async (slug: string) => {
@@ -17,14 +17,14 @@ const getPostBySlug = async (slug: string) => {
   if (response.isErr()) {
     const err = (response as Err<Error>).unwrap();
     logger.error(`Something went wrong with fetching blog post: ${err.message}`);
-    return Option<BlogPost>(null);
+    return Option<IBlogPostFields>(null);
   }
 
   const {
     blogPosts: [blogPost],
   } = (response as Ok<BlogPostQR>).unwrap();
 
-  return Option<BlogPost>(blogPost);
+  return Option<IBlogPostFields>(blogPost);
 };
 
 export async function GET(req: Request) {

@@ -5,12 +5,11 @@ import renderOptions from "@/utils/renderOptions";
 import { Links } from "@/utils/types";
 
 type BodyProps = {
-  document: Document;
+  document: Document | undefined;
   links: Links | undefined;
 };
 
-const Body = ({ document, links }: BodyProps) => (
-  <div className="space-y-4">{documentToReactComponents(document, renderOptions(links))}</div>
-);
+const Body = ({ document, links }: BodyProps) =>
+  document && <div className="space-y-4">{documentToReactComponents(document, renderOptions(links))}</div>;
 
 export default Body;
