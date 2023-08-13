@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { addColors, createLogger, format, transports } from "winston";
 
+import "server-only";
+
 const { combine, timestamp, label, printf, colorize, json } = format;
 const { File, Console } = transports;
 

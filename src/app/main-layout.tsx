@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import DesktopNavbar from "@/components/Global/DesktopNavbar";
 import MobileNavbar from "@/components/Global/MobileNavbar";
-import { ThemeContext } from "@/utils/Contexts";
+import { ThemeContext } from "@/utils/ClientUtil";
 
 const queryClient = new QueryClient();
 

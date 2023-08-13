@@ -29,6 +29,7 @@
     "@types/react-scroll": "^1.8.7",
     "axios": "^1.4.0",
     "caniuse-lite": "^1.0.30001517",
+    "client-only": "^0.0.1",
     "contentful": "^10.4.2",
     "framer-motion": "^10.15.0",
     "graphiql": "^3.0.5",
