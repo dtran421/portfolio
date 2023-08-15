@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { FiCheck, FiCopy } from "react-icons/fi";
 
-import { isNullish } from "@/utils/CommonUtil";
-
 interface GithubLinkProps {
   github: string;
   darkText?: boolean;
@@ -22,14 +20,13 @@ const GithubLink = ({ github, darkText, compact = false }: GithubLinkProps) => {
     }, 3000);
   };
 
-  let headingClass = "";
-  if (!isNullish(darkText)) {
-    headingClass = darkText ? "text-black" : "text-white";
-  }
-
   return (
     <div className="flex justify-center items-center space-x-4">
-      <p className={`${compact ? "text-sm md:text-lg" : "text-lg md:text-xl"} ${headingClass} font-medium`}>
+      <p
+        className={`${compact ? "text-sm md:text-lg" : "text-lg md:text-xl"} ${
+          darkText ? "text-black" : "text-white"
+        } font-medium`}
+      >
         Github Repo
       </p>
       <div className="flex justify-center items-center bg-zinc-100 dark:bg-zinc-900 ring-2 ring-zinc-300 dark:ring-zinc-700/50 dark-transition rounded-lg">
