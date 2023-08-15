@@ -35,6 +35,7 @@ const Card = ({
   },
 }: CardProps) => (
   <div
+    id="event"
     className={`overflow-hidden order-1 ${
       side === "L" ? "bg-primary" : "bg-secondary"
     } rounded-lg shadow-xl w-10/12 md:w-5/12 p-4`}
