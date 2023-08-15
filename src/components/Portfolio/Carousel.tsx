@@ -55,7 +55,7 @@ const Carousel = () => {
   }, [typewriterListener]);
 
   return (
-    <div className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
+    <div id="carousel" className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
       <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
         <Image
           key={pic}
