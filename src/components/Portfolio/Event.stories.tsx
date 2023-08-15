@@ -15,7 +15,7 @@ type Story = StoryObj<typeof Event>;
 export const LeftSide: Story = {
   args: {
     side: "L",
-    data: {
+    event: {
       heading: "Test Heading",
       description: generateRichTextStub(),
       type: EventType.WORK,
@@ -30,7 +30,7 @@ export const LeftSide: Story = {
 export const RightSide: Story = {
   args: {
     side: "R",
-    data: {
+    event: {
       heading: "Test Heading",
       description: generateRichTextStub(),
       type: EventType.WORK,
