@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Timeline>;
 export const Default: Story = {
   args: {
     timelineEvents: [
-      EventDefault.args?.data as TimelineEvent,
+      EventDefault.args?.event as TimelineEvent,
       {
         heading: "Studied at University of Acme",
         type: EventType.EDUCATION,

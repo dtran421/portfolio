@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconContext } from "react-icons";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
 
@@ -20,7 +19,7 @@ const tagVariants = {
 type CardProps = {
   side: string;
   isExpanded: boolean;
-  setExpanded: Dispatch<SetStateAction<boolean>>;
+  setExpanded: (isExpanded: boolean) => void;
   heading: string;
   description: RichText;
 };
@@ -81,14 +80,11 @@ const Card = ({
   </div>
 );
 
-type EventProps = {
-  side: "L" | "R";
-  data: TimelineEvent;
-};
+interface EventIconProps {
+  type: "Education" | "Internship" | "Work";
+}
 
-const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorking, description } }: EventProps) => {
-  const [isExpanded, setExpanded] = useState(false);
-
+const EventIcon = ({ type }: EventIconProps) => {
   const eventTypeToIcon = {
     Education: MdSchool,
     Internship: MdDesktopMac,
@@ -96,27 +92,38 @@ const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorki
   };
   const Icon = eventTypeToIcon[type];
 
+  return (
+    <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
+      <h1 className="mx-auto font-semibold">
+        <Icon size={20} className="text-zinc-200 dark:text-zinc-800 dark-transition" />
+      </h1>
+    </div>
+  );
+};
+
+type EventProps = {
+  side: "L" | "R";
+  event: TimelineEvent;
+};
+
+const Event = ({ side, event: { heading, type, startDate, endDate, currentlyWorking, description } }: EventProps) => {
+  const [isExpanded, setExpanded] = useState(false);
+
   const startDateStr = convertDateToAbbrevString(startDate);
   const endDateStr = convertDateToAbbrevString(endDate, currentlyWorking);
   const dateStr = `${startDateStr} - ${endDateStr}`;
 
-  const iconContext = useMemo(
-    () => ({
-      size: "20",
-      className: "text-zinc-200 dark:text-zinc-800 dark-transition",
-    }),
-    []
-  );
-
   return (
-    <IconContext.Provider value={iconContext}>
+    <>
       <div className={`w-full hidden md:flex ${side === "R" ? "flex-row-reverse" : ""} justify-between items-center`}>
-        <Card {...{ side, isExpanded, setExpanded, heading, description }} />
-        <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
-          <h1 className="mx-auto font-semibold">
-            <Icon />
-          </h1>
-        </div>
+        <Card
+          side={side}
+          isExpanded={isExpanded}
+          setExpanded={setExpanded}
+          heading={heading}
+          description={description}
+        />
+        <EventIcon type={type} />
         <div className={`order-1 w-5/12 flex ${side === "L" ? "justify-start" : "justify-end"}`}>
           <AnimatePresence>
             {isExpanded && (
@@ -141,11 +148,7 @@ const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorki
         </div>
       </div>
       <div className="flex md:hidden justify-between items-center">
-        <div className="z-10 w-8 h-8 flex items-center order-1 bg-zinc-700 dark:bg-zinc-300 dark-transition backdrop-blur-lg rounded-full">
-          <h1 className="mx-auto font-semibold">
-            <Icon />
-          </h1>
-        </div>
+        <EventIcon type={type} />
         <Card
           side={side}
           isExpanded={isExpanded}
@@ -154,7 +157,7 @@ const Event = ({ side, data: { heading, type, startDate, endDate, currentlyWorki
           description={description}
         />
       </div>
-    </IconContext.Provider>
+    </>
   );
 };
 
