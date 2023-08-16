@@ -56,7 +56,7 @@ const Carousel = () => {
 
   return (
     <div id="carousel" className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
-      <div className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
+      <figure className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
         <Image
           key={pic}
           alt={`pic of me ${pic}`}
@@ -65,7 +65,7 @@ const Carousel = () => {
           height={picData.height}
           className={imgClass}
         />
-      </div>
+      </figure>
       <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
         <p className="inline-block text-center">I am</p>
         <div ref={typewriter} className="flex justify-center items-center">

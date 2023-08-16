@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { isNullish } from "./CommonUtil";
+import { isNullish, truncateString } from "./CommonUtil";
 
 describe("isNullish", () => {
   test("it returns true for null", () => {
@@ -53,5 +53,25 @@ describe("isNullish", () => {
     expect(isNullish(Test)).toBe(false);
 
     expect(isNullish(new Test())).toBe(false);
+  });
+});
+
+describe("truncateString", () => {
+  test("it returns the original string if it is shorter than the limit", () => {
+    expect(truncateString("hello", 10)).toBe("hello");
+  });
+
+  test("it returns the truncated string if it is longer than the limit", () => {
+    expect(truncateString("hello world", 5)).toBe("hello...");
+  });
+
+  test("with default limit 50, it returns the original shorter string", () => {
+    expect(truncateString("hello world")).toBe("hello world");
+  });
+
+  test("with default limit 50, it returns the truncated string if it is longer than the limit", () => {
+    expect(truncateString("hello world, how are you? has this reached the 50 word limit yet?")).toBe(
+      "hello world, how are you? has this reached the 50 ..."
+    );
   });
 });

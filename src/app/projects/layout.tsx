@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
 
+import { truncateString } from "@/utils/CommonUtil";
+
 import ProjectsLayoutComponent from "./projects-layout";
 
 export const metadata: Metadata = {
   title: {
-    template: "Projects | %s",
+    template: truncateString("Projects | %s"),
     default: "Duke Tran | Projects",
   },
 };
