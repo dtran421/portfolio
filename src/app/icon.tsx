@@ -14,20 +14,22 @@ export const contentType = "image/png";
 export default function Icon() {
   return new ImageResponse(
     (
-      // ImageResponse JSX element
       <div
         style={{
-          fontSize: 24,
-          background: "black",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontFamily: "var(--font-oxygen)",
+          fontSize: 24,
+          fontWeight: "bold",
           color: "white",
+          backgroundImage: "linear-gradient(to top right, #ef4444, #9333ea)",
+          padding: 2,
         }}
       >
-        A
+        DT
       </div>
     ),
     // ImageResponse options
