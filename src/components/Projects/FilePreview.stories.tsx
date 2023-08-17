@@ -16,7 +16,7 @@ const meta: Meta<typeof FilePreview> = {
 export default meta;
 type Story = StoryObj<typeof FilePreview>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     label: "Test File",
     filePath: "/test.pdf",

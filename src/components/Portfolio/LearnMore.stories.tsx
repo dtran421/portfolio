@@ -16,6 +16,6 @@ const LearnMoreWrapper = () => {
   return <LearnMore animations={animations} />;
 };
 
-export const Default: Story = {
+export const Primary: Story = {
   render: () => <LearnMoreWrapper />,
 };

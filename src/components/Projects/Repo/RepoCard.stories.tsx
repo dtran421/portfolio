@@ -16,7 +16,7 @@ const meta: Meta<typeof RepoCard> = {
 export default meta;
 type Story = StoryObj<typeof RepoCard>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     name: "Test Project",
     url: "http://localhost:3000/",

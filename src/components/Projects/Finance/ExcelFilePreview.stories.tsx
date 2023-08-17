@@ -16,7 +16,7 @@ const meta: Meta<typeof ExcelFilePreview> = {
 export default meta;
 type Story = StoryObj<typeof ExcelFilePreview>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     label: "Test File",
     filePath: "/test.pdf",

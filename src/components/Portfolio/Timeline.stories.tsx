@@ -13,7 +13,7 @@ const meta: Meta<typeof Timeline> = {
 export default meta;
 type Story = StoryObj<typeof Timeline>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     timelineEvents: [
       EventDefault.args?.event as TimelineEvent,

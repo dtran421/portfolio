@@ -49,7 +49,7 @@ const PLACEHOLDER_DATA = {
   },
 };
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     data: BASE_DATA,
     errors: [],

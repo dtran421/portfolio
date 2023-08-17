@@ -16,7 +16,7 @@ const meta: Meta<typeof ProjectCard> = {
 export default meta;
 type Story = StoryObj<typeof ProjectCard>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     title: "Project Title",
     link: "http://localhost:3000/",

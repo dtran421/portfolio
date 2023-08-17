@@ -9,6 +9,6 @@ const meta: Meta<typeof CheckMark> = {
 export default meta;
 type Story = StoryObj<typeof CheckMark>;
 
-export const Default: Story = {
+export const Primary: Story = {
   render: () => <CheckMark />,
 };

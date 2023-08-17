@@ -9,7 +9,7 @@ const meta: Meta<typeof Emoji> = {
 export default meta;
 type Story = StoryObj<typeof Emoji>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     label: "waving hand",
     symbol: "👋",

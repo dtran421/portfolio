@@ -32,6 +32,6 @@ const DarkModeToggleWrapper = () => {
   );
 };
 
-export const Default: Story = {
+export const Primary: Story = {
   render: () => <DarkModeToggleWrapper />,
 };

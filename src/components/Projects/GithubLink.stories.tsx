@@ -9,7 +9,7 @@ const meta: Meta<typeof GithubLink> = {
 export default meta;
 type Story = StoryObj<typeof GithubLink>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     darkText: false,
     github: "http://localhost:3000/",

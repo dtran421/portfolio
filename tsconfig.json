@@ -27,6 +27,6 @@
     ],
     "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/app.jsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/app.jsx", ".next/types/**/*.ts", ".storybook/**/*.ts"],
   "exclude": ["node_modules", ".next"]
 }

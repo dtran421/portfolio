@@ -16,7 +16,7 @@ const meta: Meta<typeof LangProfile> = {
 export default meta;
 type Story = StoryObj<typeof LangProfile>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     name: "TypeScript",
     imgSrc: "https://img.icons8.com/color/48/000000/typescript.png",

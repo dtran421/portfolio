@@ -11,7 +11,7 @@ const meta: Meta<typeof Subsection> = {
 export default meta;
 type Story = StoryObj<typeof Subsection>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     ...generateSubsectionStub(),
     currentlyWorking: false,

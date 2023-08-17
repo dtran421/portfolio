@@ -16,7 +16,7 @@ const meta: Meta<typeof ProjectCardLabel> = {
 export default meta;
 type Story = StoryObj<typeof ProjectCardLabel>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     title: "Test Project",
     isHovered: false,

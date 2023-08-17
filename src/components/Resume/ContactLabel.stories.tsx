@@ -11,7 +11,7 @@ const meta: Meta<typeof ContactLabel> = {
 export default meta;
 type Story = StoryObj<typeof ContactLabel>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     label: "Hello World",
     icon: <FiInfo />,

@@ -18,7 +18,7 @@ const meta: Meta<typeof DesktopNavbar> = {
 export default meta;
 type Story = StoryObj<typeof DesktopNavbar>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     sticky: false,
   },

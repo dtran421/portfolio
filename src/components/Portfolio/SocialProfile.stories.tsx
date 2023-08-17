@@ -11,7 +11,7 @@ const meta: Meta<typeof SocialProfile> = {
 export default meta;
 type Story = StoryObj<typeof SocialProfile>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     name: "GitHub",
     link: "https://via.placeholder.com",

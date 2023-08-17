@@ -9,7 +9,7 @@ const meta: Meta<typeof ClassProfile> = {
 export default meta;
 type Story = StoryObj<typeof ClassProfile>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     heading: "Test Project",
     dateString: "2021-01-01",

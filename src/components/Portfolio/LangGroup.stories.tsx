@@ -12,7 +12,7 @@ const meta: Meta<typeof LangGroup> = {
 export default meta;
 type Story = StoryObj<typeof LangGroup>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     heading: "Test Heading",
     description: "Test Description",

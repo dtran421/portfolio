@@ -22,7 +22,7 @@ const meta: Meta<typeof MobileNavbar> = {
 export default meta;
 type Story = StoryObj<typeof MobileNavbar>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     sticky: false,
   },

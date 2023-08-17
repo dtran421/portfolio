@@ -9,6 +9,6 @@ const meta: Meta<typeof FetchError> = {
 export default meta;
 type Story = StoryObj<typeof FetchError>;
 
-export const Default: Story = {
+export const Primary: Story = {
   render: () => <FetchError />,
 };

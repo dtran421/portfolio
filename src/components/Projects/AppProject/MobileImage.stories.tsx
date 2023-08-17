@@ -15,7 +15,7 @@ const meta: Meta<typeof MobileImage> = {
 export default meta;
 type Story = StoryObj<typeof MobileImage>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     page: "collegetalk",
     num: 1,

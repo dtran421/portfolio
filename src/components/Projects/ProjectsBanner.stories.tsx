@@ -9,7 +9,7 @@ const meta: Meta<typeof ProjectsBanner> = {
 export default meta;
 type Story = StoryObj<typeof ProjectsBanner>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     pageTitle: "Test Project",
     accentColor: "#b4b",
