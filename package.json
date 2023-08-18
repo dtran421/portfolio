@@ -16,7 +16,7 @@
     "test:dev": "vitest dev --update",
     "test": "vitest run --coverage --reporter junit --outputFile reports/vitest-report.xml",
     "cypress:open": "cypress open",
-    "pre-commit": "yarn format && yarn typecheck && yarn lint && yarn test:dev",
+    "pre-commit": "yarn format && yarn typecheck && yarn lint && yarn test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic"
