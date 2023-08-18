@@ -1,9 +1,4 @@
-import { useMemo } from "react";
-
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { ThemeContext } from "@/utils/ClientUtil";
-import { ThemeContextObject } from "@/utils/types";
 
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -14,24 +9,20 @@ const meta: Meta<typeof DarkModeToggle> = {
 export default meta;
 type Story = StoryObj<typeof DarkModeToggle>;
 
-const DarkModeToggleWrapper = () => {
-  const themeContext = useMemo<ThemeContextObject>(
-    () => ({
-      darkMode: false,
-      toggleDarkMode: () => {
-        // Do nothing
-      },
-    }),
-    []
-  );
-
-  return (
-    <ThemeContext.Provider value={themeContext}>
-      <DarkModeToggle />
-    </ThemeContext.Provider>
-  );
+export const Primary: Story = {
+  render: () => <DarkModeToggle />,
+  parameters: {
+    backgrounds: {
+      default: "light",
+    },
+  },
 };
 
-export const Primary: Story = {
-  render: () => <DarkModeToggleWrapper />,
+export const DarkMode: Story = {
+  render: () => <DarkModeToggle />,
+  parameters: {
+    theming: {
+      themeOverride: "dark",
+    },
+  },
 };

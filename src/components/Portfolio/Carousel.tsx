@@ -1,77 +1,42 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/legacy/image";
+"use client";
+
+import Image from "next/image";
 import Typewriter from "typewriter-effect";
 
-import { isNullish } from "@/utils/CommonUtil";
+import { useCarouselControl } from "@/hooks/useCarouselControl";
 
 import carouselData from "@/public/json/carousel.json";
 
 const Carousel = () => {
   const carousel = carouselData.imgs;
-  const pics = carousel.length;
-  const strings = carousel.map((entry) => entry.label);
+  const { currentImage, phase, typewriterRef } = useCarouselControl(carousel);
 
-  const [imgClass, setImgClass] = useState("rounded-xl opacity-0 transition duration-200 ease-linear");
-  const [[pic, picData, init], cyclePics] = useState([1, carousel[0], true]);
-  const typewriter = useRef<HTMLDivElement>(null);
-  const typewriterListener = useCallback(() => {
-    if (isNullish(typewriter.current)) {
-      return;
-    }
-
-    const cyclePicture = () => {
-      const loop = pic + 1 > pics;
-      const newPic = loop ? 1 : pic + 1;
-      setImgClass(imgClass.replace("opacity-100", "opacity-0"));
-      setTimeout(() => cyclePics([newPic, carousel[newPic - 1], loop]), 250);
-      setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 250);
-    };
-
-    const parentDiv = typewriter.current as HTMLDivElement;
-    const typewriterText = (parentDiv.children[0] as HTMLSpanElement).innerText;
-
-    if (typewriterText.length === 1) {
-      if (init) {
-        setTimeout(() => setImgClass(imgClass.replace("opacity-0", "opacity-100")), 250);
-        cyclePics([pic, picData, false]);
-      } else {
-        cyclePicture();
-      }
-    }
-  }, [carousel, imgClass, init, pic, picData, pics]);
-
-  useEffect(() => {
-    const typewriterObserver = new MutationObserver(typewriterListener);
-    if (typewriter.current) {
-      typewriterObserver.observe(typewriter.current, {
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    return () => {
-      typewriterObserver.disconnect();
-    };
-  }, [typewriterListener]);
+  const labels = carousel.map((img) => img.label);
+  const imageData = carousel[currentImage - 1];
 
   return (
     <div id="carousel" className="md:w-full lg:w-1/2 flex flex-col justify-start items-center space-y-4 mx-8">
-      <figure className="w-full h-full lg:h-5/6 xl:h-1/2 flex justify-center items-center xl:items-start">
-        <Image
-          key={pic}
-          alt={`pic of me ${pic}`}
-          src={`/img/carousel/${picData.pic}`}
-          width={picData.width}
-          height={picData.height}
-          className={imgClass}
-        />
+      <figure className="w-full flex justify-center items-center xl:items-start">
+        {!!currentImage && (
+          <Image
+            key={currentImage}
+            alt={`pic of me ${currentImage}`}
+            src={`/img/carousel/${imageData.pic}`}
+            width={imageData.width}
+            height={imageData.height}
+            className={`rounded-xl transition duration-200 ease-linear ${
+              phase === "visible" ? "opacity-100" : "opacity-0"
+            }`}
+            priority
+          />
+        )}
       </figure>
-      <div className="w-full flex flex-col md:flex-row justify-center text-3xl dark:text-white dark-transition">
+      <div className="w-full flex flex-col md:flex-row justify-center text-lg md:text-xl xl:text-3xl dark:text-white dark-transition">
         <p className="inline-block text-center">I am</p>
-        <div ref={typewriter} className="flex justify-center items-center">
+        <div ref={typewriterRef} className="flex justify-center items-center">
           <Typewriter
             options={{
-              strings,
+              strings: labels,
               autoStart: true,
               loop: true,
               pauseFor: 5000,

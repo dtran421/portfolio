@@ -21,6 +21,8 @@ interface ResumeQR {
   resumeBubblesSections: ResumeBubblesSection[];
 }
 
+export const revalidate = 3600; // revalidate the data at most every hour
+
 export const getResumeData = cache(async () => {
   const response = await queryContentful<ResumeQR>(ResumeSectionsQuery);
 

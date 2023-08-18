@@ -23,7 +23,9 @@ const DesktopNavbar = ({ sticky }: ResponsiveNavbarProps) => (
     initial="fixed"
     animate={sticky ? "sticky" : "fixed"}
     variants={navbarVariants}
-    className="sticky top-0 w-full z-50 hidden lg:block bg-zinc-100/80 dark:bg-zinc-900/80 dark-transition backdrop-blur-lg pt-4 transition-all duration-200 ease-linear"
+    className={`sticky top-0 w-full z-50 hidden lg:block ${
+      sticky ? "bg-zinc-100/80 dark:bg-zinc-900/80" : "bg-zinc-100 dark:bg-zinc-900"
+    } dark-transition backdrop-blur-lg pt-4 transition-all duration-200 ease-linear`}
   >
     <div className="relative flex justify-between items-center mx-6">
       <p className="font-Oxygen text-4xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-secondary font-bold">
