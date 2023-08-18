@@ -2,23 +2,31 @@ import { ResumeSubsection } from "@/utils/types";
 
 import Subsection from "./Subsection";
 
-type SectionProps = {
-  type: "Tabs" | "Bubbles";
-  heading: string;
-  body: (ResumeSubsection | string)[];
-};
+type SectionProps =
+  | {
+      heading: string;
+    } & (
+      | {
+          type: "Tabs";
+          body: ResumeSubsection[];
+        }
+      | {
+          type: "Bubbles";
+          body: string[];
+        }
+    );
 
 const Section = ({ type, heading, body }: SectionProps) => (
   <div className="flex flex-col bg-zinc-300/25 dark:bg-zinc-700/50 dark-transition rounded-xl px-6 lg:px-10 py-6">
-    <p
+    <h3
       className={`text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold px-3 py-1 ${
         type === "Tabs" ? "mb-6" : "mb-4"
       }`}
     >
       {heading}
-    </p>
+    </h3>
     {type === "Tabs" ? (
-      (body as ResumeSubsection[]).map((content, idx, arr) => {
+      body.map((content, idx, arr) => {
         let pos: "first" | "middle" | "last";
         switch (idx) {
           case 0:
@@ -47,10 +55,9 @@ const Section = ({ type, heading, body }: SectionProps) => (
       })
     ) : (
       <div className="flex flex-wrap justify-center">
-        {(body as string[]).map((content, idx) => (
+        {body.map((content) => (
           <p
-            // eslint-disable-next-line react/no-array-index-key
-            key={idx}
+            key={content}
             className="bg-secondary text-white text-center rounded-full lg:text-lg px-6 lg:px-3 py-1 mx-2 my-1"
           >
             {content}

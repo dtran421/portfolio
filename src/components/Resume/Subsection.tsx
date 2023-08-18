@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
@@ -65,7 +67,7 @@ const Subsection = ({
           )}
         </AnimatePresence>
       </div>
-      <div className="w-full overflow-hidden">
+      <article className="w-full overflow-hidden">
         <div className="w-full flex justify-between">
           <div className="flex flex-col">
             <p className="max-w-md text-lg lg:text-xl font-medium text-secondary">{title}</p>
@@ -99,7 +101,7 @@ const Subsection = ({
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </article>
     </div>
   );
 };
