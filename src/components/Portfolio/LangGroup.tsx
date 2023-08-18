@@ -12,8 +12,8 @@ type LangGroupProps = {
 };
 
 const LangGroup = ({ heading, description, emoji, emojiLabel, languages }: LangGroupProps) => (
-  <>
-    <div id="lang-group" className="flex space-x-4">
+  <div id="lang-group">
+    <div className="flex space-x-4">
       <Emoji
         label={emojiLabel}
         symbol={emoji}
@@ -29,7 +29,7 @@ const LangGroup = ({ heading, description, emoji, emojiLabel, languages }: LangG
         <LangProfile key={name} name={name} imgSrc={img.url} accentColor={accentColor} darkText={darkText} />
       ))}
     </div>
-  </>
+  </div>
 );
 
 export default LangGroup;

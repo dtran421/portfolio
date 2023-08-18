@@ -18,12 +18,6 @@ const config: StorybookConfig = {
       nextConfigPath: path.resolve(__dirname, "../next.config.js"),
     },
   },
-  typescript: {
-    // Overrides the default Typescript configuration to allow multi-package components to be documented via Autodocs.
-    reactDocgen: "react-docgen",
-    skipBabel: true,
-    check: false,
-  },
   docs: {
     autodocs: true,
     defaultName: "Documentation",

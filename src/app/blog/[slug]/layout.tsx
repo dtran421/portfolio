@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Metadata } from "next";
 
 import { openGraph } from "@/app/shared-metadata";
+import { truncateString } from "@/utils/CommonUtil";
 
 import { getBlogPost } from "./query";
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blogPost = await getBlogPost(slug);
 
   return {
-    title: blogPost?.title ?? "Not Found",
+    title: blogPost ? truncateString(blogPost.title) : "Not Found",
     openGraph,
   };
 }

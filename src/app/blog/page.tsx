@@ -17,6 +17,8 @@ export const metadata: Metadata = {
 
 type BlogQR = BlogProps;
 
+export const revalidate = 3600; // revalidate the data at most every hour
+
 const getBlogPosts = cache(async () => {
   const response = await queryContentful<BlogQR>(BlogPostsQuery);
 

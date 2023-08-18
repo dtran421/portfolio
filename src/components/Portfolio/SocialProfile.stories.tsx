@@ -15,7 +15,7 @@ export const Primary: Story = {
   args: {
     name: "GitHub",
     link: "https://via.placeholder.com",
-    children: (
+    icon: (
       <Image
         src="https://via.placeholder.com/25"
         alt="GitHub Logo"

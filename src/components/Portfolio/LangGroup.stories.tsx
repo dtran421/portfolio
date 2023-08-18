@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Language } from "@/utils/types";
 
 import LangGroup from "./LangGroup";
-import { DarkText, Default as LangProfileDefault } from "./LangProfile.stories";
+import { DarkText, Primary as LangProfileDefault } from "./LangProfile.stories";
 
 const meta: Meta<typeof LangGroup> = {
   component: LangGroup,

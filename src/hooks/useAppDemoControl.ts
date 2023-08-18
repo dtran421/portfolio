@@ -2,10 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import findIndex from "lodash/findIndex";
 import range from "lodash/range";
 
-const getViewportMidY = () => {
-  const { innerHeight, scrollY } = window;
-  return scrollY + innerHeight / 2;
-};
+import { getViewportMidY } from "@/utils/ClientUtil";
 
 const useAppDemoControl = (numParagraphs: number) => {
   const activeRef = useRef<HTMLDivElement>(null);

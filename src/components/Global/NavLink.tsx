@@ -10,11 +10,11 @@ type NavlinkProps = {
 };
 
 const NavLink = ({ link, mobile = false }: NavlinkProps) => {
-  const segment = useSelectedLayoutSegment() ?? "Portfolio";
+  const segment = useSelectedLayoutSegment() ?? "";
   const active = startCase(segment) === link;
 
   return mobile ? (
-    <Link href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`} passHref>
+    <Link href={`/${link.toLowerCase()}`}>
       <button
         type="button"
         className={`w-full flex justify-center text-xl border-2 rounded-lg ${
@@ -28,7 +28,7 @@ const NavLink = ({ link, mobile = false }: NavlinkProps) => {
     </Link>
   ) : (
     <div className="w-full flex justify-center">
-      <Link href={`/${link === "Portfolio" ? "" : link.toLowerCase()}`} passHref>
+      <Link href={`/${link.toLowerCase()}`}>
         <button
           type="button"
           className={`w-full flex justify-center text-xl border-b-4 ${

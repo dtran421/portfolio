@@ -1,5 +1,8 @@
-import { ReactNode, useState } from "react";
+"use client";
+
+import { ReactNode, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { IconContext } from "react-icons";
 
 const logoMotion = {
   inactive: { x: 0, zIndex: 1 },
@@ -23,14 +26,21 @@ const textMotion = {
 type SocialProfileProps = {
   name: string;
   link: string;
-  children: ReactNode;
+  icon: ReactNode;
 };
 
-const SocialProfile = ({ name, link, children }: SocialProfileProps) => {
+const SocialProfile = ({ name, link, icon }: SocialProfileProps) => {
   const [isHovered, setHovered] = useState(false);
 
+  const iconContext = useMemo(
+    () => ({
+      className: "w-full h-full",
+    }),
+    []
+  );
+
   return (
-    <>
+    <IconContext.Provider value={iconContext}>
       <motion.a
         className="hidden lg:flex justify-center items-center cursor-pointer"
         href={link}
@@ -43,7 +53,7 @@ const SocialProfile = ({ name, link, children }: SocialProfileProps) => {
       >
         <motion.div variants={logoMotion} className="relative flex items-center">
           <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full shadow-lg p-2">
-            {children}
+            {icon}
           </div>
           <motion.p variants={textMotion} className="text-zinc-800 dark:text-zinc-200 dark-transition text-xl">
             {name}
@@ -58,12 +68,12 @@ const SocialProfile = ({ name, link, children }: SocialProfileProps) => {
       >
         <div className="relative flex items-center space-x-4 md:space-x-3">
           <div className="z-10 flex justify-center items-center text-white bg-primary rounded-full shadow-lg p-2">
-            {children}
+            {icon}
           </div>
           <p className="text-zinc-800 dark:text-zinc-200 dark-transition text-lg">{name}</p>
         </div>
       </a>
-    </>
+    </IconContext.Provider>
   );
 };
 
