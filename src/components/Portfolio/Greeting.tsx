@@ -1,21 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { useCallback, useEffect } from "react";
+import { motion, useAnimate } from "framer-motion";
 
 import Emoji from "../Global/Emoji";
 
 const waveAnimation = {
-  scale: [1, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1],
-  rotate: [0, 10, 110, -90, 110, -90, 10, 0],
+  scale: [1, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1],
+  rotate: [0, 10, 180, -140, 180, -140, 10, 0],
+};
+
+const waveTransition = {
+  duration: 1.75,
+  times: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 1],
 };
 
 const Greeting = () => {
-  const waveControls = useAnimation();
+  const [scope, animate] = useAnimate();
+
+  const animateWave = useCallback(() => animate(scope.current, waveAnimation, waveTransition), [animate, scope]);
 
   useEffect(() => {
-    waveControls.start(waveAnimation);
-  }, [waveControls]);
+    animateWave();
+  }, [animate, animateWave, scope]);
 
   return (
     <div className="flex justify-start py-5 text-2xl lg:text-3xl text-center">
@@ -34,12 +41,8 @@ const Greeting = () => {
             Duke Tran
           </motion.p>
           <motion.div
-            animate={waveControls}
-            transition={{
-              duration: 1.5,
-              times: [0, 0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 1],
-            }}
-            onHoverStart={() => waveControls.start(waveAnimation)}
+            ref={scope}
+            onHoverStart={() => animateWave()}
             className="transition origin-bottom-right ease-in-out duration-300 hover:scale-110 hover:rotate-12 cursor-default"
           >
             <Emoji label="wave" symbol="👋🏼" />
