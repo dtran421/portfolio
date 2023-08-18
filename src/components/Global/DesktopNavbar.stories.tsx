@@ -19,13 +19,5 @@ export default meta;
 type Story = StoryObj<typeof DesktopNavbar>;
 
 export const Primary: Story = {
-  args: {
-    sticky: false,
-  },
-};
-
-export const Sticky: Story = {
-  args: {
-    sticky: true,
-  },
+  render: () => <DesktopNavbar />,
 };
