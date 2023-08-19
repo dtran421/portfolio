@@ -15,7 +15,7 @@ const PhoneDemo = ({ page, ImagePlaceholder, activeParagraph, active }: PhoneDem
           <div className="w-1/2 h-7 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-b-xl" />
         </div>
         <div className="w-full z-10 absolute left-0 top-0 rounded-3xl">
-          <div className="w-full relative bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl p-2">
+          <figure className="w-full relative bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl p-2">
             <Image
               alt={`${page} video ${activeParagraph + 1 || 1}`}
               src={`/img/projects/${page}/${page}${activeParagraph + 1 || 1}.gif`}
@@ -23,7 +23,7 @@ const PhoneDemo = ({ page, ImagePlaceholder, activeParagraph, active }: PhoneDem
               width={1170}
               height={2532}
             />
-          </div>
+          </figure>
           <ImagePlaceholder visible={!active} />
         </div>
       </div>

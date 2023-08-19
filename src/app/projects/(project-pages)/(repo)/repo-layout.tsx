@@ -5,7 +5,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 
 import ClassProfile from "@/components/Projects/ClassProfile";
 import RepoCard from "@/components/Projects/Repo/RepoCard";
-import { useProjectData } from "@/hooks/useProjectTitle";
+import { useProjectData } from "@/hooks/useProjectData";
 
 import dataMiningData from "@/public/json/data-mining.json";
 import machineLearningData from "@/public/json/machine-learning.json";

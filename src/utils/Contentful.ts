@@ -4,6 +4,8 @@ import { ContentfulResource } from "@/graphql/Resources";
 import { Option, Result } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 
+import "server-only";
+
 const getBaseContentfulUrl = () => {
   if (!process.env.CONTENTFUL_SPACE_ID) {
     logger.error("CONTENTFUL_SPACE_ID is not set!");

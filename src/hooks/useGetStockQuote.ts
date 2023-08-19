@@ -14,12 +14,12 @@ const getStockQuote = async ({ queryKey: [symbol] }: QueryFunctionContext<[strin
 };
 
 const useGetStockQuote = (symbol: string) => {
-  const { data, isLoading, error } = useQuery<Quote, Error, Quote, [string, string]>({
+  const { data, isFetching, error } = useQuery<Quote, Error, Quote, [string, string]>({
     queryKey: [symbol, "quote"],
     queryFn: getStockQuote,
   });
 
-  return { data, isLoading, error };
+  return { data, isFetching, error };
 };
 
 export default useGetStockQuote;

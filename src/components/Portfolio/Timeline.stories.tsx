@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { LeftSide as EventDefault } from "@/components/Portfolio/Event.stories";
-import { generateRichTextStub } from "@/utils/Test";
+import { generateRichTextStub } from "@/utils/TestUtil";
 import { EventType, TimelineEvent } from "@/utils/types";
 
 import Timeline from "./Timeline";

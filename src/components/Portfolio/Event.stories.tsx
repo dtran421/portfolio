@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { generateRichTextStub } from "@/utils/Test";
+import { generateRichTextStub } from "@/utils/TestUtil";
 import { EventType } from "@/utils/types";
 
 import Event from "./Event";

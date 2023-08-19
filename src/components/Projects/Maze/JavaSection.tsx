@@ -71,7 +71,7 @@ const JavaSection = () => (
             </div>
           </div>
           <div className="flex justify-center">
-            <CodeBox args={["gui.MazeByDukeTran"]}>
+            <CodeBox cliArgs={["gui.MazeByDukeTran"]}>
               <CodeFlag flag="f" text="file" />
               <CodeFlag flag="g" text="algorithm" />
               <CodeFlag flag="d" text="driver" />
@@ -90,7 +90,7 @@ const JavaSection = () => (
         dead-end). The background colors also fade to gold on the top half of the screen and green on the bottom (the
         colors of my alma mater, William & Mary) as you get closer to the exit.
       </ContainerBody>
-      <MazeDemo type="Java" img="maze1" args={["gui.MazeByDukeTran"]} />
+      <MazeDemo type="Java" img="maze1" cliArgs={["gui.MazeByDukeTran"]} />
     </ScrollContainer>
     <ScrollContainer>
       <ContainerBody heading="Maze Generation">
@@ -108,8 +108,8 @@ const JavaSection = () => (
         . For demonstration purposes, all 3 of the maze runs below were done at skill level 4.
       </ContainerBody>
       <div className="w-full flex flex-col lg:flex-row flex-wrap justify-center lg:space-x-4 space-y-6 lg:space-y-0">
-        <MazeDemo type="Java" img="maze2" args={["gui.MazeByDukeTran", "-g Prim", "-d Wizard"]} />
-        <MazeDemo type="Java" img="maze3" args={["gui.MazeByDukeTran", "-g Eller", "-d Wizard"]} />
+        <MazeDemo type="Java" img="maze2" cliArgs={["gui.MazeByDukeTran", "-g Prim", "-d Wizard"]} />
+        <MazeDemo type="Java" img="maze3" cliArgs={["gui.MazeByDukeTran", "-g Eller", "-d Wizard"]} />
       </div>
     </ScrollContainer>
     <ScrollContainer>
@@ -122,7 +122,7 @@ const JavaSection = () => (
         (even when the maze is on difficulty level 0) since it needs to sense in all four directions after each move to
         make a decision on where to go next.
       </ContainerBody>
-      <MazeDemo type="Java" img="maze4" args={["gui.MazeByDukeTran", "-g Eller", "-d WallFollower"]} />
+      <MazeDemo type="Java" img="maze4" cliArgs={["gui.MazeByDukeTran", "-g Eller", "-d WallFollower"]} />
     </ScrollContainer>
     <ScrollContainer>
       <ContainerBody heading="Sensor Reliability">
@@ -133,7 +133,7 @@ const JavaSection = () => (
         twitching/fidgeting at some points since the sensors in those directions are unreliable (and therefore
         nonoperational at times), so it&#39;ll need to use its other operational sensors to sense in that direction.
       </ContainerBody>
-      <MazeDemo type="Java" img="maze5" args={["gui.MazeByDukeTran", "-g Prim", "-d WallFollower", "-r 1010"]} />
+      <MazeDemo type="Java" img="maze5" cliArgs={["gui.MazeByDukeTran", "-g Prim", "-d WallFollower", "-r 1010"]} />
     </ScrollContainer>
   </div>
 );

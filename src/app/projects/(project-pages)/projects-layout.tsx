@@ -1,37 +1,19 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
 import ProjectsBanner from "@/components/Projects/ProjectsBanner";
-import { Project } from "@/utils/types";
-
-import projects from "@/public/json/projects.json";
-
-const getProjectData = (link: string | null) => {
-  if (!link) {
-    return null;
-  }
-
-  const routeDataMap = Object.values(projects as Record<string, Record<string, Project>>).reduce(
-    (map, data) => ({ ...map, ...data }),
-    {}
-  );
-
-  return {
-    ...routeDataMap[link],
-    link,
-  };
-};
+import { useProjectData } from "@/hooks/useProjectData";
 
 type ProjectLayoutProps = {
   children: ReactNode;
 };
 
 const ProjectLayout = ({ children }: ProjectLayoutProps) => {
-  const segment = useSelectedLayoutSegment();
-  const projectData = getProjectData(segment);
+  const segment = useSelectedLayoutSegments().at(-1);
+  const projectData = useProjectData(segment);
 
   return (
     <>

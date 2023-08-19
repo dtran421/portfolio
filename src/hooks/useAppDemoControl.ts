@@ -60,7 +60,18 @@ const useAppDemoControl = (numParagraphs: number) => {
     }
 
     setScrollTimeout(setTimeout(() => setScrolling(false), 2000));
-  }, [activeParagraph, isScrolling, paragraphPositions, scrollTimeout]);
+
+    if (!activeRef.current) {
+      return;
+    }
+
+    const newParagraph = getActiveParagraph();
+    if (newParagraph === activeParagraph) {
+      return;
+    }
+
+    setActiveParagraph(newParagraph);
+  }, [activeParagraph, getActiveParagraph, isScrolling, paragraphPositions, scrollTimeout]);
 
   /*
    * Setup
@@ -82,17 +93,11 @@ const useAppDemoControl = (numParagraphs: number) => {
    * to the closest paragraph to the middle of the viewport.
    */
   useEffect(() => {
-    if (!activeRef.current || isScrolling) {
+    if (!activeRef.current || activeParagraph > -1) {
       return;
     }
 
     const newParagraph = getActiveParagraph();
-    /* console.log(getViewportMidY());
-    console.log("newParagraph", newParagraph); */
-    if (newParagraph === activeParagraph) {
-      return;
-    }
-
     setActiveParagraph(newParagraph);
   }, [activeParagraph, getActiveParagraph, isScrolling, paragraphPositions]);
 

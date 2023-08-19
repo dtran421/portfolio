@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph,
 };
 
-export default async function Page() {
+const ProjectsPage = () => {
   const {
     coding,
     finance,
@@ -76,4 +76,6 @@ export default async function Page() {
       <div className={preloadClass} />
     </>
   );
-}
+};
+
+export default ProjectsPage;

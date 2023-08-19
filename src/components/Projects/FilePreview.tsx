@@ -1,5 +1,7 @@
+"use client";
+
 import { useMemo } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { IconContext } from "react-icons";
 import { FiDownload, FiMaximize2 } from "react-icons/fi";
 
@@ -24,7 +26,7 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, addBg = f
   const action = filePath.substring(filePath.indexOf(".") + 1) === "pdf" ? "view" : "download";
 
   return (
-    <div className={`w-full h-full flex justify-center ${addBg ? "bg-white rounded-xl" : ""}`}>
+    <div className={`w-full flex justify-center ${addBg ? "bg-white rounded-xl" : ""}`}>
       <a
         href={`/files${filePath}`}
         target="_blank"
@@ -38,7 +40,14 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, addBg = f
           {action === "view" ? <FiMaximize2 /> : <FiDownload />}
         </IconContext.Provider>
         <div className="absolute z-10 w-full h-full group-hover:bg-gray-800/60 transition duration-150 ease-in-out" />
-        <Image alt={label} src={`/img${previewImgPath}`} width={width} height={height} className="rounded-xl" />
+        <Image
+          alt={label}
+          src={`/img${previewImgPath}`}
+          width={width}
+          height={height}
+          className="rounded-xl"
+          priority
+        />
       </a>
     </div>
   );

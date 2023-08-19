@@ -22,27 +22,27 @@ const CollegeTalkSplashScreen = ({ visible }: { visible: boolean }) => (
       visible ? "opacity-100" : "opacity-0"
     } left-0 top-0 rounded-3xl p-2 transition duration-200 ease-linear`}
   >
-    <div className="relative rounded-3xl overflow-hidden">
+    <figure className="relative rounded-3xl overflow-hidden">
       <Image
         alt="splash screen"
         src={collegetalkSplashScreen}
         className="left-0 top-0 rounded-3xl"
         placeholder="blur"
       />
-    </div>
+    </figure>
   </div>
 );
 
 const DefaultPlaceholder = ({ visible }: { visible: boolean }) => (
-  <div
+  <figure
     className={`w-full h-full absolute ${
       visible ? "opacity-100" : "opacity-0"
     } top-0 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl transition duration-200 ease-linear`}
   >
     <div className="w-full h-full relative">
-      <FaApple size={64} className="absolute left-1/2 top-1/4 -translate-x-1/2" />
+      <FaApple size={64} className="absolute left-1/2 top-1/4 -translate-x-1/2 dark-transition" />
     </div>
-  </div>
+  </figure>
 );
 
 const getParagraphs = (segment: string) => {
@@ -70,9 +70,9 @@ type AppDemoLayoutProps = {
 };
 
 const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
-  const segment = useSelectedLayoutSegment();
+  const segment = useSelectedLayoutSegment() as string;
 
-  const paragraphs = getParagraphs(segment as string);
+  const paragraphs = getParagraphs(segment);
 
   const { activeRef, activeParagraph, setParagraphPosition, isScrolling, scrollToParagraph } = useAppDemoControl(
     paragraphs.length
@@ -103,7 +103,7 @@ const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
         </div>
         <PhoneDemo
           page={segment}
-          ImagePlaceholder={SplashScreen(segment as string)}
+          ImagePlaceholder={SplashScreen(segment)}
           activeParagraph={activeParagraph}
           active={!isScrolling && activeParagraph !== -1}
         />

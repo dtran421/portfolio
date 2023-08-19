@@ -1,9 +1,32 @@
+import { useMemo } from "react";
+import { lowerCase, startCase } from "lodash";
+import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 
 import FetchError from "@/components/Global/FetchError";
+import useGetStockCompany from "@/hooks/useGetStockCompany";
+import useGetStockQuote from "@/hooks/useGetStockQuote";
 import { isNullish } from "@/utils/CommonUtil";
+import { Company, Quote } from "@/utils/types";
 
 import "react-loading-skeleton/dist/skeleton.css";
+
+const formatMarketCap = (marketCap: number): string => {
+  // * nine zeroes for billions (B)
+  if (marketCap >= 1.0e9) {
+    return `${(marketCap / 1.0e9).toFixed(3)} B`;
+  }
+  // * six zeroes for millions (MM)
+  if (marketCap >= 1.0e6) {
+    return `${(marketCap / 1.0e6).toFixed(3)} MM`;
+  }
+  // * three zeroes for thousands (M)
+  if (marketCap >= 1.0e3) {
+    return `${(marketCap / 1.0e3).toFixed(3)} M`;
+  }
+
+  return marketCap.toString();
+};
 
 interface ReturnTextProps {
   change: number;
@@ -43,28 +66,67 @@ const Cell = ({ label, value, lastRow, loading }: CellProps) => (
   </li>
 );
 
-interface StockData {
-  symbol: string;
-  name: string;
-  exchange: string;
-  latestBusinessDay: string;
-  price: number;
-  change: number;
-  changePct: number;
-
-  column1: Record<string, string>;
-  column2: Record<string, string>;
-}
-
 interface StockCardProps {
-  data: StockData;
-  errors?: Error[];
-  loading: boolean;
+  symbol: string;
   showReturn?: boolean;
   purchasePrice?: number;
 }
 
-const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePrice = 0 }: StockCardProps) => {
+const StockCard = ({ symbol, showReturn = true, purchasePrice = 0 }: StockCardProps) => {
+  const { data: quoteData, isFetching: isFetchingQuote, error: quoteError } = useGetStockQuote(symbol);
+  const { data: companyData, isFetching: isFetchingCompany, error: companyError } = useGetStockCompany(symbol);
+
+  const isLoading = isFetchingQuote || isFetchingCompany;
+  const errors = [quoteError, companyError].filter((err) => !isNullish(err)) as Error[];
+
+  const stockCardData = useMemo(() => {
+    if (isLoading || errors.length || isNullish(quoteData) || isNullish(companyData)) {
+      return {
+        symbol,
+        name: "",
+        exchange: "",
+        latestBusinessDay: "",
+        price: 0,
+        change: 0,
+        changePct: 0,
+        column1: {
+          "Market Cap": "",
+          "52 Week Range": "",
+          "Dividend Yield": "",
+        },
+        column2: {
+          Sector: "",
+          Industry: "",
+          "EPS (TTM)": "",
+        },
+      };
+    }
+
+    const { price, change, changePct, latestBusinessDay } = quoteData as Quote;
+    const { name, exchange, sector, industry, marketCap, dividendYield, eps, high52Weeks, low52Weeks } =
+      companyData as Company;
+
+    return {
+      symbol,
+      name,
+      exchange,
+      latestBusinessDay: moment(latestBusinessDay).format("MMM Do, YYYY"),
+      price,
+      change,
+      changePct,
+      column1: {
+        "Market Cap": formatMarketCap(marketCap),
+        "52 Week Range": `${low52Weeks} - ${high52Weeks}`,
+        "Dividend Yield": `${dividendYield.toFixed(2)}%`,
+      },
+      column2: {
+        Sector: startCase(lowerCase(sector)),
+        Industry: startCase(lowerCase(industry)),
+        "EPS (TTM)": eps,
+      },
+    };
+  }, [isLoading, errors.length, quoteData, companyData, symbol]);
+
   if (errors.length) {
     errors.forEach(({ message, stack, cause }) =>
       console.error(
@@ -87,7 +149,7 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
     return <FetchError />;
   }
 
-  const { symbol, name, exchange, latestBusinessDay, price, change, changePct, column1, column2 } = data;
+  const { name, exchange, latestBusinessDay, price, change, changePct, column1, column2 } = stockCardData;
 
   const numRows = Object.keys(column1).length;
   const isLastRow = (idx: number) => (idx + 1) % numRows === 0;
@@ -97,7 +159,7 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
       <div className="space-y-4 md:space-y-2">
         <div className="flex flex-col md:flex-row justify-between md:items-center font-medium space-y-1 md:space-y-0">
           <h2 className="text-lg md:text-xl">
-            {loading ? (
+            {isLoading ? (
               <Skeleton width={200} />
             ) : (
               <>
@@ -110,20 +172,20 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
           </h2>
           <div className="flex text-sm md:text-base md:text-right text-gray-700 dark:text-gray-300 space-x-2">
             <p>Last Market Close:</p>
-            {loading ? <Skeleton width={180} /> : <p>{latestBusinessDay}</p>}
+            {isLoading ? <Skeleton width={180} /> : <p>{latestBusinessDay}</p>}
           </div>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end space-y-2">
           <div className="flex flex-col md:flex-row flex-wrap md:justify-between md:items-end md:space-x-4">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {loading ? <Skeleton width={100} /> : `$${price.toFixed(2)}`}
+              {isLoading ? <Skeleton width={100} /> : `$${price.toFixed(2)}`}
             </h1>
-            {loading ? <Skeleton width={150} /> : <ReturnText change={change} changePct={changePct} />}
+            {isLoading ? <Skeleton width={150} /> : <ReturnText change={change} changePct={changePct} />}
           </div>
           {showReturn && (
             <div className="flex text-xl md:text-2xl space-x-2">
               <p className="font-medium">ROI: </p>
-              {loading ? (
+              {isLoading ? (
                 <Skeleton width={200} />
               ) : (
                 <ReturnText
@@ -138,7 +200,7 @@ const StockCard = ({ data, errors = [], loading, showReturn = true, purchasePric
       <div className="grid grid-rows-6 md:grid-rows-3 grid-cols-1 md:grid-cols-2 grid-flow-col md:gap-x-8">
         {[column1, column2].map((col) =>
           Object.entries(col).map(([label, value], idx) => (
-            <Cell key={label} label={label} value={value} lastRow={isLastRow(idx)} loading={loading} />
+            <Cell key={label} label={label} value={value} lastRow={isLastRow(idx)} loading={isLoading} />
           ))
         )}
       </div>
