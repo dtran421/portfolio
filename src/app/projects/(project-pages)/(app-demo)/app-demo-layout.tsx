@@ -3,13 +3,12 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { FaApple } from "react-icons/fa";
 
-import BackgroundMotivation from "@/components/Projects/AppProject/BackgroundMotivation";
-import MenuBar from "@/components/Projects/AppProject/MenuBar";
-import MobileImage from "@/components/Projects/AppProject/MobileImage";
-import Paragraph from "@/components/Projects/AppProject/Paragraph";
-import PhoneDemo from "@/components/Projects/AppProject/PhoneDemo";
+import BackgroundMotivation from "@/components/Projects/AppDemo/BackgroundMotivation";
+import MenuBar from "@/components/Projects/AppDemo/MenuBar";
+import MobileImage from "@/components/Projects/AppDemo/MobileImage";
+import Paragraph from "@/components/Projects/AppDemo/Paragraph";
+import PhoneDemo from "@/components/Projects/AppDemo/PhoneDemo";
 import useAppDemoControl from "@/hooks/useAppDemoControl";
 import collegetalkSplashScreen from "@/public/img/projects/collegetalk/splash_screen.png";
 
@@ -33,18 +32,6 @@ const CollegeTalkSplashScreen = ({ visible }: { visible: boolean }) => (
   </div>
 );
 
-const DefaultPlaceholder = ({ visible }: { visible: boolean }) => (
-  <figure
-    className={`w-full h-full absolute ${
-      visible ? "opacity-100" : "opacity-0"
-    } top-0 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl transition duration-200 ease-linear`}
-  >
-    <div className="w-full h-full relative">
-      <FaApple size={64} className="absolute left-1/2 top-1/4 -translate-x-1/2 dark-transition" />
-    </div>
-  </figure>
-);
-
 const getParagraphs = (segment: string) => {
   switch (segment) {
     case "collegetalk":
@@ -61,7 +48,7 @@ const SplashScreen = (segment: string) => {
     case "collegetalk":
       return CollegeTalkSplashScreen;
     default:
-      return DefaultPlaceholder;
+      return undefined;
   }
 };
 
@@ -103,9 +90,9 @@ const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
         </div>
         <PhoneDemo
           page={segment}
-          ImagePlaceholder={SplashScreen(segment)}
           activeParagraph={activeParagraph}
           active={!isScrolling && activeParagraph !== -1}
+          ImagePlaceholder={SplashScreen(segment)}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import BackgroundMotivation from "@/components/Projects/AppProject/BackgroundMotivation";
+import BackgroundMotivation from "@/components/Projects/AppDemo/BackgroundMotivation";
 import FilePreview from "@/components/Projects/FilePreview";
 
 export const metadata: Metadata = {

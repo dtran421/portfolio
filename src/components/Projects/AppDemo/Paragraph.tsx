@@ -30,7 +30,7 @@ const Paragraph = (
   return (
     <div
       ref={paragraphRef}
-      className="space-y-6 first:pt-0 pt-20 lg:pt-32 xl:pt-40 pb-20 lg:pb-40 last:pb-10 lg:last:pb-[400px]"
+      className="dark:text-white dark-transition space-y-6 first:pt-0 pt-20 lg:pt-32 xl:pt-40 pb-20 lg:pb-40 last:pb-10 lg:last:pb-[400px]"
     >
       <h2 className="text-2xl xl:text-3xl font-semibold">{heading}</h2>
       <p className="text-lg xl:text-xl leading-relaxed">{body}</p>

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import BackgroundMotivation from "@/components/Projects/AppProject/BackgroundMotivation";
+import BackgroundMotivation from "@/components/Projects/AppDemo/BackgroundMotivation";
 import AndroidSection from "@/components/Projects/Maze/AndroidSection";
 import JavaSection from "@/components/Projects/Maze/JavaSection";
 

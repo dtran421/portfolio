@@ -11,7 +11,7 @@ const NavButton = ({ heading, scrollToParagraph, idx, active }: NavButtonProps) 
   <button
     type="button"
     onClick={() => scrollToParagraph(idx)}
-    className="relative flex justify-center text-xl rounded-full hover:bg-zinc-300/40 dark:hover:bg-zinc-700/40 transition duration-100 ease-linear cursor-pointer px-6 py-1"
+    className="relative flex justify-center text-xl dark:text-white dark-transition rounded-full hover:bg-zinc-300/40 dark:hover:bg-zinc-700/40 transition duration-100 ease-linear cursor-pointer px-6 py-1"
   >
     {heading}
     {active ? <motion.div className="active" layoutId="active" transition={{ duration: 0.2, ease: "easeIn" }} /> : null}

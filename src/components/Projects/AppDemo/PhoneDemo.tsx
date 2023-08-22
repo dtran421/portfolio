@@ -1,13 +1,26 @@
 import Image from "next/image";
+import { FaApple } from "react-icons/fa";
+
+const DefaultPlaceholder = ({ visible }: { visible: boolean }) => (
+  <figure
+    className={`w-full h-full absolute ${
+      visible ? "opacity-100" : "opacity-0"
+    } top-0 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl transition duration-200 ease-linear`}
+  >
+    <div className="w-full h-full relative">
+      <FaApple size={64} className="absolute left-1/2 top-1/4 -translate-x-1/2 dark-transition" />
+    </div>
+  </figure>
+);
 
 type PhoneDemoProps = {
   page: string | null;
-  ImagePlaceholder: ({ visible }: { visible: boolean }) => JSX.Element;
   activeParagraph: number;
   active: boolean;
+  ImagePlaceholder?: ({ visible }: { visible: boolean }) => JSX.Element;
 };
 
-const PhoneDemo = ({ page, ImagePlaceholder, activeParagraph, active }: PhoneDemoProps) => (
+const PhoneDemo = ({ page, activeParagraph, active, ImagePlaceholder = DefaultPlaceholder }: PhoneDemoProps) => (
   <div className="w-1/2 relative hidden lg:block">
     <div className="sticky top-1/4 flex justify-center">
       <div className="w-3/5 relative">

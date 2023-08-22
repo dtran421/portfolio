@@ -155,7 +155,7 @@ const StockCard = ({ symbol, showReturn = true, purchasePrice = 0 }: StockCardPr
   const isLastRow = (idx: number) => (idx + 1) % numRows === 0;
 
   return (
-    <div className="w-full lg:w-4/5 xl:w-2/3 bg-slate-300/50 dark:bg-slate-700/50 text-black dark:text-white border-2 border-slate-600/60 dark-transition backdrop-blur-lg rounded-xl space-y-4 p-4 md:pb-1">
+    <div className="w-full lg:w-4/5 xl:w-2/3 bg-slate-300/50 dark:bg-slate-700/50 dark:text-white border-2 border-slate-600/60 dark-transition backdrop-blur-lg rounded-xl space-y-4 p-4 md:pb-1">
       <div className="space-y-4 md:space-y-2">
         <div className="flex flex-col md:flex-row justify-between md:items-center font-medium space-y-1 md:space-y-0">
           <h2 className="text-lg md:text-xl">
