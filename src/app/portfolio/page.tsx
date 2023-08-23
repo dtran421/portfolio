@@ -53,7 +53,7 @@ export const getPortfolioData = cache(async () => {
   };
 });
 
-export default async function Page() {
+const PortfolioPage = async () => {
   const { timelineEvents, languageGroups } = await getPortfolioData();
 
   const {
@@ -171,4 +171,6 @@ export default async function Page() {
       </section>
     </>
   );
-}
+};
+
+export default PortfolioPage;

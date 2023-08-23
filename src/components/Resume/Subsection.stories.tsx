@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { generateSubsectionStub } from "@/utils/Test";
+import { generateSubsectionStub } from "@/utils/TestUtil";
 
 import Subsection from "./Subsection";
 

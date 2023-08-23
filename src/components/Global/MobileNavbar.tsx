@@ -2,8 +2,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
+import { useStickyNavbar } from "@/hooks/useStickyNavbar";
+
 import DarkModeToggle from "./DarkModeToggle";
-import { ResponsiveNavbarProps } from "./DesktopNavbar";
 import NavLink, { TABS } from "./NavLink";
 
 const navLinkVariants = {
@@ -44,7 +45,9 @@ const navLinkListVariants = {
   },
 };
 
-const MobileNavbar = ({ sticky }: ResponsiveNavbarProps) => {
+const MobileNavbar = () => {
+  const { sticky } = useStickyNavbar();
+
   const [isExpanded, toggleExpanded] = useState(false);
 
   return (

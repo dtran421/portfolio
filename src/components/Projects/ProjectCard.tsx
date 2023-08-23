@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +17,7 @@ const ProjectCard = ({ title, link, accentColor, darkText, thumbnail, width, hei
 
   return (
     <Link href={`/projects/${link}`} passHref>
-      <section
+      <figure
         className="w-full h-56 md:h-64 lg:h-72 xl:h-96 relative"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -26,7 +28,7 @@ const ProjectCard = ({ title, link, accentColor, darkText, thumbnail, width, hei
           </div>
         </div>
         <ProjectCardLabel title={title} isHovered={isHovered} accentColor={accentColor} darkText={darkText} />
-      </section>
+      </figure>
     </Link>
   );
 };

@@ -69,7 +69,7 @@ export const getResumeData = cache(
   }
 );
 
-export default async function Page() {
+const ResumePage = async () => {
   const { resumeTabSections, resumeBubblesSections } = await getResumeData();
   return (
     <main>
@@ -134,4 +134,6 @@ export default async function Page() {
       </div>
     </main>
   );
-}
+};
+
+export default ResumePage;

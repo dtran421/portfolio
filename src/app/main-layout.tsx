@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext } from "react";
 
 import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -20,26 +20,13 @@ type MainLayoutProps = {
 const MainLayout = ({ debug, children }: MainLayoutProps) => {
   const { darkMode } = useContext(ThemeContext);
 
-  const [stickyNavbar, toggleStickyNavbar] = useState(false);
-  const stickyScrollListener = useCallback(() => {
-    toggleStickyNavbar(window.scrollY > 0);
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("scroll", stickyScrollListener);
-
-    return () => {
-      document.removeEventListener("scroll", stickyScrollListener);
-    };
-  }, [stickyScrollListener]);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode enableLiveUpdates debugMode={debug}>
         <div className={`${darkMode ? "dark" : ""}`}>
           <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
             {[DesktopNavbar, MobileNavbar].map((Navbar) => (
-              <Navbar key={Navbar.name} sticky={stickyNavbar} />
+              <Navbar key={Navbar.name} />
             ))}
             {children}
           </div>

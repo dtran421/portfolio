@@ -14,12 +14,12 @@ const getStockCompany = async ({ queryKey: [symbol] }: QueryFunctionContext<[str
 };
 
 const useGetStockCompany = (symbol: string) => {
-  const { data, isLoading, error } = useQuery<Company, Error, Company, [string, string]>({
+  const { data, isFetching, error } = useQuery<Company, Error, Company, [string, string]>({
     queryKey: [symbol, "company"],
     queryFn: getStockCompany,
   });
 
-  return { data, isLoading, error };
+  return { data, isFetching, error };
 };
 
 export default useGetStockCompany;

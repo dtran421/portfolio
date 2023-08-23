@@ -33,7 +33,7 @@ const NavLink = ({ link, mobile = false }: NavlinkProps) => {
           type="button"
           className={`w-full flex justify-center text-xl border-b-4 ${
             active
-              ? "text-black dark:text-white border-black dark:border-white border-opacity-100"
+              ? "dark:text-white border-black dark:border-white border-opacity-100"
               : "border-b-transparent text-primary hover:border-primary"
           } dark-transition px-5 py-3`}
         >

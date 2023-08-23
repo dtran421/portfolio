@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { generateRichTextStub, generateSubsectionStub } from "@/utils/Test";
+import { generateRichTextStub, generateSubsectionStub } from "@/utils/TestUtil";
 
 import Section from "./Section";
 

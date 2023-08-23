@@ -155,6 +155,7 @@ export type Company = {
 };
 
 export const ALPHAVANTAGE_FUNCTIONS = ["GLOBAL_QUOTE", "OVERVIEW"] as const;
+export type AlphavantageFn = (typeof ALPHAVANTAGE_FUNCTIONS)[number];
 
 export const ALPHAVANTAGE_FN_TO_ROUTE = {
   GLOBAL_QUOTE: "quote",
