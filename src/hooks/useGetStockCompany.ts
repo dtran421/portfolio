@@ -17,6 +17,8 @@ const useGetStockCompany = (symbol: string) => {
   const { data, isFetching, error } = useQuery<Company, Error, Company, [string, string]>({
     queryKey: [symbol, "company"],
     queryFn: getStockCompany,
+
+    staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
   });
 
   return { data, isFetching, error };
