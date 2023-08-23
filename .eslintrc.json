@@ -24,7 +24,12 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint", "@tanstack/query", "simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": "error",
-    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "react/function-component-definition": [
       "error",
       {
