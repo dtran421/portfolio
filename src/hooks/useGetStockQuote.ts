@@ -17,6 +17,8 @@ const useGetStockQuote = (symbol: string) => {
   const { data, isFetching, error } = useQuery<Quote, Error, Quote, [string, string]>({
     queryKey: [symbol, "quote"],
     queryFn: getStockQuote,
+
+    staleTime: 1000 * 60 * 10, // 10 minutes
   });
 
   return { data, isFetching, error };
