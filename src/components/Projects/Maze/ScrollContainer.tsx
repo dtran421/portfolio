@@ -15,15 +15,15 @@ export const ContainerBody = ({ heading, children }: ContainerBodyProps) => (
 );
 
 type CodeBoxProps = {
-  args: string[];
+  cliArgs: string[];
   children?: ReactNode;
 };
 
-export const CodeBox = ({ args, children }: CodeBoxProps) => (
+export const CodeBox = ({ cliArgs, children }: CodeBoxProps) => (
   <p className="flex flex-wrap items-center text-lg text-white bg-slate-800 dark:bg-gray-800/75 dark-transition rounded-lg space-x-2 p-3">
     <FiPercent size={20} className="text-primary font-medium" />
     <span>java</span>
-    {args.map((arg) => (
+    {cliArgs.map((arg) => (
       <span key={arg} className="inline-block">
         {arg}
       </span>
@@ -35,26 +35,34 @@ export const CodeBox = ({ args, children }: CodeBoxProps) => (
 type MazeDemoProps = {
   type: "Java" | "Android";
   img: string;
-  args?: string[];
+  cliArgs?: string[];
 };
 
-export const MazeDemo = ({ type, img, args = [] }: MazeDemoProps) =>
+export const MazeDemo = ({ type, img, cliArgs = [] }: MazeDemoProps) =>
   type === "Java" ? (
-    <div className="flex flex-col items-center space-y-2 p-3">
-      <div className="w-min rounded-xl overflow-hidden">
-        <Image alt={`${img} video`} src={`/img/projects/maze/${img}.gif`} width={299} height={297} layout="fixed" />
+    <div className="h-full flex flex-col items-center space-y-2 p-3">
+      <div className="h-full overflow-hidden rounded-xl">
+        <Image
+          alt={`${img} video`}
+          src={`/img/projects/maze/${img}.gif`}
+          width={299}
+          height={297}
+          layout="fixed"
+          priority
+        />
       </div>
-      <CodeBox {...{ args }} />
+      <CodeBox cliArgs={cliArgs} />
     </div>
   ) : (
     <div className="flex justify-center">
-      <div className="w-min overflow-hidden rounded-xl p-3">
+      <div className="h-full overflow-hidden rounded-xl p-3">
         <Image
           alt={`${img} android video`}
           src={`/img/projects/maze/${img}.gif`}
           width={208}
           height={430}
           layout="fixed"
+          priority
         />
       </div>
     </div>
@@ -66,7 +74,7 @@ type ScrollContainerProps = {
 
 const ScrollContainer = ({ children }: ScrollContainerProps) => (
   <div className="w-full snap-center flex-special">
-    <div className="w-full flex flex-col items-center space-y-2 lg:px-16 pb-4">{children}</div>
+    <div className="w-full h-full flex flex-col items-center space-y-2 lg:px-16 pb-4">{children}</div>
   </div>
 );
 

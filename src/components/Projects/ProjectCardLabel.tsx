@@ -10,13 +10,13 @@ const cardVariants = {
 };
 
 type ProjectCardLabelProps = {
+  title: string;
   isHovered: boolean;
   accentColor: string;
   darkText: boolean;
-  name: string;
 };
 
-const ProjectCardLabel = ({ isHovered, accentColor, darkText, name }: ProjectCardLabelProps) => (
+const ProjectCardLabel = ({ title, isHovered, accentColor, darkText }: ProjectCardLabelProps) => (
   <>
     <motion.div
       animate={isHovered ? "hover" : "inactive"}
@@ -26,11 +26,11 @@ const ProjectCardLabel = ({ isHovered, accentColor, darkText, name }: ProjectCar
       className="w-full absolute bottom-0 z-0 hidden lg:block rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
     >
       <p
-        className={`text-xl xl:text-2xl ${
+        className={`text-xl xl:text-2xl text-center ${
           darkText ? "text-black" : "text-white"
         } font-medium transition duration-200 ease-linear`}
       >
-        {name}
+        {title}
       </p>
     </motion.div>
     <div
@@ -42,7 +42,7 @@ const ProjectCardLabel = ({ isHovered, accentColor, darkText, name }: ProjectCar
           darkText ? "text-black" : "text-white"
         } font-medium transition duration-200 ease-linear`}
       >
-        {name}
+        {title}
       </p>
     </div>
   </>

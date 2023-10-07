@@ -22,5 +22,9 @@
   "eslint.validate": ["typescript"],
   "editor.codeActionsOnSave": {
     "source.fixAll": true
+  },
+  "vitest.commandLine": "yarn test --",
+  "files.exclude": {
+    "**/.git": false
   }
 }

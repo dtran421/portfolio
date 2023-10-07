@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import Image from "next/image";
 import { IconContext } from "react-icons";
@@ -9,10 +11,10 @@ type FilePreviewProps = {
   previewImgPath: string;
   width: number;
   height: number;
-  special?: boolean;
+  addBg?: boolean;
 };
 
-const FilePreview = ({ label, filePath, previewImgPath, width, height, special = false }: FilePreviewProps) => {
+const FilePreview = ({ label, filePath, previewImgPath, width, height, addBg = false }: FilePreviewProps) => {
   const iconContext = useMemo(
     () => ({
       className:
@@ -24,12 +26,12 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, special =
   const action = filePath.substring(filePath.indexOf(".") + 1) === "pdf" ? "view" : "download";
 
   return (
-    <div className={`w-full flex justify-center ${special ? "bg-white rounded-xl" : ""}`}>
+    <div className={`w-full flex justify-center ${addBg ? "bg-white rounded-xl" : ""}`}>
       <a
         href={`/files${filePath}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`relative overflow-hidden w-full ${special ? "h-full" : ""} flex justify-center items-center group`}
+        className={`relative overflow-hidden w-full ${addBg ? "h-full" : ""} flex justify-center items-center group`}
       >
         <div className="absolute left-0 top-0 z-20 bg-primary/80 group-hover:bg-primary backdrop-blur-lg rounded-full px-2 md:px-3 md:py-1 m-1 md:m-3">
           <p className="text-sm md:text-lg text-white font-medium">{label}</p>
@@ -38,7 +40,14 @@ const FilePreview = ({ label, filePath, previewImgPath, width, height, special =
           {action === "view" ? <FiMaximize2 /> : <FiDownload />}
         </IconContext.Provider>
         <div className="absolute z-10 w-full h-full group-hover:bg-gray-800/60 transition duration-150 ease-in-out" />
-        <Image alt={label} src={`/img${previewImgPath}`} {...{ width, height }} className="rounded-xl" />
+        <Image
+          alt={label}
+          src={`/img${previewImgPath}`}
+          width={width}
+          height={height}
+          className="rounded-xl"
+          priority
+        />
       </a>
     </div>
   );

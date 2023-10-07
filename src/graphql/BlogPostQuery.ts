@@ -1,4 +1,4 @@
-import { ContentfulQuery } from "@/lib/ContentfulUtil";
+import { ContentfulQuery } from "@/utils/Contentful";
 
 import { ContentfulResource } from "./Resources";
 
@@ -6,6 +6,10 @@ const BlogPostQuery = /* GraphQL */ `
   query ($preview: Boolean, $postId: String) {
     blogPostCollection(preview: $preview, limit: 1, where: { postId: $postId }) {
       items {
+        __typename
+        sys {
+          id
+        }
         postId
         title
         body {

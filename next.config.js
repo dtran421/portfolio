@@ -1,9 +1,22 @@
-module.exports = {
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["images.ctfassets.net"],
   },
-  env: {
-    BASE_URL: process.env.BASE_URL,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/portfolio",
+        permanent: true,
+      },
+    ];
   },
 };
+
+module.exports = nextConfig;
