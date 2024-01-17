@@ -3,7 +3,7 @@
 
 "use client";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 import moment from "moment";
 import { FiTag } from "react-icons/fi";
 
@@ -42,9 +42,10 @@ const ProfileHeader = ({ publishDate, inspectorProps }: ProfileHeaderProps) => (
         </p>
       </section>
     </div>
-    <div>
+    {/* // TODO: implement this */}
+    {/* <div>
       <p>Also Published:</p>
-    </div>
+    </div> */}
   </div>
 );
 
