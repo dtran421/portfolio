@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
+import { Option } from "utils-toolkit";
 
-import { Option } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { AlphavantageFn } from "@/utils/types";
 
@@ -132,12 +132,12 @@ export async function GET(_req: Request, { params }: { params: { fn: string; tic
   const { fn, ticker } = params;
 
   const alphavantageFn = getFunctionFromFn(fn);
-  if (alphavantageFn.isNone()) {
+  if (!alphavantageFn.some) {
     return NextResponse.json({ error: "Invalid function" }, { status: 400 });
   }
 
   const alphavantageUrl = getBaseAlphavantageUrl(ticker as string, alphavantageFn.coalesce());
-  if (alphavantageUrl.isNone()) {
+  if (!alphavantageUrl.some) {
     return NextResponse.json({ error: "Env variables not set, this is a problem with the server" }, { status: 500 });
   }
 

@@ -10,7 +10,6 @@ import ContactLabel from "@/components/Resume/ContactLabel";
 import Section from "@/components/Resume/Section";
 import ResumeSectionsQuery from "@/graphql/ResumeSectionsQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { Err, Ok } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { ResumeBubblesSection, ResumeSubsection, ResumeTabSection } from "@/utils/types";
 
@@ -39,8 +38,8 @@ export const getResumeData = cache(
   }> => {
     const response = await queryContentful<ResumeQR>(ResumeSectionsQuery);
 
-    if (response.isErr()) {
-      const err = (response as Err<Error>).unwrap();
+    if (!response.ok) {
+      const err = response.unwrap();
       logger.error(`Something went wrong with fetching resume data: ${err.message}`);
       return {
         resumeTabSections: null,
@@ -48,7 +47,7 @@ export const getResumeData = cache(
       };
     }
 
-    const { resumeTabSections, resumeBubblesSections } = (response as Ok<ResumeQR>).unwrap();
+    const { resumeTabSections, resumeBubblesSections } = response.unwrap();
 
     return {
       resumeTabSections: resumeTabSections.reduce(

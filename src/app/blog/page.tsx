@@ -5,7 +5,6 @@ import Emoji from "@/components/Global/Emoji";
 import FetchError from "@/components/Global/FetchError";
 import BlogPostsQuery from "@/graphql/BlogPostsQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { Err, Ok } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { BlogPost } from "@/utils/types";
 
@@ -18,13 +17,13 @@ export const revalidate = 3600; // revalidate the data at most every hour
 const getBlogPosts = cache(async () => {
   const response = await queryContentful<BlogQR>(BlogPostsQuery);
 
-  if (response.isErr()) {
-    const err = (response as Err<Error>).unwrap();
+  if (!response.ok) {
+    const err = response.unwrap();
     logger.error(`Something went wrong with fetching blog posts: ${err.message}`);
     return [];
   }
 
-  const { blogPosts } = (response as Ok<BlogQR>).unwrap();
+  const { blogPosts } = response.unwrap();
 
   return blogPosts;
 });

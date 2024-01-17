@@ -4,20 +4,16 @@ import { queryAlphavantage } from "@/utils/Alphavantage";
 import { Quote } from "@/utils/types";
 
 const getStockQuote = async ({ queryKey: [symbol] }: QueryFunctionContext<[string, string]>) => {
-  const result = await queryAlphavantage(symbol, "GLOBAL_QUOTE");
-
-  if (result.isErr()) {
-    throw result.unwrap();
-  }
-
-  return result.unwrap() as Quote;
+  const result = await queryAlphavantage<Quote>(symbol, "GLOBAL_QUOTE");
+  return result.unwrapErr();
 };
 
 const useGetStockQuote = (symbol: string) => {
-  const { data, isFetching, error } = useQuery<Quote, Error, Quote, [string, string]>({
+  const { data, isFetching, error } = useQuery({
     queryKey: [symbol, "quote"],
     queryFn: getStockQuote,
 
+    retry: 1,
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 

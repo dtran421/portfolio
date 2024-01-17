@@ -1,9 +1,9 @@
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
+import { Option } from "utils-toolkit";
 
 import BlogPostQuery from "@/graphql/BlogPostQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { Err, Ok, Option } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { BlogPost } from "@/utils/types";
 
@@ -14,15 +14,15 @@ export interface BlogPostQR {
 const getPostBySlug = async (slug: string) => {
   const response = await queryContentful<BlogPostQR>(BlogPostQuery, { postId: slug }, true);
 
-  if (response.isErr()) {
-    const err = (response as Err<Error>).unwrap();
+  if (!response.ok) {
+    const err = response.unwrap();
     logger.error(`Something went wrong with fetching blog post: ${err.message}`);
     return Option<BlogPost>(null);
   }
 
   const {
     blogPosts: [blogPost],
-  } = (response as Ok<BlogPostQR>).unwrap();
+  } = response.unwrap();
 
   return Option<BlogPost>(blogPost);
 };
@@ -33,7 +33,7 @@ export async function GET(req: Request) {
   const secret = Option<string>(searchParams.get("secret"));
   const slug = Option<string>(searchParams.get("slug"));
 
-  if (secret.isNone() || slug.isNone()) {
+  if (!secret.some || !slug.some) {
     return new Response("Missing token", { status: 401 });
   }
 
@@ -48,7 +48,7 @@ export async function GET(req: Request) {
   const post = await getPostBySlug(slug.coalesce());
 
   // If the slug doesn't exist prevent draft mode from being enabled
-  if (post.isNone()) {
+  if (!post.some) {
     return new Response("Invalid slug", { status: 401 });
   }
 
