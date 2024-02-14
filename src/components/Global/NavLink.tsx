@@ -14,7 +14,7 @@ const NavLink = ({ link, mobile = false }: NavlinkProps) => {
   const active = startCase(segment) === link;
 
   return mobile ? (
-    <Link href={`/${link.toLowerCase()}`}>
+    <Link href={`/${link.toLowerCase()}`} passHref>
       <button
         type="button"
         className={`w-full flex justify-center text-xl border-2 rounded-lg ${
@@ -28,7 +28,7 @@ const NavLink = ({ link, mobile = false }: NavlinkProps) => {
     </Link>
   ) : (
     <div className="w-full flex justify-center">
-      <Link href={`/${link.toLowerCase()}`}>
+      <Link href={`/${link.toLowerCase()}`} passHref>
         <button
           type="button"
           className={`w-full flex justify-center text-xl border-b-4 ${

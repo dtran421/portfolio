@@ -99,7 +99,7 @@ const ResumePage = async () => {
             <h2 className="md:w-5/6 lg:w-2/3 xl:w-4/5 font-medium text-sm lg:text-lg">
               Full Stack Software Engineer @ Arch
             </h2>
-            <Link href="/contact">
+            <Link href="/contact" passHref>
               <button
                 type="button"
                 className="w-full md:w-min bg-primary text-lg lg:text-xl text-white dark:text-zinc-200 dark-transition font-semibold rounded-full px-8 py-1 lg:py-2"
