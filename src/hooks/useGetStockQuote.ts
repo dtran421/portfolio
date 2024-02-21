@@ -17,7 +17,7 @@ const useGetStockQuote = (symbol: string) => {
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 
-  return { data, isFetching, error };
+  return { data: data?.coalesce(), isFetching, error };
 };
 
 export default useGetStockQuote;

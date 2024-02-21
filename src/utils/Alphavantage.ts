@@ -32,14 +32,14 @@ export const queryAlphavantage = async <T = unknown>(ticker: string, fn: Alphava
   const alphavantageUrl = getAPIAlphavantageUrl(ticker, fn);
 
   if (!alphavantageUrl.some) {
-    return Result<T, Error>(new Error("Invalid Alphavantage function provided"));
+    return Result<Option<T>, Error>(new Error("Invalid Alphavantage function provided"));
   }
 
   try {
     const { data, status, statusText } = await axios.get<ApiResponse<T>>(alphavantageUrl.coalesce());
 
     if (status !== 200) {
-      return Result<T, Error>(new Error(`[${status}] ${statusText}`));
+      return Result<Option<T>, Error>(new Error(`[${status}] ${statusText}`));
     }
 
     return consumeApiResponse<T>(data);
@@ -48,6 +48,6 @@ export const queryAlphavantage = async <T = unknown>(ticker: string, fn: Alphava
       console.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return Result<T, Error>(error as Error);
+    return Result<Option<T>, Error>(error as Error);
   }
 };

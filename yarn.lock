@@ -12521,10 +12521,10 @@ utils-merge@1.0.1:
   resolved "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
-utils-toolkit@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/utils-toolkit/-/utils-toolkit-0.2.2.tgz#6989c8499946e41e44e92b6f5aaa67ab3176a2d4"
-  integrity sha512-0YjbpWFVLxJjeay8HDqGnfcZ/rqB7AG6+ytmJQAHmfYVOfxzsJHg0jA+hmnAXp+gJO8DW643qAOw9CsitQ9tzg==
+utils-toolkit@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/utils-toolkit/-/utils-toolkit-0.2.3.tgz#84820d36ff57d93f4843d86040fc94853511a0c3"
+  integrity sha512-E2808YEQUzmrPFL4Y2x+foptTQDV1/HPcQiLc4vPSxBl5+2qpHtnnfT9CgFSawNEfdg6nhrS8zHaycwBMdlCWQ==
   dependencies:
     clsx "^2.0.0"
     tailwind-merge "^1.14.0"
