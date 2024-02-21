@@ -36,6 +36,7 @@ const GithubLink = ({ github, darkText, compact = false }: GithubLinkProps) => {
             isFocused && "ring-2 ring-zinc-100/75"
           } px-3 py-1 cursor-default`}
           onClick={() => githubLink.current?.select()}
+          aria-label="Github link"
         >
           <input
             ref={githubLink}
