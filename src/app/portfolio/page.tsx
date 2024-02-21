@@ -13,7 +13,6 @@ import SocialProfile from "@/components/Portfolio/SocialProfile";
 import Timeline from "@/components/Portfolio/Timeline";
 import TimelineAndLanguageQuery from "@/graphql/TimelineAndLanguageQuery";
 import { queryContentful } from "@/utils/Contentful";
-import { Err, Ok } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { LanguageGroup, TimelineEvent } from "@/utils/types";
 
@@ -36,8 +35,8 @@ export const revalidate = 3600; // revalidate the data at most every hour
 export const getPortfolioData = cache(async () => {
   const response = await queryContentful<PortfolioQR>(TimelineAndLanguageQuery);
 
-  if (response.isErr()) {
-    const err = (response as Err<Error>).unwrap();
+  if (!response.ok) {
+    const err = response.unwrap();
     logger.error(`Something went wrong with fetching index data: ${err.message}`);
     return {
       timelineEvents: null,
@@ -45,7 +44,7 @@ export const getPortfolioData = cache(async () => {
     };
   }
 
-  const { timelineEvents, languageGroups } = (response as Ok<PortfolioQR>).unwrap();
+  const { timelineEvents, languageGroups } = response.unwrap();
 
   return {
     timelineEvents,

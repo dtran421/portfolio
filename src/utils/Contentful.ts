@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
+import { Option, Result } from "utils-toolkit";
 
 import { ContentfulResource } from "@/graphql/Resources";
-import { Option, Result } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 
 import "server-only";
@@ -48,7 +48,7 @@ export const queryContentful = async <T>(
   const contentfulUrl = getBaseContentfulUrl();
   const contentfulAccessToken = getContentfulAccessToken(preview);
 
-  if (contentfulUrl.isNone() || contentfulAccessToken.isNone()) {
+  if (!contentfulUrl.some || !contentfulAccessToken.some) {
     return Result<T, Error>(new Error("Env variables not set, this is a problem with the server"));
   }
 

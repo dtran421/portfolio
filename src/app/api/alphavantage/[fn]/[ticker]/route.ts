@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
+import { Option } from "utils-toolkit";
 
-import { Option } from "@/utils/ReturnTypes";
 import { logger } from "@/utils/ServerUtil";
 import { AlphavantageFn } from "@/utils/types";
 
@@ -74,6 +74,7 @@ const processCompanyData = (data: CompanyQR) => {
   } = data;
 
   return NextResponse.json({
+    success: true,
     data: {
       name,
       exchange,
@@ -99,6 +100,7 @@ const processQuoteData = (data: QuoteQR) => {
   } = data;
 
   return NextResponse.json({
+    success: true,
     data: {
       price: parseFloat(price),
       change: parseFloat(change),
@@ -110,10 +112,10 @@ const processQuoteData = (data: QuoteQR) => {
 
 const processResponse = (fn: AlphavantageFn, data: QuoteQR | CompanyQR | undefined) => {
   if (!data) {
-    return NextResponse.json({ error: "No data returned" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "No data returned" });
   }
   if ("Information" in data) {
-    return NextResponse.json({ error: "Alpha Vantage daily request limit reached." }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Alpha Vantage daily request limit reached." });
   }
 
   switch (fn) {
@@ -124,7 +126,7 @@ const processResponse = (fn: AlphavantageFn, data: QuoteQR | CompanyQR | undefin
 
     // * This should never happen
     default:
-      return NextResponse.json({ error: "Invalid function" }, { status: 400 });
+      return NextResponse.json({ success: false, error: "Invalid function" }, { status: 400 });
   }
 };
 
@@ -132,13 +134,16 @@ export async function GET(_req: Request, { params }: { params: { fn: string; tic
   const { fn, ticker } = params;
 
   const alphavantageFn = getFunctionFromFn(fn);
-  if (alphavantageFn.isNone()) {
-    return NextResponse.json({ error: "Invalid function" }, { status: 400 });
+  if (!alphavantageFn.some) {
+    return NextResponse.json({ success: false, error: "Invalid function" }, { status: 400 });
   }
 
   const alphavantageUrl = getBaseAlphavantageUrl(ticker as string, alphavantageFn.coalesce());
-  if (alphavantageUrl.isNone()) {
-    return NextResponse.json({ error: "Env variables not set, this is a problem with the server" }, { status: 500 });
+  if (!alphavantageUrl.some) {
+    return NextResponse.json(
+      { success: false, error: "Env variables not set, this is a problem with the server" },
+      { status: 500 }
+    );
   }
 
   try {

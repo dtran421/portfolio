@@ -21,7 +21,7 @@
   "peacock.color": "#871ce8",
   "eslint.validate": ["typescript"],
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "vitest.commandLine": "yarn test --",
   "files.exclude": {

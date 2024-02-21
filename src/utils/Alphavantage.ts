@@ -1,9 +1,7 @@
 import axios from "axios";
+import { ApiResponse, consumeApiResponse, Option, Result } from "utils-toolkit";
 
-import { consumeAPIResponse } from "@/app/api/ApiUtils";
-
-import { Option, Result } from "./ReturnTypes";
-import { ALPHAVANTAGE_FN_TO_ROUTE, AlphavantageFn, APIResponse } from "./types";
+import { ALPHAVANTAGE_FN_TO_ROUTE, AlphavantageFn } from "./types";
 
 import "client-only";
 
@@ -33,23 +31,23 @@ const getAPIAlphavantageUrl = (ticker: string, fn: AlphavantageFn) => {
 export const queryAlphavantage = async <T = unknown>(ticker: string, fn: AlphavantageFn) => {
   const alphavantageUrl = getAPIAlphavantageUrl(ticker, fn);
 
-  if (alphavantageUrl.isNone()) {
-    return Result<T, Error>(new Error("Invalid Alphavantage function provided"));
+  if (!alphavantageUrl.some) {
+    return Result<Option<T>, Error>(new Error("Invalid Alphavantage function provided"));
   }
 
   try {
-    const { data, status, statusText } = await axios.get<APIResponse<T>>(alphavantageUrl.coalesce());
+    const { data, status, statusText } = await axios.get<ApiResponse<T>>(alphavantageUrl.coalesce());
 
     if (status !== 200) {
-      return Result<T, Error>(new Error(`[${status}] ${statusText}`));
+      return Result<Option<T>, Error>(new Error(`[${status}] ${statusText}`));
     }
 
-    return consumeAPIResponse<T>(data);
+    return consumeApiResponse<T>(data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Something went wrong with axios: ", error.toJSON());
     }
 
-    return Result<T, Error>(error as Error);
+    return Result<Option<T>, Error>(error as Error);
   }
 };

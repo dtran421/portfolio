@@ -11,17 +11,6 @@ export type ThemeContextObject = {
 };
 
 /**
- * api types
- */
-export type APIResponse<T> =
-  | {
-      data: T;
-    }
-  | {
-      error: string;
-    };
-
-/**
  * JSON schemas
  */
 export type Project = {
