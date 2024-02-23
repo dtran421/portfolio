@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { MdDesktopMac, MdSchool, MdWork } from "react-icons/md";
+import { cn } from "utils-toolkit";
 
 import { convertDateToAbbrevString } from "@/utils/ClientUtil";
 import { RichText, TimelineEvent } from "@/utils/types";
@@ -37,9 +38,10 @@ const Card = ({
 }: CardProps) => (
   <div
     id="event"
-    className={`overflow-hidden order-1 ${
+    className={cn(
+      "overflow-hidden order-1 rounded-lg shadow-xl w-10/12 md:w-5/12 p-4",
       side === "L" ? "bg-primary" : "bg-secondary"
-    } rounded-lg shadow-xl w-10/12 md:w-5/12 p-4`}
+    )}
   >
     <div className="flex justify-between text-white space-x-2">
       <h3 className="font-bold text-lg">{heading}</h3>
@@ -118,7 +120,7 @@ const Event = ({ side, event: { heading, type, startDate, endDate, currentlyWork
 
   return (
     <>
-      <div className={`w-full hidden md:flex ${side === "R" ? "flex-row-reverse" : ""} justify-between items-center`}>
+      <div className={cn("w-full hidden md:flex justify-between items-center", side === "R" && "flex-row-reverse")}>
         <Card
           side={side}
           isExpanded={isExpanded}
@@ -127,7 +129,7 @@ const Event = ({ side, event: { heading, type, startDate, endDate, currentlyWork
           description={description}
         />
         <EventIcon type={type} />
-        <div className={`order-1 w-5/12 flex ${side === "L" ? "justify-start" : "justify-end"}`}>
+        <div className={cn("order-1 w-5/12 flex", side === "L" ? "justify-start" : "justify-end")}>
           <AnimatePresence>
             {isExpanded && (
               <motion.p

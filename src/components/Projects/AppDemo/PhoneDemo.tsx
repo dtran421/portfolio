@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { FaApple } from "react-icons/fa";
+import { cn } from "utils-toolkit";
 
 const DefaultPlaceholder = ({ visible }: { visible: boolean }) => (
   <figure
-    className={`w-full h-full absolute ${
+    className={cn(
+      "w-full h-full absolute top-0 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl transition duration-200 ease-linear",
       visible ? "opacity-100" : "opacity-0"
-    } top-0 bg-zinc-800 dark:bg-zinc-200 dark-transition rounded-3xl transition duration-200 ease-linear`}
+    )}
   >
     <div className="w-full h-full relative">
       <FaApple size={64} className="absolute left-1/2 top-1/4 -translate-x-1/2 dark-transition" />
@@ -32,7 +34,7 @@ const PhoneDemo = ({ page, activeParagraph, active, ImagePlaceholder = DefaultPl
             <Image
               alt={`${page} video ${activeParagraph + 1 || 1}`}
               src={`/img/projects/${page}/${page}${activeParagraph + 1 || 1}.gif`}
-              className={`transition duration-200 ease-linear ${active ? "opacity-100" : "opacity-0"} rounded-3xl`}
+              className={cn("transition duration-200 ease-linear rounded-3xl", active ? "opacity-100" : "opacity-0")}
               width={1170}
               height={2532}
             />

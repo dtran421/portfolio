@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
+import { cn } from "utils-toolkit";
 
 import { useStickyNavbar } from "@/hooks/useStickyNavbar";
 
@@ -53,9 +54,10 @@ const MobileNavbar = () => {
   return (
     <motion.header
       animate={isExpanded ? "expanded" : "collapsed"}
-      className={`w-full sticky top-0 z-50 flex lg:hidden flex-col border-b border-b-neutral-300 dark:border-b-neutral-700 dark-transition ${
+      className={cn(
+        "w-full sticky top-0 z-50 flex lg:hidden flex-col border-b border-b-neutral-300 dark:border-b-neutral-700 dark-transition shadow-lg",
         sticky ? "bg-neutral-300/80 dark:bg-neutral-800/80 backdrop-blur-lg" : "bg-neutral-300 dark:bg-neutral-800"
-      } shadow-lg`}
+      )}
     >
       <div className="relative bg-inherit">
         <div className="relative z-40 grid grid-cols-3 px-6 py-2">

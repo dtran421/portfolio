@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useContext } from "react";
+import { cn } from "utils-toolkit";
 
 import { ContentfulLivePreviewProvider } from "@contentful/live-preview/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -23,7 +24,7 @@ const MainLayout = ({ debug, children }: MainLayoutProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ContentfulLivePreviewProvider locale="en-US" enableInspectorMode enableLiveUpdates debugMode={debug}>
-        <div className={`${darkMode ? "dark" : ""}`}>
+        <div className={cn(darkMode && "dark")}>
           <div className="w-full min-h-screen relative bg-zinc-100 dark:bg-zinc-900 transition duration-200 ease-in dark:text-white pb-16">
             {[DesktopNavbar, MobileNavbar].map((Navbar) => (
               <Navbar key={Navbar.name} />
