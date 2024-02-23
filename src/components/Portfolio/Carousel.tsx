@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Typewriter from "typewriter-effect";
+import { cn } from "utils-toolkit";
 
 import { useCarouselControl } from "@/hooks/useCarouselControl";
 
@@ -24,9 +25,10 @@ const Carousel = () => {
             src={`/img/carousel/${imageData.pic}`}
             width={imageData.width}
             height={imageData.height}
-            className={`rounded-xl transition duration-200 ease-linear ${
+            className={cn(
+              "rounded-xl transition duration-200 ease-linear",
               phase === "visible" ? "opacity-100" : "opacity-0"
-            }`}
+            )}
             priority
           />
         )}

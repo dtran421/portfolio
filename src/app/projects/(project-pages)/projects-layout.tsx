@@ -18,9 +18,9 @@ const ProjectLayout = ({ children }: ProjectLayoutProps) => {
   return (
     <>
       <ProjectsBanner
-        pageTitle={projectData?.title ?? "Project not found"}
-        accentColor={projectData?.accentColor ?? "#FFF"}
-        darkText={projectData?.darkText ?? true}
+        pageTitle={projectData?.title}
+        accentColor={projectData?.accentColor}
+        darkText={projectData?.darkText}
         github={projectData?.github}
       />
       <ProjectsBackButton />

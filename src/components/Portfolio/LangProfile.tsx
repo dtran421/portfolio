@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { cn } from "utils-toolkit";
 
 export type LangProfileProps = {
   name: string;
@@ -16,9 +17,10 @@ const LangProfile = ({ name, imgSrc, accentColor, darkText }: LangProfileProps) 
     </div>
     <p
       style={{ backgroundColor: accentColor }}
-      className={`w-5/6 rounded-full ${
+      className={cn(
+        "w-5/6 rounded-full font-semibold text-sm lg:text-base text-center py-1 my-2",
         darkText ? "text-zinc-900" : "text-zinc-100"
-      } font-semibold text-sm lg:text-base text-center py-1 my-2`}
+      )}
     >
       {name}
     </p>
