@@ -54,11 +54,11 @@ const SplashScreen = (segment: string) => {
   }
 };
 
-type AppDemoLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
+const AppDemoLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegment() as string;
 
   const paragraphs = getParagraphs(segment);

@@ -43,11 +43,11 @@ const getRepoData = (segment: string | null) => {
   }
 };
 
-type RepoPageProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const RepoLayout = ({ children }: RepoPageProps) => {
+const RepoLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegment();
   const { accentColor } = useProjectData(segment) || { accentColor: "#fff" };
 
