@@ -10,5 +10,17 @@ export default meta;
 type Story = StoryObj<typeof LearnMore>;
 
 export const Primary: Story = {
-  render: () => <LearnMore />,
+  render: () => (
+    <div className="h-screen flex flex-col justify-end pb-10">
+      <LearnMore />
+    </div>
+  ),
+};
+
+export const Hidden: Story = {
+  render: () => (
+    <div className="h-screen flex flex-col justify-center pb-10">
+      <LearnMore />
+    </div>
+  ),
 };

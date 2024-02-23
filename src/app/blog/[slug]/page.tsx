@@ -11,9 +11,9 @@ import { logger } from "@/utils/ServerUtil";
 import BlogPostPage from "./blog-post-page";
 import { getBlogPost } from "./query";
 
-type Props = {
+interface Props {
   params: { slug: string };
-};
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params

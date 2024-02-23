@@ -4,12 +4,12 @@ import { Document } from "@contentful/rich-text-types";
 import useRichTextRenderOptions from "@/hooks/useRichTextRenderOptions";
 import { Links } from "@/utils/types";
 
-type BodyProps = {
-  document: Document | undefined;
-  links: Links | undefined;
-};
+interface Props {
+  document?: Document;
+  links?: Links;
+}
 
-const Body = ({ document, links }: BodyProps) => {
+const Body = ({ document, links }: Props) => {
   const { renderOptions } = useRichTextRenderOptions(links);
 
   if (!document) {

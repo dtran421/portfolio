@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   openGraph,
 };
 
-type PortfolioQR = {
+interface PortfolioQR {
   timelineEvents: TimelineEvent[];
   languageGroups: LanguageGroup[];
-};
+}
 
 export const revalidate = 3600; // revalidate the data at most every hour
 

@@ -13,12 +13,12 @@ import { ThemeContext } from "@/contexts/theme-context";
 
 const queryClient = new QueryClient();
 
-type MainLayoutProps = {
+interface Props {
   debug: boolean;
   children: ReactNode;
-};
+}
 
-const MainLayout = ({ debug, children }: MainLayoutProps) => {
+const MainLayout = ({ debug, children }: Props) => {
   const { darkMode } = useContext(ThemeContext);
 
   return (

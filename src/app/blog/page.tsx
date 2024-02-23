@@ -8,9 +8,9 @@ import { queryContentful } from "@/utils/Contentful";
 import { logger } from "@/utils/ServerUtil";
 import { BlogPost } from "@/utils/types";
 
-type BlogQR = {
+interface BlogQR {
   blogPosts: BlogPost[];
-};
+}
 
 export const revalidate = 3600; // revalidate the data at most every hour
 

@@ -9,9 +9,9 @@ import { cn } from "utils-toolkit";
 import useEstimateReadingTime from "@/hooks/useEstimateReadingTime";
 import { BlogPost } from "@/utils/types";
 
-type TagsProps = {
+interface TagsProps {
   tags: string[];
-};
+}
 
 const Tags = ({ tags }: TagsProps) => (
   <div className="flex flex-wrap gap-2">

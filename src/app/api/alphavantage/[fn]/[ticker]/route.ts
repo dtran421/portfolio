@@ -5,7 +5,7 @@ import { Option } from "utils-toolkit";
 import { logger } from "@/utils/ServerUtil";
 import { AlphavantageFn } from "@/utils/types";
 
-type CompanyQR = {
+interface CompanyQR {
   Name: string;
   Exchange: string;
   Sector: string;
@@ -15,16 +15,16 @@ type CompanyQR = {
   EPS: string;
   "52WeekHigh": string;
   "52WeekLow": string;
-};
+}
 
-type QuoteQR = {
+interface QuoteQR {
   "Global Quote": {
     "05. price": string;
     "07. latest trading day": string;
     "09. change": string;
     "10. change percent": string;
   };
-};
+}
 
 /**
  * Get base Alphavantage url

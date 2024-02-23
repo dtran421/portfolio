@@ -7,11 +7,11 @@ import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
 import ProjectsBanner from "@/components/Projects/ProjectsBanner";
 import { useProjectData } from "@/hooks/useProjectData";
 
-type ProjectLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const ProjectLayout = ({ children }: ProjectLayoutProps) => {
+const ProjectLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegments().at(-1);
   const projectData = useProjectData(segment);
 
