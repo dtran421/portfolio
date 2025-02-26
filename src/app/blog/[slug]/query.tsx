@@ -6,7 +6,7 @@ import { queryContentful } from "@/utils/Contentful";
 import { logger } from "@/utils/ServerUtil";
 
 export const getBlogPost = async (slug: string) => {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
 
   const response = await queryContentful<BlogPostQR>(BlogPostQuery, { postId: slug }, isEnabled);
 
