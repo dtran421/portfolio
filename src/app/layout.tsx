@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import { Metadata } from "next";
 import { Oxygen, Quicksand } from "next/font/google";
 
+import { Analytics } from "@vercel/analytics/next";
+
 import { ThemeContextProvider } from "@/contexts/theme-context";
 import { IS_PROD } from "@/utils/ServerUtil";
 
@@ -42,7 +44,10 @@ const RootLayout = ({
   <html lang="en" className={`${quicksand.variable} ${oxygen.variable}`}>
     <body>
       <ThemeContextProvider>
-        <MainLayout debug={!IS_PROD}>{children}</MainLayout>
+        <MainLayout debug={!IS_PROD}>
+          {children}
+          <Analytics />
+        </MainLayout>
       </ThemeContextProvider>
     </body>
   </html>
