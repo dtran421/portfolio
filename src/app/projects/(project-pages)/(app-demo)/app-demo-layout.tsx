@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import { useSelectedLayoutSegment } from "next/navigation";
+import { cn } from "utils-toolkit";
 
 import BackgroundMotivation from "@/components/Projects/AppDemo/BackgroundMotivation";
 import MenuBar from "@/components/Projects/AppDemo/MenuBar";
@@ -17,9 +18,10 @@ import whispearringsData from "@/public/json/whispearrings.json";
 
 const CollegeTalkSplashScreen = ({ visible }: { visible: boolean }) => (
   <div
-    className={`absolute ${
+    className={cn(
+      "absolute left-0 top-0 rounded-3xl p-2 transition duration-200 ease-linear",
       visible ? "opacity-100" : "opacity-0"
-    } left-0 top-0 rounded-3xl p-2 transition duration-200 ease-linear`}
+    )}
   >
     <figure className="relative rounded-3xl overflow-hidden">
       <Image
@@ -52,11 +54,11 @@ const SplashScreen = (segment: string) => {
   }
 };
 
-type AppDemoLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const AppDemoLayout = ({ children }: AppDemoLayoutProps) => {
+const AppDemoLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegment() as string;
 
   const paragraphs = getParagraphs(segment);

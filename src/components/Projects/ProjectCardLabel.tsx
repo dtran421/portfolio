@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { cn } from "utils-toolkit";
 
 const cardVariants = {
   inactive: {
@@ -26,9 +27,10 @@ const ProjectCardLabel = ({ title, isHovered, accentColor, darkText }: ProjectCa
       className="w-full absolute bottom-0 z-0 hidden lg:block rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
     >
       <p
-        className={`text-xl xl:text-2xl text-center ${
+        className={cn(
+          "text-xl xl:text-2xl text-center font-medium transition duration-200 ease-linear",
           darkText ? "text-black" : "text-white"
-        } font-medium transition duration-200 ease-linear`}
+        )}
       >
         {title}
       </p>
@@ -38,9 +40,10 @@ const ProjectCardLabel = ({ title, isHovered, accentColor, darkText }: ProjectCa
       className="w-full absolute -bottom-10 z-0 block lg:hidden rounded-b-xl transition duration-200 ease-linear px-4 pt-6 pb-2"
     >
       <p
-        className={`flex justify-center items-center text-lg md:text-xl ${
+        className={cn(
+          "flex justify-center items-center text-lg md:text-xl font-medium transition duration-200 ease-linear",
           darkText ? "text-black" : "text-white"
-        } font-medium transition duration-200 ease-linear`}
+        )}
       >
         {title}
       </p>

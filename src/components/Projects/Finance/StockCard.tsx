@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { lowerCase, startCase } from "lodash";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
+import { cn } from "utils-toolkit";
 
 import FetchError from "@/components/Global/FetchError";
 import useGetStockCompany from "@/hooks/useGetStockCompany";
@@ -38,7 +39,7 @@ const ReturnText = ({ change, changePct }: ReturnTextProps) => {
   const sign = hasGained ? "+" : "-";
 
   return (
-    <p className={`inline-block text-xl md:text-2xl ${hasGained ? "text-green-500" : "text-red-500"}`}>
+    <p className={cn("inline-block text-xl md:text-2xl", hasGained ? "text-green-500" : "text-red-500")}>
       {sign}${Math.abs(change).toFixed(2)} ({sign}
       {Math.abs(changePct).toFixed(2)}%)
     </p>
@@ -55,11 +56,10 @@ interface CellProps {
 const Cell = ({ label, value, lastRow, loading }: CellProps) => (
   <li
     key={label}
-    className={`flex justify-between border-b-2 ${
-      lastRow ? "last-of-type:border-b-0 md:border-b-0" : ""
-    } border-slate-800/40 dark:border-slate-200/40 space-x-2 py-1 md:py-3 ${
-      lastRow ? "last-of-type:pb-0 md:pb-0" : ""
-    }`}
+    className={cn(
+      "flex justify-between border-b-2 border-slate-800/40 dark:border-slate-200/40 space-x-2 py-1 md:py-3",
+      lastRow && "last-of-type:border-b-0 md:border-b-0 last-of-type:pb-0 md:pb-0"
+    )}
   >
     <p>{label}</p>
     <p className="font-medium text-right">{loading ? <Skeleton width={100} /> : value}</p>

@@ -71,11 +71,11 @@ const getClassProfileData = (segment: string | null) => {
   }
 };
 
-type FinanceLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const FinanceLayout = ({ children }: FinanceLayoutProps) => {
+const FinanceLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegment();
 
   const { symbol, purchasePrice } = getStockData(segment);

@@ -13,14 +13,14 @@ import Body from "@/components/BlogPost/Body";
 import FetchError from "@/components/Global/FetchError";
 import { BlogPost } from "@/utils/types";
 
-type ProfileHeaderProps = {
+interface ProfileHeaderProps {
   publishDate: string;
   inspectorProps: ReturnType<
     typeof useContentfulInspectorMode<{
       entryId: string;
     }>
   >;
-};
+}
 
 const ProfileHeader = ({ publishDate, inspectorProps }: ProfileHeaderProps) => (
   <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-slate-700 dark:text-slate-300 space-y-2 md:space-y-0">
@@ -49,9 +49,9 @@ const ProfileHeader = ({ publishDate, inspectorProps }: ProfileHeaderProps) => (
   </div>
 );
 
-type BlogPostProps = {
+interface BlogPostProps {
   blogPost: BlogPost;
-};
+}
 
 const BlogPostPage = ({ blogPost }: BlogPostProps) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: blogPost.sys.id });
@@ -110,7 +110,7 @@ const BlogPostPage = ({ blogPost }: BlogPostProps) => {
             ))}
           </div>
         </div>
-        <Body document={body.json} links={body?.links} />
+        <Body document={body?.json} links={body?.links} />
       </div>
     </main>
   );

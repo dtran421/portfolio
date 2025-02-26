@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import { FiTag } from "react-icons/fi";
+import { cn } from "utils-toolkit";
 
 import useEstimateReadingTime from "@/hooks/useEstimateReadingTime";
 import { BlogPost } from "@/utils/types";
 
-type TagsProps = {
+interface TagsProps {
   tags: string[];
-};
+}
 
 const Tags = ({ tags }: TagsProps) => (
   <div className="flex flex-wrap gap-2">
@@ -44,18 +45,20 @@ const BlogPostCard = ({
     <Link href={`/blog/${postId}`} passHref>
       <button
         type="button"
-        className={`${
-          featured ? "flex flex-col lg:grid lg:grid-cols-3" : ""
-        } overflow-hidden border-2 border-transparent hover:border-primary/75 dark-transition rounded-xl space-y-4`}
+        className={cn(
+          "overflow-hidden border-2 border-transparent hover:border-primary/75 dark-transition rounded-xl space-y-4",
+          featured && "flex flex-col lg:grid lg:grid-cols-3"
+        )}
       >
         <div
-          className={`flex items-center overflow-hidden ${
+          className={cn(
+            "flex items-center overflow-hidden rounded-lg",
             featured ? "lg:col-span-2 md:h-48 lg:h-72" : "lg:h-40 xl:h-44"
-          } rounded-lg`}
+          )}
         >
           <Image src={url} alt={imgTitle} width={width} height={height} layout="intrinsic" className="rounded-lg" />
         </div>
-        <div className={`w-full space-y-2 lg:space-y-3 ${featured ? "p-3 lg:p-4" : "px-3 lg:px-4 pb-3 lg:pb-4"}`}>
+        <div className={cn("w-full space-y-2 lg:space-y-3", featured ? "p-3 lg:p-4" : "px-3 lg:px-4 pb-3 lg:pb-4")}>
           <div>
             <div className="flex lg:flex-col xl:flex-row justify-between lg:items-start text-gray-700 dark:text-gray-300">
               <p className="text-sm lg:text-base">{moment(publishDate).format("MMMM Do, YYYY")}</p>

@@ -7,20 +7,20 @@ import ProjectsBackButton from "@/components/Projects/ProjectsBackButton";
 import ProjectsBanner from "@/components/Projects/ProjectsBanner";
 import { useProjectData } from "@/hooks/useProjectData";
 
-type ProjectLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const ProjectLayout = ({ children }: ProjectLayoutProps) => {
+const ProjectLayout = ({ children }: Props) => {
   const segment = useSelectedLayoutSegments().at(-1);
   const projectData = useProjectData(segment);
 
   return (
     <>
       <ProjectsBanner
-        pageTitle={projectData?.title ?? "Project not found"}
-        accentColor={projectData?.accentColor ?? "#FFF"}
-        darkText={projectData?.darkText ?? true}
+        pageTitle={projectData?.title}
+        accentColor={projectData?.accentColor}
+        darkText={projectData?.darkText}
         github={projectData?.github}
       />
       <ProjectsBackButton />

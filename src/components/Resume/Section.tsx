@@ -1,3 +1,5 @@
+import { cn } from "utils-toolkit";
+
 import { ResumeSubsection } from "@/utils/types";
 
 import Subsection from "./Subsection";
@@ -19,9 +21,10 @@ type SectionProps =
 const Section = ({ type, heading, body }: SectionProps) => (
   <div className="flex flex-col bg-zinc-300/25 dark:bg-zinc-700/50 dark-transition rounded-xl px-6 lg:px-10 py-6">
     <h3
-      className={`text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold px-3 py-1 ${
+      className={cn(
+        "text-2xl lg:text-3xl text-center dark:text-white dark-transition font-semibold px-3 py-1",
         type === "Tabs" ? "mb-6" : "mb-4"
-      }`}
+      )}
     >
       {heading}
     </h3>
