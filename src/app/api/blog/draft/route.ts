@@ -53,7 +53,8 @@ export async function GET(req: Request) {
   }
 
   // Enable Draft Mode by setting the cookie
-  draftMode().enable();
+  const draft = await draftMode();
+  draft.enable();
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
