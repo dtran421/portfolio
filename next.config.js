@@ -1,4 +1,5 @@
 // @ts-check
+import "./env";
 
 /**
  * @type {import('next').NextConfig}
