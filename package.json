@@ -39,7 +39,7 @@
     "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "^13.4.12",
+    "next": "^15.1.7",
     "patch-package": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
